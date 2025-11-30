@@ -1,10 +1,10 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2024.12.18)  20 NOV 2025 20:26
+This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2024.12.18)  30 NOV 2025 17:23
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**demo
-(./demo.tex
+**R-1
+(./R-1.tex
 LaTeX2e <2024-11-01> patch level 1
 L3 programming layer <2024-11-02>
 (/usr/local/texlive/2024/texmf-dist/tex/latex/ctex/ctexbeamer.cls (/usr/local/texlive/2024/texmf-dist/tex/latex/ctex/config/ctexbackend.cfg
@@ -155,8 +155,8 @@ Package: pgfrcs 2023-01-15 v3.1.10 (3.1.10)
 \pgfmath@stack@operation=\toks25
 ) (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex) (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code.tex) (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonometric.code.tex) (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.code.tex) (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison.code.tex) (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.tex) (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code.tex) (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.tex) (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerarithmetics.code.tex) (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex) (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
 \c@pgfmathroundto@lastzeros=\count297
-))) (/usr/local/texlive/2024/texmf-dist/tex/latex/base/size10.clo
-File: size10.clo 2024/06/29 v1.4n Standard LaTeX file (size option)
+))) (/usr/local/texlive/2024/texmf-dist/tex/latex/extsizes/size14.clo
+File: size14.clo 1999/11/11 v1.4a NON-Standard LaTeX file (size option)
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty (/usr/local/texlive/2024/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
  (/usr/local/texlive/2024/texmf-dist/tex/latex/graphics/graphics.sty
@@ -1131,8 +1131,9 @@ Package fontspec Info:
 (fontspec)             - 'bold italic' (b/it) with NFSS spec.:
 (fontspec)             <->"STXihei/BI/OT:script=hani;language=dflt;"
 
- (./demo.aux)
-\openout1 = `demo.aux'.
+
+No file R-1.aux.
+\openout1 = `R-1.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 151.
 LaTeX Font Info:    ... okay on input line 151.
@@ -1154,7 +1155,6 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 151.
 LaTeX Font Info:    ... okay on input line 151.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 151.
 LaTeX Font Info:    ... okay on input line 151.
-
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
 *geometry* verbose mode - [ preamble ] result:
@@ -1174,12 +1174,12 @@ LaTeX Font Info:    ... okay on input line 151.
 * \topmargin=-72.26999pt
 * \headheight=14.22636pt
 * \headsep=0.0pt
-* \topskip=10.0pt
+* \topskip=14.0pt
 * \footskip=14.22636pt
-* \marginparwidth=3.0pt
-* \marginparsep=11.0pt
+* \marginparwidth=4.0pt
+* \marginparsep=10.0pt
 * \columnsep=10.0pt
-* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \skip\footins=12.0pt plus 4.0pt minus 2.0pt
 * \hoffset=0.0pt
 * \voffset=0.0pt
 * \mag=1000
@@ -1190,9 +1190,11 @@ LaTeX Font Info:    ... okay on input line 151.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 Package hyperref Info: Link coloring ON on input line 151.
-(./demo.out) (./demo.out)
 \@outlinefile=\write5
-\openout5 = `demo.out'.
+\openout5 = `R-1.out'.
+
+
+Package hyperref Warning: Rerun to get /PageLabels entry.
 
 \symnumbers=\mathgroup12
 LaTeX Font Info:    Redeclaring symbol font `pureletters' on input line 151.
@@ -1237,7 +1239,7 @@ LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (Font)                  TU/lmtt/m/n --> TU/lmtt/b/n on input line 151.
 \symboldpureletters=\mathgroup13
- (/usr/local/texlive/2024/texmf-dist/tex/latex/translator/translator-basic-dictionary-English.dict
+(/usr/local/texlive/2024/texmf-dist/tex/latex/translator/translator-basic-dictionary-English.dict
 Dictionary: translator-basic-dictionary, Language: English 
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/translator/translator-bibliography-dictionary-English.dict
 Dictionary: translator-bibliography-dictionary, Language: English 
@@ -1311,7 +1313,8 @@ LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (Font)                  TU/lmtt/b/n --> TU/lmtt/b/n on input line 151.
 \c@lstlisting=\count421
- (./demo.nav)
+
+No file R-1.nav.
 
 Package fontspec Info: 
 (fontspec)             Script 'CJK' not explicitly supported within font
@@ -1346,7 +1349,6 @@ Package fontspec Info:
 (fontspec)             <->"STFangsong/OT:script=hani;language=dflt;"
 
 
-
 Package hyperref Warning: Option `pdfauthor' has already been used,
 (hyperref)                setting the option has no effect on input line 155.
 
@@ -1355,182 +1357,242 @@ Package hyperref Warning: Option `pdfauthor' has already been used,
 [1
 
 ]
-\openout4 = `demo.vrb'.
-
- (./demo.vrb
-LaTeX Font Info:    Trying to load font information for U+msa on input line 7.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 182.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 7.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 182.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for U+stmry on input line 7.
+LaTeX Font Info:    Trying to load font information for U+stmry on input line 182.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/stmaryrd/Ustmry.fd)
 
 LaTeX Font Warning: Font shape `U/stmry/b/n' undefined
-(Font)              using `U/stmry/m/n' instead on input line 7.
+(Font)              using `U/stmry/m/n' instead on input line 182.
 
-)
+
 
 [2
 
 ]
-\openout4 = `demo.vrb'.
-
- (./demo.vrb
-File: figs/1.png Graphic file (type bmp)
-<figs/1.png>
-)
 
 [3
 
 ]
-\openout4 = `demo.vrb'.
+File: figs/network.eps Graphic file (type eps)
+<figs/network.eps>
 
- (./demo.vrb (/usr/local/texlive/2024/texmf-dist/tex/latex/listings/lstlang1.sty
+
+[4
+
+]
+File: figs/downloadr.PNG Graphic file (type bmp)
+<figs/downloadr.PNG>
+
+
+[5
+
+]
+File: figs/plot.jpg Graphic file (type bmp)
+<figs/plot.jpg>
+
+Overfull \vbox (17.47191pt too high) detected at line 235
+ []
+
+
+
+[6
+
+]
+File: figs/rc.png Graphic file (type bmp)
+<figs/rc.png>
+
+
+[7
+
+]
+File: figs/glmtrans.PNG Graphic file (type bmp)
+<figs/glmtrans.PNG>
+
+
+[8
+
+]
+File: figs/cc.png Graphic file (type bmp)
+<figs/cc.png>
+
+Overfull \vbox (33.61055pt too high) detected at line 274
+ []
+
+
+
+[9
+
+]
+File: figs/s1.png Graphic file (type bmp)
+<figs/s1.png>
+
+
+[10
+
+]
+File: figs/s2.png Graphic file (type bmp)
+<figs/s2.png>
+
+
+[11
+
+]
+File: figs/s3.png Graphic file (type bmp)
+<figs/s3.png>
+
+
+[12
+
+]
+File: figs/s4.png Graphic file (type bmp)
+<figs/s4.png>
+
+
+[13
+
+]
+File: figs/s5.png Graphic file (type bmp)
+<figs/s5.png>
+
+
+[14
+
+]
+File: figs/rstudio.png Graphic file (type bmp)
+<figs/rstudio.png>
+
+
+[15
+
+]
+
+[16
+
+]
+\openout4 = `R-1.vrb'.
+
+ (./R-1.vrb)
+
+[17
+
+]
+\openout4 = `R-1.vrb'.
+
+ (./R-1.vrb)
+
+[18
+
+]
+\openout4 = `R-1.vrb'.
+
+ (./R-1.vrb (/usr/local/texlive/2024/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2024/09/23 1.10c listings language file
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/listings/lstlang2.sty
 File: lstlang2.sty 2024/09/23 1.10c listings language file
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/listings/lstlang3.sty
 File: lstlang3.sty 2024/09/23 1.10c listings language file
 ))
-Overfull \vbox (13.99979pt too high) detected at line 225
+Overfull \vbox (74.95082pt too high) detected at line 375
  []
 
 
 
-[4
+[19
 
 ]
-\openout4 = `demo.vrb'.
+\openout4 = `R-1.vrb'.
 
- (./demo.vrb)
-
-[5
-
-]
-\openout4 = `demo.vrb'.
-
- (./demo.vrb)
-
-[6
-
-]
-\openout4 = `demo.vrb'.
-
- (./demo.vrb
-Overfull \hbox (12.48674pt too wide) in paragraph at lines 10--11
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ (./R-1.vrb
+Overfull \hbox (6.80583pt too wide) in paragraph at lines 8--9
+[][][][][][][][][][][][][][][][][][][] 
  []
 
 )
 
-[7
+[20
 
 ]
-\openout4 = `demo.vrb'.
+\openout4 = `R-1.vrb'.
 
- (./demo.vrb
-Overfull \hbox (24.48686pt too wide) in paragraph at lines 7--8
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ (./R-1.vrb
+Overfull \hbox (6.80583pt too wide) in paragraph at lines 5--6
+[][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (6.80583pt too wide) in paragraph at lines 7--8
+[][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (6.80583pt too wide) in paragraph at lines 9--10
+[][][][][][][][][][][][][][][][][][][] 
  []
 
 )
 
-[8
+[21
 
 ]
+\openout4 = `R-1.vrb'.
 
-[9
+ (./R-1.vrb)
 
-]
-\openout4 = `demo.vrb'.
-
- (./demo.vrb)
-
-[10
+[22
 
 ]
-\openout4 = `demo.vrb'.
+\openout4 = `R-1.vrb'.
 
- (./demo.vrb)
+ (./R-1.vrb)
 
-[11
-
-]
-\openout4 = `demo.vrb'.
-
- (./demo.vrb
-Overfull \hbox (30.48692pt too wide) in paragraph at lines 10--11
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-)
-
-[12
+[23
 
 ]
+\openout4 = `R-1.vrb'.
 
-[13
+ (./R-1.vrb)
 
-]
-\openout4 = `demo.vrb'.
-
- (./demo.vrb
-Overfull \hbox (42.48705pt too wide) in paragraph at lines 12--13
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-)
-
-[14
+[24
 
 ]
-\openout4 = `demo.vrb'.
+\openout4 = `R-1.vrb'.
 
- (./demo.vrb
-Overfull \hbox (12.48674pt too wide) in paragraph at lines 10--11
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
+ (./R-1.vrb)
 
-)
-
-[15
+[25
 
 ]
-\openout4 = `demo.vrb'.
+\openout4 = `R-1.vrb'.
 
- (./demo.vrb)
+ (./R-1.vrb)
 
-[16
-
-]
-\openout4 = `demo.vrb'.
-
- (./demo.vrb)
-
-[17
+[26
 
 ]
-LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <24.88> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 429.
+LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <35.83> not available
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 483.
 
 
-[18
+[27
 
 ]
 \tf@nav=\write6
-\openout6 = `demo.nav'.
+\openout6 = `R-1.nav'.
 
 \tf@toc=\write7
-\openout7 = `demo.toc'.
+\openout7 = `R-1.toc'.
 
 \tf@snm=\write8
-\openout8 = `demo.snm'.
+\openout8 = `R-1.snm'.
 
- (./demo.aux)
+ (./R-1.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 1
 L3 programming layer <2022/08/05>
@@ -1539,16 +1601,22 @@ L3 programming layer <2022/08/05>
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package rerunfilecheck Info: File `demo.out' has not changed.
-(rerunfilecheck)             Checksum: 5AF3FEF34A949E9294DCA29ED34AE7E3;75.
+
+Package rerunfilecheck Warning: File `R-1.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `R-1.out':
+(rerunfilecheck)             Before: <no file>
+(rerunfilecheck)             After:  D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 40402 strings out of 473965
- 901640 string characters out of 5732986
- 1492774 words of memory out of 5000000
- 62463 multiletter control sequences out of 15000+600000
- 576486 words of font info for 161 fonts, out of 8000000 for 9000
+ 40442 strings out of 473965
+ 907245 string characters out of 5732986
+ 1479270 words of memory out of 5000000
+ 62528 multiletter control sequences out of 15000+600000
+ 574512 words of font info for 148 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 142i,15n,137p,463b,1475s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 142i,15n,137p,462b,1458s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on demo.pdf (18 pages).
+Output written on R-1.pdf (27 pages).
