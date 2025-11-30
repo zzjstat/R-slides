@@ -1,0 +1,459 @@
+\documentclass[10pt,compress,t,noamsthm,notheorem,table,handout]{ctexbeamer}
+\usetheme{Boadilla}
+\useinnertheme{circles}
+\useoutertheme{shadow}
+\usecolortheme{seahorse}
+\usefonttheme[onlymath]{serif}
+\setbeamertemplate{navigation symbols}{}
+% \setbeamercovered{transparent}
+\usepackage{natbib}
+\usepackage{amsthm}
+\usepackage{makecell}
+\usepackage{multirow}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\bibliographystyle{unsrtnat}
+\usepackage{color}
+\setbeamercolor{myfootline}{bg=white,fg=blue}
+\definecolor{myfoot}{rgb}{0.5,0.2,0.5}
+\definecolor{darkblue}{rgb}{0.1,0,0.85}
+\setbeamertemplate{headline}
+  { \leavevmode\begin{beamercolorbox}[wd=\paperwidth,ht=1.25ex,dp=1ex,left]{}
+    \end{beamercolorbox}}
+\setbeamertemplate{footline}% 自定义页脚
+  { \leavevmode\mbox{%
+    \begin{beamercolorbox}[wd=.75\paperwidth,ht=2.25ex,dp=1ex,left]{myfootline}%
+        \rule{2em}{0pt}\color{myfoot}\ttfamily\scriptsize%
+        %\insertshortauthor~(\insertshortinstitute)
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,right]{myfootline}%
+       {\color{myfoot}\ttfamily\scriptsize\insertframenumber{}/%
+        \inserttotalframenumber\hspace*{3ex}}
+    \end{beamercolorbox}}
+    \vskip0pt }
+
+\setbeamercolor{frametitle}{fg=blue,bg=white}
+\setbeamertemplate{frametitle}{%
+  \leavevmode\linespread{1}\large\textbf{\insertframetitle}\par
+  \color{structure.fg!30!bg}\rule[6pt]{\linewidth}{2pt}\par\vspace{-1.0em}}
+
+% \setbeamertemplate{blocks}[default] % beamer块（含定理类环境）不要阴影
+\setbeamertemplate{bibliography entry title}{}{}
+\setbeamertemplate{bibliography entry location}{}{}
+\setbeamertemplate*{bibliography entry note}{}{}
+\setbeamersize{text margin left=0.75cm, text margin right=0.75cm}
+
+\setbeamercolor{bluebox}{fg=black,bg=blue!10}
+\setbeamercolor{redbox}{fg=black,bg=red!10}
+\newenvironment{Boxblue}[1][\textwidth]
+  {\begin{beamercolorbox}[sep=0.1em,shadow=true,wd=#1,rounded=true,center]{bluebox}}
+  {\end{beamercolorbox}}
+\newenvironment{Boxred}[1][\textwidth]
+  {\begin{beamercolorbox}[sep=0.1em,shadow=true,wd=#1,rounded=true,center]{redbox}}
+  {\end{beamercolorbox}}
+\usepackage{stmaryrd}
+\usepackage{amsmath,amssymb,amsfonts,bm}
+\usepackage{graphicx,xcolor}
+\graphicspath{{figures/}}
+\usepackage{hyperref}
+\hypersetup{pdfborder=001,colorlinks=true,linkcolor=darkblue,urlcolor=blue}
+\usepackage{bbding}
+\newcommand{\Bullet}{{\fontsize{6pt}{6pt}\selectfont\CircleSolid}}
+\newcommand{\Hand}{{\fontsize{8pt}{6pt}\selectfont\HandRight}}
+\newcommand{\zhu}{{\color{blue!40}\Bullet}}
+\newcommand{\zhuu}{{\color{red!80}\Hand}}
+\newcommand{\labeli}{\zhu}
+\newenvironment{blist}%
+    {\begin{list}{{\hfill\raisebox{1.12pt}{\color{blue!60}\zhu}}}{%
+     \leftmargin2em\labelwidth1.5em\labelsep0.5em
+     \itemsep1ex\itemindent0pt\parsep0pt\topsep0pt}}
+    {\end{list}}
+\newenvironment{myitem}
+  {\begin{list}{{\hfill\raisebox{0pt}{\labeli}}}{%
+    \setlength{\leftmargin}{1.2em}\labelwidth0.8em\labelsep.4em%
+    \itemsep1ex\parsep2pt\itemindent0pt\topsep0pt}}{\end{list}}
+\newenvironment{subitem}
+  {\begin{list}{{\hfill\raisebox{0pt}{-}}}{%
+    \setlength{\leftmargin}{1.2em}\labelwidth0.8em\labelsep.4em%
+    \itemsep0ex\parsep2pt\itemindent0pt\topsep0pt}}{\end{list}}
+\usepackage{colortbl}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage{stmaryrd}
+\usepackage{amsfonts}
+\usepackage[ruled,linesnumbered]{algorithm2e}
+\usepackage{float} 
+\usepackage{booktabs}
+\usepackage[framemethod=tikz]{mdframed}
+\newmdenv[linecolor=green,middlelinewidth=1pt,%
+          roundcorner=3pt,backgroundcolor=white,%
+          innertopmargin=0.8em,innerbottommargin=0.5em,%
+          innerleftmargin=3pt,innerrightmargin=3pt,%
+          skipbelow=0.5em,skipabove=1em,%
+          splittopskip=\topskip]{Block}
+\newmdenv[linecolor=green,middlelinewidth=1pt,%
+          roundcorner=3pt,backgroundcolor=red!5!white,%
+          innertopmargin=0.5em,innerbottommargin=0.5em,%
+          innerleftmargin=3pt,innerrightmargin=3pt,%
+          skipbelow=0.5em,skipabove=1em,%
+          splittopskip=\topskip]{redbox}
+\newmdenv[linecolor=green,middlelinewidth=0.5pt,%
+          %outerlinewidth=0.5pt,skipabove=0pt,
+          roundcorner=3pt,backgroundcolor=white,%
+          innerbottommargin=3pt,innerrightmargin=5pt,%
+          innerleftmargin=5pt,leftmargin=0ex]{mathbox}
+\newmdenv[linecolor=blue!5!green,middlelinewidth=0.5pt,%
+          roundcorner=3pt,backgroundcolor=yellow!5,%
+          % frametitle={Hello},frametitlebackgroundcolor=green!50,%
+          % skipabove=2pt,skipbelow=2pt,%
+          innerleftmargin=3pt,leftmargin=0ex]{notebox}
+\newmdenv[linecolor=white,font={\scriptsize},%
+          fontcolor=blue!85,backgroundcolor=yellow!5,%
+          skipabove=1ex,skipbelow=0pt,innerbottommargin=0.5ex,%
+          innerleftmargin=3pt,leftmargin=1em]{myref}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\thefootnote}{}% 不要编号
+\setbeamertemplate{footnote}{% 首行不缩进
+  \noindent\insertfootnotemark%
+  \scriptsize\color{blue!85!green!85}\insertfootnotetext\par\kern1ex}
+\renewcommand\footnoterule%    更改横线属性：长度，粗细，颜色
+  {\color{red}\kern-3pt\rule{0.4\linewidth}{0.5pt}\par\kern2.6pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[many]{tcolorbox}
+\tcbset{highlight math %
+  style={enhanced, colframe=blue!40,colback=yellow!20,arc=4pt,boxrule=1pt}}
+\newtcbox{\subsubtit}[1][]{%
+  after skip=1em,boxrule=0.5pt,
+  fontupper=\color{blue}\bfseries,top=0.5ex,bottom=0.5ex,
+  left=1ex,right=1ex,
+  colframe=green,colback=red!5!white,#1}
+
+%\renewcommand{\baselinestretch}{1.1}
+\linespread{1.1}
+\setlength{\parskip}{1ex}
+
+\usepackage{listings} %插入代码
+\usepackage{xcolor}
+\lstset{numbers=left, %设置行号位置
+        numberstyle=\tiny, %设置行号大小
+        keywordstyle=\color{blue}, %设置关键字颜色
+        commentstyle=\color[cmyk]{1,0,1,0}, %设置注释颜色
+        frame=single, %设置边框格式
+        escapeinside=``, %逃逸字符(1左面的键)，用于显示中文
+        %breaklines, %自动折行
+        extendedchars=false, %解决代码跨页时，章节标题，页眉等汉字不显示的问题
+        xleftmargin=2em,xrightmargin=2em, aboveskip=1em, %设置边距
+        tabsize=4, %设置tab空格数
+        showspaces=false, %不显示空格
+        basicstyle=\ttfamily,
+       }
+\begin{document}
+
+%%%%% =======================================================================
+\title{R语言-4}
+\author{郑泽靖 \and zzjstat2023@163.com }
+\institute{\normalsize 北京师范大学统计学院}
+\date{\today}
+
+% ===== title page =====
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+% ===== contents =====
+% \begin{frame}
+%  \frametitle{Outline}
+%  \tableofcontents[hideallsubsections] %[pausesections]
+% \end{frame}
+\begin{frame}[fragile]{R语言中的条件语句}
+    在 R 语言中，常用的条件控制语句是 \texttt{if} 语句，它有三种主要形式。
+    
+    \begin{itemize}
+        \item \textbf{(1) 单条件 (if)}：基础判断。
+        \item \textbf{(2) 复合条件 (if/else)}：二选一判断。
+        \item \textbf{(3) 多条件 (if/else if/else)}：多重分支判断。
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{单条件语句 (if)}
+    \textbf{调用格式：}
+    \begin{lstlisting}[language=R]
+if (条件表达式) {
+    # 仅当条件表达式为 TRUE 时执行
+    程序代码
+}
+    \end{lstlisting}
+    
+    \textbf{执行过程}：
+    若“条件表达式”成立（结果为 \texttt{TRUE}），则执行“程序代码”；否则，跳过执行。
+\end{frame}
+
+\begin{frame}[fragile]{单条件语句示例}
+    \begin{lstlisting}[language=R]
+x <- 1  # 初始值
+
+if (x < 1) {  # 1 < 1 为 FALSE
+    x <- x + 1  
+}
+print(x)  # x 仍为 1
+
+if (x < 2) {  # 1 < 2 为 TRUE
+    x <- x + 1  
+}
+print(x)  # x 变为 2
+    \end{lstlisting}
+    
+    \textbf{要点提示}：条件表达式必须返回一个**长度为 1 的逻辑值**（\texttt{TRUE} 或 \texttt{FALSE}）。若输入长度大于 1 的向量，将仅检查第一个元素，并给出警告。
+\end{frame}
+
+\begin{frame}[fragile]{复合条件语句 (if/else)}
+    \textbf{调用格式：}
+    \begin{lstlisting}[language=R]
+if (条件表达式) {
+    程序代码1  # 条件成立时执行
+} else {
+    程序代码2  # 条件不成立时执行
+}
+    \end{lstlisting}
+    
+    \textbf{注意事项}：
+    \begin{itemize}
+        \item \texttt{else} 必须紧跟在 \texttt{if} 代码块的右花括号 \texttt{\}} 之后，并在同一行。
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{多条件语句 (if/else if/else)}
+    \textbf{调用格式：}
+    \begin{lstlisting}[language=R]
+if (条件表达式1) {
+    程序代码1
+} else if (条件表达式2) {
+    程序代码2
+} else {
+    程序代码3  # 以上条件都不满足时执行
+}
+    \end{lstlisting}
+    
+    \textbf{执行过程}：
+    程序依次检查条件表达式，一旦发现某个条件成立，则执行相应的程序代码，**然后跳出整个结构**。
+\end{frame}
+
+\begin{frame}[fragile]{多条件语句示例：判断数字符号}
+    编写代码判断一个数字是正数、负数还是零。
+    \begin{lstlisting}[language=R]
+x <- -5
+sign_status <- ""
+
+if (x > 0) {
+    sign_status <- "正数"
+} else if (x < 0) { # 检查是否为负数
+    sign_status <- "负数" 
+} else {            # 既不大于 0 也不小于 0，则为 0
+    sign_status <- "零"
+}
+print(sign_status) # 输出 "负数"
+    \end{lstlisting}
+\end{frame}
+
+
+\begin{frame}{循环语句概述}
+    循环语句用于重复执行一段程序代码，是实现迭代和批量操作的重要手段。R 语言主要提供两种循环语句：
+    \begin{itemize}
+        \item \textbf{for 循环}：适用于已知重复次数或需要遍历向量元素的场景。
+        \item \textbf{while 循环}：适用于重复次数不确定，依赖条件表达式来控制终止的场景。
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{for 循环语句}
+    \textbf{调用格式：}
+    \begin{lstlisting}[language=R]
+for(i in 向量v) {
+    # 循环体 expr
+}
+    \end{lstlisting}
+    
+    \textbf{执行过程}：
+    \begin{enumerate}
+        \item 循环变量 $i$ 依次取向量 $v$ 中的每一个元素值。
+        \item 每取一个值，就执行一次循环体内的程序代码。
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{while 循环语句}
+    \textbf{调用格式：}
+    \begin{lstlisting}[language=R]
+while(条件表达式) {
+    循环体 
+    # 确保循环体内有能改变条件表达式的代码，防止死循环
+}
+    \end{lstlisting}
+    
+    \textbf{执行过程}：
+    \begin{enumerate}
+        \item 计算条件表达式。
+        \item 若为 \texttt{TRUE}，则运行循环体，然后返回第 1 步。
+        \item 若为 \texttt{FALSE}，则结束循环。
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{示例：模拟随机变量 $X$ (掷骰子直到 6 点)}
+    模拟 $X$: 掷骰子，直到掷出 6 点为止，记录掷骰子的次数 $X$。
+    
+    \textbf{使用 \texttt{while} 循环和 \texttt{break} 语句：}
+    \begin{lstlisting}[language=R]
+X_observations <- numeric(10) # 存储 10 次观测值
+for(i in 1:10) { 
+    n <- 0  # 实验次数
+    while(TRUE) { # 设置无限循环
+        n <- n + 1 
+        y <- sample(1:6, 1)  # 模拟掷骰子
+        if (y == 6) {        # 满足终止条件
+            X_observations[i] <- n
+            break            # 终止 while 循环
+        }
+    }
+}
+print(X_observations) # 显示 10 次模拟结果
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{函数 (Function) 定义}
+    函数是封装代码逻辑，实现代码重用和模块化的重要工具。
+    \begin{lstlisting}[language=R]
+name <- function(arg1, arg2, ...) {
+    # 函数体：程序代码
+    return(result) # 可选，但推荐使用
+}
+    \end{lstlisting}
+    
+    \begin{itemize}
+        \item \textbf{name}：自定义函数名。
+        \item \textbf{arg1, ...}：函数的输入参数。
+        \item \textbf{return(result)}：显式指定函数返回值。若省略 \texttt{return}，默认返回函数体中最后一行代码的计算结果。
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{函数示例：计算前 $n$ 个自然数之和}
+    使用公式法定义函数 \texttt{mysum}：
+    \begin{lstlisting}[language=R]
+mysum <- function(n) {  
+    # 检查输入是否为正整数
+    if (n < 1 | n != round(n)) {
+        stop("参数n必须是正整数。")
+    }
+    s <- n * (n + 1) / 2  
+    return(s)  
+}
+
+# 调用示例
+print(mysum(50))  
+# 输出 [1] 1275
+    \end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{定积分计算：\texttt{integrate} 函数}
+    R 语言通过内置的 \texttt{integrate} 函数进行一元函数的数值积分。
+    
+    计算定积分 $\int_0^1 x^2 \mathrm{~d} x$：
+    \begin{lstlisting}[language=R]
+# integrate 的第一个参数是一个函数对象
+result <- integrate(function(x) x^2, 
+                     lower = 0, upper = 1)
+print(result)
+    \end{lstlisting}
+    运行结果：
+    \[
+    \text{\$value} = 0.3333333 \text{ with absolute error < } 3.7 \times 10^{-15}
+    \]
+    \small{注意：积分的返回值是一个包含结果和误差信息的列表。}
+\end{frame}
+
+\begin{frame}[fragile]{均匀分布 $U(a, b)$ 的期望值}
+    设随机变量 $\xi \sim U(0, 60)$，理论期望值 $\mathrm{E}(\xi) = \frac{0+60}{2} = 30$。
+    
+    使用积分计算 $\mathrm{E}(\xi) = \int_{-\infty}^{\infty} x \cdot f(x) \mathrm{d}x$：
+    \begin{lstlisting}[language=R]
+# f(x) 为均匀分布的密度函数 dunif(x, min, max)
+result <- integrate(function(x) 
+              x * dunif(x, min = 0, max = 60), 
+              lower = -Inf, upper = Inf)
+print(result$value)
+    \end{lstlisting}
+    
+    \textbf{计算结果：} 
+    \[
+    \mathrm{E}(\xi) \approx 30.00000 \quad \text{(高精度逼近)}
+    \]
+\end{frame}
+
+\begin{frame}{概率分布函数概述 (d/p/q/r)}
+    在 R 中，大多数概率分布函数都遵循 **d/p/q/r** 的命名规则：
+    \begin{itemize}
+        \item \texttt{d\textbf{xxx}(x)}: \textbf{D}ensity / \textbf{D}istribution function (概率密度或概率质量函数)。
+        \item \texttt{p\textbf{xxx}(q)}: \textbf{P}robability function (累积分布函数 CDF)，表示 $ P(X \leq q) $。
+        \item \texttt{q\textbf{xxx}(p)}: \textbf{Q}uantile function (分位数函数)，求解 $ F(x) = p $ 的 $ x $ 值。
+        \item \texttt{r\textbf{xxx}(n)}: \textbf{R}andom number generation (随机数生成函数)。
+    \end{itemize}
+    \small{（xxx 为分布的缩写，如 `norm`, `binom`, `unif` 等）}
+\end{frame}
+
+\begin{frame}[fragile]{二项分布（Binomial）示例}
+    \begin{itemize}
+        \item \texttt{dbinom(x, size, prob)}
+        \item \texttt{pbinom(q, size, prob)}
+        \item \texttt{rbinom(n, size, prob)}
+    \end{itemize}
+    \begin{lstlisting}[language=R]
+> dbinom(5, size = 10, prob = 0.5)  
+# P(X=5) = 0.246
+> pbinom(5, size = 10, prob = 0.5)  
+# P(X<=5) = 0.623
+> rbinom(2, size = 10, prob = 0.5)  
+# [1] 7 8 (示例值)
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{正态分布（Normal）示例}
+    \begin{itemize}
+        \item \texttt{dnorm(x, mean, sd)}
+        \item \texttt{pnorm(q, mean, sd)}
+        \item \texttt{rnorm(n, mean, sd)}
+    \end{itemize}
+    \begin{lstlisting}[language=R]
+> dnorm(0.5, mean = 0, sd = 1)   
+# 0.3520...
+> pnorm(1.96, mean = 0, sd = 1)  
+# P(Z<=1.96) = 0.975
+> rnorm(3, mean = 0, sd = 1)     
+# [1] -0.62... 1.03... 0.70...
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{练习题：斐波那契数列函数}
+    编写一个名为 \texttt{fibonacci} 的 R 函数，该函数接受一个正整数 $n$ 作为输入参数，并返回一个长度为 $n$ 的斐波契数列。
+    
+    \textbf{斐波那契数列定义：}
+    \[ F_0=0, F_1=1, F_n = F_{n-1} + F_{n-2} \quad (n \ge 2) \]
+    
+    \textbf{示例：}
+    如果输入 \texttt{n = 5}，则输出应为：
+    \begin{verbatim}
+[1] 0 1 1 2 3
+    \end{verbatim}
+    
+    \textbf{提示：}
+    \begin{itemize}
+        \item 使用 \texttt{numeric()} 函数初始化结果向量。
+        \item 使用 \texttt{if} 语句处理 $n=1$ 和 $n=2$ 的边界情况。
+        \item 使用 \texttt{for} 循环来计算 $n \ge 3$ 的值。
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{}
+\centering \Huge
+  \emph{Thanks!}
+\end{frame}
+
+\end{document}

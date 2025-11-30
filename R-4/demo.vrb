@@ -1,0 +1,18 @@
+\frametitle{练习题：斐波那契数列函数}
+编写一个名为 \texttt{fibonacci} 的 R 函数，该函数接受一个正整数 $n$ 作为输入参数，并返回一个长度为 $n$ 的斐波契数列。
+
+    \textbf{斐波那契数列定义：}
+    \[ F_0=0, F_1=1, F_n = F_{n-1} + F_{n-2} \quad (n \ge 2) \]
+
+    \textbf{示例：}
+    如果输入 \texttt{n = 5}，则输出应为：
+    \begin{verbatim}
+[1] 0 1 1 2 3
+    \end{verbatim}
+
+    \textbf{提示：}
+    \begin{itemize}
+        \item 使用 \texttt{numeric()} 函数初始化结果向量。
+        \item 使用 \texttt{if} 语句处理 $n=1$ 和 $n=2$ 的边界情况。
+        \item 使用 \texttt{for} 循环来计算 $n \ge 3$ 的值。
+    \end{itemize}

@@ -1,0 +1,12 @@
+\frametitle{作业}
+\begin{itemize}
+    \item[1.]使用R语言创建一个数据框，包含以下列：
+\begin{itemize}
+    \item \texttt{ID}：1到10的整数
+    \item \texttt{Name}：随机给定10个名字（如“学生1”，“学生2”）
+    \item \texttt{Score}：随机生成10个1到100之间的整数
+\end{itemize}
+    \item[2.] 计算数据框中所有学生的平均分，并输出平均分。
+    \item[3.] 从数据框中筛选出分数大于等于70的学生，并输出这些学生的信息。
+    \item[4.] 从数据框中随机抽取5个学生的\texttt{Score}，使用不放回的方式抽样，并打印结果。
+\end{itemize}

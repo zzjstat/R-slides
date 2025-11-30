@@ -1,0 +1,456 @@
+\documentclass[14pt,compress,t,noamsthm,notheorem,table,handout]{ctexbeamer}
+\usetheme{Boadilla}
+\useinnertheme{circles}
+\useoutertheme{shadow}
+\usecolortheme{seahorse}
+\usefonttheme[onlymath]{serif}
+\setbeamertemplate{navigation symbols}{}
+% \setbeamercovered{transparent}
+\usepackage{natbib}
+\usepackage{amsthm}
+\usepackage{makecell}
+\usepackage{multirow}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\bibliographystyle{unsrtnat}
+\usepackage{color}
+\setbeamercolor{myfootline}{bg=white,fg=blue}
+\definecolor{myfoot}{rgb}{0.5,0.2,0.5}
+\definecolor{darkblue}{rgb}{0.1,0,0.85}
+\setbeamertemplate{headline}
+  { \leavevmode\begin{beamercolorbox}[wd=\paperwidth,ht=1.25ex,dp=1ex,left]{}
+    \end{beamercolorbox}}
+\setbeamertemplate{footline}% 自定义页脚
+  { \leavevmode\mbox{%
+    \begin{beamercolorbox}[wd=.75\paperwidth,ht=2.25ex,dp=1ex,left]{myfootline}%
+        \rule{2em}{0pt}\color{myfoot}\ttfamily\scriptsize%
+        %\insertshortauthor~(\insertshortinstitute)
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,right]{myfootline}%
+       {\color{myfoot}\ttfamily\scriptsize\insertframenumber{}/%
+        \inserttotalframenumber\hspace*{3ex}}
+    \end{beamercolorbox}}
+    \vskip0pt }
+
+\setbeamercolor{frametitle}{fg=blue,bg=white}
+\setbeamertemplate{frametitle}{%
+  \leavevmode\linespread{1}\large\textbf{\insertframetitle}\par
+  \color{structure.fg!30!bg}\rule[6pt]{\linewidth}{2pt}\par\vspace{-1.0em}}
+
+% \setbeamertemplate{blocks}[default] % beamer块（含定理类环境）不要阴影
+\setbeamertemplate{bibliography entry title}{}{}
+\setbeamertemplate{bibliography entry location}{}{}
+\setbeamertemplate*{bibliography entry note}{}{}
+\setbeamersize{text margin left=0.75cm, text margin right=0.75cm}
+
+\setbeamercolor{bluebox}{fg=black,bg=blue!10}
+\setbeamercolor{redbox}{fg=black,bg=red!10}
+\newenvironment{Boxblue}[1][\textwidth]
+  {\begin{beamercolorbox}[sep=0.1em,shadow=true,wd=#1,rounded=true,center]{bluebox}}
+  {\end{beamercolorbox}}
+\newenvironment{Boxred}[1][\textwidth]
+  {\begin{beamercolorbox}[sep=0.1em,shadow=true,wd=#1,rounded=true,center]{redbox}}
+  {\end{beamercolorbox}}
+\usepackage{stmaryrd}
+\usepackage{amsmath,amssymb,amsfonts,bm}
+\usepackage{graphicx,xcolor}
+\graphicspath{{figures/}}
+\usepackage{hyperref}
+\hypersetup{pdfborder=001,colorlinks=true,linkcolor=darkblue,urlcolor=blue}
+\usepackage{bbding}
+\newcommand{\Bullet}{{\fontsize{6pt}{6pt}\selectfont\CircleSolid}}
+\newcommand{\Hand}{{\fontsize{8pt}{6pt}\selectfont\HandRight}}
+\newcommand{\zhu}{{\color{blue!40}\Bullet}}
+\newcommand{\zhuu}{{\color{red!80}\Hand}}
+\newcommand{\labeli}{\zhu}
+\newenvironment{blist}%
+    {\begin{list}{{\hfill\raisebox{1.12pt}{\color{blue!60}\zhu}}}{%
+     \leftmargin2em\labelwidth1.5em\labelsep0.5em
+     \itemsep1ex\itemindent0pt\parsep0pt\topsep0pt}}
+    {\end{list}}
+\newenvironment{myitem}
+  {\begin{list}{{\hfill\raisebox{0pt}{\labeli}}}{%
+    \setlength{\leftmargin}{1.2em}\labelwidth0.8em\labelsep.4em%
+    \itemsep1ex\parsep2pt\itemindent0pt\topsep0pt}}{\end{list}}
+\newenvironment{subitem}
+  {\begin{list}{{\hfill\raisebox{0pt}{-}}}{%
+    \setlength{\leftmargin}{1.2em}\labelwidth0.8em\labelsep.4em%
+    \itemsep0ex\parsep2pt\itemindent0pt\topsep0pt}}{\end{list}}
+\usepackage{colortbl}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage{stmaryrd}
+\usepackage{amsfonts}
+\usepackage[ruled,linesnumbered]{algorithm2e}
+\usepackage{float} 
+\usepackage{booktabs}
+\usepackage[framemethod=tikz]{mdframed}
+\newmdenv[linecolor=green,middlelinewidth=1pt,%
+          roundcorner=3pt,backgroundcolor=white,%
+          innertopmargin=0.8em,innerbottommargin=0.5em,%
+          innerleftmargin=3pt,innerrightmargin=3pt,%
+          skipbelow=0.5em,skipabove=1em,%
+          splittopskip=\topskip]{Block}
+\newmdenv[linecolor=green,middlelinewidth=1pt,%
+          roundcorner=3pt,backgroundcolor=red!5!white,%
+          innertopmargin=0.5em,innerbottommargin=0.5em,%
+          innerleftmargin=3pt,innerrightmargin=3pt,%
+          skipbelow=0.5em,skipabove=1em,%
+          splittopskip=\topskip]{redbox}
+\newmdenv[linecolor=green,middlelinewidth=0.5pt,%
+          %outerlinewidth=0.5pt,skipabove=0pt,
+          roundcorner=3pt,backgroundcolor=white,%
+          innerbottommargin=3pt,innerrightmargin=5pt,%
+          innerleftmargin=5pt,leftmargin=0ex]{mathbox}
+\newmdenv[linecolor=blue!5!green,middlelinewidth=0.5pt,%
+          roundcorner=3pt,backgroundcolor=yellow!5,%
+          % frametitle={Hello},frametitlebackgroundcolor=green!50,%
+          % skipabove=2pt,skipbelow=2pt,%
+          innerleftmargin=3pt,leftmargin=0ex]{notebox}
+\newmdenv[linecolor=white,font={\scriptsize},%
+          fontcolor=blue!85,backgroundcolor=yellow!5,%
+          skipabove=1ex,skipbelow=0pt,innerbottommargin=0.5ex,%
+          innerleftmargin=3pt,leftmargin=1em]{myref}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\thefootnote}{}% 不要编号
+\setbeamertemplate{footnote}{% 首行不缩进
+  \noindent\insertfootnotemark%
+  \scriptsize\color{blue!85!green!85}\insertfootnotetext\par\kern1ex}
+\renewcommand\footnoterule%    更改横线属性：长度，粗细，颜色
+  {\color{red}\kern-3pt\rule{0.4\linewidth}{0.5pt}\par\kern2.6pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[many]{tcolorbox}
+\tcbset{highlight math %
+  style={enhanced, colframe=blue!40,colback=yellow!20,arc=4pt,boxrule=1pt}}
+\newtcbox{\subsubtit}[1][]{%
+  after skip=1em,boxrule=0.5pt,
+  fontupper=\color{blue}\bfseries,top=0.5ex,bottom=0.5ex,
+  left=1ex,right=1ex,
+  colframe=green,colback=red!5!white,#1}
+
+%\renewcommand{\baselinestretch}{1.1}
+\linespread{1.1}
+\setlength{\parskip}{1ex}
+
+\usepackage{listings} %插入代码
+\usepackage{xcolor}
+\lstset{numbers=left, %设置行号位置
+        numberstyle=\tiny, %设置行号大小
+        keywordstyle=\color{blue}, %设置关键字颜色
+        commentstyle=\color[cmyk]{1,0,1,0}, %设置注释颜色
+        frame=single, %设置边框格式
+        escapeinside=``, %逃逸字符(1左面的键)，用于显示中文
+        %breaklines, %自动折行
+        extendedchars=false, %解决代码跨页时，章节标题，页眉等汉字不显示的问题
+        xleftmargin=2em,xrightmargin=2em, aboveskip=1em, %设置边距
+        tabsize=4, %设置tab空格数
+        showspaces=false, %不显示空格
+        basicstyle=\ttfamily,
+       }
+\begin{document}
+
+%%%%% =======================================================================
+\title{R语言-3}
+\author{郑泽靖 \and zzjstat2023@163.com }
+\institute{\normalsize 北京师范大学统计学院}
+\date{\today}
+
+% ===== title page =====
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+% ===== contents =====
+% \begin{frame}
+%  \frametitle{Outline}
+%  \tableofcontents[hideallsubsections] %[pausesections]
+% \end{frame}
+\begin{frame}{数据结构}
+    \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\linewidth]{figs/sjjg.PNG}
+    \end{figure} 
+\end{frame}
+\section{列表(list)}
+\begin{frame}[fragile]{列表的定义}
+    列表可以看成向量结构的另一种推广。它允许其各个分量是任意的R语言结构，例如：
+    \begin{itemize}
+        \item 向量
+        \item 矩阵
+        \item 数据框
+        \item 其他列表
+    \end{itemize}
+
+    列表结构能够将不同的对象以简单的形式组合在一起，方便编程者调用。
+\end{frame}
+\begin{frame}[fragile]{列表的特点}
+    \begin{itemize}
+        \item 列表中的每个元素可以是不同类型的R对象，具有更大的灵活性。
+        \item 列表元素可以通过索引或名称进行访问。
+        \item 许多R语言函数的计算结果都是以列表的方式表达的。
+    \end{itemize}
+
+\end{frame}
+\begin{frame}[fragile]{生成列表}
+    在R语言中，可以通过函数 \texttt{list()} 来生成列表数据。以下是示例代码：
+
+    \begin{lstlisting}[language=R]
+# 生成一个列表
+x <- list(u = 2, v = "abcd")  # 列表有两个分量，分别为u和v
+x # 显示列表x的内容
+$u
+[1] 2
+$v
+[1] "abcd"   
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{索引列表分量}    
+    在R语言中，可以通过 \texttt{[[i]]} 或 \texttt{\$} 来索引和修改列表的分量。
+    \begin{lstlisting}[language=R]
+# 列表有两个分量：u 和 v
+x <- list(u = 2, v = "abcd")  
+# 索引x的第一分量
+x$u    # 或者使用 x[[1]]
+[1] 2
+# 索引x的第二分量
+x[[2]]
+[1] "abcd"
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{修改列表分量}    
+    \begin{lstlisting}[language=R]
+# 将x的第一分量修改为1:3
+x$u <- 1:3  # 修改为向量
+# 显示x的第一分量的内容
+x[[1]]
+[1] 1 2 3
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{names函数}
+    在R语言中，函数 \texttt{names} 不仅能用于数据框，也能用于列表，查阅或修改各个分量的名称。
+        \begin{lstlisting}[language=R]
+# 创建列表
+x <- list(u = 2, v = "abcd") 
+names(x)
+[1] "u"    "v"
+names(x) <- c("num", "string") 
+names(x) 
+[1] "num"    "string"
+    \end{lstlisting}
+\end{frame}
+
+\section{函数}
+\begin{frame}[fragile]{函数}
+    为了方便使用者，R语言将具有特定功能的程序代码封装在函数中。下面简单介绍一些常用函数的功能和使用方法。
+\end{frame}
+
+\begin{frame}[fragile]{1.求和函数}
+函数 \texttt{sum} 计算向量的各个分量之和，矩阵的各行（列）元素之和使用函数 \texttt{rowSums} 和 \texttt{colSums}。
+    \begin{lstlisting}[language=R]
+# 计算向量c(1, 2, 3)的各分量之和
+sum(c(1, 2, 3))  # 结果为 6
+a <- matrix(1:6, 2, 3, byrow = TRUE)
+# 计算 a 的各列之和，结果为3维行向量
+b <- colSums(a)
+# 计算 a 的各行之和，结果为2维行向量
+c <- rowSums(a)
+    \end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{2.函数的输入变量}
+    通常，$R$ 语言的数学计算函数支持数据形式的输人变量（自变量），也支持向量形式的输入变量，还支持矩阵形式的输入变量．例如，运行程序代码
+   \begin{lstlisting}[language=R]
+x <- seq(1, 11, 2)
+sin(x)
+[1]  0.8414710  0.1411200 -0.9589243
+[4]  0.65698660 0.4121185 -0.9999902
+ \end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{3.绘图功能}
+    R语言提供了方便的制图功能，可以绘制任何函数的图像。函数 \texttt{plot} 提供了一种绘制平面图形的功能，可以通过问号 \texttt{?} 来获取该函数的在线帮助。
+    \begin{lstlisting}[language=R]
+# 创建从0到10的数值序列，步长为0.1
+x <- seq(0, 10, 0.1)
+# 计算x的正弦值
+y <- sin(x)
+# 绘制函数曲线
+plot(x,y,type="l",main="y=sin(x)",
+xlab = "x", ylab = "y")
+    \end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{关系运算符}
+    在R语言中，关系运算符的计算结果是逻辑数据，表明参与运算的两个变量是否满足特定的关系。
+    不仅两个数之间可以进行关系运算，向量和数之间、矩阵和数之间也可以进行关系运算。
+    \begin{lstlisting}[language=R]
+# 将向量 1:5 赋值给 X
+X <- 1:5 
+# 判断 X 的各个分量是否小于或等于 4
+X <= 4  
+[1] TRUE TRUE TRUE TRUE FALSE
+    \end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{关系运算符的应用}
+    可以利用关系运算符显示向量中满足特定条件的分量，或将这些分量统一改为特定的值。
+    \begin{lstlisting}[language=R]
+X <- 1:5 
+# 显示 X 中小于 3 的分量构成的子向量
+X[X < 3]  
+[1] 1 2
+# 将 X 中小于 3 的分量都改为 8
+X[X < 3] <- 8 
+X   # 再次显示 X 的结果
+[1] 8 8 3 4 5
+    \end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{其他关系运算示例}
+    \begin{lstlisting}[language=R]
+# 将字符 "abc" 赋值给 b
+b <- "abc"
+# 将 b 赋值给 c
+c <- b 
+# 判断b中的内容是否和字符"abc"相等
+b == "abc"  
+[1] TRUE
+# 判断b存储的内容是否和c的相等
+b == c  
+[1] TRUE
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}{离散均匀分布}
+    若随机变量 \(X\) 满足：
+    \[
+    \mathrm{P}(X=k) = \frac{1}{n}, \quad k=1,2,\ldots,n
+    \]
+    则称 \(X\) 服从以 \(n\) 为参数的离散均匀分布。
+
+    以 \(n\) 为参数的离散均匀分布随机变量的观测值称为以 \(n\) 为参数的离散均匀分布随机数。
+\end{frame}
+
+\begin{frame}[fragile]{离散均匀分布在R语言中的模拟}
+    可以使用函数 \texttt{sample} 来模拟离散均匀分布随机数。其简单调用方式为：
+    \begin{lstlisting}[language=R]
+sample(x, # 等可能地选择 x 的分量
+size,  # size为要选取的变量的个数
+replace = FALSE)  
+# replace为真，有放回抽样；
+#否则，无放回抽样
+    \end{lstlisting}
+    \end{frame}
+
+
+
+
+    \begin{frame}[fragile]{逻辑运算符}
+逻辑运算符用于逻辑变量的运算。常用的逻辑运算符及其含义如下：
+\begin{itemize}
+    \item \texttt{!}：非运算
+    \item \texttt{\&}：与运算
+    \item \texttt{|}：或运算
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{逻辑运算符示例}
+\begin{lstlisting}[language=R]
+!TRUE    # 非运算结果为 FALSE
+!FALSE   # 非运算结果为 TRUE
+TRUE & TRUE   # 与运算结果为 TRUE
+TRUE & FALSE  # 与运算结果为 FALSE
+FALSE & FALSE # 与运算结果为 FALSE
+TRUE | TRUE   # 或运算结果为 TRUE
+TRUE | FALSE  # 或运算结果为 TRUE
+FALSE | FALSE # 或运算结果为 FALSE
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{逻辑矩阵的示例}
+\begin{lstlisting}[language=R]
+> x
+     [,1] [,2] [,3]
+[1,]    1    3    5
+[2,]    2    4    6
+
+> a <- x <= 3 
+> a
+       [,1]  [,2]  [,3]
+[1,]  TRUE  TRUE FALSE
+[2,]  TRUE FALSE FALSE
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{逻辑矩阵的示例}
+\begin{lstlisting}[language=R]
+> b <- x > 2  
+> b
+       [,1]  [,2]  [,3]
+[1,] FALSE FALSE  TRUE
+[2,]  TRUE  TRUE  TRUE
+
+> !a
+       [,1]  [,2]  [,3]
+[1,] FALSE FALSE  TRUE
+[2,] FALSE  TRUE  TRUE
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{逻辑矩阵的示例}
+\begin{lstlisting}[language=R]
+> a & b
+       [,1]  [,2]  [,3]
+[1,] FALSE FALSE FALSE
+[2,]  TRUE FALSE FALSE
+
+> a | b
+       [,1]  [,2]  [,3]
+[1,]  TRUE  TRUE  TRUE
+[2,]  TRUE  TRUE  TRUE
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{短路逻辑或}
+\texttt{||} 是短路逻辑或（OR）运算符，也用于将两个逻辑表达式组合在一起。它与 \texttt{|} 的区别在于，只要第一个表达式为TRUE，就会返回TRUE，并且不会评估第二个表达式。
+\begin{lstlisting}[language=R]
+x <- 2
+a <- x <= 3                 
+b <- x > 2                 
+result <- a && b           
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{短路逻辑和}
+\texttt{\&\& }是短路逻辑与（AND）运算符，也用于将两个逻辑表达式组合在一起。它与 \texttt{\&} 的区别在于，只要第一个表达式为FALSE，就会返回FALSE，并且不会评估第二个表达式。
+\begin{lstlisting}[language=R]
+x <- 2
+a <- x <= 3                 
+b <- x > 2                  
+result <- a || b            
+\end{lstlisting}
+\end{frame}
+
+
+    \begin{frame}[fragile]{作业}
+\begin{itemize}
+    \item[1.]使用R语言创建一个数据框，包含以下列：
+\begin{itemize}
+    \item \texttt{ID}：1到10的整数
+    \item \texttt{Name}：随机给定10个名字（如“学生1”，“学生2”）
+    \item \texttt{Score}：随机生成10个1到100之间的整数
+\end{itemize}
+    \item[2.] 计算数据框中所有学生的平均分，并输出平均分。
+    \item[3.] 从数据框中筛选出分数大于等于70的学生，并输出这些学生的信息。
+    \item[4.] 从数据框中随机抽取5个学生的\texttt{Score}，使用不放回的方式抽样，并打印结果。
+\end{itemize}
+\end{frame}
+
+\begin{frame}{}
+\centering \Huge
+  \emph{Thanks!}
+\end{frame}
+
+\end{document}
