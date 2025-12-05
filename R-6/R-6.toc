@@ -1,0 +1,4 @@
+\beamer@sectionintoc {1}{数据读取与基础绘图}{2}{0}{1}
+\beamer@sectionintoc {2}{连续变量的分布：直方图}{3}{0}{2}
+\beamer@sectionintoc {3}{分类变量的分布：条形图与饼图}{10}{0}{3}
+\beamer@sectionintoc {4}{多维分类变量的可视化}{15}{0}{4}

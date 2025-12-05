@@ -1,0 +1,17 @@
+\frametitle{绘制并列条形图}
+关键参数：\texttt{beside = TRUE}。
+
+    \textbf{代码示例}：
+\begin{lstlisting}[language=R]
+# 图 (a)
+barplot(t(y),
+        beside = TRUE,   # 关键参数：并列显示
+        legend.text = colnames(y),
+        args.legend = list(x="topleft"))
+
+# 图 (b)
+barplot(y,
+        beside = TRUE,
+        legend.text = rownames(y),
+        args.legend = list(x="topleft"))
+\end{lstlisting}
