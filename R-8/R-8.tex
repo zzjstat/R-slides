@@ -1,0 +1,541 @@
+\documentclass[10pt]{ctexbeamer}
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% Define where theme files are located. ('/styles')
+\usepackage{styles/fluxmacros}
+\usefolder{styles}
+% Use Flux theme v0.1 beta
+% Available style: asphalt, blue, red, green, gray 
+\usetheme[style=asphalt]{flux}
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\def\pgfsysdriver{pgfsys -dvipdfmx.def}
+\usepackage{tikz}
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% Extra packages for the demo:
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{colortbl}
+\usepackage{ragged2e}
+\usepackage{schemabloc}
+\usepackage{graphicx}
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% 导入包
+\usepackage{hyperref}
+% 格式设置
+\hypersetup{hidelinks,
+	colorlinks=true,
+	allcolors=cyan,
+	pdfstartview=Fit,
+	breaklinks=true}
+
+ %代码
+\usepackage{listings} %插入代码
+\usepackage{xcolor}
+\lstset{numbers=left, %设置行号位置
+        numberstyle=\tiny, %设置行号大小
+        keywordstyle=\color{blue}, %设置关键字颜色
+        commentstyle=\color[cmyk]{1,0,1,0}, %设置注释颜色
+        frame=single, %设置边框格式
+        escapeinside=``, %逃逸字符(1左面的键)，用于显示中文
+        %breaklines, %自动折行
+        extendedchars=false, %解决代码跨页时，章节标题，页眉等汉字不显示的问题
+        xleftmargin=2em,xrightmargin=2em, aboveskip=1em, %设置边距
+        tabsize=4, %设置tab空格数
+        showspaces=false, %不显示空格
+        basicstyle=\ttfamily,
+       }
+
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% Informations
+\title{R-8}
+\subtitle{}
+\author{郑泽靖 \and zzjstat2023@163.com}
+\institute{北京师范大学统计学院}
+\date{\today}
+\titlegraphic{assets/stat.png}
+\usepackage{wrapfig}
+\usepackage{caption}
+\begin{document}
+\titlepage
+\begin{frame}{假设检验问题}
+
+关于总体分布的不相容的猜测构成一个假设检验问题:
+    \begin{equation}
+        H_0 \longleftrightarrow H_1
+    \end{equation}
+\begin{itemize}
+    \item 称 $H_0$ 为原假设或零假设。
+    \item 称 $H_1$ 为备择假设或对立假设。
+\end{itemize}
+对于假设检验问题 $H_0 \longleftrightarrow H_1$:
+\begin{itemize}
+    \item 当 $p$-值小于显著性水平时，拒绝 $H_0$。
+    \item 否则，接受 $H_0$。
+\end{itemize}
+\end{frame}
+\begin{frame}{假设检验问题}
+\begin{itemize}
+    \item 设总体 $X \sim N(\mu, \sigma^2)$，感兴趣的假设检验问题为：
+    \begin{align}
+        & H_0: \mu = \mu_0, \\
+        & H_0: \mu \leqslant \mu_0, \\
+        & H_0: \mu \geqslant \mu_0,
+    \end{align}
+    其中 $\mu_0$ 为已知实数。
+    \item \textbf{双边假设检验问题}（简称双边检验问题）:
+    \begin{itemize}
+        \item 类似于 $H_0: \mu = \mu_0$ 的假设检验问题。
+    \end{itemize}
+    \item \textbf{单边假设检验问题}（简称单边检验问题）:
+    \begin{itemize}
+        \item 类似于 $H_0: \mu \leqslant \mu_0$ 或 $H_0: \mu \geqslant \mu_0$ 的假设检验问题。
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{已知总体方差情况下的均值检验}
+\begin{itemize}
+    \item 当总体标准差 $\sigma = \sigma_0$ 已知时，检验统计量为：
+    \[
+    Z = \frac{\sqrt{n}(\bar{X} - \mu_0)}{\sigma_0}
+    \]
+    \item 由定理 5.1.1 知：
+    \[
+    Z \sim N\left(\frac{\sqrt{n}(\mu - \mu_0)}{\sigma_0}, 1\right)
+    \]
+    \item 特别地，当 $\mu = \mu_0$ 时，$Z \sim N(0,1)$。
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{检验统计量的观测值}
+\begin{itemize}
+    \item 对于样本观测数据 $x_1, x_2, \cdots, x_n$，检验统计量 $Z$ 的观测值为：
+    \[
+    \bar{x} = \frac{1}{n} \sum_{k=1}^n x_k, \quad z = \frac{\sqrt{n}(\bar{x} - \mu_0)}{\sigma_0}
+    \]
+\end{itemize}
+
+\begin{lstlisting}[language=R]
+n <- length(x) # 计算样本容量
+z <- (n^0.5) * (mean(x) - mu0) / sigma0 # 计算观测值
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{$p$-值计算}
+\begin{itemize}
+    \item 对于双边检验问题 (2)，其 $p$-值为：
+    \[
+    \mathrm{P}_{H_0}\left(|Z| > |z_0|\right) = 2\left(1 - \Phi(|z_0|)\right)
+    \]
+    对应的 R 代码：
+\begin{lstlisting}[language=R]
+pValue <- 2 * pnorm(abs(z), lower.tail = FALSE)
+\end{lstlisting}
+
+    \item 对于单边检验问题 (3)，其 $p$-值为：
+    \[
+    \mathrm{P}_{H_0}\left(Z > z_0\right) = 1 - \Phi(z_0)
+    \]
+    对应的 R 代码：
+\begin{lstlisting}[language=R]
+pValue <- pnorm(z, lower.tail = FALSE)
+\end{lstlisting}
+
+    \item 对于单边检验问题 (4)，其 $p$-值为：
+    \[
+    \mathrm{P}_{H_0}\left(Z < z_0\right) = \Phi(z_0)
+    \]
+    对应的 R 代码：
+\begin{lstlisting}[language=R]
+pValue <- pnorm(z, lower.tail = TRUE)
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{未知总体方差情况下的均值检验}
+\begin{itemize}
+    \item 当总体方差未知时，使用样本标准差 $S$ 代替总体标准差，定义新的检验统计量：
+    \[
+    T = \frac{\sqrt{n}(\bar{X} - \mu_0)}{S}
+    \]
+    \item $S$ 为样本标准差。
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{$p$-值计算}
+\begin{itemize}
+    \item 对于双边假设检验问题 (2)，可以使用 R 语言中的 `t.test` 函数：
+\end{itemize}
+\begin{lstlisting}[language=R]
+h <- t.test(x, alternative = "two.sided", mu = mu0)
+pValue <- h$p.value
+\end{lstlisting}
+\begin{itemize}
+    \item 对于单边假设检验问题 (3)，使用以下 R 代码：
+\end{itemize}
+\begin{lstlisting}[language=R]
+h <- t.test(x, alternative = "greater", mu = mu0)
+pValue <- h$p.value
+\end{lstlisting}
+\begin{itemize}
+    \item 对于单边假设检验问题 (4)，使用以下 R 代码：
+\end{itemize}
+\begin{lstlisting}[language=R]
+h <- t.test(x, alternative = "less", mu = mu0)
+pValue <- h$p.value
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{双正态总体均值的检验}
+\begin{itemize}
+    \item 实际应用中，经常需要比较两个总体均值，例如比较两个班级学生的数学水平、两种安眠药的治疗效果等。
+    \item 考虑总体 $X \sim N(\mu_1, \sigma^2)$ 和总体 $Y \sim N(\mu_2, \sigma^2)$。
+\end{itemize}
+\begin{itemize}
+    \item 双边假设检验问题：
+    \[
+    H_0: \mu_1 = \mu_2
+    \]
+    \item 单边假设检验问题：
+    \[
+    H_0: \mu_1 \geqslant \mu_2
+    \]
+    或
+    \[
+    H_0: \mu_1 \leqslant \mu_2
+    \]
+\end{itemize}
+\end{frame}
+
+\begin{frame}{检验统计量 $Z$}
+\begin{itemize}
+    \item 用样本均值之差 $\bar{Y} - \bar{X}$ 估计 $\mu_2 - \mu_1$。
+    \item 构建的检验统计量：
+    \[
+    Z = \frac{\bar{Y} - \bar{X}}{\sigma \sqrt{\frac{1}{n} + \frac{1}{m}}}
+    \]
+    \item 当 $\sigma$ 已知时：
+    \[
+    Z \sim N\left(\frac{\sqrt{mn}(\mu_2 - \mu_1)}{\sigma \sqrt{n + m}}, 1\right)
+    \]
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{检验统计量的观测值}
+\begin{itemize}
+    \item 样本数据 $x_1, x_2, \ldots, x_n$ 和 $y_1, y_2, \ldots, y_m$。
+    \item 检验统计量 $Z$ 的观测值：
+    \[
+    z_0 = \frac{\sqrt{mn}(\bar{y} - \bar{x})}{\sigma \sqrt{m + n}}
+    \]
+\end{itemize}
+
+\begin{lstlisting}[language=R]
+n <- length(x) # 计算 X 的样本容量
+m <- length(y) # 计算 Y 的样本容量
+z <- (m * n)^0.5 * (mean(y) - mean(x)) 
+/ (sigma / (m + n)^0.5)
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}{双正态总体均值的 $t$ 检验}
+\begin{itemize}
+    \item 当 $\sigma$ 未知时，不能直接使用 $Z$ 作为检验统计量。
+    \item 需要使用总体标准差的估计量。
+\end{itemize}
+
+\begin{itemize}
+    \item 使用样本标准差的组合估计：
+    \[
+    S_p = \sqrt{\frac{1}{n+m-2}\left((n-1) S_X^2 + (m-1) S_Y^2\right)}
+    \]
+    \item 构建检验统计量：
+    \[
+    T = \frac{\sqrt{mn}(\bar{Y} - \bar{X})}{S_p \sqrt{m+n}}
+    \]
+    \item $T$ 服从 $t$ 分布。
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{$p$-值计算}
+\begin{itemize}
+    \item 对于双边假设检验问题：
+\end{itemize}
+\begin{lstlisting}[language=R]
+h <- t.test(x, y, alternative = "two.sided")
+pValue <- h$p.value
+\end{lstlisting}
+
+\begin{itemize}
+    \item 对于单边假设检验问题 $H_0: \mu_1 \geqslant \mu_2$：
+\end{itemize}
+\begin{lstlisting}[language=R]
+h <- t.test(x, y, alternative = "greater")
+pValue <- h$p.value
+\end{lstlisting}
+
+\begin{itemize}
+    \item 对于单边假设检验问题 $H_0: \mu_1 \leqslant \mu_2$：
+\end{itemize}
+\begin{lstlisting}[language=R]
+h <- t.test(x, y, alternative = "less")
+pValue <- h$p.value
+\end{lstlisting}
+\end{frame}
+\begin{frame}{回归模型}
+\begin{itemize}
+    \item 回归模型的一般形式为：
+    \[
+    \begin{cases}
+    Y = f(x \mid \theta) + e, \\
+    \mathrm{E}(e) = 0, \quad \mathrm{D}(e) = \sigma^2
+    \end{cases}
+    \]
+    \item 各个元素的定义：
+    \begin{itemize}
+        \item $Y$: 响应变量或预报变量
+        \item $x$: 协变量或解释变量，维数可以大于 $1$
+        \item $\theta$: 模型参数，维数可以大于 $1$
+        \item $f(\cdot \mid \theta)$: 回归函数
+        \item $e$: 残差或模型误差
+        \item $\sigma > 0$: 残差的标准差
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{最小二乘法估计}
+\begin{itemize}
+    \item 估计回归模型参数的目标是最小化样本点与回归曲线之间的距离平方和。
+    \item 具体而言，模型参数 $\theta$ 的估计为：
+    \[
+    \hat{\theta} = \underset{a \in \Theta}{\arg \min} \, Q(a)
+    \]
+    \item 其中：
+    \[
+    Q(a) = \sum_{i=1}^n \left(y_i - f(x_i \mid a)\right)^2
+    \]
+    \item $Q(a)$ 表示各个样本点与曲线 $y = f(x \mid a)$ 的整体距离。
+\end{itemize}
+\begin{itemize}
+    \item 回归曲线应该使得 $Q(a)$ 最小。
+    \item $\hat{\theta}$ 被称为模型参数 $\theta$ 的最小二乘估计量。
+    \item 这种估计模型参数的方法称为最小二乘法。
+\end{itemize}
+\end{frame}
+
+\begin{frame}{线性回归模型}
+\begin{itemize}
+    \item 当回归函数是参数的线性函数时，回归模型为：
+    \[
+    \begin{cases}
+    Y = \beta_0 + x \beta + e, \\
+    \mathrm{E}(e) = 0, \quad \mathrm{D}(e) = \sigma^2
+    \end{cases}
+    \]
+    \item 称此模型为线性回归模型。
+    \item 线性回归模型的组成：
+    \begin{itemize}
+        \item $\beta_0$: 截距项或常数项
+        \item $\beta$: 列向量，表示各协变量对响应变量的影响程度
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{线性回归模型求解函数 lm}
+\begin{itemize}
+    \item 在 R 语言中，使用函数 `lm` 计算线性回归模型中参数 $\beta$ 的最小二乘估计。
+    \item 函数 `lm` 的结果是一个特殊结构的列表，称为 `lm` 型数据。
+    \item 该列表包含参数 $\beta$ 的最小二乘估计的相关结果。
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{lm 函数的调用}
+\begin{itemize}
+    \item 可以简单地调用该函数：
+\end{itemize}
+\begin{lstlisting}[language=R]
+S <- lm(y ~ x)
+\end{lstlisting}
+\begin{itemize}
+    \item 其中 `y` 和 `x` 分别是响应变量和协变量的观测数据。
+    \item `y ~ x` 指明回归函数的结构为 $y = a + bx$。
+    \item `S` 是 `lm` 型变量，存放了模型参数估计的相关结果。
+\end{itemize}
+
+\begin{itemize}
+    \item `lm` 型变量有多个分量，其中最常用的包括：
+    \begin{itemize}
+        \item `coefficients`: 模型参数的估计结果
+        \item `residuals`: 残差估计结果
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{案例演示}
+\begin{itemize}
+    \item 下面通过一个简单的案例演示如何使用 `lm` 函数。
+    \item 示例代码：
+\end{itemize}
+\begin{lstlisting}[language=R]
+# 示例数据
+x <- c(1, 2, 3, 4, 5)
+y <- c(2, 4, 5, 4, 5)
+
+# 线性回归
+S <- lm(y ~ x)
+
+# 查看结果
+summary(S)
+\end{lstlisting}
+\end{frame}
+\begin{frame}{线性回归模型结构的表达方式}
+\begin{itemize}
+    \item 在 R 语言中，线性回归模型的结构可以通过公式表达式来定义。
+    \item 示例：在某些情况下，回归模型中没有截距项，响应变量 $y$ 与协变量 $x^2$ 的关系为线性。
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{无截距项的线性回归模型}
+\begin{itemize}
+    \item 回归函数结构的表达式为：
+\begin{lstlisting}[language=R]
+    y ~ 0 + I(x^2)
+\end{lstlisting}
+    \item 其中：
+    \begin{itemize}
+        \item `0` 表示模型中没有截距项。
+        \item `I($x \^{} 2$)` 表示协变量为 $x^2$，即回归函数为 $y = \beta x^2$。
+        \item `I()` 函数用于指示 `$x\^{} 2$` 是一个数学运算，而不是变量名。
+    \end{itemize}
+    \item 也可以使用 `-1` 代替 `0` 来表示没有截距项。
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{R 代码示例}
+\begin{lstlisting}[language=R]
+# 示例数据
+x <- c(1, 2, 3, 4, 5)
+y <- c(1, 4, 9, 16, 25)
+
+# 无截距项的线性回归
+model <- lm(y ~ 0 + I(x^2))
+
+# 查看结果
+summary(model)
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{提取模型参数和估计结果}
+\begin{itemize}
+    \item 在得到 `lm` 型变量后，可以使用 R 函数 `coef` 和 `predict` 提取模型参数和响应变量的估计结果。
+    \item 示例代码：
+\end{itemize}
+\begin{lstlisting}[language=R]
+# 生成线性回归模型
+myReg <- lm(y ~ x)
+
+# 提取参数估计结果
+coef(myReg) # 提取 lm 列表 myReg 中的参数估计结果
+
+# 计算响应变量的估计结果
+predict(myReg) # 计算响应变量的估计结果
+\end{lstlisting}
+\begin{itemize}
+    \item 其中 `myReg` 存储的是函数 `lm` 的计算结果。
+\end{itemize}
+\end{frame}
+\begin{frame}[fragile]{练习题 1：假设检验}
+\textbf{题目：}
+
+假设你有一组数据表示某个城市中一小部分人的每日步数（单位：步）。你想知道这些人的平均每日步数是否显著大于 10000 步。请使用 R 语言进行单样本 t 检验来检验这一假设。
+
+\begin{lstlisting}[language=R]
+# 步数数据
+steps <- c(9500, 10200, 9800, 11000, 12000, 9700, 
+           10300, 10800, 11500, 9900)
+
+# 使用显著性水平为 0.05
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{练习题 1：答案}
+\textbf{答案：}
+
+\begin{lstlisting}[language=R]
+# 单样本 t 检验
+t_test_result <- t.test(steps, mu = 10000, 
+                        alternative = "greater")
+
+# 输出结果
+t_test_result
+\end{lstlisting}
+
+\textbf{解释：}
+\begin{itemize}
+    \item 使用 `t.test` 函数进行单样本 t 检验。
+    \item 参数 `mu = 10000` 指定检验的均值假设。
+    \item 参数 `alternative = "greater"` 用于检验平均步数是否大于 10000 步。
+    \item 检验结果包括 t 值、自由度、p 值等信息。如果 p 值小于 0.05，可以拒绝原假设。
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{练习题 2：线性回归}
+\textbf{题目：}
+
+你是一名数据分析师，正在研究某城市的房价与房屋面积之间的关系。你有以下数据：
+
+\begin{lstlisting}[language=R]
+# 房屋面积（平方米）
+area <- c(50, 60, 80, 100, 120, 150)
+
+# 房价（万元）
+price <- c(50, 60, 80, 90, 110, 140)
+\end{lstlisting}
+
+使用 R 语言建立一个线性回归模型来预测房价，并回答以下问题：
+
+1. 建立线性回归模型，并输出模型的系数。
+2. 根据模型预测一个面积为 90 平方米的房子的价格。
+\end{frame}
+
+\begin{frame}[fragile]{练习题 2：答案}
+\textbf{答案：}
+
+\begin{lstlisting}[language=R]
+# 建立线性回归模型
+house_model <- lm(price ~ area)
+
+# 输出模型系数
+coef(house_model)
+
+# 预测面积为 90 平方米的房价
+predicted_price <- predict(house_model, 
+    newdata = data.frame(area = 90))
+
+# 输出预测结果
+predicted_price
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{练习题 2：答案}
+\textbf{解释：}
+\begin{itemize}
+    \item 使用 `lm` 函数建立线性回归模型，`price` 作为响应变量，`area` 作为解释变量。
+    \item `coefficients(house${}_{}$model)` 返回模型的截距和斜率。
+    \item 使用 `predict` 函数预测面积为 90 平方米的房价。
+    \item `newdata` 参数用于传递新数据进行预测。
+\end{itemize}
+\end{frame}
+\begin{frame}{}
+\centering \Huge
+  \emph{Thanks!}
+\end{frame}
+\end{document}

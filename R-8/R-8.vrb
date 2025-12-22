@@ -1,0 +1,8 @@
+\frametitle{练习题 2：答案}
+\textbf{解释：}
+\begin{itemize}
+    \item 使用 `lm` 函数建立线性回归模型，`price` 作为响应变量，`area` 作为解释变量。
+    \item `coefficients(house${}_{}$model)` 返回模型的截距和斜率。
+    \item 使用 `predict` 函数预测面积为 90 平方米的房价。
+    \item `newdata` 参数用于传递新数据进行预测。
+\end{itemize}

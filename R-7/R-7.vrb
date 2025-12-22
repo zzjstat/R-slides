@@ -1,0 +1,23 @@
+\frametitle{示例}
+\begin{lstlisting}[language=R]
+# 进行100次实验
+n_trials <- 100
+means <- numeric(n_trials)  # 用于存储均值
+sds <- numeric(n_trials)     # 用于存储标准差
+
+# 重复试验100次
+for (i in 1:n_trials) {
+  sample_data <- rnorm(100, mean = 2, sd = 2)  # 生成100个来自N(2, 4)的随机变量
+  means[i] <- mean(sample_data)  # 计算均值
+  sds[i] <- sd(sample_data)       # 计算标准差
+}
+
+# 绘制均值的QQ图
+par(mfrow=c(1, 2))  # 设置图形窗口为1行2列
+qqnorm(means, main = "均值的QQ图")
+qqline(means, col='blue', lwd=2)
+
+# 绘制标准差的QQ图
+qqnorm(sds, main = "标准差的QQ图")
+qqline(sds, col='red', lwd=2)
+\end{lstlisting}
