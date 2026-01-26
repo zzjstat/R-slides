@@ -1,0 +1,2 @@
+\beamer@sectionintoc {1}{函数}{25}{0}{1}
+\beamer@sectionintoc {2}{极大似然估计}{62}{0}{2}

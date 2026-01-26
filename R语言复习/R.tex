@@ -1,0 +1,1300 @@
+\documentclass[10pt,compress,t,noamsthm,notheorem,table,handout]{ctexbeamer}
+\usetheme{Boadilla}
+\useinnertheme{circles}
+\useoutertheme{shadow}
+\usecolortheme{seahorse}
+\usefonttheme[onlymath]{serif}
+\setbeamertemplate{navigation symbols}{}
+% \setbeamercovered{transparent}
+\usepackage{natbib}
+\usepackage{amsthm}
+\usepackage{makecell}
+\usepackage{multirow}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\bibliographystyle{unsrtnat}
+\usepackage{color}
+\setbeamercolor{myfootline}{bg=white,fg=blue}
+\definecolor{myfoot}{rgb}{0.5,0.2,0.5}
+\definecolor{darkblue}{rgb}{0.1,0,0.85}
+\setbeamertemplate{headline}
+  { \leavevmode\begin{beamercolorbox}[wd=\paperwidth,ht=1.25ex,dp=1ex,left]{}
+    \end{beamercolorbox}}
+\setbeamertemplate{footline}% 自定义页脚
+  { \leavevmode\mbox{%
+    \begin{beamercolorbox}[wd=.75\paperwidth,ht=2.25ex,dp=1ex,left]{myfootline}%
+        \rule{2em}{0pt}\color{myfoot}\ttfamily\scriptsize%
+        %\insertshortauthor~(\insertshortinstitute)
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,right]{myfootline}%
+       {\color{myfoot}\ttfamily\scriptsize\insertframenumber{}/%
+        \inserttotalframenumber\hspace*{3ex}}
+    \end{beamercolorbox}}
+    \vskip0pt }
+
+\setbeamercolor{frametitle}{fg=blue,bg=white}
+\setbeamertemplate{frametitle}{%
+  \leavevmode\linespread{1}\large\textbf{\insertframetitle}\par
+  \color{structure.fg!30!bg}\rule[6pt]{\linewidth}{2pt}\par\vspace{-1.0em}}
+
+% \setbeamertemplate{blocks}[default] % beamer块（含定理类环境）不要阴影
+\setbeamertemplate{bibliography entry title}{}{}
+\setbeamertemplate{bibliography entry location}{}{}
+\setbeamertemplate*{bibliography entry note}{}{}
+\setbeamersize{text margin left=0.75cm, text margin right=0.75cm}
+
+\setbeamercolor{bluebox}{fg=black,bg=blue!10}
+\setbeamercolor{redbox}{fg=black,bg=red!10}
+\newenvironment{Boxblue}[1][\textwidth]
+  {\begin{beamercolorbox}[sep=0.1em,shadow=true,wd=#1,rounded=true,center]{bluebox}}
+  {\end{beamercolorbox}}
+\newenvironment{Boxred}[1][\textwidth]
+  {\begin{beamercolorbox}[sep=0.1em,shadow=true,wd=#1,rounded=true,center]{redbox}}
+  {\end{beamercolorbox}}
+\usepackage{stmaryrd}
+\usepackage{amsmath,amssymb,amsfonts,bm}
+\usepackage{graphicx,xcolor}
+\graphicspath{{figures/}}
+\usepackage{hyperref}
+\hypersetup{pdfborder=001,colorlinks=true,linkcolor=darkblue,urlcolor=blue}
+\usepackage{bbding}
+\newcommand{\Bullet}{{\fontsize{6pt}{6pt}\selectfont\CircleSolid}}
+\newcommand{\Hand}{{\fontsize{8pt}{6pt}\selectfont\HandRight}}
+\newcommand{\zhu}{{\color{blue!40}\Bullet}}
+\newcommand{\zhuu}{{\color{red!80}\Hand}}
+\newcommand{\labeli}{\zhu}
+\newenvironment{blist}%
+    {\begin{list}{{\hfill\raisebox{1.12pt}{\color{blue!60}\zhu}}}{%
+     \leftmargin2em\labelwidth1.5em\labelsep0.5em
+     \itemsep1ex\itemindent0pt\parsep0pt\topsep0pt}}
+    {\end{list}}
+\newenvironment{myitem}
+  {\begin{list}{{\hfill\raisebox{0pt}{\labeli}}}{%
+    \setlength{\leftmargin}{1.2em}\labelwidth0.8em\labelsep.4em%
+    \itemsep1ex\parsep2pt\itemindent0pt\topsep0pt}}{\end{list}}
+\newenvironment{subitem}
+  {\begin{list}{{\hfill\raisebox{0pt}{-}}}{%
+    \setlength{\leftmargin}{1.2em}\labelwidth0.8em\labelsep.4em%
+    \itemsep0ex\parsep2pt\itemindent0pt\topsep0pt}}{\end{list}}
+\usepackage{colortbl}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage{stmaryrd}
+\usepackage{amsfonts}
+\usepackage[ruled,linesnumbered]{algorithm2e}
+\usepackage{float} 
+\usepackage{booktabs}
+\usepackage[framemethod=tikz]{mdframed}
+\newmdenv[linecolor=green,middlelinewidth=1pt,%
+          roundcorner=3pt,backgroundcolor=white,%
+          innertopmargin=0.8em,innerbottommargin=0.5em,%
+          innerleftmargin=3pt,innerrightmargin=3pt,%
+          skipbelow=0.5em,skipabove=1em,%
+          splittopskip=\topskip]{Block}
+\newmdenv[linecolor=green,middlelinewidth=1pt,%
+          roundcorner=3pt,backgroundcolor=red!5!white,%
+          innertopmargin=0.5em,innerbottommargin=0.5em,%
+          innerleftmargin=3pt,innerrightmargin=3pt,%
+          skipbelow=0.5em,skipabove=1em,%
+          splittopskip=\topskip]{redbox}
+\newmdenv[linecolor=green,middlelinewidth=0.5pt,%
+          %outerlinewidth=0.5pt,skipabove=0pt,
+          roundcorner=3pt,backgroundcolor=white,%
+          innerbottommargin=3pt,innerrightmargin=5pt,%
+          innerleftmargin=5pt,leftmargin=0ex]{mathbox}
+\newmdenv[linecolor=blue!5!green,middlelinewidth=0.5pt,%
+          roundcorner=3pt,backgroundcolor=yellow!5,%
+          % frametitle={Hello},frametitlebackgroundcolor=green!50,%
+          % skipabove=2pt,skipbelow=2pt,%
+          innerleftmargin=3pt,leftmargin=0ex]{notebox}
+\newmdenv[linecolor=white,font={\scriptsize},%
+          fontcolor=blue!85,backgroundcolor=yellow!5,%
+          skipabove=1ex,skipbelow=0pt,innerbottommargin=0.5ex,%
+          innerleftmargin=3pt,leftmargin=1em]{myref}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\thefootnote}{}% 不要编号
+\setbeamertemplate{footnote}{% 首行不缩进
+  \noindent\insertfootnotemark%
+  \scriptsize\color{blue!85!green!85}\insertfootnotetext\par\kern1ex}
+\renewcommand\footnoterule%    更改横线属性：长度，粗细，颜色
+  {\color{red}\kern-3pt\rule{0.4\linewidth}{0.5pt}\par\kern2.6pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[many]{tcolorbox}
+\tcbset{highlight math %
+  style={enhanced, colframe=blue!40,colback=yellow!20,arc=4pt,boxrule=1pt}}
+\newtcbox{\subsubtit}[1][]{%
+  after skip=1em,boxrule=0.5pt,
+  fontupper=\color{blue}\bfseries,top=0.5ex,bottom=0.5ex,
+  left=1ex,right=1ex,
+  colframe=green,colback=red!5!white,#1}
+
+%\renewcommand{\baselinestretch}{1.1}
+\linespread{1.1}
+\setlength{\parskip}{1ex}
+
+\usepackage{listings} %插入代码
+\usepackage{xcolor}
+\lstset{numbers=left, %设置行号位置
+        numberstyle=\tiny, %设置行号大小
+        keywordstyle=\color{blue}, %设置关键字颜色
+        commentstyle=\color[cmyk]{1,0,1,0}, %设置注释颜色
+        frame=single, %设置边框格式
+        escapeinside=``, %逃逸字符(1左面的键)，用于显示中文
+        %breaklines, %自动折行
+        extendedchars=false, %解决代码跨页时，章节标题，页眉等汉字不显示的问题
+        xleftmargin=2em,xrightmargin=2em, aboveskip=1em, %设置边距
+        tabsize=4, %设置tab空格数
+        showspaces=false, %不显示空格
+        basicstyle=\ttfamily,
+       }
+\begin{document}
+
+%%%%% =======================================================================
+\title{R语言基础函数}
+\author{}
+\institute{}
+\date{\today}
+
+% ===== title page =====
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+\begin{frame}[fragile]{常量}
+\textbf{常量}是直接写在程序中的值，包括数值、字符串等。
+
+\begin{itemize}
+    \item \textbf{数值型常量:} 123, 123.45
+    \item \textbf{字符型常量:} 使用双引号或单引号包围 ("Li Ming")
+    \item \textbf{逻辑型常量:} 只有 \texttt{TRUE} 和 \texttt{FALSE} 
+    \item \textbf{缺失值:} 用 \texttt{NA} 表示，常见于数据缺失情况。
+    \item \texttt{NaN} (Not a Number): 表示未定义或不可表示的数值，如0除以0。
+    \item \texttt{Inf}: 表示正无穷或负无穷，通常在除以零时出现。
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{变量}
+\textbf{变量}用于保存输入值或计算结果。
+\begin{itemize}
+    \item \textbf{变量名规则:}
+    \begin{itemize}
+        \item 由字母、数字、下划线和句点组成，不能以数字开头。
+        \item 变量名区分大小写，如 \texttt{y} 和 \texttt{Y} 是不同的变量。
+        \item 示例: \texttt{x}, \texttt{x1}, \texttt{X}, \texttt{cancer.tab}
+    \end{itemize}
+    \item \textbf{赋值:} 使用 \texttt{<-} 或 \texttt{=} 定义变量。
+\begin{lstlisting}[language=R]
+x5 <- 6.25
+x6 = sqrt(x5)
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{重要变量类型：逻辑型}
+\textbf{逻辑型变量}用于存储真（TRUE）和假（FALSE）的值。
+\textit{在数值计算中，逻辑变量值TRUE自动转换为1，FALSE自动转换为0。}
+    \begin{lstlisting}[language=R]
+TRUE + TRUE      # 求和
+## [1] 2
+a <- TRUE        # 赋值
+is.logical(a)    # 检查类型
+## [1] TRUE
+class(a)          # 查看变量类型
+## [1] "logical"
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{重要变量类型：数值型}
+\textbf{数值型变量}用于保存数值数据。
+    \begin{lstlisting}[language=R]
+a <- 23        # 将23赋值给变量a
+is.numeric(a)  # 检查是否为数值型
+## [1] TRUE
+
+is.logical(a)  # 检查是否为逻辑型
+## [1] FALSE
+
+class(a)       # 查看变量类型
+## [1] "numeric"
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{重要变量类型：字符型}
+\textbf{字符型变量}用于保存文本数据。
+    \begin{lstlisting}[language=R]
+a <- "My"        # 将"My"赋值给a
+a                # 显示a的值
+## [1] "My"
+
+is.character(a)  # 检查是否为字符型
+## [1] TRUE
+
+class(a)         # 查看变量类型
+## [1] "character"
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{向量}
+   \textbf{向量}是将若干个\textit{基础类型（数值型、字符型或逻辑型）相同}的值存储在一起的结构。各个元素可以通过序号进行访问。\\
+    向量的创建方法（1） - \textbf{组合功能函数}：
+    \begin{lstlisting}[language=R]
+# 数值型向量
+x1 <- c(1, 2) # 创建第一个数值型向量
+x2 <- c(3, 4) # 创建第二个数值型向量
+x <- c(x1, x2) # 合并向量
+x 
+## [1] 1 2 3 4
+    \end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{向量的创建}
+    \textbf{方法（2）：冒号生成数值序列} \\ 
+    表达式 "a:b" 从 a 到 b（步长为 1）。默认生成整数序列。
+    \textbf{示例：}
+    \begin{lstlisting}[language=R]
+> 1:6         # 1 到 6
+[1] 1 2 3 4 5 6
+> 4:7.6       # 整数部分
+[1] 4 5 6 7
+> 1.2:5       # 从 1.2 到 5
+[1] 1.2 2.2 3.2 4.2
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{向量的创建}
+    \textbf{方法（3）：Seq() 函数} \\ 
+    \texttt{seq(from, to, by, length.out)}\\
+    \begin{itemize}
+        \item \texttt{from}: 向量的起始值。
+        \item \texttt{to}: 向量的结束值。
+        \item \texttt{by}: 步长，默认值为 1。可为负数以生成递减序列。
+        \item \texttt{length.out}: 指定生成的向量长度，自动计算步长。
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{访问和修改向量元素}
+    \textbf{正整数下标}：使用方括号访问向量元素。
+    \textbf{示例：}
+    \begin{lstlisting}[language=R]
+x <- c(1, 4, 6.25)
+x[2]          # 取出第二个元素
+[1] 4
+x[2] <- 99    # 修改第二个元素
+print(x)              
+[1]  1.00 99.00  6.25
+  \end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{R 矩阵}
+    \textbf{矩阵}：二维数组。\textbf{向量}可以视为特殊的矩阵（行数为 1 或列数为 1 的矩阵）。
+    \textbf{注意}：每个元素必须为相同的数据类型（数值型、字符型或逻辑型）。\\
+    使用 \texttt{matrix()} 函数定义矩阵。示例如下：
+    \begin{lstlisting}[language=R]
+A <- matrix(11:16, nrow=3, ncol=2)
+print(A)
+     [,1] [,2]
+[1,]   11   14
+[2,]   12   15
+[3,]   13   16
+    \end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{矩阵的定义}
+    \begin{itemize}
+        \item \texttt{matrix()} 函数接受一个向量作为矩阵元素。
+        \item \texttt{nrow} 和 \texttt{ncol} 指定行数和列数。
+        \item 默认按列填充，可使用 \texttt{byrow=TRUE} 按行填充。
+    \end{itemize}
+{\small    \begin{lstlisting}[language=R]
+B <- matrix(c(1, -1, 1, 1), 
+     nrow=2, ncol=2, byrow=TRUE)
+print(B)
+      [,1] [,2]
+[1,]    1   -1
+[2,]    1    1
+    \end{lstlisting}}
+\end{frame}
+
+
+\begin{frame}[fragile]{访问矩阵的元素}
+    使用下标访问矩阵元素：
+    \begin{itemize}
+        \item \texttt{A[1,]}：取出第一行，返回普通向量。
+        \item \texttt{A[,1]}：取出第一列，返回普通向量。
+        \item \texttt{A[c(1, 3), 1:2]}：取出指定行和列的子矩阵。
+    \end{itemize}
+    \begin{lstlisting}[language=R]
+A <- matrix(11:16, nrow=3, ncol=2)
+A[1,]          # 取出第一行
+[1] 11 14
+A[,1]          # 取出第一列
+[1] 11 12 13
+# 取出第1和第3行的前2列
+A[c(1, 3), 1:2]  
+      [,1] [,2]
+[1,]   11   14
+[2,]   13   16
+    \end{lstlisting}
+    \end{frame}
+
+
+\begin{frame}[fragile]{矩阵元素的修改}
+    使用下标可以修改矩阵的元素：
+
+    \begin{itemize}
+        \item 使用 \texttt{A[i, j]} 访问第 \(i\) 行第 \(j\) 列的元素。
+        \item 直接赋值可以修改该元素的值。
+        \item 可以使用下标向量同时修改多个元素。
+    \end{itemize}
+    \begin{lstlisting}[language=R]
+A[2, 1] <- 99 # 修改单个元素
+A
+     [,1] [,2]
+[1,]   11   14
+[2,]   99   15
+[3,]   13   16
+    \end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{数据框}
+    数据框是R语言中一种常见的数据结构, 用于存储表格数据。
+    \begin{itemize}
+        \item 由 \( n \) 行和 \( p \) 列组成。
+        \item 各列可以包含不同类型的数据
+        \item 同一列中的数据类型必须相同。
+    \end{itemize}
+使用 \texttt{data.frame()} 函数来创建数据框。所有输入变量必须是相同维数的向量。\\
+    \textbf{示例代码：}
+    \begin{lstlisting}[language=R]
+x <- c(160, 175) 
+y <- c(51, 72)    
+sex <- c("Female", "Male") 
+myData <- data.frame(x, y, sex)  
+class(myData) 
+[1] "data.frame"
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{在R中创建数据框并设置变量名称}
+    可以在创建数据框时指定变量的名称。
+    \begin{lstlisting}[language=R]
+myData <- data.frame(height = x, 
+           weight = y, sex = sex)
+myData
+  height weight    sex
+1    160     51 Female
+2    175     72   Male
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{在R中提取数据框的数据}
+    可以通过列变量名称提取相应的数据。例如：
+    \begin{lstlisting}[language=R]
+# 提取身高数据
+heights <- myData$height
+heights
+[1] 160 175
+# 提取性别数据
+genders <- myData$sex
+genders
+Levels: Female Male
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{在R中查阅数据框列名称}
+    \textbf{查阅列名称}
+
+    在R语言中，可以通过 \texttt{names()} 函数查阅数据框各列的名称。以下是示例代码：
+
+    \begin{lstlisting}[language=R]
+myData <- data.frame(x, y, sex) 
+# 查阅各列名称
+names(myData)  #显示myData各列的名称
+[1] "x" "y" "sex"
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{在R中修改数据框列名称}
+    \textbf{修改列名称}
+我们可以使用 \texttt{names()} 函数修改数据框的列名称：
+    
+    \begin{lstlisting}[language=R]
+# 重新命名myData的列名称
+names(myData) <- c("h", "w", "Sex")
+# 显示当前各列名称
+names(myData)  
+[1] "h" "w" "Sex"
+ \end{lstlisting}
+    现在，数据框 \texttt{myData} 的列名称已更改为 \texttt{h}, \texttt{w} 和 \texttt{Sex}。
+\end{frame}
+
+\begin{frame}[fragile]{在R中索引数据框内容}
+    在R语言中，可以像数组和向量一样通过方括号索引或修改数据框中特定位置的内容。
+    \begin{lstlisting}[language=R]
+myData <- data.frame(height=x,
+           weight=y,sex=sex)
+    \end{lstlisting}
+    \begin{itemize}
+        \item \texttt{myData[1, 1]} 和 \texttt{myData\$height[1]} 是等价的，它们都代表数据框 \texttt{myData} 第1行和第1列交叉位置的变量值。
+        \item \texttt{myData[, 2]} 和 \texttt{myData\$weight} 也是等价的，它们都表示数据框 \texttt{myData} 的第2列。
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{列表的定义}
+    列表可以看成向量结构的另一种推广。它允许其各个分量是任意的R语言结构，例如：
+    \begin{itemize}
+        \item 向量
+        \item 矩阵
+        \item 数据框
+        \item 其他列表
+    \end{itemize}
+
+    列表结构能够将不同的对象以简单的形式组合在一起，方便编程者调用。
+    \begin{itemize}
+        \item 列表中的每个元素可以是不同类型的R对象，具有更大的灵活性。
+        \item 列表元素可以通过索引或名称进行访问。
+        \item 许多R语言函数的计算结果都是以列表的方式表达的。
+    \end{itemize}
+
+\end{frame}
+\begin{frame}[fragile]{生成列表}
+    在R语言中，可以通过函数 \texttt{list()} 来生成列表数据。以下是示例代码：
+
+    \begin{lstlisting}[language=R]
+# 生成一个列表
+x <- list(u = 2, v = "abcd")  # 列表有两个分量，分别为u和v
+x # 显示列表x的内容
+$u
+[1] 2
+$v
+[1] "abcd"   
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{索引列表分量}    
+    在R语言中，可以通过 \texttt{[[i]]} 或 \texttt{\$} 来索引和修改列表的分量。
+    \begin{lstlisting}[language=R]
+# 列表有两个分量：u 和 v
+x <- list(u = 2, v = "abcd")  
+# 索引x的第一分量
+x$u    # 或者使用 x[[1]]
+[1] 2
+# 索引x的第二分量
+x[[2]]
+[1] "abcd"
+# 将x的第一分量修改为1:3
+x$u <- 1:3  # 修改为向量
+# 显示x的第一分量的内容
+x[[1]]
+[1] 1 2 3
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{names函数}
+    在R语言中，函数 \texttt{names} 不仅能用于数据框，也能用于列表，查阅或修改各个分量的名称。
+        \begin{lstlisting}[language=R]
+# 创建列表
+x <- list(u = 2, v = "abcd") 
+names(x)
+[1] "u"    "v"
+names(x) <- c("num", "string") 
+names(x) 
+[1] "num"    "string"
+    \end{lstlisting}
+\end{frame}
+
+\section{函数}
+\begin{frame}[fragile]{函数}
+    为了方便使用者，R语言将具有特定功能的程序代码封装在函数中。下面简单介绍一些常用函数的功能和使用方法。\\
+    函数 \texttt{sum} 计算向量的各个分量之和，矩阵的各行（列）元素之和使用函数 \texttt{rowSums} 和 \texttt{colSums}。
+    \begin{lstlisting}[language=R]
+# 计算向量c(1, 2, 3)的各分量之和
+sum(c(1, 2, 3))  # 结果为 6
+a <- matrix(1:6, 2, 3, byrow = TRUE)
+# 计算 a 的各列之和，结果为3维行向量
+b <- colSums(a)
+# 计算 a 的各行之和，结果为2维行向量
+c <- rowSums(a)
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{绘图功能}
+    R语言提供了方便的制图功能，可以绘制任何函数的图像。函数 \texttt{plot} 提供了一种绘制平面图形的功能，可以通过问号 \texttt{?} 来获取该函数的在线帮助。
+    \begin{lstlisting}[language=R]
+# 创建从0到10的数值序列，步长为0.1
+x <- seq(0, 10, 0.1)
+# 计算x的正弦值
+y <- sin(x)
+# 绘制函数曲线
+plot(x,y,type="l",main="y=sin(x)",
+xlab = "x", ylab = "y")
+    \end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{关系运算符}
+    在R语言中，关系运算符的计算结果是逻辑数据，表明参与运算的两个变量是否满足特定的关系。
+    不仅两个数之间可以进行关系运算，向量和数之间、矩阵和数之间也可以进行关系运算。
+    \begin{lstlisting}[language=R]
+# 将向量 1:5 赋值给 X
+X <- 1:5 
+# 判断 X 的各个分量是否小于或等于 4
+X <= 4  
+[1] TRUE TRUE TRUE TRUE FALSE
+    \end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{关系运算符的应用}
+    可以利用关系运算符显示向量中满足特定条件的分量，或将这些分量统一改为特定的值。
+    \begin{lstlisting}[language=R]
+X <- 1:5 
+# 显示 X 中小于 3 的分量构成的子向量
+X[X < 3]  
+[1] 1 2
+# 将 X 中小于 3 的分量都改为 8
+X[X < 3] <- 8 
+X   # 再次显示 X 的结果
+[1] 8 8 3 4 5
+    \end{lstlisting}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{离散均匀分布在R语言中的模拟}
+    可以使用函数 \texttt{sample} 来模拟离散均匀分布随机数。其简单调用方式为：
+    \begin{lstlisting}[language=R]
+sample(x, # 等可能地选择 x 的分量
+size,  # size为要选取的变量的个数
+replace = FALSE)  
+# replace为真，有放回抽样；
+#否则，无放回抽样
+    \end{lstlisting}
+    \end{frame}
+
+
+
+
+    \begin{frame}[fragile]{逻辑运算符}
+逻辑运算符用于逻辑变量的运算。常用的逻辑运算符及其含义如下：
+\begin{itemize}
+    \item \texttt{!}：非运算
+    \item \texttt{\&}：与运算
+    \item \texttt{|}：或运算
+\end{itemize}
+\begin{lstlisting}[language=R]
+!TRUE    # 非运算结果为 FALSE
+!FALSE   # 非运算结果为 TRUE
+TRUE & TRUE   # 与运算结果为 TRUE
+TRUE & FALSE  # 与运算结果为 FALSE
+FALSE & FALSE # 与运算结果为 FALSE
+TRUE | TRUE   # 或运算结果为 TRUE
+TRUE | FALSE  # 或运算结果为 TRUE
+FALSE | FALSE # 或运算结果为 FALSE
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{R语言中的条件语句}
+    在 R 语言中，常用的条件控制语句是 \texttt{if} 语句，它有三种主要形式。
+    
+    \begin{itemize}
+        \item \textbf{(1) 单条件 (if)}：基础判断。
+        \item \textbf{(2) 复合条件 (if/else)}：二选一判断。
+        \item \textbf{(3) 多条件 (if/else if/else)}：多重分支判断。
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{单条件语句 (if)}
+    \textbf{调用格式：}
+    \begin{lstlisting}[language=R]
+if (条件表达式) {
+    # 仅当条件表达式为 TRUE 时执行
+    程序代码
+}
+    \end{lstlisting}
+    
+    \textbf{执行过程}：
+    若“条件表达式”成立（结果为 \texttt{TRUE}），则执行“程序代码”；否则，跳过执行。
+\end{frame}
+
+
+\begin{frame}[fragile]{复合条件语句 (if/else)}
+    \textbf{调用格式：}
+    \begin{lstlisting}[language=R]
+if (条件表达式) {
+    程序代码1  # 条件成立时执行
+} else {
+    程序代码2  # 条件不成立时执行
+}
+    \end{lstlisting}
+    
+    \textbf{注意事项}：
+    \begin{itemize}
+        \item \texttt{else} 必须紧跟在 \texttt{if} 代码块的右花括号 \texttt{\}} 之后，并在同一行。
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{多条件语句 (if/else if/else)}
+    \textbf{调用格式：}
+    \begin{lstlisting}[language=R]
+if (条件表达式1) {
+    程序代码1
+} else if (条件表达式2) {
+    程序代码2
+} else {
+    程序代码3  # 以上条件都不满足时执行
+}
+    \end{lstlisting}
+    
+    \textbf{执行过程}：
+    程序依次检查条件表达式，一旦发现某个条件成立，则执行相应的程序代码，**然后跳出整个结构**。
+\end{frame}
+
+
+
+\begin{frame}{循环语句概述}
+    循环语句用于重复执行一段程序代码，是实现迭代和批量操作的重要手段。R 语言主要提供两种循环语句：
+    \begin{itemize}
+        \item \textbf{for 循环}：适用于已知重复次数或需要遍历向量元素的场景。
+        \item \textbf{while 循环}：适用于重复次数不确定，依赖条件表达式来控制终止的场景。
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{for 循环语句}
+    \textbf{调用格式：}
+    \begin{lstlisting}[language=R]
+for(i in 向量v) {
+    # 循环体 expr
+}
+    \end{lstlisting}
+    
+    \textbf{执行过程}：
+    \begin{enumerate}
+        \item 循环变量 $i$ 依次取向量 $v$ 中的每一个元素值。
+        \item 每取一个值，就执行一次循环体内的程序代码。
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{while 循环语句}
+    \textbf{调用格式：}
+    \begin{lstlisting}[language=R]
+while(条件表达式) {
+    循环体 
+    # 确保循环体内有能改变条件表达式的代码，防止死循环
+}
+    \end{lstlisting}
+    
+    \textbf{执行过程}：
+    \begin{enumerate}
+        \item 计算条件表达式。
+        \item 若为 \texttt{TRUE}，则运行循环体，然后返回第 1 步。
+        \item 若为 \texttt{FALSE}，则结束循环。
+    \end{enumerate}
+\end{frame}
+
+
+\begin{frame}[fragile]{函数 (Function) 定义}
+    函数是封装代码逻辑，实现代码重用和模块化的重要工具。
+    \begin{lstlisting}[language=R]
+name <- function(arg1, arg2, ...) {
+    # 函数体：程序代码
+    return(result) # 可选，但推荐使用
+}
+    \end{lstlisting}
+    
+    \begin{itemize}
+        \item \textbf{name}：自定义函数名。
+        \item \textbf{arg1, ...}：函数的输入参数。
+        \item \textbf{return(result)}：显式指定函数返回值。若省略 \texttt{return}，默认返回函数体中最后一行代码的计算结果。
+    \end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{定积分计算：\texttt{integrate} 函数}
+    R 语言通过内置的 \texttt{integrate} 函数进行一元函数的数值积分。
+    
+    计算定积分 $\int_0^1 x^2 \mathrm{~d} x$：
+    \begin{lstlisting}[language=R]
+# integrate 的第一个参数是一个函数对象
+result <- integrate(function(x) x^2, 
+                     lower = 0, upper = 1)
+print(result)
+    \end{lstlisting}
+    运行结果：
+    \[
+    \text{\$value} = 0.3333333 \text{ with absolute error < } 3.7 \times 10^{-15}
+    \]
+    \small{注意：积分的返回值是一个包含结果和误差信息的列表。}
+\end{frame}
+
+
+\begin{frame}{概率分布函数概述 (d/p/q/r)}
+    在 R 中，大多数概率分布函数都遵循 **d/p/q/r** 的命名规则：
+    \begin{itemize}
+        \item \texttt{d\textbf{xxx}(x)}: \textbf{D}ensity / \textbf{D}istribution function (概率密度或概率质量函数)。
+        \item \texttt{p\textbf{xxx}(q)}: \textbf{P}robability function (累积分布函数 CDF)，表示 $ P(X \leq q) $。
+        \item \texttt{q\textbf{xxx}(p)}: \textbf{Q}uantile function (分位数函数)，求解 $ F(x) = p $ 的 $ x $ 值。
+        \item \texttt{r\textbf{xxx}(n)}: \textbf{R}andom number generation (随机数生成函数)。
+    \end{itemize}
+    \small{（xxx 为分布的缩写，如 `norm`, `binom`, `unif` 等）}
+\end{frame}
+
+\begin{frame}[fragile]{二项分布（Binomial）示例}
+    \begin{itemize}
+        \item \texttt{dbinom(x, size, prob)}
+        \item \texttt{pbinom(q, size, prob)}
+        \item \texttt{rbinom(n, size, prob)}
+    \end{itemize}
+    \begin{lstlisting}[language=R]
+> dbinom(5, size = 10, prob = 0.5)  
+# P(X=5) = 0.246
+> pbinom(5, size = 10, prob = 0.5)  
+# P(X<=5) = 0.623
+> rbinom(2, size = 10, prob = 0.5)  
+# [1] 7 8 (示例值)
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{正态分布（Normal）示例}
+    \begin{itemize}
+        \item \texttt{dnorm(x, mean, sd)}
+        \item \texttt{pnorm(q, mean, sd)}
+        \item \texttt{rnorm(n, mean, sd)}
+    \end{itemize}
+    \begin{lstlisting}[language=R]
+> dnorm(0.5, mean = 0, sd = 1)   
+# 0.3520...
+> pnorm(1.96, mean = 0, sd = 1)  
+# P(Z<=1.96) = 0.975
+> rnorm(3, mean = 0, sd = 1)     
+# [1] -0.62... 1.03... 0.70...
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{蒙特卡罗方法简介}
+    \begin{block}{定义}
+    蒙特卡罗 (Monte Carlo) 方法是一种以概率统计理论为指导的数值计算方法。它使用随机数（或伪随机数）来解决计算问题。
+    \end{block}
+    
+    \begin{itemize}
+        \item \textbf{核心思想}：当所求解的问题是某随机事件出现的概率，或者是某随机变量的数学期望时，通过“实验”的方法得出频率，以此逼近概率或期望。
+        \item \textbf{应用场景}：数值积分,物理模拟等。
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{蒙特卡罗估计方法小结}
+    我们可以通过生成随机样本来估计以下各类统计量：
+    \begin{itemize}
+        \item \textbf{期望值} $\mathrm{E}[X]$：直接计算样本均值 $\bar{x}$。
+        \item \textbf{概率值} $\mathrm{P}(A)$：计算事件发生的频率（示性函数的均值）。
+        \item \textbf{分布函数} $F(x)$：计算 $X_i \le x$ 的经验比例（Glivenko-Cantelli 定理保证了收敛性）。
+        \item \textbf{积分} $\int g(x)dx$：转化为期望形式进行估计。
+    \end{itemize}
+\end{frame}
+\begin{frame}[fragile]{蒙特卡罗积分：原理}
+    目标：计算定积分 $\theta = \int_a^b g(x) dx$。
+    
+    \textbf{方法：} 引入在 $(a, b)$ 上的均匀分布随机变量 $X \sim U(a, b)$，其概率密度函数为 $f(x) = \frac{1}{b-a}$。
+    
+    我们可以将积分改写为期望的形式：
+    \[
+    \theta = \int_a^b g(x) dx = (b-a) \int_a^b g(x) \underbrace{\frac{1}{b-a}}_{f(x)} dx = (b-a) \mathrm{E}[g(X)]
+    \]
+    
+    \textbf{估计量：}
+    \[
+    \hat{\theta} = \frac{b-a}{n} \sum_{i=1}^n g(X_i), \quad X_i \sim U(a, b)
+    \]
+\end{frame}
+
+\begin{frame}[fragile]{直方图 (Histogram)}
+    直方图用于展示\textbf{连续变量}的分布情况。使用 \texttt{hist()} 函数即可绘制。
+    
+\begin{lstlisting}[language=R]
+hist(x, breaks="Sturges", freq=FALSE)
+\end{lstlisting}
+
+    \begin{table}
+    \centering
+    \begin{tabular}{|l|l|}
+    \hline 
+    \textbf{参数} & \textbf{含义} \\
+    \hline 
+    \texttt{x} & 数据向量（必须为数值型） \\
+    \hline 
+    \texttt{breaks} & 设置分组边界 \\
+    & (1) 默认为 "Sturges"（自动计算最适组距） \\
+    & (2) 指定向量：自定义组边界点 \\
+    \hline 
+    \texttt{freq} & 纵轴显示设置 \\
+    & \texttt{TRUE} (默认)：显示\textbf{频数} (Frequency) \\
+    & \texttt{FALSE}：显示\textbf{频率/密度} (Density) \\
+    \hline
+    \end{tabular}
+    \end{table}
+\end{frame}
+
+\begin{frame}[fragile]{分类变量的频数统计}
+    对于分类变量（因子），可以使用 \texttt{table()} 函数统计各类别的频数。
+\begin{lstlisting}[language=R]
+# 创建示例数据
+x <- c("女", "男", "女", "女", "女", "男", "女", "男", 
+       "女", "女", "男", "男", "女", "男", "女", "女", 
+       "女", "女", "男", "男", "男", "男", "男")
+y <- as.factor(x) 
+
+u <- table(y)     # 计算频数
+print(u)
+# y
+# 男  女 
+# 12  17 
+\end{lstlisting}
+
+    使用 \texttt{addmargins()} 添加合计行：
+\begin{lstlisting}[language=R]
+addmargins(u)
+# y   女  男  Sum
+#    17  12  29
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{分类变量的频率统计}
+    使用 \texttt{prop.table()} 计算比例（频率）：
+\begin{lstlisting}[language=R]
+prop.table(u)
+# 男        女 
+# 0.4137931 0.5862069 
+\end{lstlisting}
+
+    结合 \texttt{addmargins()} 显示合计频率：
+\begin{lstlisting}[language=R]
+v <- prop.table(u)         
+addmargins(v)              
+# 男        女        Sum 
+# 0.4137931 0.5862069 1.0000000
+\end{lstlisting}
+\end{frame}
+
+% --- Frame 11: 条形图绘制 ---
+\begin{frame}[fragile]{分类数据的条形图 (Bar Plot)}
+    条形图和饼图常用于展示分类数据。在 R 中使用 \texttt{barplot()} 绘制条形图。
+
+\begin{lstlisting}[language=R]
+# 绘制频数条形图
+barplot(u)  
+# 绘制频率条形图
+barplot(v)  
+\end{lstlisting}
+
+\end{frame}
+
+
+% --- Frame 14: 饼图 ---
+\begin{frame}[fragile]{饼图 (Pie Chart)}
+    饼图通过扇形面积比例展示各分类变量的频率。使用 \texttt{pie()} 函数绘制。
+\begin{lstlisting}[language=R]
+print(u)
+# y
+# 男 女 
+# 12 17 
+
+pie(u)
+\end{lstlisting}
+\end{frame}
+
+
+
+% --- Frame 16: 条形图类型 ---
+\begin{frame}[fragile]{多变量条形图}
+    展示两个分类变量的关系时，常用的条形图类型：
+    \begin{enumerate}
+        \item \textbf{堆积条形图 (Stacked Bar Plot)}：分为等高（展示比例）和非等高（展示总量）。
+        \item \textbf{并列条形图 (Dodged Bar Plot)}：便于直接比较各组数值。
+    \end{enumerate}
+\end{frame}
+
+% --- Frame 17: 数据准备 ---
+\begin{frame}[fragile]{数据准备：创建列联表}
+    首先将数据存储为矩阵或 table 对象：
+\begin{lstlisting}[language=R]
+# 创建矩阵数据
+x <- matrix(c(12, 19, 17, 21), nrow=2, ncol=2)
+colnames(x) <- c("男", "女")      # 列名：性别
+rownames(x) <- c("文科", "理科")  # 行名：专业
+
+y <- as.table(x)  # 转换为 table 对象
+print(y)
+\end{lstlisting}
+
+    \begin{table}[h]
+    \centering
+    \begin{tabular}{lcc} 
+    \hline
+    & \textbf{男} & \textbf{女} \\
+    \hline
+    \textbf{文科} & 12 & 17 \\
+    \textbf{理科} & 19 & 21 \\
+    \hline
+    \end{tabular}
+    \caption{变量 y 的内容}
+    \end{table}
+\end{frame}
+
+% --- Frame 18: 等高堆积条形图代码 ---
+\begin{frame}[fragile]{绘制等高堆积条形图}
+    等高堆积条形图主要用于比较\textbf{结构比例}（即条件概率）。
+    
+    \textbf{给定学科时的性别比例}
+\begin{lstlisting}[language=R]
+# prop.table(..., margin=2) 表示按列计算比例(列和为1)
+barplot(prop.table(t(y), margin=2))
+\end{lstlisting}
+
+    \textbf{给定性别时的学科比例}
+\begin{lstlisting}[language=R]
+barplot(prop.table(y, margin=2)) 
+\end{lstlisting}
+\end{frame}
+
+% --- Frame 19: 条件概率解释 ---
+\begin{frame}[fragile]{条件概率计算详解}
+    函数 \texttt{prop.table(data, margin)} 用于计算比例：
+    \begin{itemize}
+        \item \texttt{margin=1}：按行计算（行和为1）。
+        \item \texttt{margin=2}：按列计算（列和为1）。
+    \end{itemize}
+
+    \textbf{示例结果}：
+    \begin{columns}
+        \begin{column}{0.48\textwidth}
+        \small
+        \texttt{prop.table(t(y), margin=2)}
+        \begin{tabular}{rrr} 
+        \hline
+        & 文科 & 理科 \\
+        \hline
+        男 & 0.41 & 0.48 \\
+        女 & 0.59 & 0.52 \\
+        \hline
+        \end{tabular}
+        \end{column}
+        
+        \begin{column}{0.48\textwidth}
+        \small
+        \texttt{prop.table(y, margin=2)}
+        \begin{tabular}{rrr} 
+        \hline
+        & 男 & 女 \\
+        \hline
+        文科 & 0.39 & 0.45 \\
+        理科 & 0.61 & 0.55 \\
+        \hline
+        \end{tabular}
+        \end{column}
+    \end{columns}
+    
+    \vspace{0.5cm}
+    注：通过 \texttt{help(prop.table)} 可查看更多用法。
+\end{frame}
+
+% --- Frame 20: 堆积条形图 ---
+\begin{frame}[fragile]{普通堆积条形图}
+    普通堆积条形图既能展示各组内部的比例结构，也能展示样本总量的差异。
+    直接使用原始频数数据 \texttt{y} 进行绘制，无需计算比例。
+
+\begin{lstlisting}[language=R]
+barplot(t(y))
+barplot(y)
+\end{lstlisting}
+\end{frame}
+
+% --- Frame 22: 并列条形图 ---
+\begin{frame}[fragile]{并列条形图 (Dodged)}
+    并列条形图将各类别的柱子并排显示，便于直接比较数值大小。
+    关键参数：\texttt{beside = TRUE}。
+
+    \textbf{代码示例}：
+\begin{lstlisting}[language=R]
+
+barplot(t(y), beside = TRUE)   # 关键参数：并列显示
+barplot(y, beside = TRUE)
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{集中趋势的分析}
+\begin{lstlisting}[language=R]
+1、样本均值  mean()
+2、样本中位数 median()
+3、样本分位数 quantile(x,a,type=5)  
+type在1:9取值，代表9种计算分位数的方法
+4、众数
+#连续型变量样本数据的众数
+x=runif(100,5,10)
+hist(x)
+y <- hist(x,plot=F) #计算x的分组数据统计结果
+maxID <- which.max(y$counts) #计算最大频数所在区间序号
+mean(y$breaks[maxID:(maxID+1)])#计算第maxID区间的中心
+#离散型变量样本数据的众数
+x=sample(1:10,100,T)
+y <- table(x) #计算x的分组数据统计结果
+names(which.max(y)) #计算最大频数
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{集中趋势的分析}
+\begin{lstlisting}[language=R]
+5.方差： var(x)
+x<-c (42,55,64,70,75,78,80,82,82,82, 
+ 85,85,85,85,88,90,90,92,95,99)
+y<-c(39,52,61,68,72,76,77,78,79,78, 
+ 83,83,81,81,85,87,86,91,91,98)
+var(x)
+var(y)
+6.标准差：sd (x) 
+sd(x)
+7.标准化 scale(x)
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{QQ图}
+使用 \texttt{qqnorm} 和 \texttt{qqline} 绘制正态 QQ 图。当样本来自正态分布时，散点应近似分布在一条直线附近。
+
+QQ 图的做法如下：设有 $n$ 个观测值 $y_1, y_2, \ldots, y_n$，从小到大排列。对于样本来自 $N(\mu, \sigma^2)$，有：
+\[
+y_i \approx \mu + \sigma x_i
+\]
+其中 $x_i$ 是标准正态分布的分位数。
+
+R 代码示例：
+\begin{lstlisting}[language=R]
+qqnorm(x)
+qqline(x, lwd=2, col='blue')
+\end{lstlisting}
+散点越集中在对角线附近，数据越可能服从正态分布。
+\end{frame}
+
+
+
+\begin{frame}[fragile]{盒形图}
+ \begin{lstlisting}[language=R]
+x <-c(42,55,64,70,75,78,80,82,82,82,85,85,85,85,85,88
+,90,90,92,95,87)
+fivenum(x) #计算五数概括：四分位数，最小值，最大值
+boxplot(x,range=1.5,horizontal=F,ylab="分数")
+\end{lstlisting}
+其中：
+range:默认1.5，表示上、下两条须线的长度不超过四分位间距（上四分位数-下四分位数）的1.5倍
+horizontal=T，则为水平的盒形图
+x:也可以是数据框，对其中的每一个变量画盒形图
+\end{frame}
+
+\begin{frame}[fragile]{盒形图}
+使用 \texttt{boxplot} 函数可以在同一坐标系下绘制来自不同总体的样本数据的盒形图，方便比较它们的分布特征和离群数据情况。只需将不同的样本数据放入一个数据框，然后将该数据框作为 \texttt{boxplot} 的输入变量。
+
+例如，当数据框 \texttt{xy} 的各列为不同总体的样本数据时，使用以下代码绘制盒形图：
+
+\begin{lstlisting}[language=R]
+boxplot(xy)
+例：
+xy <- data.frame("甲班"=x, "乙班"=y)
+boxplot(xy, range=1.5, ylab="分数")
+\end{lstlisting}
+\end{frame}
+
+\section{极大似然估计}
+\begin{frame}[fragile]{apply函数}
+ \begin{lstlisting}[language=R]
+x <- matrix(rnorm(1000*5),1000,5)
+#生成1000组容量为5的样本，
+每个样本都服从标准正态分布，排列成1000行5列的矩阵。
+apply(x,MARGIN=1,FUN=mean) 
+#对x的每一行求均值
+\end{lstlisting}
+apply函数能够极大减少 for 循环的使用:
+ \begin{lstlisting}[language=R]
+apply(X, MARGIN, FUN, ...)
+\end{lstlisting}
+\begin{itemize}
+    \item x:     运算对象：数组、矩阵、数据框，数据至少是二维的
+    \item MARGIN:取1，2，c(1,2)分别表示对运算对象的行、列、同时对二者运算
+    \item FUN：  指定运算函数，如mean表示求均值
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{最大似然估计}
+R函数optim()、nlm()、optimize()可以用来求函数极值， 因此可以用来计算最大似然估计。 optimize()只能求一元函数极值。\\
+正态分布最大似然估计有解析表达式。 作为示例， 用R函数进行数值优化求解。
+
+对数似然函数为：
+$$\ln L\left(\mu, \sigma^2\right)=-\frac{n}{2} \ln (2 \pi)-\frac{n}{2} \ln \sigma^2-\frac{1}{2 \sigma^2} \sum\left(X_i-\mu\right)^2$$
+
+定义R的优化目标函数为上述对数似然函数去掉常数项以后乘以， 求其最小值点。
+\end{frame}
+\begin{frame}[fragile]{最大似然估计}
+目标函数为：
+ \begin{lstlisting}[language=R]
+objf.norm1 <- function(theta, x){
+  mu <- theta[1]
+  s2 <- exp(theta[2])
+  n <- length(x)
+  res <- n*log(s2) + 1/s2*sum((x - mu)^2)
+  res
+}
+\end{lstlisting}
+其中 $\theta_1$ 为均值参数 $\mu ， \theta_2$ 为方差参数 $\sigma^2$ 的对数值。 $\mathrm{x}$ 是样本数值组成的 $R$ 向量。
+\end{frame}
+
+\begin{frame}[fragile]{optim函数}
+可以用optim函数来求极小值点。下面是一个模拟演示:
+ \begin{lstlisting}[language=R]
+  n<-30
+  mu0 <- 20
+  sigma0 <- 2
+  set.seed(1)
+  x <- rnorm(n, mu0, sigma0)
+  theta0 <- c(0,0)
+  ores <- optim(theta0, objf.norm1, x=x)
+  print(ores)
+  theta <- ores$par
+  mu <- theta[1]
+  sigma <- exp(0.5*theta[2])
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{optimize()}
+函数 optimize() 进行一元函数数值优化计算。例如，在一元正态分布最大似然估计中，在对数似然函数中代入 $\mu=\bar{x}$ ，目标函数 ：
+$$
+h\left(\sigma^2\right)=\ln \left(\sigma^2\right)+\frac{1}{\sigma^2} \sum\left(X_i-\bar{X}\right)^2
+$$
+下面的例子模拟计算 $\sigma^2$ 的最大似然估计：
+ \begin{lstlisting}[language=R]
+  n<-30
+  mu0 <- 20;  sigma0 <- 2;  set.seed(1)
+  x <- rnorm(n, mu0, sigma0); mu <- mean(x)
+  ss <- sum((x - mu)^2)/length(x)
+  objf <- function(delta, ss) log(delta) + 1/delta*ss
+  ores <- optimize(objf, lower=0.0001,
+                   upper=1000, ss=ss)
+  delta <- ores$minimum;sigma <- sqrt(delta)
+  print(ores)
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{optimize()}
+ \begin{lstlisting}[language=R]
+## $minimum
+## [1] 3.30214
+## 
+## $objective
+## [1] 2.194568
+## 
+## 真实sigma= 2 公式估计sigma= 1.817177  
+## 数值优化估计sigma= 1.817179
+\end{lstlisting}
+该函数的计算结果会存在列表中，是有两个分量的列表变量：
+ \begin{lstlisting}[language=R]
+#第一个分量$maximum：最优的参数取值
+#第二个分量$objective：最优（最大或最小）的函数值
+\end{lstlisting}
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]{未知总体方差情况下的均值检验}
+\begin{itemize}
+    \item 对于双边假设检验问题 (2)，可以使用 R 语言中的 `t.test` 函数：
+\end{itemize}
+\begin{lstlisting}[language=R]
+h <- t.test(x, alternative = "two.sided", mu = mu0)
+pValue <- h$p.value
+\end{lstlisting}
+\begin{itemize}
+    \item 对于单边假设检验问题 (3)，使用以下 R 代码：
+\end{itemize}
+\begin{lstlisting}[language=R]
+h <- t.test(x, alternative = "greater", mu = mu0)
+pValue <- h$p.value
+\end{lstlisting}
+\begin{itemize}
+    \item 对于单边假设检验问题 (4)，使用以下 R 代码：
+\end{itemize}
+\begin{lstlisting}[language=R]
+h <- t.test(x, alternative = "less", mu = mu0)
+pValue <- h$p.value
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{总体方差未知双正态总体均值的 $t$ 检验}
+
+\begin{itemize}
+    \item 对于双边假设检验问题：
+\end{itemize}
+\begin{lstlisting}[language=R]
+h <- t.test(x, y, alternative = "two.sided")
+pValue <- h$p.value
+\end{lstlisting}
+
+\begin{itemize}
+    \item 对于单边假设检验问题 $H_0: \mu_1 \geqslant \mu_2$：
+\end{itemize}
+\begin{lstlisting}[language=R]
+h <- t.test(x, y, alternative = "greater")
+pValue <- h$p.value
+\end{lstlisting}
+
+\begin{itemize}
+    \item 对于单边假设检验问题 $H_0: \mu_1 \leqslant \mu_2$：
+\end{itemize}
+\begin{lstlisting}[language=R]
+h <- t.test(x, y, alternative = "less")
+pValue <- h$p.value
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{线性回归模型求解函数 lm}
+\begin{itemize}
+    \item 在 R 语言中，使用函数 `lm` 计算线性回归模型中参数 $\beta$ 的最小二乘估计。
+    \item 函数 `lm` 的结果是一个特殊结构的列表，称为 `lm` 型数据。
+    \item 该列表包含参数 $\beta$ 的最小二乘估计的相关结果。
+\end{itemize}
+\begin{lstlisting}[language=R]
+S <- lm(y ~ x)
+\end{lstlisting}
+
+\begin{itemize}
+    \item `lm` 型变量有多个分量，其中最常用的包括：
+    \begin{itemize}
+        \item `coefficients`: 模型参数的估计结果
+        \item `residuals`: 残差估计结果
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{提取模型参数和估计结果}
+\begin{itemize}
+    \item 在得到 `lm` 型变量后，可以使用 R 函数 `coef` 和 `predict` 提取模型参数和响应变量的估计结果。
+    \item 示例代码：
+\end{itemize}
+\begin{lstlisting}[language=R]
+# 生成线性回归模型
+myReg <- lm(y ~ x)
+
+# 提取参数估计结果
+coef(myReg) # 提取 lm 列表 myReg 中的参数估计结果
+
+# 计算响应变量的估计结果
+predict(myReg) # 计算响应变量的估计结果
+\end{lstlisting}
+\begin{itemize}
+    \item 其中 `myReg` 存储的是函数 `lm` 的计算结果。
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{}
+\centering \Huge
+  \emph{Thanks!}
+\end{frame}
+
+\end{document}

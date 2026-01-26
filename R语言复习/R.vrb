@@ -1,0 +1,18 @@
+\frametitle{提取模型参数和估计结果}
+\begin{itemize}
+    \item 在得到 `lm` 型变量后，可以使用 R 函数 `coef` 和 `predict` 提取模型参数和响应变量的估计结果。
+    \item 示例代码：
+\end{itemize}
+\begin{lstlisting}[language=R]
+# 生成线性回归模型
+myReg <- lm(y ~ x)
+
+# 提取参数估计结果
+coef(myReg) # 提取 lm 列表 myReg 中的参数估计结果
+
+# 计算响应变量的估计结果
+predict(myReg) # 计算响应变量的估计结果
+\end{lstlisting}
+\begin{itemize}
+    \item 其中 `myReg` 存储的是函数 `lm` 的计算结果。
+\end{itemize}
