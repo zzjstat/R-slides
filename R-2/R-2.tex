@@ -1,607 +1,1037 @@
-\documentclass[14pt,compress,t,noamsthm,notheorem,table,handout]{ctexbeamer}
-\usetheme{Boadilla}
-\useinnertheme{circles}
-\useoutertheme{shadow}
-\usecolortheme{seahorse}
+\documentclass[14pt,compress,t,noamsthm,notheorem,table,handout,fontset=none]{ctexbeamer}
+
+\setCJKmainfont[
+  Path=/usr/local/texlive/2024/texmf-dist/fonts/opentype/public/fandol/,
+  BoldFont=FandolSong-Bold.otf
+]{FandolSong-Regular.otf}
+\setCJKsansfont[
+  Path=/usr/local/texlive/2024/texmf-dist/fonts/opentype/public/fandol/,
+  BoldFont=FandolHei-Bold.otf
+]{FandolHei-Regular.otf}
+\setCJKmonofont[
+  Path=/usr/local/texlive/2024/texmf-dist/fonts/opentype/public/fandol/
+]{FandolFang-Regular.otf}
+
+\setsansfont[
+  Path=/usr/local/texlive/2024/texmf-dist/fonts/opentype/public/tex-gyre/,
+  BoldFont=texgyreheros-bold.otf,
+  ItalicFont=texgyreheros-italic.otf,
+  BoldItalicFont=texgyreheros-bolditalic.otf
+]{texgyreheros-regular.otf}
+\setmonofont[
+  Path=/usr/local/texlive/2024/texmf-dist/fonts/opentype/public/inconsolata/,
+  BoldFont=Inconsolatazi4-Bold.otf,
+  StylisticSet=3
+]{Inconsolatazi4-Regular.otf}
+
+\usetheme{default}
 \usefonttheme[onlymath]{serif}
 \setbeamertemplate{navigation symbols}{}
-% \setbeamercovered{transparent}
-\usepackage{natbib}
-\usepackage{amsthm}
-\usepackage{makecell}
-\usepackage{multirow}
-\renewcommand{\qedsymbol}{$\blacksquare$}
-\bibliographystyle{unsrtnat}
-\usepackage{color}
-\setbeamercolor{myfootline}{bg=white,fg=blue}
-\definecolor{myfoot}{rgb}{0.5,0.2,0.5}
-\definecolor{darkblue}{rgb}{0.1,0,0.85}
-\setbeamertemplate{headline}
-  { \leavevmode\begin{beamercolorbox}[wd=\paperwidth,ht=1.25ex,dp=1ex,left]{}
-    \end{beamercolorbox}}
-\setbeamertemplate{footline}% 自定义页脚
-  { \leavevmode\mbox{%
-    \begin{beamercolorbox}[wd=.75\paperwidth,ht=2.25ex,dp=1ex,left]{myfootline}%
-        \rule{2em}{0pt}\color{myfoot}\ttfamily\scriptsize%
-        %\insertshortauthor~(\insertshortinstitute)
-    \end{beamercolorbox}%
-    \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,right]{myfootline}%
-       {\color{myfoot}\ttfamily\scriptsize\insertframenumber{}/%
-        \inserttotalframenumber\hspace*{3ex}}
-    \end{beamercolorbox}}
-    \vskip0pt }
 
-\setbeamercolor{frametitle}{fg=blue,bg=white}
-\setbeamertemplate{frametitle}{%
-  \leavevmode\linespread{1}\large\textbf{\insertframetitle}\par
-  \color{structure.fg!30!bg}\rule[6pt]{\linewidth}{2pt}\par\vspace{-1.0em}}
-
-% \setbeamertemplate{blocks}[default] % beamer块（含定理类环境）不要阴影
-\setbeamertemplate{bibliography entry title}{}{}
-\setbeamertemplate{bibliography entry location}{}{}
-\setbeamertemplate*{bibliography entry note}{}{}
-\setbeamersize{text margin left=0.75cm, text margin right=0.75cm}
-
-\setbeamercolor{bluebox}{fg=black,bg=blue!10}
-\setbeamercolor{redbox}{fg=black,bg=red!10}
-\newenvironment{Boxblue}[1][\textwidth]
-  {\begin{beamercolorbox}[sep=0.1em,shadow=true,wd=#1,rounded=true,center]{bluebox}}
-  {\end{beamercolorbox}}
-\newenvironment{Boxred}[1][\textwidth]
-  {\begin{beamercolorbox}[sep=0.1em,shadow=true,wd=#1,rounded=true,center]{redbox}}
-  {\end{beamercolorbox}}
-\usepackage{stmaryrd}
-\usepackage{amsmath,amssymb,amsfonts,bm}
-\usepackage{graphicx,xcolor}
-\graphicspath{{figures/}}
-\usepackage{hyperref}
-\hypersetup{pdfborder=001,colorlinks=true,linkcolor=darkblue,urlcolor=blue}
-\usepackage{bbding}
-\newcommand{\Bullet}{{\fontsize{6pt}{6pt}\selectfont\CircleSolid}}
-\newcommand{\Hand}{{\fontsize{8pt}{6pt}\selectfont\HandRight}}
-\newcommand{\zhu}{{\color{blue!40}\Bullet}}
-\newcommand{\zhuu}{{\color{red!80}\Hand}}
-\newcommand{\labeli}{\zhu}
-\newenvironment{blist}%
-    {\begin{list}{{\hfill\raisebox{1.12pt}{\color{blue!60}\zhu}}}{%
-     \leftmargin2em\labelwidth1.5em\labelsep0.5em
-     \itemsep1ex\itemindent0pt\parsep0pt\topsep0pt}}
-    {\end{list}}
-\newenvironment{myitem}
-  {\begin{list}{{\hfill\raisebox{0pt}{\labeli}}}{%
-    \setlength{\leftmargin}{1.2em}\labelwidth0.8em\labelsep.4em%
-    \itemsep1ex\parsep2pt\itemindent0pt\topsep0pt}}{\end{list}}
-\newenvironment{subitem}
-  {\begin{list}{{\hfill\raisebox{0pt}{-}}}{%
-    \setlength{\leftmargin}{1.2em}\labelwidth0.8em\labelsep.4em%
-    \itemsep0ex\parsep2pt\itemindent0pt\topsep0pt}}{\end{list}}
-\usepackage{colortbl}
-\usepackage{tikz}
-\usetikzlibrary{arrows}
-\usepackage{stmaryrd}
-\usepackage{amsfonts}
-\usepackage[ruled,linesnumbered]{algorithm2e}
-\usepackage{float} 
+\usepackage{amsmath,amssymb}
 \usepackage{booktabs}
-\usepackage[framemethod=tikz]{mdframed}
-\newmdenv[linecolor=green,middlelinewidth=1pt,%
-          roundcorner=3pt,backgroundcolor=white,%
-          innertopmargin=0.8em,innerbottommargin=0.5em,%
-          innerleftmargin=3pt,innerrightmargin=3pt,%
-          skipbelow=0.5em,skipabove=1em,%
-          splittopskip=\topskip]{Block}
-\newmdenv[linecolor=green,middlelinewidth=1pt,%
-          roundcorner=3pt,backgroundcolor=red!5!white,%
-          innertopmargin=0.5em,innerbottommargin=0.5em,%
-          innerleftmargin=3pt,innerrightmargin=3pt,%
-          skipbelow=0.5em,skipabove=1em,%
-          splittopskip=\topskip]{redbox}
-\newmdenv[linecolor=green,middlelinewidth=0.5pt,%
-          %outerlinewidth=0.5pt,skipabove=0pt,
-          roundcorner=3pt,backgroundcolor=white,%
-          innerbottommargin=3pt,innerrightmargin=5pt,%
-          innerleftmargin=5pt,leftmargin=0ex]{mathbox}
-\newmdenv[linecolor=blue!5!green,middlelinewidth=0.5pt,%
-          roundcorner=3pt,backgroundcolor=yellow!5,%
-          % frametitle={Hello},frametitlebackgroundcolor=green!50,%
-          % skipabove=2pt,skipbelow=2pt,%
-          innerleftmargin=3pt,leftmargin=0ex]{notebox}
-\newmdenv[linecolor=white,font={\scriptsize},%
-          fontcolor=blue!85,backgroundcolor=yellow!5,%
-          skipabove=1ex,skipbelow=0pt,innerbottommargin=0.5ex,%
-          innerleftmargin=3pt,leftmargin=1em]{myref}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\renewcommand{\thefootnote}{}% 不要编号
-\setbeamertemplate{footnote}{% 首行不缩进
-  \noindent\insertfootnotemark%
-  \scriptsize\color{blue!85!green!85}\insertfootnotetext\par\kern1ex}
-\renewcommand\footnoterule%    更改横线属性：长度，粗细，颜色
-  {\color{red}\kern-3pt\rule{0.4\linewidth}{0.5pt}\par\kern2.6pt}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\usepackage[many]{tcolorbox}
-\tcbset{highlight math %
-  style={enhanced, colframe=blue!40,colback=yellow!20,arc=4pt,boxrule=1pt}}
-\newtcbox{\subsubtit}[1][]{%
-  after skip=1em,boxrule=0.5pt,
-  fontupper=\color{blue}\bfseries,top=0.5ex,bottom=0.5ex,
-  left=1ex,right=1ex,
-  colframe=green,colback=red!5!white,#1}
-
-%\renewcommand{\baselinestretch}{1.1}
-\linespread{1.1}
-\setlength{\parskip}{1ex}
-
-\usepackage{listings} %插入代码
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
 \usepackage{xcolor}
-\lstset{numbers=left, %设置行号位置
-        numberstyle=\tiny, %设置行号大小
-        keywordstyle=\color{blue}, %设置关键字颜色
-        commentstyle=\color[cmyk]{1,0,1,0}, %设置注释颜色
-        frame=single, %设置边框格式
-        escapeinside=``, %逃逸字符(1左面的键)，用于显示中文
-        %breaklines, %自动折行
-        extendedchars=false, %解决代码跨页时，章节标题，页眉等汉字不显示的问题
-        xleftmargin=2em,xrightmargin=2em, aboveskip=1em, %设置边距
-        tabsize=4, %设置tab空格数
-        showspaces=false, %不显示空格
-        basicstyle=\ttfamily,
-       }
+\usepackage{etoolbox}
+
+\graphicspath{{figs/}}
+\definecolor{navy}{HTML}{193B5B}
+\definecolor{bodytext}{HTML}{24313D}
+\definecolor{muted}{HTML}{617080}
+\definecolor{rulegray}{HTML}{CBD4DD}
+\definecolor{codebg}{HTML}{F4F6F8}
+\definecolor{codeframe}{HTML}{D5DDE5}
+\definecolor{codecomment}{HTML}{4B705C}
+\definecolor{codestring}{HTML}{92533C}
+\definecolor{tablehead}{HTML}{EEF2F6}
+\hypersetup{pdfborder=0 0 0,colorlinks=true,linkcolor=navy,urlcolor=navy}
+
+\setbeamercolor{normal text}{fg=bodytext,bg=white}
+\setbeamercolor{structure}{fg=navy}
+\setbeamercolor{frametitle}{fg=navy,bg=white}
+\setbeamercolor{myfootline}{bg=white,fg=muted}
+\setbeamercolor{block title}{fg=navy,bg=white}
+\setbeamercolor{block body}{fg=bodytext,bg=white}
+\setbeamercolor{alerted text}{fg=codestring}
+\setbeamerfont{frametitle}{size=\fontsize{18}{21},series=\bfseries}
+\setbeamerfont{block title}{size=\normalsize,series=\bfseries}
+\setbeamertemplate{blocks}[default]
+\setbeamertemplate{itemize item}{\raisebox{0.15ex}{\scriptsize\textbullet}}
+\setbeamertemplate{enumerate item}{\insertenumlabel.}
+\AtBeginEnvironment{itemize}{\setlength{\itemsep}{0.24em}}
+\AtBeginEnvironment{enumerate}{\setlength{\itemsep}{0.24em}}
+\arrayrulecolor{rulegray}
+\setlength{\heavyrulewidth}{0.6pt}
+\setlength{\lightrulewidth}{0.35pt}
+
+\setbeamertemplate{headline}{}
+\setbeamertemplate{footline}{%
+  \leavevmode\mbox{%
+    \begin{beamercolorbox}[wd=.75\paperwidth,ht=3mm,dp=2mm,left]{myfootline}%
+      \hspace*{0.8cm}{\fontsize{7.5}{9}\selectfont 统计学导论上机课}
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.25\paperwidth,ht=3mm,dp=2mm,right]{myfootline}%
+      {\fontsize{7.5}{9}\selectfont\insertframenumber\,/\,\inserttotalframenumber\hspace*{0.8cm}}
+    \end{beamercolorbox}}
+  \vskip0pt}
+\setbeamertemplate{frametitle}{%
+  \vspace{0.28cm}%
+  {\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle\par}%
+  \vspace{0.12cm}%
+  {\color{rulegray}\hrule height 0.45pt}%
+  \vspace{-0.2cm}}
+\setbeamersize{text margin left=0.8cm,text margin right=0.8cm}
+
+\setbeamertemplate{title page}{%
+  \vspace*{0.95cm}%
+  {\fontsize{25}{31}\selectfont\bfseries\color{navy}\inserttitle\par}%
+  \vspace{0.35cm}%
+  {\fontsize{14}{19}\selectfont\color{bodytext}\insertsubtitle\par}%
+  \vspace{0.65cm}%
+  {\color{rulegray}\hrule height 0.45pt}%
+  \vspace{0.6cm}%
+  {\fontsize{13}{18}\selectfont\insertauthor\par}%
+  \vspace{0.12cm}%
+  {\fontsize{10}{15}\selectfont\color{muted}\insertinstitute\par}%
+  \vfill
+  {\fontsize{10}{14}\selectfont\color{muted}\insertdate\par}%
+  \vspace*{0.6cm}}
+
+\lstset{
+  language=R,
+  basicstyle=\ttfamily\fontsize{12.5}{14.5}\selectfont\color{bodytext},
+  keywordstyle=\color{navy},
+  commentstyle=\color{codecomment},
+  stringstyle=\color{codestring},
+  backgroundcolor=\color{codebg},
+  frame=single,
+  rulecolor=\color{codeframe},
+  framerule=0.35pt,
+  framesep=5pt,
+  showstringspaces=false,
+  keepspaces=true,
+  breaklines=true,
+  columns=fullflexible,
+  xleftmargin=5pt,
+  xrightmargin=5pt,
+  aboveskip=0.35em,
+  belowskip=0.35em
+}
+
+\lstdefinestyle{output}{
+  language={},
+  keywordstyle=\color{bodytext},
+  commentstyle=\color{bodytext},
+  stringstyle=\color{bodytext},
+  backgroundcolor=\color{white},
+  frame=none,
+  aboveskip=0.12em,
+  belowskip=0.25em
+}
+
+\newcommand{\code}[1]{\textcolor{navy}{\texttt{#1}}}
+\newcommand{\inputlabel}{\par\smallskip{\fontsize{10.5}{13}\selectfont\bfseries\color{muted}输入代码\par}}
+\newcommand{\outputlabel}{\par\smallskip{\fontsize{10.5}{13}\selectfont\bfseries\color{muted}Console 输出\par}}
+\newcommand{\thead}[1]{\textcolor{navy}{\textbf{#1}}}
+
+\title{R语言基础（二）}
+\subtitle{向量、矩阵、数据框与列表}
+\author{郑泽靖}
+\institute{北京师范大学统计学院}
+\date{2026年秋季学期}
+
 \begin{document}
 
-%%%%% =======================================================================
-\title{R语言-2}
-\author{郑泽靖 \and zzjstat2023@163.com }
-\institute{\normalsize 北京师范大学统计学院}
-\date{\today}
-
-% ===== title page =====
 \begin{frame}[plain]
   \titlepage
 \end{frame}
 
-% ===== contents =====
-%\begin{frame}
- % \frametitle{Outline}
- %  \tableofcontents[hideallsubsections] %[pausesections]
-%\end{frame}
-
-\begin{frame}[fragile]{常量}
-\textbf{常量}是直接写在程序中的值，包括数值、字符串等。
-
-\begin{itemize}
-    \item \textbf{数值型常量:} 123, 123.45
-    \item \textbf{字符型常量:} 使用双引号或单引号包围 ("Li Ming")
-    \item \textbf{逻辑型常量:} 只有 \texttt{TRUE} 和 \texttt{FALSE} 
-    \item \textbf{缺失值:} 用 \texttt{NA} 表示，常见于数据缺失情况。
-    \item \texttt{NaN} (Not a Number): 表示未定义或不可表示的数值，如0除以0。
-    \item \texttt{Inf}: 表示正无穷或负无穷，通常在除以零时出现。
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}[fragile]{变量}
-\textbf{变量}用于保存输入值或计算结果。
-\begin{itemize}
-    \item \textbf{变量名规则:}
-    \begin{itemize}
-        \item 由字母、数字、下划线和句点组成，不能以数字开头。
-        \item 变量名区分大小写，如 \texttt{y} 和 \texttt{Y} 是不同的变量。
-        \item 示例: \texttt{x}, \texttt{x1}, \texttt{X}, \texttt{cancer.tab}
-    \end{itemize}
-    \item \textbf{赋值:} 使用 \texttt{<-} 或 \texttt{=} 定义变量。
-\begin{lstlisting}[language=R]
-x5 <- 6.25
-x6 = sqrt(x5)
+\begin{frame}[fragile]{上讲回顾：变量与类型}
+  \small
+  变量保存输入值或计算结果。下面定义三种基本类型的变量。
+  \inputlabel
+\begin{lstlisting}
+n <- 23
+name <- "My"
+flag <- TRUE
 \end{lstlisting}
-\end{itemize}
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}llll@{}}
+    \toprule
+    \thead{变量} & \thead{class() 返回值} & \thead{检查代码} & \thead{结果} \\
+    \midrule
+    \code{n} & \code{"numeric"} & \code{is.numeric(n)} & \code{TRUE} \\
+    \code{name} & \code{"character"} & \code{is.character(name)} & \code{TRUE} \\
+    \code{flag} & \code{"logical"} & \code{is.logical(flag)} & \code{TRUE} \\
+    \bottomrule
+  \end{tabular*}\par
+  \vspace{0.2em}
+  \code{class()} 查看类型，类型检查函数返回 \code{TRUE} 或 \code{FALSE}。\par
+  数值计算中，\code{TRUE} 按 1 计算，\code{FALSE} 按 0 计算。
+  \note{教材第18--19页。与下一页合计复习3分钟。沿用第一讲已学内容，不重新展开类型和常量。}
 \end{frame}
 
-
-\begin{frame}[fragile]{重要变量类型：逻辑型}
-\textbf{逻辑型变量}用于存储真（TRUE）和假（FALSE）的值。
-\textit{在数值计算中，逻辑变量值TRUE自动转换为1，FALSE自动转换为0。}
-    \begin{lstlisting}[language=R]
-TRUE + TRUE      # 求和
-## [1] 2
-a <- TRUE        # 赋值
-is.logical(a)    # 检查类型
-## [1] TRUE
-class(a)          # 查看变量类型
-## [1] "logical"
-    \end{lstlisting}
+\begin{frame}{上讲回顾：常量与命名}
+  \small
+  常量是直接写在代码中的值。以下系统常量有特定含义。
+  \par\vspace{0.4em}
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lp{0.73\linewidth}@{}}
+    \toprule
+    \thead{名称} & \thead{含义} \\
+    \midrule
+    \code{pi} & 圆周率，约为 3.141593 \\
+    \code{Inf} & 正无穷，例如 \code{1 / 0} 的结果 \\
+    \code{NaN} & 无法定义的数值结果，例如 \code{0 / 0} \\
+    \code{NA} & 缺失值，例如没有记录的观测值 \\
+    \bottomrule
+  \end{tabular*}\par
+  \begin{itemize}
+    \item 名称可含字母、数字、下划线和句点；\\
+          区分大小写，不以数字开头。
+    \item 本课统一用 \code{<-} 赋值。\code{=} 也可赋值，\code{\#} 用于注释。
+    \item 直接输入变量名可查看结果；不覆盖已有函数或常量。
+  \end{itemize}
+  \note{教材第16--19页。常量、变量名及查看结果均为第一讲复习。字符值用英文引号，逻辑值TRUE和FALSE用大写。}
 \end{frame}
 
-\begin{frame}[fragile]{重要变量类型：数值型}
-\textbf{数值型变量}用于保存数值数据。
-    \begin{lstlisting}[language=R]
-a <- 23        # 将23赋值给变量a
-is.numeric(a)  # 检查是否为数值型
-## [1] TRUE
-
-is.logical(a)  # 检查是否为逻辑型
-## [1] FALSE
-
-class(a)       # 查看变量类型
-## [1] "numeric"
-    \end{lstlisting}
+\begin{frame}{数据表的行与列}
+  \small
+  教材示例：两位观测对象的身高、体重和性别。
+  \par\vspace{0.7em}
+  \renewcommand{\arraystretch}{1.6}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}ccc@{}}
+    \toprule
+    \thead{身高（cm）} & \thead{体重（kg）} & \thead{性别} \\
+    \midrule
+    160 & 51 & \code{"Female"} \\
+    175 & 72 & \code{"Male"} \\
+    \bottomrule
+  \end{tabular*}\par
+  \vspace{0.6em}
+  \begin{itemize}
+    \item 每一行是一位观测对象的记录。
+    \item 每一列是一个变量，本例有 2 条记录、3 个变量。
+    \item 身高和体重采用数值型，性别采用字符型。
+  \end{itemize}
+  \note{教材第19、24--25页。数据取自教材数据框示例；身高以cm、体重以kg说明。与下一页结构比较合计2分钟，复习与结构概览共5分钟。}
 \end{frame}
 
-\begin{frame}[fragile]{重要变量类型：字符型}
-\textbf{字符型变量}用于保存文本数据。
-    \begin{lstlisting}[language=R]
-a <- "My"        # 将"My"赋值给a
-a                # 显示a的值
-## [1] "My"
-
-is.character(a)  # 检查是否为字符型
-## [1] TRUE
-
-class(a)         # 查看变量类型
-## [1] "character"
-    \end{lstlisting}
+\begin{frame}{四种数据结构}
+  \small
+  本讲使用向量、矩阵、数据框和列表。
+  \par\vspace{0.6em}
+  \renewcommand{\arraystretch}{1.45}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lp{0.69\linewidth}@{}}
+    \toprule
+    \thead{结构} & \thead{本讲使用方式} \\
+    \midrule
+    向量 & 保存一组相同类型的值，按位置提取元素 \\
+    矩阵 & 按行和列排列数据，各元素具有相同类型 \\
+    数据框 & 保存表格数据，各列可以采用不同类型 \\
+    列表 & 将不同的 R 对象保存为不同分量 \\
+    \bottomrule
+  \end{tabular*}\par
+  \vspace{0.6em}
+  向量是一维结构；矩阵和数据框具有行、列结构。\par
+  列表中的分量不要求具有相同类型或长度。
+  \note{教材第19、22、24、26页的数据结构定义。本讲不展开数组、因子或嵌套列表。}
 \end{frame}
 
-\begin{frame}[fragile]{变量的输出}
-\begin{itemize}
-    \item 在R中，直接输入变量名并运行代码，可以查看变量的值。
-    \item 使用函数 \texttt{print()} 也可以输出变量的值。
-\begin{lstlisting}[language=R]
-> a <- 56
-> a
-[1] 56
-> print(a)
-[1] 56
- \end{lstlisting}
-\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]{变量的输出}
-cat()函数可以更灵活地输出变量值。例如：
-{\small \begin{lstlisting}[language=R]
-> x <- 5
-> y <- 10
-> cat("x的值是:", x, "，y的值是:", y, "\n")
-x的值是: 5 ，y的值是: 10 
+\begin{frame}[fragile]{组合向量}
+  \code{c()} 可以组合多个值，也可以组合已有向量。\par
+  单个数值也可看作只有一个元素的数值向量。
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.62\textwidth}
+  \inputlabel
+\begin{lstlisting}
+x1 <- c(1, 2)
+x2 <- c(3, 4)
+vec <- c(x1, x2)
+vec
 \end{lstlisting}
-\begin{lstlisting}[language=R]
-> name <- "Alice"
-> age <- 30 
-> cat("姓名:", name, "\n", #\n用来换行
-+     "年龄:", age, "岁\n", sep = "")
-姓名:Alice
-年龄:30岁
- \end{lstlisting}}
+    \end{column}
+    \begin{column}{0.34\textwidth}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] 1 2 3 4
+\end{lstlisting}
+    \end{column}
+  \end{columns}
+  \par\vspace{0.35em}
+  \begin{itemize}
+    \item 本例按 \code{x1}、\code{x2} 的顺序组成新向量。
+    \item 字符型或逻辑型向量也使用 \code{c()} 创建。
+    \item 不用 \code{c} 作为保存数据的变量名。
+  \end{itemize}
+  \note{教材第18--20页的c()和基本向量。向量部分10分钟（第一节第5--15分钟），复习c()后转入seq()和多个正整数下标。仅使用同类型向量。}
 \end{frame}
 
-\begin{frame}{数据集}
-    \begin{figure}[htbp]
-        \centering
-        \includegraphics[width=1\linewidth]{figs/sjj.PNG}
-    \end{figure} 
-    请观察图中的数据集，思考以下问题：
-    \begin{itemize}
-        \item 数据集中包含哪些变量？
-        \item 每个变量的数据类型是什么？（例如：数值型、字符型、逻辑型等）
-    \end{itemize}
+\begin{frame}{seq() 的常用参数}
+  \small
+  \code{seq()} 用于生成等差数列。
+  \par\vspace{0.5em}
+  \renewcommand{\arraystretch}{1.25}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}ll@{}}
+    \toprule
+    \thead{参数} & \thead{含义} \\
+    \midrule
+    \code{from} & 起始值 \\
+    \code{to} & 终止值 \\
+    \code{by} & 步长，即相邻两个值之差 \\
+    \code{length.out} & 生成的值的个数 \\
+    \bottomrule
+  \end{tabular*}\par
+  \vspace{0.6em}
+  教材使用以下三种组合：
+  \begin{enumerate}
+    \item 起始值、终止值、步长。
+    \item 起始值、终止值、个数。
+    \item 起始值、步长、个数。
+  \end{enumerate}
+  \note{教材第21页的三种seq()调用。只介绍本例使用的参数组合，不要求同时填写全部参数。}
 \end{frame}
 
-
-
-\begin{frame}{数据结构}
-    \begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.8\linewidth]{figs/sjjg.PNG}
-    \end{figure} 
-\end{frame}
-
-\begin{frame}[fragile]{向量}
-   \textbf{向量}是将若干个\textit{基础类型（数值型、字符型或逻辑型）相同}的值存储在一起的结构。各个元素可以通过序号进行访问。\\
-    向量的创建方法（1） - \textbf{组合功能函数}：
-    \begin{lstlisting}[language=R]
-# 数值型向量
-x1 <- c(1, 2) # 创建第一个数值型向量
-x2 <- c(3, 4) # 创建第二个数值型向量
-x <- c(x1, x2) # 合并向量
-x 
-## [1] 1 2 3 4
-    \end{lstlisting}
-\end{frame}
-\begin{frame}[fragile]{向量}
-    \begin{lstlisting}[language=R]
-# 字符型向量 
-b <- c("one", "two", "apple") 
-# 逻辑型向量 
-d <- c(TRUE, TRUE, FALSE, TRUE)  
-    \end{lstlisting}
-
-    \textbf{注意事项：}
-    \begin{itemize}
-        \item 向量中的所有元素必须是相同类型。
-        \item 使用组合函数时，注意不要使用已定义的变量名，例如“c”。
-    \end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]{向量的创建}
-    \textbf{方法（2）：冒号生成数值序列} \\ 
-    表达式 "a:b" 从 a 到 b（步长为 1）。默认生成整数序列。
-    \textbf{示例：}
-    \begin{lstlisting}[language=R]
-> 1:6         # 1 到 6
-[1] 1 2 3 4 5 6
-> 4:7.6       # 整数部分
-[1] 4 5 6 7
-> 1.2:5       # 从 1.2 到 5
-[1] 1.2 2.2 3.2 4.2
-    \end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]{向量的创建}
-    \textbf{方法（3）：Seq() 函数} \\ 
-    \texttt{seq(from, to, by, length.out)}\\
-    \begin{itemize}
-        \item \texttt{from}: 向量的起始值。
-        \item \texttt{to}: 向量的结束值。
-        \item \texttt{by}: 步长，默认值为 1。可为负数以生成递减序列。
-        \item \texttt{length.out}: 指定生成的向量长度，自动计算步长。
-    \end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]{向量的创建}
-    \begin{lstlisting}[language=R]
-> seq(2, 10) # 默认步长
-[1] 2 3 4 5 6 7 8 9 10
-> seq(2, 10, by = 2)# 指定步长
-[1] 2 4 6 8 10
-# 指定长度 # 生成 5 个数的等差数列
-> seq(0, 1, length.out = 5)  
-[1] 0.0 0.25 0.5 0.75 1.0
-# 递减序列
-> seq(10, 2, by = -2)
+\begin{frame}[fragile]{按步长生成序列}
+  \small
+  \code{by} 指定相邻两个值之差。
+  \inputlabel
+\begin{lstlisting}
+seq(-2, 3, by = 0.5)
+seq(10, 2, by = -2)
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] -2.0 -1.5 -1.0 -0.5 0.0 0.5 1.0
+[8] 1.5 2.0 2.5 3.0
 [1] 10 8 6 4 2
-    \end{lstlisting}
+\end{lstlisting}
+  \begin{itemize}
+    \item 第一行从 $-2$ 开始，每次增加 0.5，到 3 结束。
+    \item 第二行每次减少 2，得到递减序列。
+  \end{itemize}
+  \note{教材第21页的seq(-2,3,by=0.5)。递减例沿用原课件，说明步长参数取负值的同一操作。输出换行与Console宽度有关，行首编号表示该行第一个元素的位置。}
 \end{frame}
 
-\begin{frame}[fragile]{访问和修改向量元素}
-    \textbf{正整数下标}：使用方括号访问向量元素。
-    \textbf{示例：}
-    \begin{lstlisting}[language=R]
-x <- c(1, 4, 6.25)
-x[2]          # 取出第二个元素
+\begin{frame}[fragile]{按个数生成序列}
+  指定起始值、终止值和个数，由 R 确定步长。
+  \inputlabel
+\begin{lstlisting}
+seq(2, 4, length.out = 4)
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] 2.000000 2.666667 3.333333 4.000000
+\end{lstlisting}
+  \begin{itemize}
+    \item 生成 4 个值，首项为 2，末项为 4。
+    \item 相邻值之间的差相同。
+  \end{itemize}
+  \note{教材第21页的seq(2,4,length.out=4)。这里的length.out是参数名，不引入length()函数。}
+\end{frame}
+
+\begin{frame}[fragile]{同时指定步长和个数}
+  起始值、步长和个数确定后，末项也随之确定。
+  \inputlabel
+\begin{lstlisting}
+seq(2, by = 0.4, length.out = 4)
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] 2.0 2.4 2.8 3.2
+\end{lstlisting}
+  \begin{itemize}
+    \item 从 2 开始，每次增加 0.4，共生成 4 个值。
+    \item 本例不再另外指定 \code{to}。
+  \end{itemize}
+  \note{教材第21页的seq(2,by=0.4,length=4)，采用完整参数名length.out，避免将部分匹配作为新知识介绍。}
+\end{frame}
+
+\begin{frame}[fragile]{提取向量中的多个元素}
+  \small
+  将多个位置编号放在方括号内。
+  \inputlabel
+\begin{lstlisting}
+vec <- c(1, 4, 6.25)
+vec[2]
+vec[c(1, 3)]
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
 [1] 4
-x[2] <- 99    # 修改第二个元素
-print(x)              
-[1]  1.00 99.00  6.25
-  \end{lstlisting}
-\end{frame}
-\begin{frame}[fragile]{访问和修改向量元素}
-\begin{lstlisting}[language=R]
-x[c(1, 3)]    # 取出第1和第3个元素
 [1] 1.00 6.25
- # 修改第1和第3个元素
-x[c(1, 3)] <- c(11, 13) 
-print(x)                                  
+\end{lstlisting}
+  \begin{itemize}
+    \setlength{\itemsep}{0.08em}
+    \item \code{vec[2]} 提取第 2 个元素。
+    \item \code{vec[c(1, 3)]} 依次提取第 1、3 个元素。
+    \item 位置编号从 1 开始。本讲使用已有元素位置\\
+          \mbox{作为正整数下标}，本例为 1、2、3。
+  \end{itemize}
+  \note{教材第21--22页的正整数下标。单下标为复习，多下标为本讲新内容。}
+\end{frame}
+
+\begin{frame}[fragile]{修改向量中的多个元素}
+  沿用向量 \code{vec}，通过赋值更改所选位置。
+  \inputlabel
+\begin{lstlisting}
+vec[2] <- 99
+vec[c(1, 3)] <- c(11, 13)
+vec
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
 [1] 11 99 13
-x[c(1, 3, 1)]  # 重复下标
+\end{lstlisting}
+  \begin{itemize}
+    \item 第一行将第 2 个元素改为 99。
+    \item 第二行将第 1、3 个元素分别改为 11、13。
+    \item 替换值的顺序与所选位置的顺序一致。
+  \end{itemize}
+  \note{教材第22页的下标赋值。多个位置的修改沿用原课件，只使用正整数位置和等长替换值，不展开其他索引。}
+\end{frame}
+
+\begin{frame}[fragile]{重复下标}
+  一个位置编号可以在下标向量中重复出现。
+  \inputlabel
+\begin{lstlisting}
+vec[c(1, 3, 1)]
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
 [1] 11 13 11
-    \end{lstlisting}
+\end{lstlisting}
+  \begin{itemize}
+    \item 按第 1、3、1 个位置的顺序提取。
+    \item 第 1 个元素被提取两次，原向量不变。
+  \end{itemize}
+  \note{教材第21--22页的重复正整数下标例子。沿用前页更改后的vec。}
 \end{frame}
 
-
-\begin{frame}[fragile]{R 矩阵}
-    \textbf{矩阵}：二维数组。\textbf{向量}可以视为特殊的矩阵（行数为 1 或列数为 1 的矩阵）。
-    \begin{figure}[htbp]
-        \centering
-        \includegraphics[width=0.7\linewidth]{figs/jz.png}
-    \end{figure}
-    \textbf{注意}：每个元素必须为相同的数据类型（数值型、字符型或逻辑型）。
+\begin{frame}{矩阵的行与列}
+  \small
+  矩阵按行、列排列数据，各元素具有相同的数据类型。
+  \par\vspace{0.6em}
+  \renewcommand{\arraystretch}{1.6}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lccc@{}}
+    \toprule
+    & \thead{第1列} & \thead{第2列} & \thead{第3列} \\
+    \midrule
+    \thead{第1行} & 1 & 5 & 9 \\
+    \thead{第2行} & 3 & 7 & 11 \\
+    \bottomrule
+  \end{tabular*}\par
+  \vspace{0.6em}
+  \begin{itemize}
+    \item 本例是 2 行、3 列的数值型矩阵。
+    \item 行号和列号共同确定一个元素的位置。
+    \item 向量只有元素顺序，矩阵还具有行、列结构。
+  \end{itemize}
+  \note{教材第22页的矩阵定义和2行3列示例。矩阵讲解17分钟（第一节第15--32分钟），以教师演示为主。第19--22页讲清位置选择与修改结果，不涉及矩阵乘法或求逆。}
 \end{frame}
 
-\begin{frame}[fragile]{矩阵的定义}
-    使用 \texttt{matrix()} 函数定义矩阵。示例如下：
-    \begin{lstlisting}[language=R]
-A <- matrix(11:16, nrow=3, ncol=2)
-print(A)
-     [,1] [,2]
-[1,]   11   14
-[2,]   12   15
-[3,]   13   16
-    \end{lstlisting}
-\end{frame}
-\begin{frame}[fragile]{矩阵的定义}
-    \begin{itemize}
-        \item \texttt{matrix()} 函数接受一个向量作为矩阵元素。
-        \item \texttt{nrow} 和 \texttt{ncol} 指定行数和列数。
-        \item 默认按列填充，可使用 \texttt{byrow=TRUE} 按行填充。
-    \end{itemize}
-{\small    \begin{lstlisting}[language=R]
-B <- matrix(c(1, -1, 1, 1), 
-     nrow=2, ncol=2, byrow=TRUE)
-print(B)
-      [,1] [,2]
-[1,]    1   -1
-[2,]    1    1
-    \end{lstlisting}}
-\end{frame}
-
-
-\begin{frame}[fragile]{访问矩阵的元素}
-    使用下标访问矩阵元素：
-    \begin{itemize}
-        \item \texttt{A[1,]}：取出第一行，返回普通向量。
-        \item \texttt{A[,1]}：取出第一列，返回普通向量。
-        \item \texttt{A[c(1, 3), 1:2]}：取出指定行和列的子矩阵。
-    \end{itemize}
-    \begin{lstlisting}[language=R]
-A <- matrix(11:16, nrow=3, ncol=2)
+\begin{frame}[fragile]{创建矩阵：默认按列填充}
+  \small
+  \code{matrix()} 将向量中的值排列成矩阵。
+  \inputlabel
+\begin{lstlisting}
+m <- seq(1, 11, by = 2)
+A <- matrix(m, nrow = 2, ncol = 3)
 A
-      [,1] [,2]
-[1,]   11   14
-[2,]   12   15
-[3,]   13   16
-    \end{lstlisting}
-    \end{frame}
-
-\begin{frame}[fragile]{访问矩阵的元素}
-    \begin{lstlisting}[language=R]
-A[1,]          # 取出第一行
-[1] 11 14
-A[,1]          # 取出第一列
-[1] 11 12 13
-# 取出第1和第3行的前2列
-A[c(1, 3), 1:2]  
-      [,1] [,2]
-[1,]   11   14
-[2,]   13   16
-    \end{lstlisting}
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+     [,1] [,2] [,3]
+[1,]    1    5    9
+[2,]    3    7   11
+\end{lstlisting}
+  \begin{itemize}
+    \item \code{nrow} 指定行数，\code{ncol} 指定列数。
+    \item 默认先填满第 1 列，再填第 2、3 列。
+  \end{itemize}
+  \note{教材第22页：x<-seq(1,11,by=2)和matrix(x,2,3)，此处写出参数名便于辨认。}
 \end{frame}
 
-\begin{frame}[fragile]{矩阵元素的修改}
-    使用下标可以修改矩阵的元素：
+\begin{frame}[fragile]{创建矩阵：按行填充}
+  \small
+  设置 \code{byrow = TRUE}，先填满一行再填下一行。
+  \inputlabel
+\begin{lstlisting}
+B <- matrix(1:6, nrow = 2, ncol = 3,
+            byrow = TRUE)
+B
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+     [,1] [,2] [,3]
+[1,]    1    2    3
+[2,]    4    5    6
+\end{lstlisting}
+  \begin{itemize}
+    \item 数据、行数和列数已确定，填充顺序影响元素位置。
+    \item \code{TRUE} 是已学过的逻辑值。
+  \end{itemize}
+  \note{教材第23页matrix(1:6,2,3,byrow=TRUE)。采用完整TRUE，不扩展简写T。}
+\end{frame}
 
-    \begin{itemize}
-        \item 使用 \texttt{A[i, j]} 访问第 \(i\) 行第 \(j\) 列的元素。
-        \item 直接赋值可以修改该元素的值。
-        \item 可以使用下标向量同时修改多个元素。
-    \end{itemize}
-    \begin{lstlisting}[language=R]
-A[2, 1] <- 99 # 修改单个元素
-A
+\begin{frame}{矩阵下标的写法}
+  \small
+  方括号内，逗号前选择行，逗号后选择列。
+  \par\vspace{0.5em}
+  \renewcommand{\arraystretch}{1.35}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}ll@{}}
+    \toprule
+    \thead{代码} & \thead{提取内容} \\
+    \midrule
+    \code{A[1, 2]} & 第1行、第2列的一个元素 \\
+    \code{A[1, ]} & 第1行的全部元素 \\
+    \code{A[, 1]} & 第1列的全部元素 \\
+    \code{A[c(1, 2), c(1, 3)]} & 指定行、列组成的子矩阵 \\
+    \bottomrule
+  \end{tabular*}\par
+  \vspace{0.6em}
+  空白表示保留该方向上的全部位置。\par
+  行号、列号均从 1 开始。\par
+  同一写法可放在 \code{<-} 左侧，修改元素、整行、整列或子矩阵。
+  \note{教材第23页：a[i,j]、a[i,]、a[,j]。这里只使用正整数下标，不讲drop等参数。}
+\end{frame}
+
+\begin{frame}[fragile]{提取矩阵的元素、行和列}
+  沿用默认按列填充的矩阵 \code{A}。
+  \inputlabel
+\begin{lstlisting}
+A[1, ]
+A[, 1]
+A[1, 2]
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] 1 5 9
+[1] 1 3
+[1] 5
+\end{lstlisting}
+  输出依次为：第 1 行、第 1 列、\code{A[1, 2]}。
+  \note{教材第23页矩阵元素、行、列的提取。A仍为第15页创建的初始矩阵。}
+\end{frame}
+
+\begin{frame}[fragile]{提取子矩阵}
+  \small
+  \setlength{\smallskipamount}{1pt}
+  另建 3 行、3 列的矩阵 \code{C}，按行填入 1 到 9。
+  \inputlabel
+\begin{lstlisting}[aboveskip=0.15em,belowskip=0.15em]
+C <- matrix(1:9, nrow = 3, ncol = 3,
+            byrow = TRUE)
+i <- c(1, 3)
+j <- c(1, 2)
+C[i, j]
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
      [,1] [,2]
-[1,]   11   14
-[2,]   99   15
-[3,]   13   16
-    \end{lstlisting}
+[1,]    1    2
+[2,]    7    8
+\end{lstlisting}
+  \code{i} 选择第 1、3 行，\code{j} 选择第 1、2 列。\par
+  所选行、列交叉位置的元素构成子矩阵。
+  \note{教材第23页的a<-matrix(1:9,3,3,T)、i和j。本例保留行列索引向量，供后续子矩阵修改使用。}
 \end{frame}
-\begin{frame}[fragile]{矩阵元素的修改}
-\begin{lstlisting}[language=R]
-# 修改多个元素
-A[c(1, 3), 2] <- c(20, 30)
+
+\begin{frame}[fragile]{修改矩阵的一个元素}
+  将矩阵 \code{A} 第 1 行、第 2 列的元素改为 99。
+  \inputlabel
+\begin{lstlisting}
+A[1, 2] <- 99
 A
-     [,1] [,2]
-[1,]   11   20
-[2,]   99   15
-[3,]   13   30
-    \end{lstlisting}
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+     [,1] [,2] [,3]
+[1,]    1   99    9
+[2,]    3    7   11
+\end{lstlisting}
+  给所选位置赋值后，再输入 \code{A} 查看更改结果。
+  \note{教材第23--24页的矩阵下标赋值。此处修改A，不修改上一页另建的C。}
 \end{frame}
 
-\begin{frame}[fragile]{数据框}
-    数据框是R语言中一种常见的数据结构, 用于存储表格数据。
-    \begin{itemize}
-        \item 由 \( n \) 行和 \( p \) 列组成。
-        \item 各列可以包含不同类型的数据
-        \item 同一列中的数据类型必须相同。
-    \end{itemize}
-    \begin{figure}[htbp]
-        \centering
-        \includegraphics[width=1\linewidth]{figs/sjj.PNG}
-    \end{figure}
+\begin{frame}[fragile]{修改矩阵的多个元素}
+  更改矩阵 \code{A} 第 1、2 行、第 3 列的两个元素。
+  \inputlabel
+\begin{lstlisting}
+A[c(1, 2), 3] <- c(20, 30)
+A
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+     [,1] [,2] [,3]
+[1,]    1   99   20
+[2,]    3    7   30
+\end{lstlisting}
+  两个替换值依次对应所选的两行。\par
+  前一页更改的 99 仍然保留。
+  \note{教材第23--24页允许对所选行列赋值。多个位置替换沿用原课件的操作，不增加其他索引方式。}
 \end{frame}
 
-\begin{frame}[fragile]{在R中创建数据框}
-使用 \texttt{data.frame()} 函数来创建数据框。所有输入变量必须是相同维数的向量。\\
-    \textbf{示例代码：}
-    \begin{lstlisting}[language=R]
-x <- c(160, 175) 
-y <- c(51, 72)    
-sex <- c("Female", "Male") 
-myData <- data.frame(x, y, sex)  
-class(myData) 
+\begin{frame}[fragile]{对子矩阵赋值}
+  \small
+  沿用 \code{C}，以及第 1、3 行和第 1、2 列的选择 \code{i}、\code{j}。
+  \inputlabel
+\begin{lstlisting}
+C[i, j] <- matrix(c(1, 0, 0, 1),
+                  nrow = 2, ncol = 2)
+C
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+     [,1] [,2] [,3]
+[1,]    1    0    3
+[2,]    4    5    6
+[3,]    0    1    9
+\end{lstlisting}
+  这里一次更改所选的 4 个位置，其余位置不变。\par
+  赋值矩阵的行数、列数与所选子矩阵一致。
+  \note{教材第24页对子矩阵赋值的完整例子。只说明位置和赋值结果，不展开单位矩阵等线性代数概念。}
+\end{frame}
+
+\begin{frame}{课堂练习一：向量与矩阵}
+  \small
+  练习时间：9 分钟。新建脚本 \code{R2-practice.R}。
+  \begin{enumerate}
+    \item 用 \code{seq()} 生成从 10 到 60、步长为 10 的向量 \code{v}。\par
+      提取第 1、3 个元素。
+    \item 用 \code{v} 创建 2 行、3 列矩阵 \code{M}，采用默认填充顺序。
+    \item 提取矩阵 \code{M} 的第 1 行和第 2 列。
+    \item 将第 1 行、第 2 列的元素改为 99，查看修改后的矩阵。
+    \item 添加必要注释，保存脚本。
+  \end{enumerate}
+  \vfill
+  当堂完成并核对结果，不要求提交。
+  \note{第一节复习与结构概览5分钟、向量10分钟、矩阵17分钟，讲解共32分钟；第32--41分钟独立练习9分钟，第41--45分钟讲评与保存4分钟，合计45分钟。仅使用教材第21--24页的操作。}
+\end{frame}
+
+\begin{frame}[fragile]{课堂练习一：参考代码}
+\begin{lstlisting}
+v <- seq(10, 60, by = 10)
+v[c(1, 3)]
+M <- matrix(v, nrow = 2, ncol = 3)
+M
+M[1, ]
+M[, 2]
+M[1, 2] <- 99
+M
+\end{lstlisting}
+  \vfill
+  从第一行开始，按顺序运行代码。\par
+  核对矩阵修改前、后的结果。
+  \note{练习一参考代码。不要使用已经修改过的课堂示例A代替新建的M。}
+\end{frame}
+
+\begin{frame}[fragile]{课堂练习一：结果核对}
+  \small
+  以下三项均在矩阵修改前核对。
+  \par\vspace{0.4em}
+  \renewcommand{\arraystretch}{1.4}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}ll@{}}
+    \toprule
+    \thead{代码} & \thead{结果} \\
+    \midrule
+    \code{v[c(1, 3)]} & \code{10 30} \\
+    \code{M[1, ]} & \code{10 30 50} \\
+    \code{M[, 2]} & \code{30 40} \\
+    \bottomrule
+  \end{tabular*}\par
+  \vspace{0.5em}
+  将第 1 行、第 2 列改为 99 后，矩阵为：
+\begin{lstlisting}[style=output]
+     [,1] [,2] [,3]
+[1,]   10   99   50
+[2,]   20   40   60
+\end{lstlisting}
+  将操作代码保存在 \code{R2-practice.R} 中。
+  \note{seq()生成10、20、30、40、50、60，默认按列填入M。原矩阵第一行10、30、50，第二行20、40、60。}
+\end{frame}
+
+\begin{frame}{数据框与表格数据}
+  \small
+  数据框用于保存表格数据，各列可以采用不同的数据类型。
+  \par\vspace{0.5em}
+  \renewcommand{\arraystretch}{1.5}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}ccc@{}}
+    \toprule
+    \thead{身高（cm）} & \thead{体重（kg）} & \thead{性别} \\
+    \midrule
+    160 & 51 & \code{"Female"} \\
+    175 & 72 & \code{"Male"} \\
+    \bottomrule
+  \end{tabular*}\par
+  \vspace{0.5em}
+  \begin{itemize}
+    \item 每行是一条记录，每列是一个变量。
+    \item 同一变量的各个观测值保存在同一列。
+    \item 本讲用等长向量建立数据框，使各列记录一一对应。
+  \end{itemize}
+  \note{教材第24--25页。第二节先用2分钟打开并接续脚本；数据框讲解15分钟（第2--17分钟），以同一份两行三列数据连续演示。}
+\end{frame}
+
+\begin{frame}[fragile]{创建数据框}
+  \small
+  身高、体重和性别分别保存在三个向量中。
+  \inputlabel
+\begin{lstlisting}
+x <- c(160, 175)
+y <- c(51, 72)
+sex <- c("Female", "Male")
+myData <- data.frame(x, y, sex)
+class(myData)
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
 [1] "data.frame"
-    \end{lstlisting}
+\end{lstlisting}
+  \code{data.frame()} 将这三个向量组成数据框。\par
+  本例三个向量都包含两个值。
+  \note{教材第24页的完整创建示例。x是身高，y是体重，sex是性别。}
 \end{frame}
 
-\begin{frame}[fragile]{在R中创建数据框}
-    创建的数据框 \texttt{myData} 的输出：
-    \begin{lstlisting}[language=R]
-> myData
+\begin{frame}[fragile]{查看数据框及列名}
+  \small
+  直接输入对象名查看数据，\code{names()} 查看列名。
+  \inputlabel
+\begin{lstlisting}
+myData
+names(myData)
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
     x  y    sex
 1 160 51 Female
 2 175 72   Male
-    \end{lstlisting}
+[1] "x" "y" "sex"
+\end{lstlisting}
+  创建时未另行指定列名，本例采用输入变量的名称。
+  \note{教材第25--26页。列名x、y、sex与刚才data.frame(x,y,sex)的输入变量一致。}
 \end{frame}
-\begin{frame}[fragile]{在R中创建数据框并设置变量名称}
-    可以在创建数据框时指定变量的名称。
-    \begin{lstlisting}[language=R]
-myData <- data.frame(height = x, 
-           weight = y, sex = sex)
+
+\begin{frame}[fragile]{创建时指定列名}
+  \small
+  重新创建同样的数据，并直接指定列名。
+  \inputlabel
+\begin{lstlisting}
+myData <- data.frame(height = x,
+                     weight = y, sex = sex)
 myData
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
   height weight    sex
 1    160     51 Female
 2    175     72   Male
 \end{lstlisting}
-\end{frame}
-\begin{frame}[fragile]{在R中提取数据框的数据}
-    可以通过列变量名称提取相应的数据。例如：
-    \begin{lstlisting}[language=R]
-# 提取身高数据
-heights <- myData$height
-heights
-[1] 160 175
-# 提取性别数据
-genders <- myData$sex
-genders
-Levels: Female Male
-    \end{lstlisting}
+  列名现在为 \code{height}、\code{weight}、\code{sex}。\par
+  这里改变的是名称，记录的顺序和值没有改变。
+  \note{教材第25页。此页明确重新创建myData，后续先使用height、weight、sex，直到更名页再更改列名。}
 \end{frame}
 
-\begin{frame}[fragile]{在R中查阅数据框列名称}
-    \textbf{查阅列名称}
-
-    在R语言中，可以通过 \texttt{names()} 函数查阅数据框各列的名称。以下是示例代码：
-
-    \begin{lstlisting}[language=R]
-myData <- data.frame(x, y, sex) 
-# 查阅各列名称
-names(myData)  #显示myData各列的名称
-[1] "x" "y" "sex"
+\begin{frame}[fragile]{按列名提取数据}
+  对象名后用 \code{\$} 和列名提取一列。
+  \inputlabel
+\begin{lstlisting}
+myData$height
+myData$sex
 \end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] 160 175
+[1] "Female" "Male"
+\end{lstlisting}
+  \begin{itemize}
+    \item 第一行提取身高列，第二行提取性别列。
+    \item 本例的性别列为字符型。
+  \end{itemize}
+  \note{教材第25页。教材的旧版输出显示形式不同，课堂以当前R环境运行结果为准；本讲不介绍因子。}
 \end{frame}
-\begin{frame}[fragile]{在R中修改数据框列名称}
-    \textbf{修改列名称}
-我们可以使用 \texttt{names()} 函数修改数据框的列名称：
-    
-    \begin{lstlisting}[language=R]
-# 重新命名myData的列名称
+
+\begin{frame}[fragile]{用行列下标提取数据}
+  \small
+  数据框也可按行号、列号提取数据。
+  \inputlabel
+\begin{lstlisting}
+myData[1, 1]
+myData$height[1]
+myData[, 2]
+myData$weight
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] 160
+[1] 160
+[1] 51 72
+[1] 51 72
+\end{lstlisting}
+  前两行取得同一个值，后两行取得同一列数据。
+  \note{教材第26页给出的两对等价写法。输入代码只包含英文标点，正文中的行号/列号是说明。}
+\end{frame}
+
+\begin{frame}[fragile]{修改数据框中的记录}
+  将第 1 条记录的身高更正为 165。
+  \inputlabel
+\begin{lstlisting}
+myData[1, 1] <- 165
+myData
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+  height weight    sex
+1    165     51 Female
+2    175     72   Male
+\end{lstlisting}
+  也可用 \code{myData\$height[1] <- 165} 修改。
+  \note{教材第26页的修改例子；两种写法作用相同，课堂执行其中一种即可。}
+\end{frame}
+
+\begin{frame}[fragile]{修改数据框的列名}
+  \small
+  用 \code{names()} 给各列重新命名。
+  \inputlabel
+\begin{lstlisting}
+names(myData)
 names(myData) <- c("h", "w", "Sex")
-# 显示当前各列名称
-names(myData)  
+names(myData)
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] "height" "weight" "sex"
 [1] "h" "w" "Sex"
- \end{lstlisting}
-    现在，数据框 \texttt{myData} 的列名称已更改为 \texttt{h}, \texttt{w} 和 \texttt{Sex}。
+\end{lstlisting}
+  \code{h} 为身高，\code{w} 为体重，\code{Sex} 为性别。\par
+  \code{Sex} 的首字母大写，与 \code{sex} 不同。
+  \note{教材第25--26页names()的查看与修改。按赋值中的真实大小写使用Sex，避免旧排印输出与赋值不一致。}
 \end{frame}
 
-\begin{frame}[fragile]{在R中索引数据框内容}
-    在R语言中，可以像数组和向量一样通过方括号索引或修改数据框中特定位置的内容。
-    \begin{lstlisting}[language=R]
-myData <- data.frame(height=x,
-           weight=y,sex=sex)
-    \end{lstlisting}
-    \begin{itemize}
-        \item \texttt{myData[1, 1]} 和 \texttt{myData\$height[1]} 是等价的，它们都代表数据框 \texttt{myData} 第1行和第1列交叉位置的变量值。
-        \item \texttt{myData[, 2]} 和 \texttt{myData\$weight} 也是等价的，它们都表示数据框 \texttt{myData} 的第2列。
-    \end{itemize}
-\end{frame}
-\begin{frame}[fragile]{在R中修改数据框内容}
-可以通过以下代码修改 \texttt{myData[1, 1]} 的内容：
-    \begin{lstlisting}[language=R]
-# 将myData[1, 1]修改为165
-myData[1, 1] <- 165 
-myData$height[1] <- 165 
-    \end{lstlisting}
+\begin{frame}[fragile]{更名后的数据引用}
+  后续代码使用新的列名，原有数据不变。
+  \inputlabel
+\begin{lstlisting}
+myData$h
+myData$Sex
+myData[, 2]
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] 165 175
+[1] "Female" "Male"
+[1] 51 72
+\end{lstlisting}
+  名称变更后，用 \code{h} 提取身高列，用 \code{Sex} 提取性别列。\par
+  按列位置提取的 \code{myData[, 2]} 仍为体重列。
+  \note{教材第25--26页的列名和下标操作。沿用更名及更正后的myData，后续不再重新创建对象。}
 \end{frame}
 
-\begin{frame}[fragile]{作业}
-\begin{itemize}
-    \item[1.] 定义一个数值变量和一个字符变量，并打印它们的值。
-    \item[2.] 创建一个数值向量和一个字符向量，并打印它们的值；修改数值向量的第三个元素为 10，并打印修改后的向量。
-    \item[3.] 创建一个 \(2 \times 3\) 矩阵，并打印矩阵；提取矩阵的第一行和第二列，并打印它们；将矩阵的第一行第二列的元素修改为 99，并打印修改后的矩阵。
-\end{itemize}
+\begin{frame}[fragile]{创建列表}
+  \small
+  列表可以把不同的 R 对象保存为不同分量。
+  \inputlabel
+\begin{lstlisting}
+lst <- list(u = 2, v = "abcd")
+lst
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+$u
+[1] 2
+
+$v
+[1] "abcd"
+\end{lstlisting}
+  本例有两个分量：\code{u} 保存数值，\code{v} 保存字符。\par
+  列表的不同分量可以具有不同的类型或长度。
+  \note{教材第26--27页list(u=2,v="abcd")。列表讲解8分钟（第二节第17--25分钟）。不同分量也可保存向量、矩阵或数据框，但本讲不展开嵌套。部分R函数的计算结果也用列表保存。}
 \end{frame}
-\begin{frame}{}
-\centering \Huge
-  \emph{Thanks!}
+
+\begin{frame}[fragile]{提取列表分量}
+  用双中括号按位置提取，用 \code{\$} 按名称提取。
+  \inputlabel
+\begin{lstlisting}
+lst[[1]]
+lst$u
+lst[[2]]
+lst$v
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] 2
+[1] 2
+[1] "abcd"
+[1] "abcd"
+\end{lstlisting}
+  前两行提取分量 \code{u}，后两行提取分量 \code{v}。
+  \note{教材第27页的[[i]]和$索引。这里只提取分量内容，不介绍单中括号返回子列表的区别。}
+\end{frame}
+
+\begin{frame}[fragile]{修改列表分量}
+  可以给选中的分量重新赋值。
+  \inputlabel
+\begin{lstlisting}
+lst$u <- 1:3
+lst[[1]]
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] 1 2 3
+\end{lstlisting}
+  \begin{itemize}
+    \item 分量 \code{u} 原来是一个数值，现在是数值向量。
+    \item 分量 \code{v} 仍保存字符值 \code{"abcd"}。
+    \item 也可用 \code{lst[[1]] <- 1:3} 完成相同修改。
+  \end{itemize}
+  \note{教材第27页的x$u<-1:3及双中括号赋值说明。只修改一个分量，不涉及列表增删或循环。}
+\end{frame}
+
+\begin{frame}[fragile]{查看和修改列表分量名称}
+  \small
+  列表也可用 \code{names()} 查看或修改分量名称。
+  \inputlabel
+\begin{lstlisting}
+names(lst)
+names(lst) <- c("num", "string")
+names(lst)
+lst$num
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] "u" "v"
+[1] "num" "string"
+[1] 1 2 3
+\end{lstlisting}
+  更名后用 \code{lst\$num} 提取原来的数值向量。\par
+  改名称不改变各分量保存的内容。
+  \note{教材第27页的列表names()示例。明确更名后使用num、string，不再使用旧的u、v。}
+\end{frame}
+
+\begin{frame}{课堂练习二：数据框}
+  \small
+  在 \code{R2-practice.R} 中完成两部分练习，共 15 分钟。\par
+  教学示例：三名学生的阅读记录。
+  \par\vspace{0.3em}
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}ccc@{}}
+    \toprule
+    \thead{学生编号} & \thead{阅读页数} & \thead{阅读分钟数} \\
+    \midrule
+    A & 12 & 30 \\
+    B & 18 & 40 \\
+    C & 15 & 35 \\
+    \bottomrule
+  \end{tabular*}\par
+  \begin{enumerate}
+    \item 用 \code{id}、\code{pages}、\code{minutes} 三个向量创建数据框 \code{reading}。
+    \item 查看列名，提取页数列，将 B 的页数更正为 20。
+    \item 将列名改为 \code{id}、\code{read\_pages}、\code{minutes}，\par
+      用新的列名提取页数列，并显示数据框。
+  \end{enumerate}
+  \note{第二节衔接2分钟、数据框15分钟、列表8分钟；第25--40分钟独立完成两部分练习，共15分钟；第40--45分钟讲评与保存5分钟，合计45分钟。此页与下一页同属一次练习，不各计15分钟。数据为教学示例，不是真实调查。}
+\end{frame}
+
+\begin{frame}{课堂练习二：列表}
+  \small
+  继续同一份脚本，完成列表部分。
+  \begin{enumerate}
+    \setcounter{enumi}{3}
+    \item 创建列表 \code{info}，分量 \code{u} 为数值 2，\par
+      分量 \code{v} 为字符值 \code{"abcd"}。
+    \item 用位置和名称分别提取这两个分量。
+    \item 将分量 \code{u} 改为向量 \code{1:3}。\par
+      将分量名称改为 \code{num}、\code{string}，再用新名称提取。
+    \item 添加必要注释，保存两部分代码。
+  \end{enumerate}
+  \vfill
+  练习当堂完成，保存在本地，不要求提交。
+  \note{教材第26--27页列表操作的练习。与上一页合计独立练习15分钟，随后两部分统一讲评与保存5分钟。两个对象reading与info彼此独立，不将数据框装入列表，不增加嵌套。}
+\end{frame}
+
+\begin{frame}[fragile]{课堂练习二：数据框参考代码}
+\begin{lstlisting}
+id <- c("A", "B", "C")
+pages <- c(12, 18, 15)
+minutes <- c(30, 40, 35)
+reading <- data.frame(id, pages, minutes)
+names(reading)
+reading$pages
+reading[2, 2] <- 20
+names(reading) <- c("id", "read_pages",
+                   "minutes")
+reading$read_pages
+reading
+\end{lstlisting}
+  \vfill
+  先建立数据框，再更正记录和更改列名。
+  \note{练习二的数据框参考代码，从第一行运行可恢复题目初始数据。}
+\end{frame}
+
+\begin{frame}[fragile]{课堂练习二：列表参考代码}
+\begin{lstlisting}
+info <- list(u = 2, v = "abcd")
+info[[1]]
+info$u
+info[[2]]
+info$v
+info$u <- 1:3
+names(info) <- c("num", "string")
+names(info)
+info$num
+info$string
+\end{lstlisting}
+  \vfill
+  提取分量内容用双中括号或 \code{\$}。\par
+  更名后用新的名称引用分量。
+  \note{练习二列表参考代码，可独立运行。两种提取方式均展示，修改和更名顺序与题目一致。}
+\end{frame}
+
+\begin{frame}[fragile]{课堂练习二：数据框结果核对}
+  \small
+  更正记录、修改列名后，\code{reading} 为：
+\begin{lstlisting}[style=output]
+  id read_pages minutes
+1  A         12      30
+2  B         20      40
+3  C         15      35
+\end{lstlisting}
+  \renewcommand{\arraystretch}{1.4}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}ll@{}}
+    \toprule
+    \thead{代码} & \thead{更改后的结果} \\
+    \midrule
+    \code{reading[2, 2]} & \code{20} \\
+    \code{reading\$read\_pages} & \code{12 20 15} \\
+    \bottomrule
+  \end{tabular*}\par
+  \vspace{0.6em}
+  列名为 \code{id}、\code{read\_pages}、\code{minutes}。\par
+  先核对更改后的对象，再保存代码。
+  \note{练习二结果。只有B的页数由18改为20，其他值和记录顺序保持不变。}
+\end{frame}
+
+\begin{frame}{课堂练习二：列表结果核对}
+  \small
+  区分修改前与修改后、更名前与更名后的引用。
+  \par\vspace{0.4em}
+  \renewcommand{\arraystretch}{1.45}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lll@{}}
+    \toprule
+    \thead{阶段} & \thead{代码} & \thead{结果} \\
+    \midrule
+    创建后 & \code{info[[1]]} & \code{2} \\
+    创建后 & \code{info\$v} & \code{"abcd"} \\
+    更名后 & \code{names(info)} & \code{"num" "string"} \\
+    更名后 & \code{info\$num} & \code{1 2 3} \\
+    更名后 & \code{info\$string} & \code{"abcd"} \\
+    \bottomrule
+  \end{tabular*}\par
+  \vfill
+  将两部分代码保存在 \code{R2-practice.R} 中，无需提交。
+  \note{练习二结果。列表u由2修改为1:3后才改名num；v的字符内容保持abcd，只改名string。保留课堂练习与结果核对，不设置课后提交要求。}
 \end{frame}
 
 \end{document}

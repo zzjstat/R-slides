@@ -12,10 +12,19 @@
   Path=/usr/local/texlive/2024/texmf-dist/fonts/opentype/public/fandol/
 ]{FandolFang-Regular.otf}
 
-\usetheme{Boadilla}
-\useinnertheme{circles}
-\useoutertheme{shadow}
-\usecolortheme{seahorse}
+\setsansfont[
+  Path=/usr/local/texlive/2024/texmf-dist/fonts/opentype/public/tex-gyre/,
+  BoldFont=texgyreheros-bold.otf,
+  ItalicFont=texgyreheros-italic.otf,
+  BoldItalicFont=texgyreheros-bolditalic.otf
+]{texgyreheros-regular.otf}
+\setmonofont[
+  Path=/usr/local/texlive/2024/texmf-dist/fonts/opentype/public/inconsolata/,
+  BoldFont=Inconsolatazi4-Bold.otf,
+  StylisticSet=3
+]{Inconsolatazi4-Regular.otf}
+
+\usetheme{default}
 \usefonttheme[onlymath]{serif}
 \setbeamertemplate{navigation symbols}{}
 
@@ -25,61 +34,109 @@
 \usepackage{hyperref}
 \usepackage{listings}
 \usepackage{xcolor}
+\usepackage{etoolbox}
 
 \graphicspath{{figs/}}
-\hypersetup{pdfborder=001,colorlinks=true,linkcolor=blue!70!black,urlcolor=blue!70!black}
+\definecolor{navy}{HTML}{193B5B}
+\definecolor{bodytext}{HTML}{24313D}
+\definecolor{muted}{HTML}{617080}
+\definecolor{rulegray}{HTML}{CBD4DD}
+\definecolor{codebg}{HTML}{F4F6F8}
+\definecolor{codeframe}{HTML}{D5DDE5}
+\definecolor{codecomment}{HTML}{4B705C}
+\definecolor{codestring}{HTML}{92533C}
+\definecolor{tablehead}{HTML}{EEF2F6}
+\hypersetup{pdfborder=0 0 0,colorlinks=true,linkcolor=navy,urlcolor=navy}
 
-\definecolor{darkblue}{rgb}{0.1,0,0.85}
-\definecolor{myfoot}{rgb}{0.5,0.2,0.5}
-\definecolor{codebg}{RGB}{247,248,250}
-\definecolor{codeframe}{RGB}{190,198,210}
-\definecolor{practice}{RGB}{236,246,255}
+\setbeamercolor{normal text}{fg=bodytext,bg=white}
+\setbeamercolor{structure}{fg=navy}
+\setbeamercolor{frametitle}{fg=navy,bg=white}
+\setbeamercolor{myfootline}{bg=white,fg=muted}
+\setbeamercolor{block title}{fg=navy,bg=white}
+\setbeamercolor{block body}{fg=bodytext,bg=white}
+\setbeamercolor{alerted text}{fg=codestring}
+\setbeamerfont{frametitle}{size=\fontsize{18}{21},series=\bfseries}
+\setbeamerfont{block title}{size=\normalsize,series=\bfseries}
+\setbeamertemplate{blocks}[default]
+\setbeamertemplate{itemize item}{\raisebox{0.15ex}{\scriptsize\textbullet}}
+\setbeamertemplate{enumerate item}{\insertenumlabel.}
+\AtBeginEnvironment{itemize}{\setlength{\itemsep}{0.24em}}
+\AtBeginEnvironment{enumerate}{\setlength{\itemsep}{0.24em}}
+\arrayrulecolor{rulegray}
+\setlength{\heavyrulewidth}{0.6pt}
+\setlength{\lightrulewidth}{0.35pt}
 
-\setbeamercolor{myfootline}{bg=white,fg=blue}
-\setbeamercolor{frametitle}{fg=blue,bg=white}
-\setbeamercolor{block title}{fg=blue!70!black,bg=blue!10}
-\setbeamercolor{block body}{fg=black,bg=blue!4}
-\setbeamercolor{alerted text}{fg=red!75!black}
-
-\setbeamertemplate{headline}{%
-  \leavevmode\begin{beamercolorbox}[wd=\paperwidth,ht=1.25ex,dp=1ex,left]{}
-  \end{beamercolorbox}}
+\setbeamertemplate{headline}{}
 \setbeamertemplate{footline}{%
   \leavevmode\mbox{%
-    \begin{beamercolorbox}[wd=.75\paperwidth,ht=2.25ex,dp=1ex,left]{myfootline}%
-      \rule{2em}{0pt}\color{myfoot}\ttfamily\scriptsize 统计学导论上机课
+    \begin{beamercolorbox}[wd=.75\paperwidth,ht=3mm,dp=2mm,left]{myfootline}%
+      \hspace*{0.8cm}{\fontsize{7.5}{9}\selectfont 统计学导论上机课}
     \end{beamercolorbox}%
-    \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,right]{myfootline}%
-      {\color{myfoot}\ttfamily\scriptsize\insertframenumber{}/\inserttotalframenumber\hspace*{3ex}}
+    \begin{beamercolorbox}[wd=.25\paperwidth,ht=3mm,dp=2mm,right]{myfootline}%
+      {\fontsize{7.5}{9}\selectfont\insertframenumber\,/\,\inserttotalframenumber\hspace*{0.8cm}}
     \end{beamercolorbox}}
   \vskip0pt}
 \setbeamertemplate{frametitle}{%
-  \leavevmode\linespread{1}\large\textbf{\insertframetitle}\par
-  \color{structure.fg!30!bg}\rule[6pt]{\linewidth}{2pt}\par\vspace{-1.0em}}
-\setbeamersize{text margin left=0.75cm,text margin right=0.75cm}
+  \vspace{0.28cm}%
+  {\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle\par}%
+  \vspace{0.12cm}%
+  {\color{rulegray}\hrule height 0.45pt}%
+  \vspace{-0.2cm}}
+\setbeamersize{text margin left=0.8cm,text margin right=0.8cm}
+
+\setbeamertemplate{title page}{%
+  \vspace*{0.95cm}%
+  {\fontsize{25}{31}\selectfont\bfseries\color{navy}\inserttitle\par}%
+  \vspace{0.35cm}%
+  {\fontsize{14}{19}\selectfont\color{bodytext}\insertsubtitle\par}%
+  \vspace{0.65cm}%
+  {\color{rulegray}\hrule height 0.45pt}%
+  \vspace{0.6cm}%
+  {\fontsize{13}{18}\selectfont\insertauthor\par}%
+  \vspace{0.12cm}%
+  {\fontsize{10}{15}\selectfont\color{muted}\insertinstitute\par}%
+  \vfill
+  {\fontsize{10}{14}\selectfont\color{muted}\insertdate\par}%
+  \vspace*{0.6cm}}
 
 \lstset{
   language=R,
-  basicstyle=\ttfamily\small,
-  keywordstyle=\color{blue!75!black},
-  commentstyle=\color{green!45!black},
-  stringstyle=\color{red!65!black},
+  basicstyle=\ttfamily\fontsize{12.5}{14.5}\selectfont\color{bodytext},
+  keywordstyle=\color{navy},
+  commentstyle=\color{codecomment},
+  stringstyle=\color{codestring},
   backgroundcolor=\color{codebg},
   frame=single,
   rulecolor=\color{codeframe},
+  framerule=0.35pt,
+  framesep=5pt,
   showstringspaces=false,
   breaklines=true,
   columns=fullflexible,
-  xleftmargin=0.5em,
-  xrightmargin=0.5em,
-  aboveskip=0.5em,
-  belowskip=0.5em
+  xleftmargin=5pt,
+  xrightmargin=5pt,
+  aboveskip=0.35em,
+  belowskip=0.35em
 }
 
-\newcommand{\code}[1]{\texttt{#1}}
+\lstdefinestyle{output}{
+  language={},
+  keywordstyle=\color{bodytext},
+  commentstyle=\color{bodytext},
+  stringstyle=\color{bodytext},
+  backgroundcolor=\color{white},
+  frame=none,
+  aboveskip=0.12em,
+  belowskip=0.25em
+}
+
+\newcommand{\code}[1]{\textcolor{navy}{\texttt{#1}}}
+\newcommand{\inputlabel}{\par\smallskip{\fontsize{10.5}{13}\selectfont\bfseries\color{muted}输入代码\par}}
+\newcommand{\outputlabel}{\par\smallskip{\fontsize{10.5}{13}\selectfont\bfseries\color{muted}Console 输出\par}}
+\newcommand{\thead}[1]{\textcolor{navy}{\textbf{#1}}}
 
 \title{R语言基础（一）}
-\subtitle{RStudio 操作与基础数据处理}
+\subtitle{软件安装、基本操作与简单计算}
 \author{郑泽靖}
 \institute{北京师范大学统计学院}
 \date{2026年秋季学期}
@@ -90,534 +147,686 @@
   \titlepage
 \end{frame}
 
-\begin{frame}{本讲内容}
-  \begin{columns}[T,onlytextwidth]
-    \column{0.48\textwidth}
-      \textbf{第一节（45 分钟）}
-      \begin{itemize}
-        \item R 与 RStudio 的安装和分工
-        \item RStudio 界面与脚本运行
-        \item 基本运算与对象赋值
-      \end{itemize}
-    \column{0.48\textwidth}
-      \textbf{第二节（45 分钟）}
-      \begin{itemize}
-        \item 函数、向量与向量化计算
-        \item 基本汇总与缺失值处理
-        \item 课堂练习与错误排查
-      \end{itemize}
-  \end{columns}
-  \vfill
-  \centering 本讲不布置课后作业，课堂练习当堂完成。
-\end{frame}
+% \begin{frame}{本讲内容}
+%   \begin{enumerate}
+%     \item R 与 RStudio 的下载和安装。
+%     \item RStudio 界面及脚本的创建、保存和运行。
+%     \item 简单运算、函数调用与帮助文档。
+%     \item 变量、赋值、注释及常见变量类型。
+%     \item 圆周率、缺失值等系统常量。
+%   \end{enumerate}
+%   \vfill
+%   {\small 教材：李勇、金毅《统计学导论——基于 R 语言》，第一章附录“R 软件简介”，第 11--22、28--29 页。}
+%   \note{教材页码为印刷页码。本讲加入基础向量与求和，第二讲继续学习其他向量操作、矩阵和数据框，第三讲学习列表、行列求和及绘图。}
+% \end{frame}
 
-\begin{frame}{文科研究中的数据任务}
+\begin{frame}{R 软件简介}
+  R 用于统计计算、数据分析和绘图。
   \begin{itemize}
-    \item 问卷：读者对作品的评分是否集中在较高水平？
-    \item 文本：不同作品中某个词语出现了多少次？
-    \item 行为记录：学生每天的阅读时间有多大差异？
-    \item 研究复核：采用新样本后，分析过程能否重复执行并得到可核验结果？
+    \item R 是 S 语言的一种实现，由 \mbox{Robert Gentleman}、\mbox{Ross Ihaka} 等开发。
+    \item R 是免费软件，源代码公开。
+    \item 教材使用 R 完成统计计算和随机现象模拟。
   \end{itemize}
-  \vspace{0.8em}
-  \begin{block}{R 在数据分析中的作用}
-    R 可用于记录分析过程、执行重复计算，并将分析结果整理为表格和图形。
-  \end{block}
-\end{frame}
-
-\begin{frame}{统计软件的使用原则}
-  \begin{columns}[T,onlytextwidth]
-    \column{0.58\textwidth}
-      \begin{itemize}
-        \item 统计分析从研究问题和数据背景出发。
-        \item 同一个统计量在不同研究设计中可能有不同含义。
-        \item 代码运行成功不能保证分析方法和结论合理。
-      \end{itemize}
-      \vspace{0.5em}
-      R 负责执行并记录分析步骤，研究者负责选择方法和解释结果。
-    \column{0.38\textwidth}
-      \begin{block}{教材提示}
-        使用统计软件时，应选择与数据和问题相匹配的方法，避免盲目处理数据。
-      \end{block}
-      \vspace{0.4em}
-      {\scriptsize 参考教材第一章第 1.4 节}
-  \end{columns}
-\end{frame}
-
-\begin{frame}{手工计算与程序计算}
-  \small
-  计算下列 10 个观测值的平均数：
-  \[
-    4,\ 8,\ 15,\ 16,\ 23,\ 42,\ 7,\ 9,\ 12,\ 11
-  \]
-  \begin{itemize}
-    \item 手工计算：总和为 147，平均数为 $147/10=14.7$。
-    \item 数据量增加或数据更新后，手工计算需要重复全部步骤，也不利于核查。
-    \item 程序可以保存计算规则，对新数据重复执行相同过程，并减少计算错误。
-  \end{itemize}
-  \vspace{0.2em}
-  \textbf{统计编程适用于大规模数据处理、重复计算、复杂统计分析和数据可视化。}
-\end{frame}
-
-\begin{frame}{R 的主要特点}
-  \begin{itemize}
-    \item R 是免费、开放源代码的软件，可在主要操作系统上运行。
-    \item R 提供参数与非参数检验、线性回归和广义线性回归等统计方法。
-    \item R 具有完善的统计图形功能，适合探索数据和呈现分析结果。
-    \item CRAN 扩展包可以增加数据处理、统计建模和图形功能。
-    \item R 可以导入文本文件、电子表格和数据库等多种数据源。
-    \item R 采用交互式运行方式，并拥有活跃的用户与开发者社区。
-  \end{itemize}
+  \note{教材第 11 页，附录开头。本讲教学范围为教材印刷第 11--22、28--29 页中的入门部分。第二讲继续学习其他向量操作、矩阵和数据框。本页仅介绍软件背景，不展开统计模型或编程语言历史。}
 \end{frame}
 
 \begin{frame}{R 与 RStudio}
+  \setlength{\leftmargini}{1.2em}
   \begin{columns}[T,onlytextwidth]
-    \column{0.48\textwidth}
+    \column{0.49\textwidth}
       \textbf{R}
       \begin{itemize}
-        \item 负责计算和统计分析
-        \item 免费、开源
-        \item 提供大量统计方法
+        \item 执行计算和\mbox{统计分析}
+        \item 安装后\par 可直接输入命令
       \end{itemize}
-    \column{0.48\textwidth}
+    \column{0.49\textwidth}
       \textbf{RStudio}
       \begin{itemize}
-        \item 集成脚本编辑、代码运行与结果管理
-        \item 提供对象、图形和帮助文档等工作区
-        \item 本课程采用的主要开发环境
+        \item 提供脚本编辑和运行界面
+        \item 集中显示变量、\par 图形和帮助
       \end{itemize}
   \end{columns}
   \vfill
-  \centering\large R 提供计算环境，RStudio 提供调用和管理 R 的集成开发环境。
+  本课程安装两者，主要在 RStudio 中使用 R。
+  \note{教材第 11--14 页。RStudio 是调用 R 的集成开发环境。}
 \end{frame}
 
 \begin{frame}{安装顺序与官方下载入口}
   \begin{enumerate}
-    \item 先安装 R。R 提供统计计算环境。
-    \item 再安装 RStudio Desktop。RStudio 调用已经安装的 R。
-    \item 两个软件均安装完成后，本课程统一在 RStudio 中编写并运行 R 代码。
+    \item 先安装 R。
+    \item 再安装 RStudio Desktop。
+    \item 安装完成后，启动 RStudio。
   \end{enumerate}
-  \vspace{0.8em}
+  \vspace{0.6em}
   \begin{block}{官方下载入口}
-    R：\href{https://www.r-project.org/}{\texttt{www.r-project.org}}\qquad
-    RStudio：\href{https://docs.posit.co/ide/user/}{\texttt{docs.posit.co/ide/user}}
+    R：\href{https://www.r-project.org/}{\texttt{www.r-project.org}}\par
+    RStudio：\href{https://docs.posit.co/ide/user/\#open-source}{\texttt{docs.posit.co/ide/user/}}
   \end{block}
-  \vspace{0.5em}
-  安装包应来自官方网站或 CRAN 正式镜像。
+  \vfill
+  {\small 选择与电脑系统兼容的版本。教材中的旧版本号和下载网址以官方网站现行信息为准。}
+  \note{教材第 11、13 页。现行官方入口：https://www.r-project.org/；https://docs.posit.co/ide/user/，Install Links 下的 Open Source。核对日期：2026-10-06。}
 \end{frame}
 
 \begin{frame}{R 的下载流程}
-  \begin{columns}[T,onlytextwidth]
-    \column{0.52\textwidth}
-      \begin{enumerate}
-        \item 在 R 项目主页点击 \textbf{Download R}。
-        \item 选择 \textbf{0-Cloud} 或一个可访问的 CRAN 镜像。
-        \item 选择操作系统：Windows、macOS 或 Linux。
-        \item 下载当前稳定版并按默认选项安装。
-      \end{enumerate}
-      \vspace{0.4em}
-      {\small 直接入口：\href{https://cloud.r-project.org/}{\texttt{cloud.r-project.org}}}
-    \column{0.44\textwidth}
-      \centering
-      \includegraphics[width=\linewidth]{s3.PNG}
-  \end{columns}
+  \small
+  \begin{enumerate}
+    \item 在 R 项目主页点击 \textbf{Download R}。
+    \item 选择 \textbf{0-Cloud} 或一个可访问的 CRAN 镜像。
+    \item 在 \textbf{Download and Install R} 中选择操作系统。
+  \end{enumerate}
+  \vspace{0.2em}
+  \centering
+  \includegraphics[width=0.94\linewidth,trim=90 74 202 101,clip]{s3.PNG}\par
+  \vspace{0.3em}
+  \raggedright
+  直接入口：\href{https://cloud.r-project.org/}{\texttt{cloud.r-project.org}}\par
+  CRAN 镜像是提供 R 下载文件的网站，选择能够正常访问的入口即可。
+  \note{教材第 11 页的下载安装操作；CRAN 镜像说明见第 32 页。截图来自原课件，保留操作系统下载链接。现行入口：https://cloud.r-project.org/。核对日期：2026-10-06。}
 \end{frame}
 
-\begin{frame}{Windows 与 macOS 的安装文件}
+\begin{frame}{R 的安装文件}
   \begin{columns}[T,onlytextwidth]
     \column{0.48\textwidth}
       \textbf{Windows}
       \begin{itemize}
         \item 进入 \textbf{Download R for Windows}
         \item 选择 \textbf{base}
-        \item 下载当前稳定版的 \code{.exe} 文件
-        \item 按安装向导完成安装
+        \item 下载 \code{.exe} 安装文件
+        \item 双击文件，按向导完成安装
       \end{itemize}
     \column{0.48\textwidth}
       \textbf{macOS}
       \begin{itemize}
         \item 进入 \textbf{Download R for macOS}
-        \item Apple 芯片选择 \code{arm64.pkg}
-        \item 较早的 Intel 机型选择 \code{x86\_64.pkg}
-        \item 打开 \code{.pkg} 文件完成安装
+        \item Apple 芯片选 \code{arm64.pkg}
+        \item Intel 芯片选 \code{x86\_64.pkg}
+        \item 打开文件，按向导完成安装
       \end{itemize}
   \end{columns}
   \vfill
-  {\small Windows：\href{https://cran.r-project.org/bin/windows/base/}{\texttt{cran.r-project.org/bin/windows/base/}}\par
-   macOS：\href{https://cran.r-project.org/bin/macosx/}{\texttt{cran.r-project.org/bin/macosx/}}}
+  {\small macOS 可在“关于本机”中查看芯片类型。下载前确认系统版本符合要求。\par
+   \href{https://cran.r-project.org/bin/windows/base/}{Windows 官方安装页面}\qquad
+   \href{https://cran.r-project.org/bin/macosx/}{macOS 官方安装页面}}
+  \note{教材第 11 页的下载与安装操作。操作系统文件选择按现行官方说明更新：https://cran.r-project.org/bin/windows/base/；https://cran.r-project.org/bin/macosx/。核对日期：2026-10-06。Linux 用户按 CRAN 对应发行版的说明安装，不在课堂展开。}
 \end{frame}
 
-\begin{frame}{RStudio Desktop 的下载与安装}
-  \begin{columns}[T,onlytextwidth]
-    \column{0.56\textwidth}
-      \begin{enumerate}
-        \item 确认 R 已经安装完成。
-        \item 打开 RStudio IDE 官方下载页面。
-        \item 选择 Open Source 版本的 RStudio Desktop。
-        \item 下载与操作系统匹配的安装文件并安装。
-        \item 启动 RStudio，确认 Console 可以正常显示。
-      \end{enumerate}
-      \vspace{0.3em}
-      {\small 下载页面：\href{https://docs.posit.co/ide/user/}{\texttt{docs.posit.co/ide/user/}}}
-    \column{0.40\textwidth}
-      \centering
-      \includegraphics[width=\linewidth]{rstudio.png}
-  \end{columns}
+\begin{frame}{RStudio 的下载与安装}
+  \small
+  \begin{enumerate}
+    \item 安装 R 后，打开 \href{https://docs.posit.co/ide/user/\#open-source}{RStudio 官方下载入口}。
+    \item 在 \textbf{Install Links} 的 \textbf{Open Source} 下选择\par
+      \textbf{RStudio Desktop download}。
+    \item 按电脑操作系统下载兼容的安装文件。
+    \item Windows：双击 \code{.exe}，按向导完成安装。\par
+      macOS：打开 \code{.dmg}，将 RStudio 拖入 Applications。
+    \item 从开始菜单或应用程序列表启动 RStudio。
+  \end{enumerate}
+  \vfill
+  选择免费桌面版 Desktop，不选择 Server 或 Pro。\par
+  \href{https://docs.posit.co/ide/user/\#direct-downloads-open-source}{Direct Downloads (Open Source)} 提供各系统下载链接。
+  \note{教材第 13 页，先安装 R 再安装 RStudio。现行官方入口：https://docs.posit.co/ide/user/，Open Source 与 Direct Downloads (Open Source)。核对日期：2026-10-06。}
 \end{frame}
 
-\begin{frame}[fragile]{安装结果的验证}
-  打开 RStudio，在 Console 中依次运行：
-\begin{lstlisting}
-R.version.string
-1 + 1
-\end{lstlisting}
-  正常情况下，Console 会显示 R 的版本信息和计算结果：
-\begin{lstlisting}
-## [1] "R version ..."
-## [1] 2
-\end{lstlisting}
-  如果 RStudio 无法启动或 Console 未加载 R，应先检查 R 是否已经正确安装，再检查 RStudio 版本是否与操作系统兼容。
+\begin{frame}{R 的图形界面与控制台}
+  安装 R 后，可以直接打开 R 的图形界面。
+  \begin{itemize}
+    \item Windows 中通常显示为 RGui，macOS 中显示为 R。
+    \item 在控制台 Console 中输入命令，\par 按 Enter 运行。
+    \item 控制台显示命令的计算结果。
+    \item 行首的 \code{>} 是输入提示符，无需自行输入。
+  \end{itemize}
+  \vspace{0.5em}
+  RStudio 也有 Console，\par 输入和运行命令的方法相同。
+  \note{教材第 11--13 页，R 图形用户界面及控制台。平台名称仅用于辨认已安装的软件。}
 \end{frame}
 
-\begin{frame}{RStudio 的主要工作区}
-  \begin{columns}[T,onlytextwidth]
-    \column{0.58\textwidth}
-      \centering
-      \includegraphics[width=\linewidth]{rstudio.png}
-    \column{0.38\textwidth}
-      \begin{enumerate}
-        \item Source：编写脚本
-        \item Console：显示运行结果
-        \item Environment：查看对象
-        \item Files / Plots / Help：管理文件、图形和帮助
-      \end{enumerate}
-  \end{columns}
+\begin{frame}{RStudio 的四个工作区}
+  \centering
+  \includegraphics[width=0.90\linewidth]{rstudio.png}\par
+  \raggedright\small
+  \vspace{0.3em}
+  \setlength{\tabcolsep}{1pt}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}ll@{}}
+    左上 \textbf{Source}：编写脚本。 & 右上 \textbf{Environment}：查看变量。 \\
+    左下 \textbf{Console}：命令与结果。 & 右下：文件、图形与帮助。 \\
+  \end{tabular*}\par
+  \vspace{0.2em}\par
+  {\scriptsize 图示为默认布局，创建脚本后显示 Source。}
+  \note{教材第 13--15 页。截图来自原课件。当前界面可参考 Posit 官方说明 https://docs.posit.co/ide/user/ide/guide/ui/ui-panes.html。}
 \end{frame}
 
-\begin{frame}{R 脚本的创建与运行}
+\begin{frame}{RStudio 的常用标签页}
+  \small
+  \vspace{0.4em}
+  \renewcommand{\arraystretch}{1.15}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lp{0.65\textwidth}@{}}
+    \toprule
+    \thead{标签页} & \thead{用途} \\
+    \midrule
+    Environment & 查看当前变量及其内容 \\
+    History & 查看已经运行的命令 \\
+    Files & 查看文件和文件夹 \\
+    Plots & 查看绘制的图形 \\
+    Packages & 查看和管理程序包 \\
+    Help & 查看函数帮助 \\
+    Viewer & 查看网页等内容 \\
+    \bottomrule
+  \end{tabular*}\par
+  \vspace{0.5em}
+  在 \code{Tools > Global Options} 中\par 可以调整字体大小和界面布局。
+  \note{教材第 14--15 页。这里只辨认标签页，程序包安装和网页内容在后续课程使用。}
+\end{frame}
+
+\begin{frame}{R 脚本的创建与保存}
+  脚本是保存 R 代码的文本文件。
   \begin{enumerate}
     \item 点击 \code{File > New File > R Script}。
-    \item 立即保存，文件名设为 \code{R1-practice.R}。
-    \item 本讲代码统一保存在该脚本中。
-    \item Windows 使用 \code{Ctrl + Enter} 运行当前行；macOS 使用 \code{Command + Enter}。
-    \item 也可以选中代码后点击 \code{Run}；Console 中输入的命令按 Enter 立即运行。
+    \item 在 Source 中输入代码。
+    \item 点击 \code{File > Save}，选择保存文件夹。
+    \item 将文件命名为 \code{R1-practice.R}。
   \end{enumerate}
-  \vspace{0.7em}
-  \begin{block}{脚本与控制台}
-    Console 显示即时结果；脚本保存完整代码，便于修改、复查和重复运行。
-  \end{block}
+  \vspace{0.5em}
+  \begin{itemize}
+    \item 保存快捷键：Windows 为 \code{Ctrl + S}，\par
+      macOS 为 \code{Command + S}。
+    \item 文件名旁的 \code{*} 表示修改尚未保存。
+  \end{itemize}
+  \note{教材第 14 页，编辑窗口中代码的保存和未保存标记。现行文件操作：https://docs.posit.co/ide/user/ide/guide/ui/files.html。}
 \end{frame}
 
-\begin{frame}[fragile]{脚本的基本结构}
-  一个简短的分析脚本通常依次记录数据、计算过程和输出结果。
+\begin{frame}{R 代码的运行}
+  \begin{itemize}
+    \item 在 Source 中选中代码，点击 \code{Run}。
+    \item 也可运行当前行：\par
+      Windows 使用 \code{Ctrl + Enter}。\par
+      macOS 使用 \code{Command + Enter}。
+    \item 在 Console 中直接输入命令，按 Enter 运行。
+    \item 在 Console 中查看结果。
+  \end{itemize}
+  \vfill
+  保存脚本与运行代码是两个操作。\par 运行代码后仍需保存文件。
+  \note{教材第 16--17 页。教材采用旧版 Ctrl+r，本讲使用当前 RStudio 的 Run 和默认运行快捷键。官方说明：https://docs.posit.co/ide/user/ide/guide/code/execution.html。}
+\end{frame}
+
+\begin{frame}[fragile]{代码与输出}
+  \inputlabel
 \begin{lstlisting}
-# Data
-day1 <- 35
-day2 <- 45
-
-# Analysis
-average_time <- (day1 + day2) / 2
-
-# Result
-average_time
+1 + 1
 \end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] 2
+\end{lstlisting}
+  \begin{itemize}
+    \item 只输入代码 \code{1 + 1}，输出由 R 自动显示。
+    \item \code{[1]} 表示本行结果从第 1 个元素开始显示。
+    \item Console 中的结果不会自动写入脚本。
+  \end{itemize}
+  \note{输入输出见教材第 11--16 页；算术运算见第 28 页。教材第 20--21 页还解释分行输出编号，此处仅辨认单个结果的输出。}
 \end{frame}
 
 \begin{frame}[fragile]{基本运算}
-  在脚本中输入并逐行运行：
+  在脚本中逐行运行：
 \begin{lstlisting}
-1 + 1
+2 + 3
+8 - 5
 5 * 8
 100 / 4
 2^3
+(2 + 3) * 4
 \end{lstlisting}
   \begin{itemize}
+    \item 结果依次为 5、3、40、25、8、20。
     \item \code{*} 表示乘法，\code{/} 表示除法，\code{\^{}} 表示乘方。
-    \item 圆括号可以改变运算顺序，例如 \code{(2 + 3) * 4}。
-    \item R 按通常的数学规则确定运算顺序。
+    \item 括号改变运算顺序。代码使用英文半角标点。
   \end{itemize}
+  \note{教材第 28 页的算术运算符。这里只使用单个数值，不涉及矩阵运算。}
 \end{frame}
 
-\begin{frame}[fragile]{注释与输出}
-\begin{lstlisting}
-# average reading time for two days
-(35 + 45) / 2
-## [1] 40
-\end{lstlisting}
-  \begin{itemize}
-    \item 井号 \code{\#} 后面的文字是注释，R 不会执行它。
-    \item \code{[1]} 是输出位置的提示，不是答案的一部分。
-    \item 注释用于记录分析目的、数据来源和处理依据。
-  \end{itemize}
-  \vspace{0.4em}
-  不写与代码内容重复的注释，优先记录必要的背景信息。
-\end{frame}
-
-\begin{frame}[fragile]{对象与赋值}
-\begin{lstlisting}
-day1 <- 35
-day2 <- 45
-average_time <- (day1 + day2) / 2
-average_time
-## [1] 40
-\end{lstlisting}
-  \begin{itemize}
-    \item \code{<-} 是赋值运算符，将右侧的值赋给左侧对象。
-    \item 对象名应反映数据含义，并注意 R 区分大小写。
-    \item 赋值语句运行后，Environment 中将显示相应对象。
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]{函数与参数}
-  函数接收输入并返回结果，圆括号中填写函数所需的参数。
-\begin{lstlisting}
-sqrt(25)
-round(3.14159, digits = 2)
-mean(c(35, 45))
-
-?mean
-\end{lstlisting}
-  \begin{itemize}
-    \item \code{sqrt()}、\code{round()} 和 \code{mean()} 是函数。
-    \item \code{digits = 2} 指定保留两位小数。
-    \item \code{?mean} 打开函数帮助；\code{help.start()} 打开帮助系统；\href{https://www.rdocumentation.org/}{RDocumentation} 可检索函数及扩展包文档。
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]{向量的创建}
-  向量是由相同基本类型元素构成的一维数据结构。
-\begin{lstlisting}
-reading_time <- c(25, 40, 35, 50, 20,
-                  45, 30, 55, 40, 60)
-
-reading_time
-\end{lstlisting}
-  \begin{itemize}
-    \item \code{c()} 将多个元素组合为一个向量。
-    \item 函数参数之间使用逗号分隔。
-    \item 对象名 \code{reading\_time} 表明该向量记录阅读时间。
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]{向量化计算}
-  对向量进行运算时，R 会对其中每个元素执行相同的计算。
-\begin{lstlisting}
-reading_hours <- reading_time / 60
-round(reading_hours, digits = 2)
-
-## [1] 0.42 0.67 0.58 0.83 0.33
-## [6] 0.75 0.50 0.92 0.67 1.00
-\end{lstlisting}
-  上述代码把每条阅读时间记录从分钟转换为小时。与逐个计算相比，向量化写法更简洁，也便于复查。
-\end{frame}
-
-\begin{frame}[fragile]{基本汇总函数}
-\begin{lstlisting}
-sum(reading_time)
-length(reading_time)
-mean(reading_time)
-
-## [1] 400
-## [1] 10
-## [1] 40
-\end{lstlisting}
-  \begin{block}{统计解释}
-    在本例给出的 10 条记录中，平均阅读时间为 40 分钟。该结果仅描述现有观测，不涉及对其他学生或其他日期的总体推断。
-  \end{block}
-\end{frame}
-
-\begin{frame}[fragile]{课堂练习一：向量与汇总函数}
-  某项调查记录了八名学生一天内的阅读页数：
-\begin{lstlisting}
-pages <- c(18, 25, 20, 30, 22, 27, 24, 34)
-\end{lstlisting}
-  完成以下计算：
+\begin{frame}[fragile]{课堂练习一：脚本与基本运算}
   \begin{enumerate}
-    \item 用 \code{length()} 查看记录数。
-    \item 用 \code{sum()} 计算总页数。
-    \item 用 \code{mean()} 计算平均页数。
-    \item 根据数据背景表述平均数的含义。
+    \item 新建脚本，保存为 \code{R1-practice.R}。
+    \item 输入以下代码，选中后点击 \code{Run}。
+    \item 核对结果，将最后一行改为 \code{(18 + 22) / 2}，\par
+      再次运行，并保存修改后的代码。
   \end{enumerate}
-  \vfill
-  \hfill 建议时间：6 分钟
-\end{frame}
-
-\begin{frame}[fragile]{课堂练习一：结果核对}
 \begin{lstlisting}
-length(pages)
-sum(pages)
-mean(pages)
-
-## [1] 8
-## [1] 200
-## [1] 25
-  \end{lstlisting}
-  \begin{block}{结果表述}
-    八名学生一天阅读页数的平均值为 25 页。平均数概括观测值的整体水平，不意味着每名学生均阅读 25 页。
-  \end{block}
-\end{frame}
-
-\begin{frame}[fragile]{缺失值的识别与处理}
-\begin{lstlisting}
-ratings <- c(4, 5, 3, 4, 5, 2, 4, NA, 3, 5)
-
-mean(ratings)
-## [1] NA
-
-mean(ratings, na.rm = TRUE)
-## [1] 3.888889
+6 + 9
+30 - 12
+7 * 4
+36 / 6
+(18 + 26) / 2
 \end{lstlisting}
-  \begin{itemize}
-    \item \code{NA} 表示该位置的观测值缺失。
-    \item \code{na.rm = TRUE} 表示本次计算排除缺失观测。
-    \item 报告结果时应说明缺失值数量及其处理方式。
-  \end{itemize}
+  \note{教材第 14、16、28 页。课堂独立练习后核对结果，代码保存在本地，不要求提交文件。}
 \end{frame}
 
-\begin{frame}[fragile]{常见错误信息及排查}
+\begin{frame}{课堂练习一：结果核对}
   \small
-  \renewcommand{\arraystretch}{0.92}
-  \begin{tabular}{p{0.34\textwidth}p{0.58\textwidth}}
+  \vspace{0.4em}
+  \renewcommand{\arraystretch}{1.4}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}p{0.65\linewidth}l@{}}
     \toprule
-    \textbf{错误信息或现象} & \textbf{检查内容} \\
+    \thead{输入代码} & \thead{结果} \\
     \midrule
-    \code{object not found} & 是否运行了赋值语句；大小写是否一致 \\
-    \code{unexpected symbol} & 逗号、括号或引号是否遗漏 \\
-    Console 出现 \code{+} & 上一行可能没有结束；按 Esc 后检查 \\
-    得到 \code{NA} & 数据中是否存在缺失值 \\
+    \code{6 + 9} & 15 \\
+    \code{30 - 12} & 18 \\
+    \code{7 * 4} & 28 \\
+    \code{36 / 6} & 6 \\
+    \code{(18 + 26) / 2} & 22 \\
+    \code{(18 + 22) / 2} & 20 \\
     \bottomrule
-  \end{tabular}
-  \vspace{0.6em}
-
-  排查顺序：错误信息、代码位置、语法结构、对象状态。
-\end{frame}
-
-\begin{frame}[fragile]{课堂练习二：缺失值与描述性汇总}
-  某项调查记录了 10 位读者对一篇作品的评分：
-\begin{lstlisting}
-ratings <- c(4, 5, 3, 4, 5, 2, 4, NA, 3, 5)
-\end{lstlisting}
-  完成以下分析：
-  \begin{enumerate}
-    \item 查看向量长度，并计算有效评分的数量。
-    \item 计算有效评分的平均数。
-    \item 找出最低分和最高分：\code{min()}、\code{max()}。
-    \item 计算评分的极差：最高分减最低分。
-    \item 表述分析结果，并说明缺失值的处理方式。
-  \end{enumerate}
+  \end{tabular*}\par
   \vfill
-  \hfill 建议时间：12 分钟
+  代码保存在脚本中，运行结果显示在 Console 中。
 \end{frame}
 
-\begin{frame}[fragile]{课堂练习二：参考结果}
+\begin{frame}[fragile]{函数调用}
+  R 提供了完成特定计算的函数。\par 函数名后的圆括号中填写输入值。
+  \inputlabel
 \begin{lstlisting}
-length(ratings)
-sum(!is.na(ratings))
-mean(ratings, na.rm = TRUE)
-min(ratings, na.rm = TRUE)
-max(ratings, na.rm = TRUE)
-max(ratings, na.rm = TRUE) - min(ratings, na.rm = TRUE)
+sin(10)
 \end{lstlisting}
-  \begin{block}{结果表述}
-    10 条记录中有 9 个有效评分。有效评分的平均值约为 3.89，最低值为 2，最高值为 5，极差为 3；计算时排除了 1 个缺失观测。
-  \end{block}
-\end{frame}
-
-\begin{frame}{本讲小结}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] -0.5440211
+\end{lstlisting}
   \begin{itemize}
-    \item R 负责统计计算，RStudio 提供代码编辑和结果管理环境。
-    \item 脚本应保存数据、计算过程和必要的注释。
-    \item \code{<-} 用于赋值，\code{c()} 用于创建向量，函数用于完成计算。
-    \item 汇总数据时应检查缺失值，并在结果解释中说明处理方式。
-    \item 出现错误时，先阅读 Console 信息并定位刚刚运行的代码。
+    \item \code{sin()} 是正弦函数。
+    \item 本例中，10 是传给函数的参数。
+    \item 输入不同参数，函数会计算相应结果。
   \end{itemize}
-  \vfill
-  \centering 本讲不布置课后作业。
+  \note{教材第 15--16 页的原例。此处学习调用函数的方法，不展开三角函数推导。R 的三角函数参数单位为弧度。}
 \end{frame}
 
-\appendix
-
-\begin{frame}[fragile]{补充：科学记数法与复合表达式}
+\begin{frame}[fragile]{函数的帮助文档}
+  \small
+  在 Console 中运行，帮助显示在右下角的 \textbf{Help} 标签页。
 \begin{lstlisting}
-5 + (2.3 - 1.125) * 3.2 / 1.1 + 1.23E3
-## [1] 1238.418
+?sin
+help(sin)
+\end{lstlisting}
+  两种写法都可打开同一个帮助文档。
+  \par\vspace{0.5em}
+  \begin{columns}[T,onlytextwidth]
+    \column{0.66\textwidth}
+      \renewcommand{\arraystretch}{1.3}
+      \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}ll@{}}
+        \toprule
+        \thead{栏目} & \thead{阅读内容} \\
+        \midrule
+        Description & 函数的用途 \\
+        Usage & 调用写法 \\
+        Arguments & 输入参数的说明 \\
+        \bottomrule
+      \end{tabular*}\par
+      \vspace{0.6em}
+      本例查看 \code{sin(x)} 的写法。\par
+      输入值为 10 时，写成 \code{sin(10)}。
+    \column{0.30\textwidth}
+      \centering
+      \includegraphics[width=0.80\linewidth]{sin-help-usage.png}\par
+      {\scriptsize 帮助页 Usage 局部}
+  \end{columns}
+  \note{教材第 15 页：help、?sin 和 Help 标签页。截图来自本机 R 4.4.2 的 base::sin 帮助文档，由 tools::Rd2HTML 渲染后截取 Usage 局部，字号放大但正文未改。本讲只说明 sin(x) 的调用写法，不展开帮助页中的其他三角函数。参考上机课-20240913.pptx 第 47 页的帮助文档栏目说明。}
+\end{frame}
+
+\begin{frame}[fragile]{变量与赋值}
+  变量用于保存输入值或计算结果。
+  \inputlabel
+\begin{lstlisting}
+x <- 5
+x
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] 5
 \end{lstlisting}
   \begin{itemize}
-    \item \code{1.23E3} 表示 $1.23\times 10^3$。
-    \item R 按括号、乘方、乘除、加减的顺序计算表达式。
-    \item 乘法使用 \code{*}，除法使用 \code{/}，乘方使用 \code{\^{}}。
-    \item 输入代码时应使用英文标点，避免中文逗号和引号造成语法错误。
+    \item \code{x <- 5} 将数值 5 保存到变量 \code{x} 中。
+    \item 输入变量名 \code{x}，查看保存的值。
+    \item \code{x = 5} 也可赋值，本课程统一使用 \code{<-}。
   \end{itemize}
+  \note{教材第 12--13 页，x<-5 与等号赋值。}
 \end{frame}
 
-\begin{frame}[fragile]{补充：常用数学函数}
+\begin{frame}[fragile]{变量的使用与更新}
+  \inputlabel
 \begin{lstlisting}
-sqrt(6.25)       # 2.5
-exp(1)           # 2.718282
-log10(10000)     # 4
+x <- 5
+y <- x
+x <- 8
 
-round(1.1234, 2) # 1.12
-floor(1.1234)    # 1
-ceiling(1.1234)  # 2
+x
+y
 \end{lstlisting}
+  两行输出依次为 8 和 5。
   \begin{itemize}
-    \item \code{sqrt()}、\code{exp()} 和 \code{log10()} 分别计算平方根、自然指数和常用对数。
-    \item \code{round()}、\code{floor()} 和 \code{ceiling()} 分别用于四舍五入、向下取整和向上取整。
+    \item \code{y <- x} 将当时 \code{x} 的值保存到 \code{y}。
+    \item 重新给 \code{x} 赋值后，\code{y} 仍为 5。
+    \item Environment 中会显示这些变量。
   \end{itemize}
+  \note{教材第 12 页，y=x 后 y 是 x 的一个复制品；第 14--15 页，Environment 显示变量内容。}
 \end{frame}
 
-\begin{frame}[fragile]{补充：圆周率与三角函数}
-\begin{lstlisting}
-pi
-## [1] 3.141593
-sin(pi / 6)
-## [1] 0.5
-cos(pi / 6)
-## [1] 0.8660254
-tan(pi / 6)
-## [1] 0.5773503
-\end{lstlisting}
-  R 的三角函数以弧度为单位。\code{pi} 是 R 内置的圆周率常量。
-\end{frame}
-
-\begin{frame}[fragile]{补充：常量与基本类型}
-  常量是直接写在代码中的值。R 中常见的常量包括：
+\begin{frame}{变量命名}
   \begin{itemize}
-    \item 数值型：\code{123}、\code{123.45}
-    \item 字符型：\code{"Li Ming"}、\code{'Li Ming'}
-    \item 逻辑型：\code{TRUE}、\code{FALSE}
-    \item 缺失值：\code{NA}
+    \item 本课程采用英文字母开头的名称，\par 后面可加数字。
+    \item 名称区分大小写，\code{x} 与 \code{X} 是不同变量。
+    \item 不以数字开头，例如 \code{1x} 不能作为普通变量名。
+    \item 避免使用已有函数名和系统常量名，例如 \mbox{\code{sin}、\code{pi}}。
   \end{itemize}
   \vspace{0.5em}
-  同一向量通常用于保存相同基本类型的数据。字符型常量必须置于英文单引号或双引号中。
+  常见名称：\code{x}、\code{y}、\code{x1}。
+  \note{教材第 16 页的命名、大小写和不覆盖系统变量。只采用教材中的简单名称。}
 \end{frame}
 
-\begin{frame}[fragile]{补充：特殊数值}
-  \begin{itemize}
-    \item \code{NA} 表示缺失的观测值。
-    \item \code{NaN} 表示无法定义的数值结果，例如 \code{0 / 0}。
-    \item \code{Inf} 和 \code{-Inf} 表示正无穷和负无穷，例如 \code{1 / 0}。
-  \end{itemize}
+\begin{frame}[fragile]{代码注释}
+  井号 \code{\#} 后面的文字是注释，R 不执行这些文字。
+  \inputlabel
 \begin{lstlisting}
-0 / 0
-## [1] NaN
-1 / 0
-## [1] Inf
+x <- 5  # save 5 in x
+x       # show x
 \end{lstlisting}
-  \code{NA}、\code{NaN} 和 \code{Inf} 的含义不同，数据检查时应分别识别。
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] 5
+\end{lstlisting}
+  \vspace{0.3em}
+  注释用于说明代码的含义。上述代码去掉注释后，计算结果不变。
+  \note{教材第 17 页，\# 注释。课上可使用中文注释，示例代码采用英文注释便于显示。}
 \end{frame}
 
-\begin{frame}[fragile]{补充：对象命名与赋值}
-  \begin{itemize}
-    \item 对象名可以包含字母、数字、下划线和句点，但不能以数字开头。
-    \item R 区分大小写，\code{y} 与 \code{Y} 是两个不同的对象。
-    \item 对象可以保存数值、向量、矩阵、数据框和函数等内容。
-    \item \code{<-} 和 \code{=} 均可用于赋值；本课程统一使用 \code{<-}。
-  \end{itemize}
+\begin{frame}[fragile]{教材示例：计算结果的保存}
+  在脚本中输入：
 \begin{lstlisting}
-x <- 10
-x1 <- 20
-cancer.tab <- c(3, 5, 8)
+y <- sin(10)  # save the result
+y            # show the result
 \end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] -0.5440211
+\end{lstlisting}
+  \begin{itemize}
+    \item 第一行调用函数，并将结果赋给 \code{y}。
+    \item 第二行显示 \code{y} 的值。
+    \item 选中两行点击 \code{Run}，再保存脚本。
+  \end{itemize}
+  \note{教材第 16--17 页的 y<-sin(10)、y 及带注释的原例。教材中分号用于同一行分隔语句，分行编写时可以省略。}
 \end{frame}
+
+\begin{frame}[fragile]{常见变量类型}
+  \small
+  教材介绍三种常见变量类型：
+  \par\vspace{0.5em}
+  \renewcommand{\arraystretch}{1.5}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lll@{}}
+    \toprule
+    \thead{类型} & \thead{含义} & \thead{例子} \\
+    \midrule
+    数值型 numeric & 保存数值 & \code{5}、\code{3.14} \\
+    字符型 character & 保存文字 & \code{"Li Ming"} \\
+    逻辑型 logical & 表示真或假 & \code{TRUE}、\code{FALSE} \\
+    \bottomrule
+  \end{tabular*}\par
+  \vspace{0.6em}
+  字符值使用英文引号。逻辑值 \code{TRUE} 和 \code{FALSE} 使用大写。
+  \note{教材第 18--19 页。类型的数值底层表示和自动转换不在本讲展开。}
+\end{frame}
+
+\begin{frame}[fragile]{查看变量类型}
+  \code{class()} 返回变量的类型。
+  \inputlabel
+\begin{lstlisting}
+a <- TRUE
+x <- pi
+name <- "How are you?"
+class(a)
+class(x)
+class(name)
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] "logical"
+[1] "numeric"
+[1] "character"
+\end{lstlisting}
+  \note{教材第 18--19 页：class(a)、class(x)、class(x) 字符型示例。示例变量名 name 便于辨认文字，本节只展示单个值。}
+\end{frame}
+
+\begin{frame}[fragile]{检查变量类型}
+  \small
+  以下函数检查变量是否属于指定类型，结果为 \code{TRUE} 或 \code{FALSE}。
+  \par\vspace{0.5em}
+  \renewcommand{\arraystretch}{1.5}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lll@{}}
+    \toprule
+    \thead{代码} & \thead{检查内容} & \thead{结果} \\
+    \midrule
+    \code{is.logical(a)} & 是否为逻辑型 & \code{TRUE} \\
+    \code{is.numeric(x)} & 是否为数值型 & \code{TRUE} \\
+    \code{is.character(name)} & 是否为字符型 & \code{TRUE} \\
+    \bottomrule
+  \end{tabular*}\par
+  \vspace{0.6em}
+  {\normalsize 在数值计算中，\code{TRUE} 按 1 计算，\code{FALSE} 按 0 计算。}
+\begin{lstlisting}
+TRUE + FALSE
+\end{lstlisting}
+  结果为 \code{[1] 1}。
+  \note{教材第 18--19 页，is.logical、is.numeric、is.character 及逻辑值数值计算。沿用前页的 a、x、name。}
+\end{frame}
+
+\begin{frame}{系统常量}
+  \small
+  \vspace{0.4em}
+  \renewcommand{\arraystretch}{1.5}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lp{0.67\textwidth}@{}}
+    \toprule
+    \thead{名称} & \thead{含义} \\
+    \midrule
+    \code{pi} & 圆周率，约为 3.141593 \\
+    \code{Inf} & 正无穷，例如 \code{1 / 0} 的结果 \\
+    \code{NaN} & 无法定义的数值结果，例如 \code{0 / 0} \\
+    \code{NA} & 缺失值，例如没有记录的观测值 \\
+    \bottomrule
+  \end{tabular*}\par
+  \vspace{0.6em}
+  这些名称具有特定含义，不用于保存其他计算结果。\par
+  \vspace{0.3em}
+  \code{NA}、\code{NaN} 与 \code{Inf} 的含义不同。
+  \note{教材第 19 页表 1-2，常用的系统变量表。只介绍含义，不讲缺失值处理方法。}
+\end{frame}
+
+\begin{frame}[fragile]{数值向量：保存一组数据}
+  \small
+  教学示例：用一个向量保存 5 篇文章的字数。
+  \par\vspace{0.4em}
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lccccc@{}}
+    \toprule
+    \thead{文章} & \thead{A} & \thead{B} & \thead{C} & \thead{D} & \thead{E} \\
+    字数 & 1200 & 1500 & 900 & 1800 & 1600 \\
+    \bottomrule
+  \end{tabular*}\par
+  \inputlabel
+\begin{lstlisting}
+words <- c(1200, 1500, 900, 1800, 1600)
+words
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] 1200 1500 900 1800 1600
+\end{lstlisting}
+  \code{c()} 将多个值组合为一个向量。\par
+  本例中，每个元素对应一篇文章，顺序与表格一致。
+  \note{教材第 20 页：数值向量与 c()。字数数据为教学示例，不是真实调查结果。只使用同类型数值，不讲混合类型转换。}
+\end{frame}
+
+\begin{frame}[fragile]{字符向量与逻辑向量}
+  向量也可以保存字符值或逻辑值。
+  \inputlabel
+\begin{lstlisting}
+article <- c("A", "B", "C", "D", "E")
+checked <- c(TRUE, TRUE, FALSE, TRUE, TRUE)
+class(article)
+class(checked)
+\end{lstlisting}
+  \begin{columns}[T,onlytextwidth]
+    \column{0.40\textwidth}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] "character"
+[1] "logical"
+\end{lstlisting}
+    \column{0.56\textwidth}
+  \begin{itemize}
+    \item \code{article} 保存文章编号。
+    \item \code{checked} 表示各条记录是否已经核对。
+    \item 本讲使用的向量，各元素具有相同的数据类型。
+  \end{itemize}
+  \end{columns}
+  \note{教材第 18--19 页：逻辑向量和字符向量的 c() 示例。沿用 class() 检查类型，不讲自动转换或其他数据结构。}
+\end{frame}
+
+\begin{frame}[fragile]{连续整数序列}
+  冒号 \code{:} 可以生成连续整数。
+  \inputlabel
+\begin{lstlisting}
+1:5
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] 1 2 3 4 5
+\end{lstlisting}
+  \begin{itemize}
+    \item 本例从 1 开始，到 5 结束，每次增加 1。
+    \item 结果与 \code{c(1, 2, 3, 4, 5)} 相同。
+  \end{itemize}
+  \vspace{0.4em}
+  这里的 1、2、3、4、5 是序列中的数值。
+  \note{教材第 20 页的冒号运算符。本讲只演示升序连续整数，不展开其他步长的序列；不对 1:5 使用 class()，避免引出 integer 类别。}
+\end{frame}
+
+\begin{frame}[fragile]{向量元素的查看与修改}
+  \small
+  沿用字数向量。假设第 3 篇文章的字数经核对应为 1100。
+  \inputlabel
+\begin{lstlisting}
+words[3]
+words[3] <- 1100
+words
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] 900
+[1] 1200 1500 1100 1800 1600
+\end{lstlisting}
+  \begin{itemize}
+    \item \code{words[3]} 查看第 3 个元素，位置编号从 1 开始。
+    \item \code{words[3] <- 1100} 更正第 3 个元素。
+    \item 输入 \code{words}，查看更正后的整组数据。
+  \end{itemize}
+  \note{教材第 21--22 页：正整数下标查看与单元素修改。这里的 3 是位置编号，不是字数；只更正题设指定的一条记录，不讲批量、负数或逻辑索引。}
+\end{frame}
+
+\begin{frame}[fragile]{求和与简单计算}
+  以下使用更正后的 5 条字数记录。
+  \inputlabel
+\begin{lstlisting}
+sum(words)
+sum(words) / 5
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] 7200
+[1] 1440
+\end{lstlisting}
+  \begin{itemize}
+    \item \code{sum()} 计算各元素之和，本例为总字数。
+    \item 本例共 5 篇文章，\par 总字数除以 5 得到\mbox{平均字数}。
+    \item 数据修改后，应重新运行计算语句。
+  \end{itemize}
+  \note{教材第 29 页：sum() 求向量各元素之和。平均字数只使用已讲的除法；分母 5 为本例记录数，不引入 mean()、length() 或缺失值处理参数。}
+\end{frame}
+
+\begin{frame}{课堂练习二：数据输入与简单计算}
+  \small
+  在 \code{R1-practice.R} 中完成以下操作。
+  \par\vspace{0.2em}
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lccccc@{}}
+    \toprule
+    \thead{文章} & \thead{A} & \thead{B} & \thead{C} & \thead{D} & \thead{E} \\
+    字数 & 1200 & 1500 & 900 & 1800 & 1600 \\
+    \bottomrule
+  \end{tabular*}\par
+  \vspace{0.2em}
+  \begin{enumerate}
+    \item 用 \code{c()} 建立数值向量 \code{words}，计算原始总字数。
+    \item 查看第 3 个元素，将其更正为 1100。
+      重新计算总字数和平均字数。
+    \item 用 \code{class()} 查看 \code{words} 的类型。
+      创建字符变量 \code{name} 和逻辑变量 \code{a}，
+      运行 \code{is.character(name)} 与 \code{is.logical(a)}。
+    \item 添加必要的注释，保存修改后的代码。
+  \end{enumerate}
+  \vfill
+  课堂核对结果，脚本保存在本地，不要求提交。
+  \note{教材第 14、16--22、28--29 页已讲知识的综合练习。独立操作后再展示参考代码。练习二及讲评共约 17 分钟。}
+\end{frame}
+
+\begin{frame}[fragile]{课堂练习二：参考代码}
+\begin{lstlisting}
+words <- c(1200, 1500, 900, 1800, 1600)
+sum(words)
+words[3]
+words[3] <- 1100
+sum(words)
+sum(words) / 5
+class(words)
+name <- "How are you?"
+a <- TRUE
+is.character(name)
+is.logical(a)
+\end{lstlisting}
+  \vfill
+  按顺序运行代码，并添加说明操作含义的注释。
+  \note{教材第 18--22、29 页。每次核对本例时从第一行重新运行，确保 words 回到题目给定的初始记录。}
+\end{frame}
+
+\begin{frame}{课堂练习二：结果核对}
+  \small
+  \vspace{0.4em}
+  \renewcommand{\arraystretch}{1.25}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lll@{}}
+    \toprule
+    \thead{操作阶段} & \thead{代码} & \thead{结果} \\
+    \midrule
+    原始记录 & \code{sum(words)} & 7000 \\
+    更正前 & \code{words[3]} & 900 \\
+    更正后 & \code{sum(words)} & 7200 \\
+    更正后 & \code{sum(words) / 5} & 1440 \\
+    类型查看 & \code{class(words)} & \code{"numeric"} \\
+    类型检查 & \code{is.character(name)} & \code{TRUE} \\
+    类型检查 & \code{is.logical(a)} & \code{TRUE} \\
+    \bottomrule
+  \end{tabular*}\par
+  \vfill
+  更正数据后，应重新运行计算语句。\par
+  将修改后的代码保存在 \code{R1-practice.R} 中，无需提交。
+  \note{本例五条原始记录的总字数为 7000；第 3 条由 900 更正为 1100 后，总字数为 7200，平均字数为 1440。核对时区分更正前后的数据状态。}
+\end{frame}
+
+% \begin{frame}{本讲小结}
+%   \begin{itemize}
+%     \item 先安装 R，再安装 RStudio。
+%     \item 在 Source 中编写脚本，在 Console 中查看结果。
+%     \item 保存脚本使用 \code{Save}，运行代码使用 \code{Run}。
+%     \item \code{<-} 用于赋值，\code{\#} 用于注释，\code{?} 用于查询帮助。
+%     \item 认识数值型、字符型、逻辑型，以及 \code{pi}、\code{Inf}、\code{NaN}、\code{NA}。
+%   \end{itemize}
+%   \vfill
+%   本讲练习完成后保存在本地，不要求提交作业。
+% \end{frame}
 
 \end{document}

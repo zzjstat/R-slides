@@ -1,0 +1,17 @@
+\frametitle{课堂练习二：参考代码}
+\begin{lstlisting}
+words <- c(1200, 1500, 900, 1800, 1600)
+sum(words)
+words[3]
+words[3] <- 1100
+sum(words)
+sum(words) / 5
+class(words)
+name <- "How are you?"
+a <- TRUE
+is.character(name)
+is.logical(a)
+\end{lstlisting}
+  \vfill
+  按顺序运行代码，并添加说明操作含义的注释。
+  \note{教材第 18--22、29 页。每次核对本例时从第一行重新运行，确保 words 回到题目给定的初始记录。}
