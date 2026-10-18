@@ -1,456 +1,1072 @@
-\documentclass[14pt,compress,t,noamsthm,notheorem,table,handout]{ctexbeamer}
-\usetheme{Boadilla}
-\useinnertheme{circles}
-\useoutertheme{shadow}
-\usecolortheme{seahorse}
+\documentclass[14pt,compress,t,noamsthm,notheorem,table,handout,fontset=none]{ctexbeamer}
+
+\setCJKmainfont[
+  Path=/usr/local/texlive/2024/texmf-dist/fonts/opentype/public/fandol/,
+  BoldFont=FandolSong-Bold.otf
+]{FandolSong-Regular.otf}
+\setCJKsansfont[
+  Path=/usr/local/texlive/2024/texmf-dist/fonts/opentype/public/fandol/,
+  BoldFont=FandolHei-Bold.otf
+]{FandolHei-Regular.otf}
+\setCJKmonofont[
+  Path=/usr/local/texlive/2024/texmf-dist/fonts/opentype/public/fandol/
+]{FandolFang-Regular.otf}
+
+\setsansfont[
+  Path=/usr/local/texlive/2024/texmf-dist/fonts/opentype/public/tex-gyre/,
+  BoldFont=texgyreheros-bold.otf,
+  ItalicFont=texgyreheros-italic.otf,
+  BoldItalicFont=texgyreheros-bolditalic.otf
+]{texgyreheros-regular.otf}
+\setmonofont[
+  Path=/usr/local/texlive/2024/texmf-dist/fonts/opentype/public/inconsolata/,
+  BoldFont=Inconsolatazi4-Bold.otf,
+  StylisticSet=3
+]{Inconsolatazi4-Regular.otf}
+
+\usetheme{default}
 \usefonttheme[onlymath]{serif}
 \setbeamertemplate{navigation symbols}{}
-% \setbeamercovered{transparent}
-\usepackage{natbib}
-\usepackage{amsthm}
-\usepackage{makecell}
-\usepackage{multirow}
-\renewcommand{\qedsymbol}{$\blacksquare$}
-\bibliographystyle{unsrtnat}
-\usepackage{color}
-\setbeamercolor{myfootline}{bg=white,fg=blue}
-\definecolor{myfoot}{rgb}{0.5,0.2,0.5}
-\definecolor{darkblue}{rgb}{0.1,0,0.85}
-\setbeamertemplate{headline}
-  { \leavevmode\begin{beamercolorbox}[wd=\paperwidth,ht=1.25ex,dp=1ex,left]{}
-    \end{beamercolorbox}}
-\setbeamertemplate{footline}% 自定义页脚
-  { \leavevmode\mbox{%
-    \begin{beamercolorbox}[wd=.75\paperwidth,ht=2.25ex,dp=1ex,left]{myfootline}%
-        \rule{2em}{0pt}\color{myfoot}\ttfamily\scriptsize%
-        %\insertshortauthor~(\insertshortinstitute)
-    \end{beamercolorbox}%
-    \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,right]{myfootline}%
-       {\color{myfoot}\ttfamily\scriptsize\insertframenumber{}/%
-        \inserttotalframenumber\hspace*{3ex}}
-    \end{beamercolorbox}}
-    \vskip0pt }
 
-\setbeamercolor{frametitle}{fg=blue,bg=white}
-\setbeamertemplate{frametitle}{%
-  \leavevmode\linespread{1}\large\textbf{\insertframetitle}\par
-  \color{structure.fg!30!bg}\rule[6pt]{\linewidth}{2pt}\par\vspace{-1.0em}}
-
-% \setbeamertemplate{blocks}[default] % beamer块（含定理类环境）不要阴影
-\setbeamertemplate{bibliography entry title}{}{}
-\setbeamertemplate{bibliography entry location}{}{}
-\setbeamertemplate*{bibliography entry note}{}{}
-\setbeamersize{text margin left=0.75cm, text margin right=0.75cm}
-
-\setbeamercolor{bluebox}{fg=black,bg=blue!10}
-\setbeamercolor{redbox}{fg=black,bg=red!10}
-\newenvironment{Boxblue}[1][\textwidth]
-  {\begin{beamercolorbox}[sep=0.1em,shadow=true,wd=#1,rounded=true,center]{bluebox}}
-  {\end{beamercolorbox}}
-\newenvironment{Boxred}[1][\textwidth]
-  {\begin{beamercolorbox}[sep=0.1em,shadow=true,wd=#1,rounded=true,center]{redbox}}
-  {\end{beamercolorbox}}
-\usepackage{stmaryrd}
-\usepackage{amsmath,amssymb,amsfonts,bm}
-\usepackage{graphicx,xcolor}
-\graphicspath{{figures/}}
-\usepackage{hyperref}
-\hypersetup{pdfborder=001,colorlinks=true,linkcolor=darkblue,urlcolor=blue}
-\usepackage{bbding}
-\newcommand{\Bullet}{{\fontsize{6pt}{6pt}\selectfont\CircleSolid}}
-\newcommand{\Hand}{{\fontsize{8pt}{6pt}\selectfont\HandRight}}
-\newcommand{\zhu}{{\color{blue!40}\Bullet}}
-\newcommand{\zhuu}{{\color{red!80}\Hand}}
-\newcommand{\labeli}{\zhu}
-\newenvironment{blist}%
-    {\begin{list}{{\hfill\raisebox{1.12pt}{\color{blue!60}\zhu}}}{%
-     \leftmargin2em\labelwidth1.5em\labelsep0.5em
-     \itemsep1ex\itemindent0pt\parsep0pt\topsep0pt}}
-    {\end{list}}
-\newenvironment{myitem}
-  {\begin{list}{{\hfill\raisebox{0pt}{\labeli}}}{%
-    \setlength{\leftmargin}{1.2em}\labelwidth0.8em\labelsep.4em%
-    \itemsep1ex\parsep2pt\itemindent0pt\topsep0pt}}{\end{list}}
-\newenvironment{subitem}
-  {\begin{list}{{\hfill\raisebox{0pt}{-}}}{%
-    \setlength{\leftmargin}{1.2em}\labelwidth0.8em\labelsep.4em%
-    \itemsep0ex\parsep2pt\itemindent0pt\topsep0pt}}{\end{list}}
-\usepackage{colortbl}
-\usepackage{tikz}
-\usetikzlibrary{arrows}
-\usepackage{stmaryrd}
-\usepackage{amsfonts}
-\usepackage[ruled,linesnumbered]{algorithm2e}
-\usepackage{float} 
+\usepackage{amsmath,amssymb}
 \usepackage{booktabs}
-\usepackage[framemethod=tikz]{mdframed}
-\newmdenv[linecolor=green,middlelinewidth=1pt,%
-          roundcorner=3pt,backgroundcolor=white,%
-          innertopmargin=0.8em,innerbottommargin=0.5em,%
-          innerleftmargin=3pt,innerrightmargin=3pt,%
-          skipbelow=0.5em,skipabove=1em,%
-          splittopskip=\topskip]{Block}
-\newmdenv[linecolor=green,middlelinewidth=1pt,%
-          roundcorner=3pt,backgroundcolor=red!5!white,%
-          innertopmargin=0.5em,innerbottommargin=0.5em,%
-          innerleftmargin=3pt,innerrightmargin=3pt,%
-          skipbelow=0.5em,skipabove=1em,%
-          splittopskip=\topskip]{redbox}
-\newmdenv[linecolor=green,middlelinewidth=0.5pt,%
-          %outerlinewidth=0.5pt,skipabove=0pt,
-          roundcorner=3pt,backgroundcolor=white,%
-          innerbottommargin=3pt,innerrightmargin=5pt,%
-          innerleftmargin=5pt,leftmargin=0ex]{mathbox}
-\newmdenv[linecolor=blue!5!green,middlelinewidth=0.5pt,%
-          roundcorner=3pt,backgroundcolor=yellow!5,%
-          % frametitle={Hello},frametitlebackgroundcolor=green!50,%
-          % skipabove=2pt,skipbelow=2pt,%
-          innerleftmargin=3pt,leftmargin=0ex]{notebox}
-\newmdenv[linecolor=white,font={\scriptsize},%
-          fontcolor=blue!85,backgroundcolor=yellow!5,%
-          skipabove=1ex,skipbelow=0pt,innerbottommargin=0.5ex,%
-          innerleftmargin=3pt,leftmargin=1em]{myref}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\renewcommand{\thefootnote}{}% 不要编号
-\setbeamertemplate{footnote}{% 首行不缩进
-  \noindent\insertfootnotemark%
-  \scriptsize\color{blue!85!green!85}\insertfootnotetext\par\kern1ex}
-\renewcommand\footnoterule%    更改横线属性：长度，粗细，颜色
-  {\color{red}\kern-3pt\rule{0.4\linewidth}{0.5pt}\par\kern2.6pt}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\usepackage[many]{tcolorbox}
-\tcbset{highlight math %
-  style={enhanced, colframe=blue!40,colback=yellow!20,arc=4pt,boxrule=1pt}}
-\newtcbox{\subsubtit}[1][]{%
-  after skip=1em,boxrule=0.5pt,
-  fontupper=\color{blue}\bfseries,top=0.5ex,bottom=0.5ex,
-  left=1ex,right=1ex,
-  colframe=green,colback=red!5!white,#1}
-
-%\renewcommand{\baselinestretch}{1.1}
-\linespread{1.1}
-\setlength{\parskip}{1ex}
-
-\usepackage{listings} %插入代码
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
 \usepackage{xcolor}
-\lstset{numbers=left, %设置行号位置
-        numberstyle=\tiny, %设置行号大小
-        keywordstyle=\color{blue}, %设置关键字颜色
-        commentstyle=\color[cmyk]{1,0,1,0}, %设置注释颜色
-        frame=single, %设置边框格式
-        escapeinside=``, %逃逸字符(1左面的键)，用于显示中文
-        %breaklines, %自动折行
-        extendedchars=false, %解决代码跨页时，章节标题，页眉等汉字不显示的问题
-        xleftmargin=2em,xrightmargin=2em, aboveskip=1em, %设置边距
-        tabsize=4, %设置tab空格数
-        showspaces=false, %不显示空格
-        basicstyle=\ttfamily,
-       }
+\usepackage{etoolbox}
+
+\graphicspath{{figs/}}
+\definecolor{navy}{HTML}{193B5B}
+\definecolor{bodytext}{HTML}{24313D}
+\definecolor{muted}{HTML}{617080}
+\definecolor{rulegray}{HTML}{CBD4DD}
+\definecolor{codebg}{HTML}{F4F6F8}
+\definecolor{codeframe}{HTML}{D5DDE5}
+\definecolor{codecomment}{HTML}{4B705C}
+\definecolor{codestring}{HTML}{92533C}
+\definecolor{tablehead}{HTML}{EEF2F6}
+\hypersetup{pdfborder=0 0 0,colorlinks=true,linkcolor=navy,urlcolor=navy}
+
+\setbeamercolor{normal text}{fg=bodytext,bg=white}
+\setbeamercolor{structure}{fg=navy}
+\setbeamercolor{frametitle}{fg=navy,bg=white}
+\setbeamercolor{myfootline}{bg=white,fg=muted}
+\setbeamercolor{block title}{fg=navy,bg=white}
+\setbeamercolor{block body}{fg=bodytext,bg=white}
+\setbeamercolor{alerted text}{fg=codestring}
+\setbeamerfont{frametitle}{size=\fontsize{18}{21},series=\bfseries}
+\setbeamerfont{block title}{size=\normalsize,series=\bfseries}
+\setbeamertemplate{blocks}[default]
+\setbeamertemplate{itemize item}{\raisebox{0.15ex}{\scriptsize\textbullet}}
+\setbeamertemplate{enumerate item}{\insertenumlabel.}
+\AtBeginEnvironment{itemize}{\setlength{\itemsep}{0.24em}}
+\AtBeginEnvironment{enumerate}{\setlength{\itemsep}{0.24em}}
+\arrayrulecolor{rulegray}
+\setlength{\heavyrulewidth}{0.6pt}
+\setlength{\lightrulewidth}{0.35pt}
+
+\setbeamertemplate{headline}{}
+\setbeamertemplate{footline}{%
+  \leavevmode\mbox{%
+    \begin{beamercolorbox}[wd=.75\paperwidth,ht=3mm,dp=2mm,left]{myfootline}%
+      \hspace*{0.8cm}{\fontsize{7.5}{9}\selectfont 统计学导论上机课}
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.25\paperwidth,ht=3mm,dp=2mm,right]{myfootline}%
+      {\fontsize{7.5}{9}\selectfont\insertframenumber\,/\,\inserttotalframenumber\hspace*{0.8cm}}
+    \end{beamercolorbox}}
+  \vskip0pt}
+\setbeamertemplate{frametitle}{%
+  \vspace{0.28cm}%
+  {\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle\par}%
+  \vspace{0.12cm}%
+  {\color{rulegray}\hrule height 0.45pt}%
+  \vspace{-0.2cm}}
+\setbeamersize{text margin left=0.8cm,text margin right=0.8cm}
+
+\setbeamertemplate{title page}{%
+  \vspace*{0.95cm}%
+  {\fontsize{25}{31}\selectfont\bfseries\color{navy}\inserttitle\par}%
+  \vspace{0.35cm}%
+  {\fontsize{14}{19}\selectfont\color{bodytext}\insertsubtitle\par}%
+  \vspace{0.65cm}%
+  {\color{rulegray}\hrule height 0.45pt}%
+  \vspace{0.6cm}%
+  {\fontsize{13}{18}\selectfont\insertauthor\par}%
+  \vspace{0.12cm}%
+  {\fontsize{10}{15}\selectfont\color{muted}\insertinstitute\par}%
+  \vfill
+  {\fontsize{10}{14}\selectfont\color{muted}\insertdate\par}%
+  \vspace*{0.6cm}}
+
+\lstset{
+  language=R,
+  basicstyle=\ttfamily\fontsize{12.5}{14.5}\selectfont\color{bodytext},
+  keywordstyle=\color{navy},
+  commentstyle=\color{codecomment},
+  stringstyle=\color{codestring},
+  backgroundcolor=\color{codebg},
+  frame=single,
+  rulecolor=\color{codeframe},
+  framerule=0.35pt,
+  framesep=5pt,
+  showstringspaces=false,
+  keepspaces=true,
+  breaklines=true,
+  columns=fullflexible,
+  xleftmargin=5pt,
+  xrightmargin=5pt,
+  aboveskip=0.35em,
+  belowskip=0.35em
+}
+
+\lstdefinestyle{output}{
+  language={},
+  keywordstyle=\color{bodytext},
+  commentstyle=\color{bodytext},
+  stringstyle=\color{bodytext},
+  backgroundcolor=\color{white},
+  frame=none,
+  aboveskip=0.12em,
+  belowskip=0.25em
+}
+
+\newcommand{\code}[1]{\textcolor{navy}{\texttt{#1}}}
+\newcommand{\inputlabel}{\par\smallskip{\fontsize{10.5}{13}\selectfont\bfseries\color{muted}输入代码\par}}
+\newcommand{\outputlabel}{\par\smallskip{\fontsize{10.5}{13}\selectfont\bfseries\color{muted}Console 输出\par}}
+\newcommand{\thead}[1]{\textcolor{navy}{\textbf{#1}}}
+
+\title{R语言基础（三）}
+\subtitle{基本运算、常用函数与逻辑运算}
+\author{郑泽靖}
+\institute{北京师范大学统计学院}
+\date{2026年秋季学期}
+
 \begin{document}
 
-%%%%% =======================================================================
-\title{R语言-3}
-\author{郑泽靖 \and zzjstat2023@163.com }
-\institute{\normalsize 北京师范大学统计学院}
-\date{\today}
-
-% ===== title page =====
 \begin{frame}[plain]
   \titlepage
+  \note{教材第28--31、94--98页。本讲两节，每节45分钟。第一节讲运算与函数，第二节讲关系运算、逻辑运算与抽样。}
 \end{frame}
 
-% ===== contents =====
-% \begin{frame}
-%  \frametitle{Outline}
-%  \tableofcontents[hideallsubsections] %[pausesections]
-% \end{frame}
-\begin{frame}{数据结构}
-    \begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.8\linewidth]{figs/sjjg.PNG}
-    \end{figure} 
-\end{frame}
-\section{列表(list)}
-\begin{frame}[fragile]{列表的定义}
-    列表可以看成向量结构的另一种推广。它允许其各个分量是任意的R语言结构，例如：
-    \begin{itemize}
-        \item 向量
-        \item 矩阵
-        \item 数据框
-        \item 其他列表
-    \end{itemize}
-
-    列表结构能够将不同的对象以简单的形式组合在一起，方便编程者调用。
-\end{frame}
-\begin{frame}[fragile]{列表的特点}
-    \begin{itemize}
-        \item 列表中的每个元素可以是不同类型的R对象，具有更大的灵活性。
-        \item 列表元素可以通过索引或名称进行访问。
-        \item 许多R语言函数的计算结果都是以列表的方式表达的。
-    \end{itemize}
-
-\end{frame}
-\begin{frame}[fragile]{生成列表}
-    在R语言中，可以通过函数 \texttt{list()} 来生成列表数据。以下是示例代码：
-
-    \begin{lstlisting}[language=R]
-# 生成一个列表
-x <- list(u = 2, v = "abcd")  # 列表有两个分量，分别为u和v
-x # 显示列表x的内容
-$u
-[1] 2
-$v
-[1] "abcd"   
+\begin{frame}[fragile]{上讲回顾：数据结构与列表}
+  \small
+  \renewcommand{\arraystretch}{1.15}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}ll@{}}
+    \toprule
+    \thead{数据结构} & \thead{基本用途} \\
+    \midrule
+    向量 & 保存一组同类型的值 \\
+    矩阵 & 按行和列组织同类型的值 \\
+    数据框 & 按列保存一张数据表 \\
+    列表 & 组合不同的 R 对象 \\
+    \bottomrule
+  \end{tabular*}
+  \inputlabel
+\begin{lstlisting}
+lst <- list(u = 2, v = "abcd")
+lst[[1]]
+names(lst) <- c("num", "string")
 \end{lstlisting}
+  \code{lst[[1]]} 得到 2；更名后用 \code{lst\$num} 提取该分量。
+  \note{教材第19--27页。第一节第0--3分钟，复习3分钟。创建、提取和更名仅作回顾，不重新展开列表。}
 \end{frame}
 
-\begin{frame}[fragile]{索引列表分量}    
-    在R语言中，可以通过 \texttt{[[i]]} 或 \texttt{\$} 来索引和修改列表的分量。
-    \begin{lstlisting}[language=R]
-# 列表有两个分量：u 和 v
-x <- list(u = 2, v = "abcd")  
-# 索引x的第一分量
-x$u    # 或者使用 x[[1]]
-[1] 2
-# 索引x的第二分量
-x[[2]]
-[1] "abcd"
+\begin{frame}[fragile]{矩阵运算：准备数据}
+  后面几页使用同一组矩阵 \code{A} 和 \code{B}。
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \inputlabel
+\begin{lstlisting}
+A <- matrix(1:4, 2, 2,
+  byrow = TRUE)
+A
 \end{lstlisting}
+      \outputlabel
+\begin{lstlisting}[style=output]
+     [,1] [,2]
+[1,]    1    2
+[2,]    3    4
+\end{lstlisting}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \inputlabel
+\begin{lstlisting}
+B <- matrix(
+  c(2, 5, 3, 6), 2, 2)
+B
+\end{lstlisting}
+      \outputlabel
+\begin{lstlisting}[style=output]
+     [,1] [,2]
+[1,]    2    3
+[2,]    5    6
+\end{lstlisting}
+    \end{column}
+  \end{columns}
+  \note{教材第28页。运算与求和共17分钟，第一节第3--20分钟。先检查矩阵A按行、B按列填入，后面沿用这两个对象。}
 \end{frame}
 
-\begin{frame}[fragile]{修改列表分量}    
-    \begin{lstlisting}[language=R]
-# 将x的第一分量修改为1:3
-x$u <- 1:3  # 修改为向量
-# 显示x的第一分量的内容
-x[[1]]
-[1] 1 2 3
-    \end{lstlisting}
+\begin{frame}[fragile]{同型矩阵的加减}
+  行数和列数相同的矩阵，按对应位置进行加减。
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \inputlabel
+\begin{lstlisting}
+A + B
+\end{lstlisting}
+      \outputlabel
+\begin{lstlisting}[style=output]
+     [,1] [,2]
+[1,]    3    5
+[2,]    8   10
+\end{lstlisting}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \inputlabel
+\begin{lstlisting}
+A - B
+\end{lstlisting}
+      \outputlabel
+\begin{lstlisting}[style=output]
+     [,1] [,2]
+[1,]   -1   -1
+[2,]   -2   -2
+\end{lstlisting}
+    \end{column}
+  \end{columns}
+  \par\vspace{0.4em}
+  例如，\code{A + B} 左上角的结果为 $1+2=3$。
+  \note{教材第28--29页。对应表1-3的加减运算。只手算左上角，其他位置用相同规则核对。}
 \end{frame}
 
-\begin{frame}[fragile]{names函数}
-    在R语言中，函数 \texttt{names} 不仅能用于数据框，也能用于列表，查阅或修改各个分量的名称。
-        \begin{lstlisting}[language=R]
-# 创建列表
-x <- list(u = 2, v = "abcd") 
-names(x)
-[1] "u"    "v"
-names(x) <- c("num", "string") 
-names(x) 
-[1] "num"    "string"
-    \end{lstlisting}
+\begin{frame}[fragile]{矩阵与一个数的加减}
+  一个数与矩阵运算时，\par
+  分别作用于矩阵中的每个元素。
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \inputlabel
+\begin{lstlisting}
+A + 2
+\end{lstlisting}
+      \outputlabel
+\begin{lstlisting}[style=output]
+     [,1] [,2]
+[1,]    3    4
+[2,]    5    6
+\end{lstlisting}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \inputlabel
+\begin{lstlisting}
+2 - A
+\end{lstlisting}
+      \outputlabel
+\begin{lstlisting}[style=output]
+     [,1] [,2]
+[1,]    1    0
+[2,]   -1   -2
+\end{lstlisting}
+    \end{column}
+  \end{columns}
+  \par\vspace{0.4em}
+  \code{2 - A} 在每个位置都用 2 减去原来的元素。
+  \note{教材第28页表1-3、第29页A+2。2-A是表中数减矩阵规则的直接应用，提醒减法的先后顺序。}
 \end{frame}
 
-\section{函数}
-\begin{frame}[fragile]{函数}
-    为了方便使用者，R语言将具有特定功能的程序代码封装在函数中。下面简单介绍一些常用函数的功能和使用方法。
+\begin{frame}[fragile]{按元素相乘与相除}
+  \code{*} 和 \code{/} 对矩阵中相同位置的元素进行运算。
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.43\textwidth}
+      \inputlabel
+\begin{lstlisting}
+A * B
+\end{lstlisting}
+      \outputlabel
+\begin{lstlisting}[style=output]
+     [,1] [,2]
+[1,]    2    6
+[2,]   15   24
+\end{lstlisting}
+    \end{column}
+    \begin{column}{0.53\textwidth}
+      \inputlabel
+\begin{lstlisting}
+A / B
+\end{lstlisting}
+      \outputlabel
+\begin{lstlisting}[style=output]
+     [,1]      [,2]
+[1,]  0.5 0.6666667
+[2,]  0.6 0.6666667
+\end{lstlisting}
+    \end{column}
+  \end{columns}
+  \par\vspace{0.4em}
+  本例两矩阵的行数、列数分别相同。
+  \note{教材第28--29页。A*B为对应位置相乘；A/B为对应位置相除。提前说明矩阵乘法使用后面的另一个符号。}
 \end{frame}
 
-\begin{frame}[fragile]{1.求和函数}
-函数 \texttt{sum} 计算向量的各个分量之和，矩阵的各行（列）元素之和使用函数 \texttt{rowSums} 和 \texttt{colSums}。
-    \begin{lstlisting}[language=R]
-# 计算向量c(1, 2, 3)的各分量之和
-sum(c(1, 2, 3))  # 结果为 6
+\begin{frame}[fragile]{按元素进行幂运算}
+  \code{A\textasciicircum 2} 计算每个元素的平方。\par
+  \code{A\textasciicircum B} 用 \code{B} 中对应元素作为指数。
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \inputlabel
+\begin{lstlisting}
+A ^ 2
+\end{lstlisting}
+      \outputlabel
+\begin{lstlisting}[style=output]
+     [,1] [,2]
+[1,]    1    4
+[2,]    9   16
+\end{lstlisting}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \inputlabel
+\begin{lstlisting}
+A ^ B
+\end{lstlisting}
+      \outputlabel
+\begin{lstlisting}[style=output]
+     [,1] [,2]
+[1,]    1    8
+[2,]  243 4096
+\end{lstlisting}
+    \end{column}
+  \end{columns}
+  \note{教材第28--29页。以右下角4的6次幂等于4096说明矩阵指数也是按元素计算。不引入矩阵幂的推导。}
+\end{frame}
+
+\begin{frame}[fragile]{矩阵与一个数的除法}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \inputlabel
+\begin{lstlisting}
+C <- matrix(1:6, 2, 3,
+  byrow = TRUE)
+C
+\end{lstlisting}
+      \outputlabel
+\begin{lstlisting}[style=output]
+     [,1] [,2] [,3]
+[1,]    1    2    3
+[2,]    4    5    6
+\end{lstlisting}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \inputlabel
+\begin{lstlisting}
+C / 2
+\end{lstlisting}
+      \outputlabel
+\begin{lstlisting}[style=output]
+     [,1] [,2] [,3]
+[1,]  0.5  1.0  1.5
+[2,]  2.0  2.5  3.0
+\end{lstlisting}
+    \end{column}
+  \end{columns}
+  \par\vspace{0.3em}
+  \code{C / 2} 将每个元素除以 2。\par
+  \code{A} 是 $2\times2$，\code{C} 是 $2\times3$，不能直接相加。
+  \note{教材第29页。C为教材例子。A+C、A*C、C/A均因维数不相容而报错，作为口头检查，不要求学生专门输入错误代码。}
+\end{frame}
+
+\begin{frame}[fragile]{矩阵乘法}
+  \code{\%*\%} 表示矩阵乘法。\par
+  左边矩阵的列数须等于右边矩阵的行数。
+  \inputlabel
+\begin{lstlisting}
+A %*% C
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+     [,1] [,2] [,3]
+[1,]    9   12   15
+[2,]   19   26   33
+\end{lstlisting}
+  本例：$2\times2$ 的矩阵乘 $2\times3$ 的矩阵，\par
+  得到 $2\times3$ 的矩阵。矩阵与一个数相乘使用 \code{*}。
+  \note{教材第28--29页。教师演示约2分钟，说明符号和维数即可，不展开线性代数推导。矩阵与单个数相乘用普通乘号。}
+\end{frame}
+
+\begin{frame}[fragile]{矩阵求逆}
+  \code{solve(A)} 计算矩阵 \code{A} 的逆矩阵。
+  \inputlabel
+\begin{lstlisting}
+solve(A)
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+     [,1] [,2]
+[1,] -2.0  1.0
+[2,]  1.5 -0.5
+\end{lstlisting}
+  \begin{itemize}
+    \item 求逆的对象须为可逆的方阵。
+    \item 本例 \code{A} 可以求逆。\code{C} 不是方阵，不能这样求逆。
+  \end{itemize}
+  \note{教材第28--29页。教师演示约1分钟，只介绍solve(A)的用途与本例结果，不推导逆矩阵，也不增加方程求解用法。}
+\end{frame}
+
+\begin{frame}[fragile]{求和函数}
+  \code{sum()} 计算所有元素之和。
+  \inputlabel
+\begin{lstlisting}
+sum(c(1, 2, 3))
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] 6
+\end{lstlisting}
+  接下来使用矩阵 \code{a}：
+  \inputlabel
+\begin{lstlisting}
 a <- matrix(1:6, 2, 3, byrow = TRUE)
-# 计算 a 的各列之和，结果为3维行向量
-b <- colSums(a)
-# 计算 a 的各行之和，结果为2维行向量
-c <- rowSums(a)
-    \end{lstlisting}
+\end{lstlisting}
+  \[
+    a=\begin{pmatrix}1&2&3\\4&5&6\end{pmatrix}.
+  \]
+  \note{教材第29--30页。sum为基础复习。a与前页C数值相同，改用教材求和段落中的名称。用小写a，提醒大小写有区别。}
 \end{frame}
 
+\begin{frame}[fragile]{按行与按列求和}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \code{rowSums()}：各行之和。
+      \inputlabel
+\begin{lstlisting}
+rowSums(a)
+\end{lstlisting}
+      \outputlabel
+\begin{lstlisting}[style=output]
+[1]  6 15
+\end{lstlisting}
+      第一行：$1+2+3=6$。\par
+      第二行：$4+5+6=15$。
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \code{colSums()}：各列之和。
+      \inputlabel
+\begin{lstlisting}
+colSums(a)
+\end{lstlisting}
+      \outputlabel
+\begin{lstlisting}[style=output]
+[1] 5 7 9
+\end{lstlisting}
+      三列分别得到 5、7、9。
+    \end{column}
+  \end{columns}
+  \par\vspace{0.4em}
+  两个函数都返回向量。
+  \note{教材第29--30页。至此完成第一节第3--20分钟的运算与求和17分钟。用输出元素个数检查行和与列和是否混淆。}
+\end{frame}
 
-\begin{frame}[fragile]{2.函数的输入变量}
-    通常，$R$ 语言的数学计算函数支持数据形式的输人变量（自变量），也支持向量形式的输入变量，还支持矩阵形式的输入变量．例如，运行程序代码
-   \begin{lstlisting}[language=R]
+\begin{frame}[fragile]{数学函数作用于向量}
+  数学函数可以逐个计算向量中的元素。\par
+  \code{sin()} 计算正弦值，输入角度以弧度为单位。
+  \inputlabel
+\begin{lstlisting}
 x <- seq(1, 11, 2)
 sin(x)
-[1]  0.8414710  0.1411200 -0.9589243
-[4]  0.65698660 0.4121185 -0.9999902
- \end{lstlisting}
-\end{frame}
-\begin{frame}[fragile]{3.绘图功能}
-    R语言提供了方便的制图功能，可以绘制任何函数的图像。函数 \texttt{plot} 提供了一种绘制平面图形的功能，可以通过问号 \texttt{?} 来获取该函数的在线帮助。
-    \begin{lstlisting}[language=R]
-# 创建从0到10的数值序列，步长为0.1
-x <- seq(0, 10, 0.1)
-# 计算x的正弦值
-y <- sin(x)
-# 绘制函数曲线
-plot(x,y,type="l",main="y=sin(x)",
-xlab = "x", ylab = "y")
-    \end{lstlisting}
-\end{frame}
-\begin{frame}[fragile]{关系运算符}
-    在R语言中，关系运算符的计算结果是逻辑数据，表明参与运算的两个变量是否满足特定的关系。
-    不仅两个数之间可以进行关系运算，向量和数之间、矩阵和数之间也可以进行关系运算。
-    \begin{lstlisting}[language=R]
-# 将向量 1:5 赋值给 X
-X <- 1:5 
-# 判断 X 的各个分量是否小于或等于 4
-X <= 4  
-[1] TRUE TRUE TRUE TRUE FALSE
-    \end{lstlisting}
-\end{frame}
-\begin{frame}[fragile]{关系运算符的应用}
-    可以利用关系运算符显示向量中满足特定条件的分量，或将这些分量统一改为特定的值。
-    \begin{lstlisting}[language=R]
-X <- 1:5 
-# 显示 X 中小于 3 的分量构成的子向量
-X[X < 3]  
-[1] 1 2
-# 将 X 中小于 3 的分量都改为 8
-X[X < 3] <- 8 
-X   # 再次显示 X 的结果
-[1] 8 8 3 4 5
-    \end{lstlisting}
-\end{frame}
-\begin{frame}[fragile]{其他关系运算示例}
-    \begin{lstlisting}[language=R]
-# 将字符 "abc" 赋值给 b
-b <- "abc"
-# 将 b 赋值给 c
-c <- b 
-# 判断b中的内容是否和字符"abc"相等
-b == "abc"  
-[1] TRUE
-# 判断b存储的内容是否和c的相等
-b == c  
-[1] TRUE
-    \end{lstlisting}
-\end{frame}
-
-\begin{frame}{离散均匀分布}
-    若随机变量 \(X\) 满足：
-    \[
-    \mathrm{P}(X=k) = \frac{1}{n}, \quad k=1,2,\ldots,n
-    \]
-    则称 \(X\) 服从以 \(n\) 为参数的离散均匀分布。
-
-    以 \(n\) 为参数的离散均匀分布随机变量的观测值称为以 \(n\) 为参数的离散均匀分布随机数。
-\end{frame}
-
-\begin{frame}[fragile]{离散均匀分布在R语言中的模拟}
-    可以使用函数 \texttt{sample} 来模拟离散均匀分布随机数。其简单调用方式为：
-    \begin{lstlisting}[language=R]
-sample(x, # 等可能地选择 x 的分量
-size,  # size为要选取的变量的个数
-replace = FALSE)  
-# replace为真，有放回抽样；
-#否则，无放回抽样
-    \end{lstlisting}
-    \end{frame}
-
-
-
-
-    \begin{frame}[fragile]{逻辑运算符}
-逻辑运算符用于逻辑变量的运算。常用的逻辑运算符及其含义如下：
-\begin{itemize}
-    \item \texttt{!}：非运算
-    \item \texttt{\&}：与运算
-    \item \texttt{|}：或运算
-\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]{逻辑运算符示例}
-\begin{lstlisting}[language=R]
-!TRUE    # 非运算结果为 FALSE
-!FALSE   # 非运算结果为 TRUE
-TRUE & TRUE   # 与运算结果为 TRUE
-TRUE & FALSE  # 与运算结果为 FALSE
-FALSE & FALSE # 与运算结果为 FALSE
-TRUE | TRUE   # 或运算结果为 TRUE
-TRUE | FALSE  # 或运算结果为 TRUE
-FALSE | FALSE # 或运算结果为 FALSE
 \end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1]  0.8414710  0.1411200 -0.9589243
+[4]  0.6569866  0.4121185 -0.9999902
+\end{lstlisting}
+  结果与 \code{x} 一一对应，仍是一个向量。\par
+  输出中的 \code{[4]} 表示该行从第 4 个元素开始。
+  \note{教材第30页。数学函数与绘图共12分钟，第一节第20--32分钟。沿教材正弦例说明向量化计算，不另列函数清单。}
 \end{frame}
 
-\begin{frame}[fragile]{逻辑矩阵的示例}
-\begin{lstlisting}[language=R]
-> x
+\begin{frame}[fragile]{数学函数作用于矩阵}
+  当输入为矩阵时，\code{sin()} 对各位置分别计算，\par
+  并保留原来的行数和列数。
+  \inputlabel
+\begin{lstlisting}
+x <- seq(1, 11, 2)
+x <- matrix(x, 2, 3)
+sin(x)
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+         [,1]       [,2]       [,3]
+[1,] 0.841471 -0.9589243  0.4121185
+[2,] 0.141120  0.6569866 -0.9999902
+\end{lstlisting}
+  \note{教材第30页。提醒matrix默认按列填入，因此矩阵输出顺序与前页向量显示顺序不同。没有引入新的数学函数。}
+\end{frame}
+
+\begin{frame}[fragile]{绘制函数曲线}
+  在平面上绘图，先准备每个点的横坐标与纵坐标。
+  \inputlabel
+\begin{lstlisting}
+x <- seq(0, 10, 0.1)
+y <- sin(x)
+plot(x, y, type = "l")
+\end{lstlisting}
+  \begin{itemize}
+    \item \code{x}：从 0 到 10，步长为 0.1。
+    \item \code{y}：各个横坐标对应的正弦值。
+    \item \code{type = "l"}：用线连接这些点，字母为小写 L。
+  \end{itemize}
+  图形显示在 RStudio 的 Plots 窗格中。
+  \note{教材第31页。只讲教材中的x、y、type三个参数。先逐行运行，再切到Plots观察。需要时用?plot查看帮助，不增加图形参数。}
+\end{frame}
+
+\begin{frame}{正弦曲线的运行结果}
+  \centering
+  \includegraphics[width=0.94\linewidth,height=0.65\textheight,keepaspectratio]{sin-curve.pdf}
+  \par\vspace{0.2em}
+  \raggedright
+  曲线对应上一页的 \code{plot(x, y, type = "l")}。\par
+  Plots 窗格的 Export 可保存或复制图形。
+  \note{教材第31页。图由上一页同一组x、y数据实际生成。至此完成第一节第20--32分钟的数学函数与绘图12分钟。Export沿教材说明，仅指认按钮，不扩展导出参数。}
+\end{frame}
+
+\begin{frame}{课堂练习一}
+  练习时间：9 分钟。新建脚本 \code{R3-practice.R}。
+  \begin{enumerate}
+    \item 按行创建 $2\times3$ 矩阵 \code{M}，填入 1 到 6。\par
+      计算 \mbox{\code{M + 2}}。
+    \item 分别计算 \code{M} 的各行之和、各列之和。
+    \item 创建从 0 到 10、步长为 0.1 的向量 \code{x}。\par
+      计算 \mbox{\code{y = sin(x)}}，绘制折线图。
+  \end{enumerate}
+  \par\vspace{0.4em}
+  在脚本中分段保存代码，运行后核对数值与图形。
+  \note{教材第29--31页的课堂变式。第一节第32--41分钟，独立练习9分钟。仅使用已讲过的创建、加法、求和与绘图。无需提交。}
+\end{frame}
+
+\begin{frame}[fragile]{练习一参考：矩阵运算与求和}
+  \inputlabel
+\begin{lstlisting}
+M <- matrix(1:6, 2, 3, byrow = TRUE)
+M + 2
+rowSums(M)
+colSums(M)
+\end{lstlisting}
+  \small
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}ll@{}}
+    \toprule
+    \thead{计算} & \thead{结果} \\
+    \midrule
+    \code{M + 2} & 两行分别为 3、4、5 和 6、7、8 \\
+    \code{rowSums(M)} & 6、15 \\
+    \code{colSums(M)} & 5、7、9 \\
+    \bottomrule
+  \end{tabular*}
+  \note{教材第29--30页。与后两页合计第一节第41--45分钟讲评4分钟。主要检查byrow和两个求和函数，参考代码可独立运行。}
+\end{frame}
+
+\begin{frame}[fragile]{练习一参考：函数与绘图}
+  \inputlabel
+\begin{lstlisting}
+x <- seq(0, 10, 0.1)
+y <- sin(x)
+plot(x, y, type = "l")
+\end{lstlisting}
+  \begin{itemize}
+    \item 横坐标范围应为 0 到 10。
+    \item 曲线应与前面的正弦曲线一致。
+    \item \code{x} 与 \code{y} 的元素个数应相同。
+  \end{itemize}
+  \note{教材第30--31页。仍属第一节讲评4分钟，不再组织第二轮练习。检查type中的字母l和引号。}
+\end{frame}
+
+\begin{frame}{第一节操作核对}
+  \small
+  \renewcommand{\arraystretch}{1.25}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}ll@{}}
+    \toprule
+    \thead{操作} & \thead{核对要点} \\
+    \midrule
+    \code{A * B} & 对应位置的元素相乘 \\
+    \code{A \%*\% C} & 左边列数等于右边行数 \\
+    \code{rowSums(a)} & 每行得到一个和 \\
+    \code{colSums(a)} & 每列得到一个和 \\
+    \code{sin(x)} & 对各个元素计算正弦值 \\
+    \code{plot(x, y, type = "l")} & 在 Plots 窗格显示曲线 \\
+    \bottomrule
+  \end{tabular*}
+  \par\vspace{0.5em}
+  保存脚本 \code{R3-practice.R}。
+  \note{教材第28--31页。第一节第45分钟结束。仅用表格核对典型错误，不逐页重讲。}
+\end{frame}
+
+\begin{frame}{关系运算符}
+  关系运算判断两个值之间的关系，结果为\par
+  \code{TRUE} 或 \code{FALSE}。
+  \par\vspace{0.4em}
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}ll@{}}
+    \toprule
+    \thead{运算符} & \thead{含义} \\
+    \midrule
+    \code{<} & 小于 \\
+    \code{<=} & 小于或等于 \\
+    \code{>} & 大于 \\
+    \code{>=} & 大于或等于 \\
+    \code{==} & 等于 \\
+    \code{!=} & 不等于 \\
+    \bottomrule
+  \end{tabular*}
+  \note{教材第94页表2-2。第二节第0--8分钟，关系运算8分钟，包含本页及后两页。提醒==用于比较，与<-赋值区分。}
+\end{frame}
+
+\begin{frame}[fragile]{向量的关系运算}
+  向量与一个数比较时，对各个元素分别判断。
+  \inputlabel
+\begin{lstlisting}
+X <- 1:5
+X <= 4
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1]  TRUE  TRUE  TRUE  TRUE FALSE
+\end{lstlisting}
+  \par\vspace{0.3em}
+  原向量 \code{X} 仍是 1、2、3、4、5。\par
+  比较结果是与 \code{X} 等长的逻辑向量。
+  \note{教材第94页。让学生把每一个TRUE/FALSE对应回原来的元素。关系运算也可用于矩阵，稍后逻辑矩阵中演示。}
+\end{frame}
+
+\begin{frame}[fragile]{字符的相等判断}
+  \inputlabel
+\begin{lstlisting}
+b <- "abc"
+other <- b
+b == "abc"
+b == "ab"
+b == other
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] TRUE
+[1] FALSE
+[1] TRUE
+\end{lstlisting}
+  字符值需要放在引号中。
+  \note{教材第94页。other替代书中变量c，避免覆盖常用函数名。到此完成第二节第0--8分钟的关系运算。}
+\end{frame}
+
+\begin{frame}{逻辑运算符}
+  \small
+  \renewcommand{\arraystretch}{1.3}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lll@{}}
+    \toprule
+    \thead{运算符} & \thead{含义} & \thead{示例及结果} \\
+    \midrule
+    \code{!} & 非 & \code{!TRUE} 为 \code{FALSE} \\
+             &    & \code{!FALSE} 为 \code{TRUE} \\
+    \code{\&} & 与 & 两个条件都为真，结果才为真 \\
+    \code{|} & 或 & 至少一个条件为真，结果为真 \\
+    \bottomrule
+  \end{tabular*}
+  \par\vspace{0.6em}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}llll@{}}
+    \toprule
+    & \code{TRUE, TRUE} & \code{TRUE, FALSE} & \code{FALSE, FALSE} \\
+    \midrule
+    \code{\&} & \code{TRUE} & \code{FALSE} & \code{FALSE} \\
+    \code{|} & \code{TRUE} & \code{TRUE} & \code{FALSE} \\
+    \bottomrule
+  \end{tabular*}
+  \note{教材第97--98页。第二节第8--16分钟，逻辑运算8分钟。矩阵例子由教师演示，各页沿用同一组x、a、b，不要求每页全班同步输入。}
+\end{frame}
+
+\begin{frame}[fragile]{关系运算生成逻辑矩阵}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \inputlabel
+\begin{lstlisting}
+x <- matrix(1:6, 2, 3)
+x
+\end{lstlisting}
+      \outputlabel
+\begin{lstlisting}[style=output]
      [,1] [,2] [,3]
 [1,]    1    3    5
 [2,]    2    4    6
-
-> a <- x <= 3 
-> a
-       [,1]  [,2]  [,3]
+\end{lstlisting}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \inputlabel
+\begin{lstlisting}
+a <- x <= 3
+a
+\end{lstlisting}
+      \outputlabel
+\begin{lstlisting}[style=output]
+      [,1]  [,2]  [,3]
 [1,]  TRUE  TRUE FALSE
 [2,]  TRUE FALSE FALSE
 \end{lstlisting}
+    \end{column}
+  \end{columns}
+  \par\vspace{0.4em}
+  逻辑矩阵保留原矩阵的行数、列数\par
+  和位置对应关系。
+  \note{教材第98页。先创建x，再将每个位置是否不大于3的判断保存为逻辑矩阵a。}
 \end{frame}
 
-\begin{frame}[fragile]{逻辑矩阵的示例}
-\begin{lstlisting}[language=R]
-> b <- x > 2  
-> b
-       [,1]  [,2]  [,3]
-[1,] FALSE FALSE  TRUE
-[2,]  TRUE  TRUE  TRUE
-
-> !a
-       [,1]  [,2]  [,3]
-[1,] FALSE FALSE  TRUE
-[2,] FALSE  TRUE  TRUE
+\begin{frame}[fragile]{逻辑矩阵：条件与取反}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \inputlabel
+\begin{lstlisting}
+b <- x > 2
+b
 \end{lstlisting}
+      \outputlabel
+\begin{lstlisting}[style=output]
+      [,1]  [,2] [,3]
+[1,] FALSE  TRUE TRUE
+[2,] FALSE  TRUE TRUE
+\end{lstlisting}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \inputlabel
+\begin{lstlisting}
+!a
+\end{lstlisting}
+      \outputlabel
+\begin{lstlisting}[style=output]
+      [,1]  [,2] [,3]
+[1,] FALSE FALSE TRUE
+[2,] FALSE  TRUE TRUE
+\end{lstlisting}
+    \end{column}
+  \end{columns}
+  \par\vspace{0.4em}
+  \code{!a} 将 \code{a} 中的真、假逐个取反。
+  \note{教材第98页。b是x>2，与a是不同条件。右列只改变逻辑值，不修改a本身。}
 \end{frame}
 
-\begin{frame}[fragile]{逻辑矩阵的示例}
-\begin{lstlisting}[language=R]
-> a & b
-       [,1]  [,2]  [,3]
+\begin{frame}[fragile]{逻辑矩阵：与、或}
+  \code{a} 表示 \code{x <= 3}，\code{b} 表示 \code{x > 2}。
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \inputlabel
+\begin{lstlisting}
+a & b
+\end{lstlisting}
+      \outputlabel
+\begin{lstlisting}[style=output]
+      [,1]  [,2]  [,3]
+[1,] FALSE  TRUE FALSE
+[2,] FALSE FALSE FALSE
+\end{lstlisting}
+      只有数值 3 同时满足。
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \inputlabel
+\begin{lstlisting}
+a | b
+\end{lstlisting}
+      \outputlabel
+\begin{lstlisting}[style=output]
+     [,1] [,2] [,3]
+[1,] TRUE TRUE TRUE
+[2,] TRUE TRUE TRUE
+\end{lstlisting}
+      所有位置至少满足一个。
+    \end{column}
+  \end{columns}
+  \note{教材第98页。逐位置组合逻辑值。教材矩阵由1:6按列创建，两个条件同时为真只有第一行第二列，即数值3所在位置。}
+\end{frame}
+
+\begin{frame}[fragile]{矩阵与一个逻辑值}
+  单个逻辑值也可以与逻辑矩阵中的各个元素运算。
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \inputlabel
+\begin{lstlisting}
+a & FALSE
+\end{lstlisting}
+      \outputlabel
+\begin{lstlisting}[style=output]
+      [,1]  [,2]  [,3]
 [1,] FALSE FALSE FALSE
-[2,]  TRUE FALSE FALSE
-
-> a | b
-       [,1]  [,2]  [,3]
-[1,]  TRUE  TRUE  TRUE
-[2,]  TRUE  TRUE  TRUE
+[2,] FALSE FALSE FALSE
 \end{lstlisting}
-\end{frame}
-
-
-\begin{frame}[fragile]{短路逻辑或}
-\texttt{||} 是短路逻辑或（OR）运算符，也用于将两个逻辑表达式组合在一起。它与 \texttt{|} 的区别在于，只要第一个表达式为TRUE，就会返回TRUE，并且不会评估第二个表达式。
-\begin{lstlisting}[language=R]
-x <- 2
-a <- x <= 3                 
-b <- x > 2                 
-result <- a && b           
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \inputlabel
+\begin{lstlisting}
+a | FALSE
 \end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]{短路逻辑和}
-\texttt{\&\& }是短路逻辑与（AND）运算符，也用于将两个逻辑表达式组合在一起。它与 \texttt{\&} 的区别在于，只要第一个表达式为FALSE，就会返回FALSE，并且不会评估第二个表达式。
-\begin{lstlisting}[language=R]
-x <- 2
-a <- x <= 3                 
-b <- x > 2                  
-result <- a || b            
+      \outputlabel
+\begin{lstlisting}[style=output]
+     [,1]  [,2]  [,3]
+[1,] TRUE  TRUE FALSE
+[2,] TRUE FALSE FALSE
 \end{lstlisting}
+    \end{column}
+  \end{columns}
+  \note{教材第98页a与F的运算。与FALSE运算全部为FALSE，或FALSE保留原逻辑值。教师快速展示，联系上一页真值表。}
 \end{frame}
 
-
-    \begin{frame}[fragile]{作业}
-\begin{itemize}
-    \item[1.]使用R语言创建一个数据框，包含以下列：
-\begin{itemize}
-    \item \texttt{ID}：1到10的整数
-    \item \texttt{Name}：随机给定10个名字（如“学生1”，“学生2”）
-    \item \texttt{Score}：随机生成10个1到100之间的整数
-\end{itemize}
-    \item[2.] 计算数据框中所有学生的平均分，并输出平均分。
-    \item[3.] 从数据框中筛选出分数大于等于70的学生，并输出这些学生的信息。
-    \item[4.] 从数据框中随机抽取5个学生的\texttt{Score}，使用不放回的方式抽样，并打印结果。
-\end{itemize}
+\begin{frame}[fragile]{单个条件的短路逻辑运算}
+  \small
+  \code{\&\&} 与 \code{||} 用于组合单个逻辑判断。
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \inputlabel
+\begin{lstlisting}
+n <- 2
+(n <= 3) && (n > 2)
+\end{lstlisting}
+      \outputlabel
+\begin{lstlisting}[style=output]
+[1] FALSE
+\end{lstlisting}
+      \code{\&\&}：左侧为假时，\par
+      不再计算右侧。
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \inputlabel
+\begin{lstlisting}
+(n <= 3) || (n > 2)
+\end{lstlisting}
+      \outputlabel
+\begin{lstlisting}[style=output]
+[1] TRUE
+\end{lstlisting}
+      \code{||}：左侧为真时，\par
+      不再计算右侧。
+    \end{column}
+  \end{columns}
+  \par\vspace{0.3em}
+  前面的逻辑向量、逻辑矩阵逐元素运算使用 \code{\&}、\code{|}。
+  \note{教材第98页。短路逻辑运算两侧各为单个逻辑值。用n=2演示两个条件的与、或结果，不使用矩阵作为条件。到此第二节第16分钟。}
 \end{frame}
 
-\begin{frame}{}
-\centering \Huge
-  \emph{Thanks!}
+\begin{frame}[fragile]{按条件提取向量元素}
+  \code{X < 3} 先得到逻辑向量。\par
+  将它放入方括号，提取对应 \code{TRUE} 的位置。
+  \inputlabel
+\begin{lstlisting}
+X <- 1:5
+X[X < 3]
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] 1 2
+\end{lstlisting}
+  \par\vspace{0.3em}
+  \code{X} 中小于 3 的元素为 1 和 2。
+  \note{教材第94页。第二节第16--23分钟，条件提取与修改7分钟。前面已解释关系与逻辑运算，此处明确先判断、再提取的顺序。}
+\end{frame}
+
+\begin{frame}[fragile]{按条件修改向量元素}
+  将 \code{X} 中小于 3 的元素统一改为 8。
+  \inputlabel
+\begin{lstlisting}
+X <- 1:5
+X[X < 3] <- 8
+X
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] 8 8 3 4 5
+\end{lstlisting}
+  \inputlabel
+\begin{lstlisting}
+X == 1:5
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] FALSE FALSE  TRUE  TRUE  TRUE
+\end{lstlisting}
+  \note{教材第94页。教材X==1:5的逐位置比较用于核对修改后哪些位置仍与原值相同。赋值实际修改X，提醒后续例子按页重新创建X。}
+\end{frame}
+
+\begin{frame}[fragile]{组合两个筛选条件}
+  提取大于或等于 2，并且小于或等于 4 的元素。
+  \inputlabel
+\begin{lstlisting}
+X <- 1:5
+X[(X >= 2) & (X <= 4)]
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] 2 3 4
+\end{lstlisting}
+  \begin{itemize}
+    \item 每个括号内先得到一个逻辑向量。
+    \item \code{\&} 逐位置合并两个条件。
+  \end{itemize}
+  \note{教材第94、98页已有关系与逻辑运算的简单组合，不引入数据框筛选等新操作。到此完成第二节第16--23分钟的7分钟。}
+\end{frame}
+
+\begin{frame}[fragile]{随机抽样与 sample()}
+  \small
+  从 $1,\ldots,n$ 中等可能地取一个值，对应\par
+  离散均匀分布：
+  \[
+    \mathrm{P}(X=k)=\frac{1}{n},\qquad k=1,\ldots,n.
+  \]
+  \code{sample()} 从给定向量中随机抽取元素。
+  \inputlabel
+% QA-TEMPLATE
+\begin{lstlisting}
+sample(x, size, replace = FALSE)
+\end{lstlisting}
+  \begin{itemize}
+    \item \code{x}：供抽取的向量。
+    \item \code{size}：抽取的个数。
+    \item \code{replace}：是否有放回，默认 \code{FALSE}。
+  \end{itemize}
+  \note{教材第95页。第二节第23--32分钟，抽样与频率仍共9分钟。本页第23--25分钟，共2分钟。保留旧课件离散均匀分布定义，结合sample说明，不扩展其他概率分布。代码是调用格式，实际例子在下一页。}
+\end{frame}
+
+\begin{frame}[fragile]{有放回与不放回抽样}
+  \inputlabel
+\begin{lstlisting}
+sample(1:10, 20, replace = TRUE)
+sample(1:10, 5, replace = FALSE)
+\end{lstlisting}
+  \small
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lll@{}}
+    \toprule
+    \thead{抽样方式} & \thead{抽取个数} & \thead{本例结果的特点} \\
+    \midrule
+    有放回 & 20 & 来自 1 到 10，可重复 \\
+    不放回 & 5 & 来自 1 到 10，互不重复 \\
+    \bottomrule
+  \end{tabular*}
+  \par\vspace{0.5em}
+  每次运行得到的具体数值和顺序可能不同。\par
+  本例不放回时，最多只能抽取 10 个数。
+  \note{教材第95页。第二节第25--27分钟，共2分钟。明确有放回允许重复，不能说一定重复每一个候选值。不放回的默认值为FALSE，sample(1:10,20)会报错。随机输出不与固定答案逐项比对。}
+\end{frame}
+
+\begin{frame}[fragile]{模拟掷骰子}
+  每次掷一颗均匀骰子，对应从 1 到 6 中\par
+  有放回地抽取一个数。
+  \inputlabel
+\begin{lstlisting}
+dice <- sample(1:6, 100, replace = TRUE)
+dice
+\end{lstlisting}
+  \begin{itemize}
+    \item \code{dice} 保存 100 次模拟结果。
+    \item 每个元素为 1、2、3、4、5、6 中的一个。
+    \item 前面的结果不会使后面少一个可选点数。
+  \end{itemize}
+  运行后查看自己的结果，\par
+  无需与教材数列逐项一致。
+  \note{教材第95--96页。第二节第27--29分钟，共2分钟。与sample(1:6,100,T)含义相同，统一使用TRUE。dice替代全篇反复使用的x，便于与逻辑矩阵区分。为R-4掷骰重复实验做准备。}
+\end{frame}
+
+\begin{frame}[fragile]{出现次数与频率}
+  \code{dice == 6} 判断每次是否出现 6。\par
+  求和时，\code{TRUE} 按 1、\code{FALSE} 按 0 计算。
+  \inputlabel
+\begin{lstlisting}
+sum(dice == 6)
+sum(dice == 6) / 100
+\end{lstlisting}
+  \begin{itemize}
+    \item 第一行：100 次中出现 6 的次数。
+    \item 第二行：出现 6 的次数除以总次数，即频率。
+  \end{itemize}
+  频率随模拟结果变化，不要求恰好等于 $1/6$。
+  \note{教材第97页。第二节第29--31分钟，共2分钟。仅用教材sum(逻辑条件)/实验次数计算某一面频率，不展开六面频率循环。TRUE/FALSE数值含义第一讲已学。下一页用1分钟演示教材硬币例，抽样与频率仍在第32分钟结束。}
+\end{frame}
+
+\begin{frame}[fragile]{硬币模拟：用 \texttt{mean()} 计算频率}
+  用 1 表示正面、0 表示反面，模拟投掷一枚\par
+  质地均匀的硬币 10000 次。
+  \inputlabel
+\begin{lstlisting}
+x <- sample(c(0, 1), 10000, replace = TRUE)
+mean(x)
+\end{lstlisting}
+  \code{mean(x)} 计算 \code{x} 中数值的平均数。
+  \begin{itemize}
+    \item 对于 0、1 数据，平均数等于 1 出现的频率。
+    \item 本例结果是正面出现的频率，\par
+      每次可能不同，不要求恰好等于 0.5。
+  \end{itemize}
+  \note{教材第95页硬币模拟原例。第二节第31--32分钟，共1分钟，仅教师演示。运行这两行代码，不显示10000个模拟值；只说明mean求平均数、0/1平均数即1的频率，不扩展均值理论、参数或练习。前四页各2分钟，本页1分钟，抽样与频率合计仍为9分钟。后续练习第32--41分钟、讲评第41--45分钟均不变。}
+\end{frame}
+
+\begin{frame}{课堂练习二}
+  练习时间：9 分钟。在 \code{R3-practice.R} 中继续。
+  \begin{enumerate}
+    \item 创建 \code{X <- 1:10}，提取大于或等于 3、\par
+      且小于或等于 7 的元素。
+    \item 将 \code{X} 中小于 3 的元素改为 0，再显示 \code{X}。
+    \item 模拟掷骰子 100 次，保存为 \code{dice}。计算出现 6 的次数和频率。
+  \end{enumerate}
+  \par\vspace{0.4em}
+  前两题核对确定结果；\par
+  第三题核对计算方法与结果范围。
+  \note{教材第94--98页的课堂变式。第二节第32--41分钟，独立练习9分钟。均为已经讲过的向量操作，无数据框行筛选、循环或字符串生成。无需提交。}
+\end{frame}
+
+\begin{frame}[fragile]{练习二参考：条件提取与修改}
+  \inputlabel
+\begin{lstlisting}
+X <- 1:10
+X[(X >= 3) & (X <= 7)]
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] 3 4 5 6 7
+\end{lstlisting}
+  \inputlabel
+\begin{lstlisting}
+X[X < 3] <- 0
+X
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1]  0  0  3  4  5  6  7  8  9 10
+\end{lstlisting}
+  \note{教材第94、98页。第二节第41--45分钟，后三页讲评共4分钟。检查逐元素与单值逻辑运算是否混淆，比较用两个等号、赋值用左箭头。}
+\end{frame}
+
+\begin{frame}[fragile]{练习二参考：抽样与频率}
+  \inputlabel
+\begin{lstlisting}
+dice <- sample(1:6, 100, replace = TRUE)
+sum(dice == 6)
+sum(dice == 6) / 100
+\end{lstlisting}
+  \begin{itemize}
+    \item 出现次数应为 0 到 100 之间的整数。
+    \item 频率为出现次数除以 100，介于 0 与 1 之间。
+    \item 同学之间的结果可能不同，计算方法应一致。
+  \end{itemize}
+  \note{教材第95--97页。参考代码可独立运行。没有固定随机输出，重点核对replace=TRUE、==与总次数100。仍属于第二节讲评4分钟。}
+\end{frame}
+
+\begin{frame}{本讲操作核对}
+  \small
+  \renewcommand{\arraystretch}{1.3}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}ll@{}}
+    \toprule
+    \thead{任务} & \thead{主要写法} \\
+    \midrule
+    比较值是否满足条件 & \code{<}、\code{<=}、\code{>}、\code{>=}、\code{==}、\code{!=} \\
+    逐元素组合条件 & \code{!}、\code{\&}、\code{|} \\
+    按条件提取、修改 & \code{X[\textsf{条件}]}、\code{X[\textsf{条件}] <- \textsf{新值}} \\
+    随机抽样 & \code{sample(x, size, replace)} \\
+    计算出现频率 & \code{sum(\textsf{条件}) / \textsf{总次数}} \\
+    \bottomrule
+  \end{tabular*}
+  \par\vspace{0.5em}
+  保存本讲脚本，下讲继续使用抽样与逻辑判断。
+  \note{教材第94--98页。第二节第45分钟结束。保留课堂脚本，无提交作业要求。}
 \end{frame}
 
 \end{document}

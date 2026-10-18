@@ -1,431 +1,637 @@
-\documentclass[10pt,compress,t,noamsthm,notheorem,table,handout]{ctexbeamer}
-\usetheme{Boadilla}
-\useinnertheme{circles}
-\useoutertheme{shadow}
-\usecolortheme{seahorse}
+\documentclass[14pt,compress,t,noamsthm,notheorem,table,handout,fontset=none]{ctexbeamer}
+
+\setCJKmainfont[
+  Path=/usr/local/texlive/2024/texmf-dist/fonts/opentype/public/fandol/,
+  BoldFont=FandolSong-Bold.otf
+]{FandolSong-Regular.otf}
+\setCJKsansfont[
+  Path=/usr/local/texlive/2024/texmf-dist/fonts/opentype/public/fandol/,
+  BoldFont=FandolHei-Bold.otf
+]{FandolHei-Regular.otf}
+\setCJKmonofont[
+  Path=/usr/local/texlive/2024/texmf-dist/fonts/opentype/public/fandol/
+]{FandolFang-Regular.otf}
+\setsansfont[
+  Path=/usr/local/texlive/2024/texmf-dist/fonts/opentype/public/tex-gyre/,
+  BoldFont=texgyreheros-bold.otf,
+  ItalicFont=texgyreheros-italic.otf,
+  BoldItalicFont=texgyreheros-bolditalic.otf
+]{texgyreheros-regular.otf}
+\setmonofont[
+  Path=/usr/local/texlive/2024/texmf-dist/fonts/opentype/public/inconsolata/,
+  BoldFont=Inconsolatazi4-Bold.otf,
+  StylisticSet=3
+]{Inconsolatazi4-Regular.otf}
+\usetheme{default}
 \usefonttheme[onlymath]{serif}
 \setbeamertemplate{navigation symbols}{}
-% \setbeamercovered{transparent}
-\usepackage{natbib}
-\usepackage{amsthm}
-\usepackage{makecell}
-\usepackage{multirow}
-\renewcommand{\qedsymbol}{$\blacksquare$}
-\bibliographystyle{unsrtnat}
-\usepackage{color}
-\setbeamercolor{myfootline}{bg=white,fg=blue}
-\definecolor{myfoot}{rgb}{0.5,0.2,0.5}
-\definecolor{darkblue}{rgb}{0.1,0,0.85}
-\setbeamertemplate{headline}
-  { \leavevmode\begin{beamercolorbox}[wd=\paperwidth,ht=1.25ex,dp=1ex,left]{}
-    \end{beamercolorbox}}
-\setbeamertemplate{footline}% 自定义页脚
-  { \leavevmode\mbox{%
-    \begin{beamercolorbox}[wd=.75\paperwidth,ht=2.25ex,dp=1ex,left]{myfootline}%
-        \rule{2em}{0pt}\color{myfoot}\ttfamily\scriptsize%
-        %\insertshortauthor~(\insertshortinstitute)
-    \end{beamercolorbox}%
-    \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,right]{myfootline}%
-       {\color{myfoot}\ttfamily\scriptsize\insertframenumber{}/%
-        \inserttotalframenumber\hspace*{3ex}}
-    \end{beamercolorbox}}
-    \vskip0pt }
-
-\setbeamercolor{frametitle}{fg=blue,bg=white}
-\setbeamertemplate{frametitle}{%
-  \leavevmode\linespread{1}\large\textbf{\insertframetitle}\par
-  \color{structure.fg!30!bg}\rule[6pt]{\linewidth}{2pt}\par\vspace{-1.0em}}
-
-% \setbeamertemplate{blocks}[default] % beamer块（含定理类环境）不要阴影
-\setbeamertemplate{bibliography entry title}{}{}
-\setbeamertemplate{bibliography entry location}{}{}
-\setbeamertemplate*{bibliography entry note}{}{}
-\setbeamersize{text margin left=0.75cm, text margin right=0.75cm}
-
-\setbeamercolor{bluebox}{fg=black,bg=blue!10}
-\setbeamercolor{redbox}{fg=black,bg=red!10}
-\newenvironment{Boxblue}[1][\textwidth]
-  {\begin{beamercolorbox}[sep=0.1em,shadow=true,wd=#1,rounded=true,center]{bluebox}}
-  {\end{beamercolorbox}}
-\newenvironment{Boxred}[1][\textwidth]
-  {\begin{beamercolorbox}[sep=0.1em,shadow=true,wd=#1,rounded=true,center]{redbox}}
-  {\end{beamercolorbox}}
-\usepackage{stmaryrd}
-\usepackage{amsmath,amssymb,amsfonts,bm}
-\usepackage{graphicx,xcolor}
-\graphicspath{{figures/}}
-\usepackage{hyperref}
-\hypersetup{pdfborder=001,colorlinks=true,linkcolor=darkblue,urlcolor=blue}
-\usepackage{bbding}
-\newcommand{\Bullet}{{\fontsize{6pt}{6pt}\selectfont\CircleSolid}}
-\newcommand{\Hand}{{\fontsize{8pt}{6pt}\selectfont\HandRight}}
-\newcommand{\zhu}{{\color{blue!40}\Bullet}}
-\newcommand{\zhuu}{{\color{red!80}\Hand}}
-\newcommand{\labeli}{\zhu}
-\newenvironment{blist}%
-    {\begin{list}{{\hfill\raisebox{1.12pt}{\color{blue!60}\zhu}}}{%
-     \leftmargin2em\labelwidth1.5em\labelsep0.5em
-     \itemsep1ex\itemindent0pt\parsep0pt\topsep0pt}}
-    {\end{list}}
-\newenvironment{myitem}
-  {\begin{list}{{\hfill\raisebox{0pt}{\labeli}}}{%
-    \setlength{\leftmargin}{1.2em}\labelwidth0.8em\labelsep.4em%
-    \itemsep1ex\parsep2pt\itemindent0pt\topsep0pt}}{\end{list}}
-\newenvironment{subitem}
-  {\begin{list}{{\hfill\raisebox{0pt}{-}}}{%
-    \setlength{\leftmargin}{1.2em}\labelwidth0.8em\labelsep.4em%
-    \itemsep0ex\parsep2pt\itemindent0pt\topsep0pt}}{\end{list}}
-\usepackage{colortbl}
-\usepackage{tikz}
-\usetikzlibrary{arrows}
-\usepackage{stmaryrd}
-\usepackage{amsfonts}
-\usepackage[ruled,linesnumbered]{algorithm2e}
-\usepackage{float} 
+\usepackage{amsmath,amssymb}
 \usepackage{booktabs}
-\usepackage[framemethod=tikz]{mdframed}
-\newmdenv[linecolor=green,middlelinewidth=1pt,%
-          roundcorner=3pt,backgroundcolor=white,%
-          innertopmargin=0.8em,innerbottommargin=0.5em,%
-          innerleftmargin=3pt,innerrightmargin=3pt,%
-          skipbelow=0.5em,skipabove=1em,%
-          splittopskip=\topskip]{Block}
-\newmdenv[linecolor=green,middlelinewidth=1pt,%
-          roundcorner=3pt,backgroundcolor=red!5!white,%
-          innertopmargin=0.5em,innerbottommargin=0.5em,%
-          innerleftmargin=3pt,innerrightmargin=3pt,%
-          skipbelow=0.5em,skipabove=1em,%
-          splittopskip=\topskip]{redbox}
-\newmdenv[linecolor=green,middlelinewidth=0.5pt,%
-          %outerlinewidth=0.5pt,skipabove=0pt,
-          roundcorner=3pt,backgroundcolor=white,%
-          innerbottommargin=3pt,innerrightmargin=5pt,%
-          innerleftmargin=5pt,leftmargin=0ex]{mathbox}
-\newmdenv[linecolor=blue!5!green,middlelinewidth=0.5pt,%
-          roundcorner=3pt,backgroundcolor=yellow!5,%
-          % frametitle={Hello},frametitlebackgroundcolor=green!50,%
-          % skipabove=2pt,skipbelow=2pt,%
-          innerleftmargin=3pt,leftmargin=0ex]{notebox}
-\newmdenv[linecolor=white,font={\scriptsize},%
-          fontcolor=blue!85,backgroundcolor=yellow!5,%
-          skipabove=1ex,skipbelow=0pt,innerbottommargin=0.5ex,%
-          innerleftmargin=3pt,leftmargin=1em]{myref}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\renewcommand{\thefootnote}{}% 不要编号
-\setbeamertemplate{footnote}{% 首行不缩进
-  \noindent\insertfootnotemark%
-  \scriptsize\color{blue!85!green!85}\insertfootnotetext\par\kern1ex}
-\renewcommand\footnoterule%    更改横线属性：长度，粗细，颜色
-  {\color{red}\kern-3pt\rule{0.4\linewidth}{0.5pt}\par\kern2.6pt}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\usepackage[many]{tcolorbox}
-\tcbset{highlight math %
-  style={enhanced, colframe=blue!40,colback=yellow!20,arc=4pt,boxrule=1pt}}
-\newtcbox{\subsubtit}[1][]{%
-  after skip=1em,boxrule=0.5pt,
-  fontupper=\color{blue}\bfseries,top=0.5ex,bottom=0.5ex,
-  left=1ex,right=1ex,
-  colframe=green,colback=red!5!white,#1}
-
-%\renewcommand{\baselinestretch}{1.1}
-\linespread{1.1}
-\setlength{\parskip}{1ex}
-
-\usepackage{listings} %插入代码
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
 \usepackage{xcolor}
-\lstset{numbers=left, %设置行号位置
-        numberstyle=\tiny, %设置行号大小
-        keywordstyle=\color{blue}, %设置关键字颜色
-        commentstyle=\color[cmyk]{1,0,1,0}, %设置注释颜色
-        frame=single, %设置边框格式
-        escapeinside=``, %逃逸字符(1左面的键)，用于显示中文
-        %breaklines, %自动折行
-        extendedchars=false, %解决代码跨页时，章节标题，页眉等汉字不显示的问题
-        xleftmargin=2em,xrightmargin=2em, aboveskip=1em, %设置边距
-        tabsize=4, %设置tab空格数
-        showspaces=false, %不显示空格
-        basicstyle=\ttfamily,
-       }
+\usepackage{etoolbox}
+\graphicspath{{figs/}}
+\definecolor{navy}{HTML}{193B5B}
+\definecolor{bodytext}{HTML}{24313D}
+\definecolor{muted}{HTML}{617080}
+\definecolor{rulegray}{HTML}{CBD4DD}
+\definecolor{codebg}{HTML}{F4F6F8}
+\definecolor{codeframe}{HTML}{D5DDE5}
+\definecolor{codecomment}{HTML}{4B705C}
+\definecolor{codestring}{HTML}{92533C}
+\definecolor{tablehead}{HTML}{EEF2F6}
+\hypersetup{pdfborder=0 0 0,colorlinks=true,linkcolor=navy,urlcolor=navy}
+\setbeamercolor{normal text}{fg=bodytext,bg=white}
+\setbeamercolor{structure}{fg=navy}
+\setbeamercolor{frametitle}{fg=navy,bg=white}
+\setbeamercolor{myfootline}{bg=white,fg=muted}
+\setbeamercolor{block title}{fg=navy,bg=white}
+\setbeamercolor{block body}{fg=bodytext,bg=white}
+\setbeamercolor{alerted text}{fg=codestring}
+\setbeamerfont{frametitle}{size=\fontsize{18}{21},series=\bfseries}
+\setbeamerfont{block title}{size=\normalsize,series=\bfseries}
+\setbeamertemplate{blocks}[default]
+\setbeamertemplate{itemize item}{\raisebox{0.15ex}{\scriptsize\textbullet}}
+\setbeamertemplate{enumerate item}{\insertenumlabel.}
+\AtBeginEnvironment{itemize}{\setlength{\itemsep}{0.24em}}
+\AtBeginEnvironment{enumerate}{\setlength{\itemsep}{0.24em}}
+\arrayrulecolor{rulegray}
+\setlength{\heavyrulewidth}{0.6pt}
+\setlength{\lightrulewidth}{0.35pt}
+\setbeamertemplate{headline}{}
+\setbeamertemplate{footline}{%
+  \leavevmode\mbox{%
+    \begin{beamercolorbox}[wd=.75\paperwidth,ht=3mm,dp=2mm,left]{myfootline}%
+      \hspace*{0.8cm}{\fontsize{7.5}{9}\selectfont 统计学导论上机课}
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.25\paperwidth,ht=3mm,dp=2mm,right]{myfootline}%
+      {\fontsize{7.5}{9}\selectfont\insertframenumber\,/\,\inserttotalframenumber\hspace*{0.8cm}}
+    \end{beamercolorbox}}
+  \vskip0pt}
+\setbeamertemplate{frametitle}{%
+  \vspace{0.28cm}%
+  {\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle\par}%
+  \vspace{0.12cm}%
+  {\color{rulegray}\hrule height 0.45pt}%
+  \vspace{-0.2cm}}
+\setbeamersize{text margin left=0.8cm,text margin right=0.8cm}
+\setbeamertemplate{title page}{%
+  \vspace*{0.95cm}%
+  {\fontsize{25}{31}\selectfont\bfseries\color{navy}\inserttitle\par}%
+  \vspace{0.35cm}%
+  {\fontsize{14}{19}\selectfont\color{bodytext}\insertsubtitle\par}%
+  \vspace{0.65cm}%
+  {\color{rulegray}\hrule height 0.45pt}%
+  \vspace{0.6cm}%
+  {\fontsize{13}{18}\selectfont\insertauthor\par}%
+  \vspace{0.12cm}%
+  {\fontsize{10}{15}\selectfont\color{muted}\insertinstitute\par}%
+  \vfill
+  {\fontsize{10}{14}\selectfont\color{muted}\insertdate\par}%
+  \vspace*{0.6cm}}
+\lstset{
+  language=R,
+  basicstyle=\ttfamily\fontsize{12.5}{14.5}\selectfont\color{bodytext},
+  keywordstyle=\color{navy},
+  commentstyle=\color{codecomment},
+  stringstyle=\color{codestring},
+  backgroundcolor=\color{codebg},
+  frame=single,
+  rulecolor=\color{codeframe},
+  framerule=0.35pt,
+  framesep=5pt,
+  showstringspaces=false,
+  keepspaces=true,
+  breaklines=true,
+  columns=fullflexible,
+  xleftmargin=5pt,
+  xrightmargin=5pt,
+  aboveskip=0.35em,
+  belowskip=0.35em
+}
+\lstdefinestyle{output}{
+  language={},
+  keywordstyle=\color{bodytext},
+  commentstyle=\color{bodytext},
+  stringstyle=\color{bodytext},
+  backgroundcolor=\color{white},
+  frame=none,
+  aboveskip=0.12em,
+  belowskip=0.25em
+}
+\newcommand{\code}[1]{\textcolor{navy}{\texttt{#1}}}
+\newcommand{\inputlabel}{\par\smallskip{\fontsize{10.5}{13}\selectfont\bfseries\color{muted}输入代码\par}}
+\newcommand{\outputlabel}{\par\smallskip{\fontsize{10.5}{13}\selectfont\bfseries\color{muted}Console 输出\par}}
+\newcommand{\thead}[1]{\textcolor{navy}{\textbf{#1}}}
+
+\title{R语言基础（五）}
+\subtitle{随机模拟与正态近似}
+\author{郑泽靖}
+\institute{北京师范大学统计学院}
+\date{2026年秋季学期}
+
 \begin{document}
 
-%%%%% =======================================================================
-\title{R语言-5}
-\author{郑泽靖 \and zzjstat2023@163.com }
-\institute{\normalsize 北京师范大学统计学院}
-\date{\today}
+% 第一节45分钟：回顾2，随机数5，大数定律及应用8，MC积分5，正态概率10，练习10，讲评5。
+% 第二节45分钟：回顾3，CLT7，体重例8，泊松模拟12，练习10，讲评5。
 
-% ===== title page =====
 \begin{frame}[plain]
   \titlepage
+  \note{教材第84--93页。封面不另计时。本讲两节，各45分钟。第一节随机模拟与蒙特卡罗方法，第二节中心极限定理及应用。各保留10分钟课堂练习和5分钟讲评，无需提交作业。}
 \end{frame}
 
-% ===== contents =====
-% \begin{frame}
-%  \frametitle{Outline}
-%  \tableofcontents[hideallsubsections] %[pausesections]
-% \end{frame}
-\begin{frame}[fragile]{蒙特卡罗方法简介}
-    \begin{block}{定义}
-    蒙特卡罗 (Monte Carlo) 方法是一种以概率统计理论为指导的数值计算方法。它使用随机数（或伪随机数）来解决计算问题。
-    \end{block}
-    
-    \begin{itemize}
-        \item \textbf{核心思想}：当所求解的问题是某随机事件出现的概率，或者是某随机变量的数学期望时，通过“实验”的方法得出频率，以此逼近概率或期望。
-        \item \textbf{应用场景}：数值积分,物理模拟等。
-    \end{itemize}
+\begin{frame}[fragile]{回顾：平均值与频率}
+  \inputlabel
+\begin{lstlisting}
+x <- c(0, 1, 1, 0, 1)
+mean(x)
+mean(x == 1)
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] 0.6
+[1] 0.6
+\end{lstlisting}
+  \code{mean(x)} 计算平均值。\par\smallskip
+  对逻辑值求平均时，\par
+  \code{TRUE} 按1计算，\code{FALSE} 按0计算。\par
+  因此可得到条件成立的频率。
+  \note{教材第85--86页，衔接R-3的mean与逻辑频率。第一节回顾2分钟。教师演示并请学生解释0.6。}
 \end{frame}
 
-\begin{frame}[fragile]{经典案例：计算圆周率 $\pi$}
-    \begin{columns}
-        \column{0.6\textwidth}
-            考虑单位正方形 $S$ 和其内切圆 $C$（第一象限）：
-            \[
-            \begin{cases}
-            0 \le X \le 1 \\
-            0 \le Y \le 1
-            \end{cases}
-            \]
-            若 $X, Y \sim U(0, 1)$ 独立同分布，则点落入圆内的概率为：
-            \[
-            P(X^2 + Y^2 \leq 1) = \frac{\text{圆面积}/4}{\text{正方形面积}} = \frac{\pi/4}{1} = \frac{\pi}{4}
-            \]
-        \column{0.4\textwidth}
-            \begin{figure}
-                \centering
-                % 建议这里确保图片清晰，或使用TikZ绘制
-                \includegraphics[width=\textwidth]{figs/1.png} 
-            \end{figure}
-    \end{columns}
+\begin{frame}[fragile]{均匀分布随机数：runif()}
+  生成区间 $(0,1)$ 上均匀分布的随机数。
+  \inputlabel
+\begin{lstlisting}
+x <- runif(10, 0, 1)
+x
+mean(x)
+\end{lstlisting}
+  \begin{itemize}
+    \item 第一个参数10是生成的个数。
+    \item 后两个参数0、1是区间端点。
+    \item 重复运行通常会得到不同结果。
+  \end{itemize}
+  \note{教材第84页案例2.17、第88页runif程序。第一节随机数5分钟中的3分钟，学生跟随运行。只解释本例参数，不扩展随机数原理。}
 \end{frame}
 
-\begin{frame}[fragile]{R 代码实现：计算 $\pi$}
-    基于大数定律，我们可以估计：
-    \[
-    \pi \approx 4 \times \frac{\#\{X_i^2 + Y_i^2 \leq 1\}}{n}
-    \]
-    
-\begin{lstlisting}[language=R]
-p_est <- function(n) {
-    x <- runif(n); y <- runif(n)
-    k <- (x^2 + y^2 <= 1)
-    return(4 * sum(k) / n)
+\begin{frame}[fragile]{正态分布随机数：rnorm()}
+  生成标准正态分布 $N(0,1)$ 的随机数。
+  \inputlabel
+\begin{lstlisting}
+x <- rnorm(10, 0, 1)
+x
+\end{lstlisting}
+  \begin{itemize}
+    \item 10是生成的个数，0是均值，1是标准差。
+    \item 标准正态随机数可以取正值，也可以取负值。
+  \end{itemize}
+  \note{教材第89页正态随机数程序。第一节随机数5分钟中的2分钟，教师演示。学生仅掌握本例三个参数的含义。}
+\end{frame}
+
+\begin{frame}{大数定律}
+  设 $X_1,\ldots,X_n$ 是 $X$ 的独立、同分布重复观测，\\
+  且 $X$ 的数学期望为有限数。
+  \[
+    \lim_{n\to\infty}\frac{1}{n}\sum_{k=1}^n X_k
+    =\mathrm{E}(X)
+  \]
+  上述等式成立的概率为1。\par\medskip
+  可以用大量重复观测的平均值估计数学期望。\par\smallskip
+  本讲通过计算与图形理解结论，不讨论证明。
+  \note{教材第85页定理2.6.1，保留重复观测和有限期望条件。第一节大数定律及应用8分钟中的2分钟。说明“概率为1”的结论不等于每次有限次计算都相同。}
+\end{frame}
+
+\begin{frame}[fragile]{均匀分布的样本平均值}
+  对 $X\sim U(0,1)$，有 $\mathrm{E}(X)=0.5$。
+  \inputlabel
+\begin{lstlisting}
+x <- runif(50000, 0, 1)
+mean(x[1:100])
+mean(x[1:1000])
+mean(x)
+\end{lstlisting}
+  三次平均分别使用100、1000、50000个观测。\par\smallskip
+  大样本下平均值通常更接近0.5，\par
+  但误差不必逐次减小。
+  \note{教材第84页案例2.17。第一节大数定律及应用8分钟中的1分钟，教师演示同一组数据不同前缀的平均值。}
+\end{frame}
+
+\begin{frame}{平均值随观测次数的变化}
+  \centering
+  \includegraphics[width=0.94\linewidth,height=5.8cm,keepaspectratio]{uniform-mean.pdf}
+  \par\smallskip
+  \raggedright\small 图形对应一次模拟。曲线会波动，不必单调接近0.5。
+  \note{教材第84页图2.19。图由R生成，50000次U(0,1)重复观测的前缀平均值，虚线为期望0.5。第一节大数定律及应用8分钟中的1分钟，教师引导读图，不要求学生独立编写作图程序。}
+\end{frame}
+
+\begin{frame}[fragile]{矩的平均与频率}
+  \small
+  例2.6.1：若 $\mathrm{E}(X^k)$ 有限，可用 $X_i^k$ 的平均估计它。
+  \inputlabel
+\begin{lstlisting}
+x <- runif(10000, 0, 1)
+mean(x^2)
+mean(x <= 0.5)
+\end{lstlisting}
+  \begin{itemize}
+    \item 第一项估计 $\mathrm{E}(X^2)$。
+    \item 第二项计算 $X\leq0.5$ 的频率，估计其概率。
+  \end{itemize}
+  例2.6.2的含义：频率是0、1取值的平均，能用于估计概率。
+  \note{教材第85--86页例2.6.1和2.6.2。第一节大数定律及应用8分钟中的2分钟。只解释已有幂运算和mean的组合，不推导均匀分布二阶矩。}
+\end{frame}
+
+\begin{frame}[fragile]{经验分布函数}
+  对给定的 $t$，经验分布函数表示\\
+  观测值中不大于 $t$ 的比例。
+  \[
+    F_n(t)=\frac{\text{不大于 }t\text{ 的观测个数}}{n}
+    \ \approx\ F(t)=\mathrm{P}(X\leq t).
+  \]
+  \inputlabel
+\begin{lstlisting}
+x <- runif(10000, 0, 1)
+t <- 0.5
+mean(x <= t)
+\end{lstlisting}
+  例2.6.3：对给定的 $t$，可用 $F_n(t)$ 估计 $F(t)$。
+  \note{教材第86--87页定义2.6.1、例2.6.3。第一节大数定律及应用8分钟中的2分钟，解释“累计比例”。保持教材范围，不引入ecdf函数或一致收敛。}
+\end{frame}
+
+\begin{frame}{蒙特卡罗积分}
+  蒙特卡罗方法：用随机模拟解决计算问题。\par\medskip
+  例2.6.4：设 $f$ 在 $[a,b]$ 上连续，取 $U\sim U(a,b)$。
+  \[
+    \int_a^b f(x)\,\mathrm{d}x
+    =(b-a)\mathrm{E}\{f(U)\}.
+  \]
+  用 $n$ 个均匀分布随机数 $U_1,\ldots,U_n$，得到
+  \[
+    \int_a^b f(x)\,\mathrm{d}x
+    \approx (b-a)\frac{1}{n}\sum_{k=1}^n f(U_k).
+  \]
+  \note{教材第87页例2.6.4与蒙特卡罗方法定义。第一节MC积分5分钟中的3分钟。只说明“区间长度乘函数值平均”，不作积分理论推导。}
+\end{frame}
+
+\begin{frame}{积分近似的计算步骤}
+  \begin{enumerate}
+    \item 在积分区间 $[a,b]$ 中生成均匀随机数。
+    \item 计算每个随机数对应的函数值 $f(U_k)$。
+    \item 计算函数值的平均，再乘区间长度 $b-a$。
+  \end{enumerate}
+  \medskip
+  每次运行所用的随机数不同，近似值通常也不同。\par\smallskip
+  增大模拟次数有助于提高精度，但一次结果不保证更接近目标值。
+  \note{教材第87页公式2.72及第88页思考题。第一节MC积分5分钟中的2分钟，联系下一页例2.6.5。}
+\end{frame}
+
+\begin{frame}{教材例2.6.5：标准正态区间概率}
+  设 $X\sim N(0,1)$，计算 $\mathrm{P}(0.1<X<2)$。\par\medskip
+  标准正态密度为
+  \[
+    \varphi(x)=\frac{1}{\sqrt{2\pi}}\exp\left(-\frac{x^2}{2}\right).
+  \]
+  因此
+  \[
+    \mathrm{P}(0.1<X<2)=\int_{0.1}^{2}\varphi(x)\,\mathrm{d}x.
+  \]
+  可以用均匀随机数近似计算这个积分。
+  \note{教材第88页例2.6.5。第一节正态概率10分钟中的2分钟，教师说明计算对象与正态密度。}
+\end{frame}
+
+\begin{frame}[fragile]{方法一：均匀随机数计算积分}
+  \inputlabel
+\begin{lstlisting}
+Y <- runif(10000, 0.1, 2)
+c <- 1 / sqrt(2 * pi)
+f <- c * exp(-(Y * Y) / 2)
+p <- (2 - 0.1) * mean(f)
+p
+\end{lstlisting}
+  \begin{itemize}
+    \item \code{sqrt()} 计算平方根，\code{exp()} 计算指数函数。
+    \item \code{pi} 是 R 中的圆周率常量。
+    \item \code{f} 保存密度值，\code{p} 保存近似概率。
+  \end{itemize}
+  \note{教材第88页例2.6.5原程序，排版规范化并显式显示p。第一节正态概率10分钟中的3分钟，教师逐行演示，学生运行课堂程序相应段。}
+\end{frame}
+
+\begin{frame}[fragile]{方法二：正态随机数计算频率}
+  直接生成标准正态随机数，计算落入区间的比例。
+  \inputlabel
+\begin{lstlisting}
+x <- rnorm(100000, 0, 1)
+I <- x > 0.1 & x < 2
+p <- mean(I)
+p
+\end{lstlisting}
+  \code{I} 保存每个随机数是否落在 $(0.1,2)$ 中。\par\smallskip
+  \code{mean(I)} 是条件成立的频率，近似所求概率。
+  \note{教材第89页例2.6.5第二种方法。第一节正态概率10分钟中的3分钟。复用R-3已学的逻辑运算及mean，不引入其他模拟方法。}
+\end{frame}
+
+\begin{frame}[fragile]{用 pnorm() 核对}
+  \code{pnorm(t, 0, 1)} 给出标准正态概率 $\mathrm{P}(X\leq t)$。
+  \inputlabel
+\begin{lstlisting}
+pnorm(2, 0, 1) - pnorm(0.1, 0, 1)
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] 0.437422
+\end{lstlisting}
+  两种模拟方法都在估计约0.4374的同一个概率。\par\smallskip
+  模拟值与计算值有差异，不需要与本页完全相同。
+  \note{教材第88--89页pnorm校核。第一节正态概率10分钟中的2分钟。连续分布端点概率为0，不在此另加端点知识讲解。}
+\end{frame}
+
+\begin{frame}{课堂练习一：重复模拟}
+  \begin{enumerate}
+    \item 运行例2.6.5的两段模拟程序，各重复两次，记录近似概率。
+    \item 方法一把10000改为100000，再运行一次。
+    \item 方法二把100000改为10000，再运行一次。
+    \item 与0.437422比较，\\
+      用一句话说明运行结果的差异。
+  \end{enumerate}
+  \medskip
+  使用 \code{R5-class.R} 第5、6段的完整程序。\par\smallskip
+  课堂完成，无需提交。
+  \note{教材第88--89页例2.6.5及思考题。第一节独立练习10分钟。学生只修改模拟次数，不要求封装函数、编写循环或计算误差阶。}
+\end{frame}
+
+\begin{frame}[fragile]{练习一参考：两种计算程序}
+  \small
+  均匀随机数与密度值平均：
+\begin{lstlisting}
+Y <- runif(100000, 0.1, 2)
+f <- exp(-(Y * Y) / 2) / sqrt(2 * pi)
+(2 - 0.1) * mean(f)
+\end{lstlisting}
+  正态随机数与区间频率：
+\begin{lstlisting}
+x <- rnorm(10000, 0, 1)
+mean(x > 0.1 & x < 2)
+\end{lstlisting}
+  两段程序的结果都应接近0.4374。
+  \note{教材第88--89页例2.6.5。第一节讲评5分钟中的3分钟。核对区间条件、区间长度因子及mean的对象，不给随机输出的固定标准答案。}
+\end{frame}
+
+\begin{frame}{第一节小结}
+  \begin{itemize}
+    \item 随机数模拟重复观测，每次结果通常不同。
+    \item 观测平均值可估计数学期望，\par
+          观测频率可估计概率。
+    \item 蒙特卡罗积分使用函数值平均与区间长度。
+    \item 模拟次数增加时，误差仍可能局部增大。
+  \end{itemize}
+  \medskip
+  例2.6.5的两种方法，都在计算\par
+  同一个正态区间概率。
+  \note{教材第84--89页。第一节讲评5分钟中的2分钟。第一节累计45分钟，收束后课间休息。}
+\end{frame}
+
+\begin{frame}{第二节：样本平均值的分布}
+  上一节用样本平均值估计数学期望。
+  \[
+    \overline{X}_n=\frac{1}{n}\sum_{k=1}^n X_k.
+  \]
+  若重新抽取一组样本，$\overline{X}_n$ 也会改变。\par\medskip
+  本节研究标准化后的样本平均值\par
+  如何用正态分布近似。
+  \note{教材第89--90页中心极限定理的引入。第二节回顾3分钟。区别一组样本中的n个观测与重复抽取多组样本，不讲估计误差阶。}
+\end{frame}
+
+\begin{frame}{样本平均值的标准化}
+  记 $\mu=\mathrm{E}(X)$、$\sigma^2=\mathrm{D}(X)>0$。
+  \[
+    Z_n=\frac{\sqrt{n}(\overline{X}_n-\mu)}{\sigma}
+       =\frac{\overline{X}_n-\mu}{\sigma/\sqrt{n}}.
+  \]
+  \begin{itemize}
+    \item 减去 $\mu$，使中心位于0。
+    \item 除以 $\sigma/\sqrt{n}$，使标准差为1。
+  \end{itemize}
+  标准化后可与标准正态分布比较。
+  \note{教材第90页公式2.73。第二节CLT7分钟中的3分钟。只说明均值和标准差的作用，公式的推导不计入上机课。}
+\end{frame}
+
+\begin{frame}{中心极限定理}
+  设 $X_1,\ldots,X_n$ 是 $X$ 的独立、同分布重复观测，且
+  \[
+    0<\sigma^2=\mathrm{D}(X)<\infty.
+  \]
+  对任意实数 $t$，有
+  \[
+    \lim_{n\to\infty}\mathrm{P}(Z_n\leq t)=\Phi(t).
+  \]
+  $\Phi$ 是标准正态分布函数。\par\smallskip
+  当 $n$ 较大时，用 $N(0,1)$ 近似 $Z_n$ 的分布。
+  \note{教材第91页定理2.6.2。第二节CLT7分钟中的2分钟。保留有限且正的方差条件，不证明定理，不宣称任意有限n均准确。}
+\end{frame}
+
+\begin{frame}{大数定律与中心极限定理}
+  \small
+  \renewcommand{\arraystretch}{1.4}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}p{0.26\linewidth}p{0.65\linewidth}@{}}
+    \toprule
+    \thead{结论} & \thead{本讲中的用途} \\
+    \midrule
+    大数定律 & 用样本平均值估计数学期望，\newline 用频率估计概率。 \\
+    中心极限定理 & 用标准正态分布近似\newline 标准化样本平均值的分布。 \\
+    \bottomrule
+  \end{tabular*}
+  \par\medskip
+  后者不要求原变量 $X$ 本身服从正态分布，\par
+  但需要定理中的重复观测与方差条件。
+  \note{教材第89--92页。第二节CLT7分钟中的2分钟。教材案例2.18的图形比较旨在理解正态近似，本讲随后以例2.6.7的模拟呈现同一含义，不增加二项图绘图任务。}
+\end{frame}
+
+\begin{frame}{教材例2.6.6：平均体重的概率}
+  已知某大学女学生体重的均值为51.96 kg，\\
+  标准差为6.31 kg。\par\medskip
+  随机选择36名女大学生，\\
+  求平均体重超过57 kg的概率。\par\medskip
+  记36人的平均体重为 $\overline X$，用中心极限定理近似：
+  \[
+    \mathrm{P}(\overline X>57)
+    \approx 1-\Phi\left(\frac{\sqrt{36}(57-51.96)}{6.31}\right).
+  \]
+  \note{教材第92页例2.6.6。第二节体重例8分钟中的3分钟。教师确认单位、样本量和“平均超过57”的事件，不改教材数值。}
+\end{frame}
+
+\begin{frame}[fragile]{例2.6.6的 R 计算}
+  \inputlabel
+\begin{lstlisting}
+z <- sqrt(36) * (57 - 51.96) / 6.31
+z
+1 - pnorm(z, 0, 1)
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] 4.792393
+[1] 8.240182e-07
+\end{lstlisting}
+  \code{e-07} 表示乘以 $10^{-7}$。\par\smallskip
+  按教材的正态近似，所求概率很小。
+  \note{教材第92页例2.6.6程序与结果。第二节体重例8分钟中的3分钟，学生跟随运行。1-pnorm写法与教材一致，不添加数值稳定性话题。}
+\end{frame}
+
+\begin{frame}{例2.6.6的结果解释}
+  \begin{itemize}
+    \item 计算对象是36人平均体重超过57 kg的概率。
+    \item 标准化时使用平均值的标准差 $6.31/\sqrt{36}$。
+    \item 结果是中心极限定理给出的近似值。
+  \end{itemize}
+  \medskip
+  教材没有假设单个人的体重一定服从正态分布。\par\smallskip
+  正态近似仍需满足重复观测等定理条件。
+  \note{教材第92页例2.6.6后说明。第二节体重例8分钟中的2分钟。强调平均值与单个观测的区别，不增加新的例题。}
+\end{frame}
+
+\begin{frame}{教材例2.6.7：泊松样本的标准化均值}
+  设 $X\sim\mathrm{P}(0.5)$，其均值、方差都为0.5。\par\medskip
+  每组取 $n=30$ 个重复观测，计算
+  \[
+    \overline X=\frac{1}{30}\sum_{k=1}^{30}X_k,
+    \qquad Z=\frac{\sqrt{30}(\overline X-0.5)}{\sqrt{0.5}}.
+  \]
+  重复生成1000组样本，得到1000个 $Z$ 值。\par\smallskip
+  将它们的经验分布函数与 $\Phi$ 比较。
+  \note{教材第92页例2.6.7。第二节泊松模拟12分钟中的2分钟。教师演示，学生使用给定完整程序，不从零编写长程序。泊松均值与方差采用教材已知结论，不推导。}
+\end{frame}
+
+\begin{frame}[fragile]{生成1000组泊松样本}
+  \inputlabel
+\begin{lstlisting}
+n <- 30
+y <- matrix(rpois(1000 * n, 0.5),
+            1000, n)
+z <- (rowSums(y) / n - 0.5) *
+     sqrt(n / 0.5)
+\end{lstlisting}
+  \begin{itemize}
+    \item \code{rpois()} 生成泊松分布随机数，参数0.5。
+    \item \code{y} 有1000行、$n$ 列，每行是一组样本。
+    \item \code{rowSums(y) / n} 是每组的样本平均值。
+  \end{itemize}
+  \note{教材第92页例2.6.7，参数化n以便教材第93页练习。第二节泊松模拟12分钟中的3分钟，教师结合矩阵行列解释，仅引入本例rpois参数。}
+\end{frame}
+
+\begin{frame}[fragile]{计算标准化均值的经验累计比例}
+  \inputlabel
+\begin{lstlisting}
+x <- seq(-3, 3, 0.1)
+f <- c()
+for (i in 1:length(x)) {
+  f <- c(f, sum(z <= x[i]) / 1000)
 }
-
-num <- c(1e3, 1e4, 1e5, 1e6) # 样本量
-results <- c()
-for (N in num) {
-    results <- c(results, p_est(N))
-}
-
-data.frame(N=num, Est=results, 
-           Error=abs(results - pi))
+phi <- pnorm(x, 0, 1)
 \end{lstlisting}
-\end{frame} 
-
-\begin{frame}[fragile]{理论基石：大数定律}
-    \begin{block}{Kolmogorov 强大数定律}
-    若 $X_1, X_2, \ldots, X_n$ 是独立同分布 (i.i.d.) 的随机变量且 $\mathrm{E}|X| < \infty$，则：
-    \[
-    P\left( \lim_{n \to \infty} \frac{1}{n} \sum_{k=1}^n X_k = \mathrm{E}(X) \right) = 1
-    \]
-    \end{block}
-    \vspace{0.5cm}
-    这意味着：只要样本量 $n$ 足够大，样本均值将几乎处处收敛于理论期望。
+  \code{f} 保存各位置的经验累计比例。\par\smallskip
+  \code{phi} 保存相同位置的标准正态累计概率。
+  \note{教材第92页例2.6.7。第二节泊松模拟12分钟中的3分钟。解释length(x)是x中元素个数，for/c/sum均为前讲内容。与教材一致采用小于等于；不引入ecdf或其他函数。}
 \end{frame}
 
-\begin{frame}[fragile]{应用 1：估计期望 $\mathrm{E}(X)$}
-    以 $X \sim U(0,1)$ 为例，理论值 $\mathrm{E}(X)=0.5$。
-\begin{lstlisting}[language=R]
-mean_unif <- function(n) {
-    x <- runif(n, 0, 1)
-    mean(x)
-}
-num <- c(10, 100, 1000, 10000, 100000)
-results <- c()
-for (N in num) {
-    results <- c(results, mean_unif(N))
-}
-print(results)
-\end{lstlisting}
-    \small{随着 $n$ 增加，样本均值迅速逼近 0.5。}
-\end{frame}
-
-\begin{frame}[fragile]{应用 2：估计概率 $\mathrm{P}(A)$}
-    概率可以看作是示性函数 $I_A(X)$ 的期望：
-    \[
-    \mathrm{P}(A) = \mathrm{E}[I_A(X)] \approx \frac{1}{n} \sum_{i=1}^n I_A(X_i) = \text{频率}
-    \]
-    以 $X \sim B(10, 0.5)$ 为例，估计 $P(X=4)$：
-\begin{lstlisting}[language=R]
-p_binom <- function(n) {
-    x <- rbinom(n, size = 10, prob = 0.5)
-    mean(x == 4) # 使用 mean() 计算逻辑向量的比例
-}
-results <- c()
-for (N in num) {
-    results <- c(results, p_binom(N))
+\begin{frame}[fragile]{经验分布与标准正态分布的比较}
+  \small
+  \code{R5-class.R} 已提供完整绘图段。核心代码为：
+\begin{lstlisting}
+plot(x, phi, type = "l", ylim = c(0, 1))
+for (i in 1:(length(x) - 1)) {
+  lines(x[i:(i + 1)], c(f[i], f[i]),
+        col = "red")
+  points(x[i], f[i], pch = 20,
+         col = "red")
 }
 \end{lstlisting}
-    \small{理论值：`dbinom(4, 10, 0.5)` $\approx 0.205$。}
+  黑线表示 $\Phi$，红色线段与点表示经验累计比例。\par\smallskip
+  本例重点是比较曲线，绘图参数不要求独立编写。
+  \note{教材第93页绘图段，修正plot中对象名为已计算的phi，避免教材排印不一致。简化为在每个网格位置画点，仍沿用plot/lines/points，完整程序含标签及图例。第二节泊松模拟12分钟中的1分钟，教师运行现成代码，不逐项讲解作图参数。}
 \end{frame}
 
-\begin{frame}[fragile]{应用 3：估计复杂函数的期望}
-    假设 $X_1, X_2 \sim N(0,1)$，估计 $\theta = E|X_1 - X_2|$。
-    
-    此处解析解较复杂，但蒙特卡罗模拟非常简单：
-\begin{lstlisting}[language=R]
-m <- 100000
-x1 <- rnorm(m); x2 <- rnorm(m) # 向量化操作效率更高
-g_val <- abs(x1 - x2)
-est <- mean(g_val)
+\begin{frame}{30个观测的样本：一次模拟结果}
+  \centering
+  \includegraphics[width=0.96\linewidth,height=5.9cm,keepaspectratio]{poisson-n30.pdf}
+  \par\smallskip
+  \raggedright\small 两条曲线大体接近，但经验分布仍可见偏差与阶梯。
+  \note{教材第93页图2.23。由R按例2.6.7生成1000组容量30的泊松样本，黑线Phi，红线与点是网格上的经验累计比例。第二节泊松模拟12分钟中的2分钟，教师引导读图。图只是一轮模拟，不证明定理或保证所有次数下偏差单调减小。}
+\end{frame}
 
-cat("估计值:", est, "\n")
-cat("理论值:", 2/sqrt(pi)) 
+\begin{frame}{泊松模拟中的两个次数}
+  \small
+  \renewcommand{\arraystretch}{1.35}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}p{0.29\linewidth}p{0.62\linewidth}@{}}
+    \toprule
+    \thead{数值} & \thead{含义} \\
+    \midrule
+    每组 $n=30$ & 每组30个观测，\newline 计算一次样本平均值。 \\
+    重复1000组 & 得到1000个标准化均值，\newline 用来计算经验累计比例。 \\
+    \bottomrule
+  \end{tabular*}
+  \par\medskip
+  下一步只改变每组样本量 $n$，保持重复1000组。
+  \note{教材第92--93页例2.6.7及容量改300说明。本页不另计时，包含在上一页2分钟读图内，专门区分每组样本量和组数。}
+\end{frame}
+
+\begin{frame}{课堂练习二：改变每组样本量}
+  \begin{enumerate}
+    \item 运行 \code{R5-class.R} 的“泊松模拟”段，\par
+          观察 $n=30$ 的图形。
+    \item 将 \code{n <- 30} 改为 \code{n <- 300}，\par
+          重新运行该段全部代码。
+    \item 保持每次1000组，比较两图中的\par
+          经验分布与标准正态曲线。
+    \item 说明每组样本量与重复组数\par
+          分别由哪个数表示。
+  \end{enumerate}
+  \medskip
+  使用给定程序，课堂完成，无需提交。
+  \note{教材第93页例2.6.7后的n由30改为300。第二节独立练习10分钟。程序参数化后学生仅改一处，勿只重跑绘图段而未重新生成数据。}
+\end{frame}
+
+\begin{frame}[fragile]{练习二参考：需要重新计算的对象}
+  \inputlabel
+\begin{lstlisting}
+n <- 300
+y <- matrix(rpois(1000 * n, 0.5),
+            1000, n)
+z <- (rowSums(y) / n - 0.5) *
+     sqrt(n / 0.5)
 \end{lstlisting}
-    \small{理论值 $\approx 1.128379$。这种方法在处理多维复杂分布时优势巨大。}
+  随后重新运行经验累计比例与绘图代码。\par\smallskip
+  此时 \code{y} 有1000行、300列，\par
+  仍得到1000个标准化均值。
+  \note{教材第92--93页例2.6.7。第二节讲评5分钟中的2分钟，核对n对随机数个数、矩阵列数、平均和标准化的作用，完整段只需改首行。}
 \end{frame}
 
-\begin{frame}{蒙特卡罗估计方法小结}
-    我们可以通过生成随机样本来估计以下各类统计量：
-    \begin{itemize}
-        \item \textbf{期望值} $\mathrm{E}[X]$：直接计算样本均值 $\bar{x}$。
-        \item \textbf{概率值} $\mathrm{P}(A)$：计算事件发生的频率（示性函数的均值）。
-        \item \textbf{分布函数} $F(x)$：计算 $X_i \le x$ 的经验比例（Glivenko-Cantelli 定理保证了收敛性）。
-        \item \textbf{积分} $\int g(x)dx$：转化为期望形式进行估计。
-    \end{itemize}
-\end{frame}
-\begin{frame}[fragile]{蒙特卡罗积分：原理}
-    目标：计算定积分 $\theta = \int_a^b g(x) dx$。
-    
-    \textbf{方法：} 引入在 $(a, b)$ 上的均匀分布随机变量 $X \sim U(a, b)$，其概率密度函数为 $f(x) = \frac{1}{b-a}$。
-    
-    我们可以将积分改写为期望的形式：
-    \[
-    \theta = \int_a^b g(x) dx = (b-a) \int_a^b g(x) \underbrace{\frac{1}{b-a}}_{f(x)} dx = (b-a) \mathrm{E}[g(X)]
-    \]
-    
-    \textbf{估计量：}
-    \[
-    \hat{\theta} = \frac{b-a}{n} \sum_{i=1}^n g(X_i), \quad X_i \sim U(a, b)
-    \]
+\begin{frame}{300个观测的样本：一次模拟结果}
+  \centering
+  \includegraphics[width=0.96\linewidth,height=5.9cm,keepaspectratio]{poisson-n300.pdf}
+  \par\smallskip
+  \raggedright\small 本轮模拟的经验分布更接近标准正态曲线，仍存在随机波动。
+  \note{教材第93页例2.6.7后改变样本容量的说明。图由R生成1000组容量300的泊松样本。第二节讲评5分钟中的1分钟，只比较本轮图形，不将有限次模拟视为定理证明。}
 \end{frame}
 
-\begin{frame}[fragile]{积分示例 1：区间 $[0, 1]$}
-    计算 $\theta = \int_0^1 e^{-x} dx$。此时 $b-a=1$。
-\begin{lstlisting}[language=R]
-m <- 10000
-x <- runif(m)        # 默认 min=0, max=1
-theta_hat <- mean(exp(-x))
-
-print(paste("MC估计:", round(theta_hat, 5)))
-print(paste("真实值:", round(1 - exp(-1), 5)))
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]{积分示例 2：一般区间 $[2, 4]$}
-    计算 $\theta = \int_2^4 e^{-x} dx$。注意这里要乘以区间长度 $(4-2)=2$。
-\begin{lstlisting}[language=R]
-m <- 10000
-x <- runif(m, min = 2, max = 4)
-# 公式: (b-a) * mean(g(x))
-theta_hat <- 2 * mean(exp(-x)) 
-
-print(paste("MC估计:", round(theta_hat, 5)))
-print(paste("真实值:", round(exp(-2) - exp(-4), 5)))
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}{误差分析：中心极限定理 (CLT)}
-    蒙特卡罗估计的误差服从什么分布？
-    \begin{block}{Lindeberg-Lévy CLT}
-    若 $X_1, \ldots, X_n$ 独立同分布，期望 $\mu$，方差 $\sigma^2 < \infty$，则：
-    \[
-    \sqrt{n}(\bar{X}_n - \mu) \xrightarrow{d} N(0, \sigma^2)
-    \]
-    或者标准化形式：
-    \[
-    \frac{\bar{X}_n - \mu}{\sigma / \sqrt{n}} \xrightarrow{d} N(0, 1)
-    \]
-    \end{block}
-    这告诉我们，蒙特卡罗估计的误差收敛速度为 $O(1/\sqrt{n})$。
-\end{frame}
-
-\begin{frame}[fragile]{CLT 验证：可视化}
-    验证：当 $n$ 较大时，标准化样本均值近似标准正态分布。
-    以 $X \sim U(0,1)$ 为例，$\mu=0.5, \sigma^2=1/12$。
-\begin{lstlisting}[language=R]
-verify_clt <- function(m, n) {
-    # m: 模拟次数, n: 每次的样本量
-    z_scores <- numeric(m)
-    true_sd <- sqrt(1/12)
-    for (i in 1:m) {
-        x <- runif(n)
-        # 构造标准化变量
-        z_scores[i] <- (mean(x)-0.5)/(true_sd/sqrt(n))
-    }
-    return(z_scores)
-}
-data <- verify_clt(m=2000, n=100)
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]{CLT 验证：绘图结果}
-    接上页代码，绘制直方图与理论曲线对比：
-\begin{lstlisting}[language=R]
-# 绘制频率直方图
-hist(data, prob = TRUE, breaks = 40, 
-     main = "Standardized Mean vs N(0,1)", 
-     col = "lightblue", border = "white")
-
-# 添加标准正态分布密度曲线
-curve(dnorm(x), add = TRUE, col = "red", lwd = 2)
-\end{lstlisting}
-    \begin{itemize}
-        \item 蓝色直方图代表模拟数据的分布。
-        \item 红色曲线代表标准正态分布 $N(0,1)$。
-        \item 两者高度重合说明了 CLT 的有效性。
-    \end{itemize}
-\end{frame}
-% ===== 练习题部分 =====
-
-\section{课后练习}
-
-% 练习题 1：蒙特卡罗积分
-\begin{frame}[fragile]{练习题 1：定积分计算}
-    利用蒙特卡罗方法计算如下定积分的近似值，并与真实值进行比较：
-    \[
-    I = \int_{1}^{5} \ln(x) \, dx
-    \]
-    
-    \textbf{提示：}
-    \begin{itemize}
-        \item 积分区间为 $[1, 5]$，长度为 4。
-        \item 真实值计算公式：$\int \ln(x) dx = x\ln x - x$。
-        \item 真实值结果约为 $5\ln 5 - 5 - (1\ln 1 - 1) \approx 4.047$。
-    \end{itemize}
-
-\end{frame}
-
-% 练习题 2：多维概率估计
-\begin{frame}[fragile]{练习题 2：多维随机变量概率估计}
-    设 $X, Y, Z$ 相互独立且均服从 $U(0, 1)$ 分布。
-    请编写 R 代码估计以下事件发生的概率：
-    \[
-    P(X + Y + Z \le 1)
-    \]
-
-    \textbf{思考：}
-    \begin{itemize}
-        \item 理论上，这是三维单位立方体中被平面 $x+y+z=1$ 截出的四面体的体积。
-        \item 理论值为 $\frac{1}{3!} = \frac{1}{6} \approx 0.16667$。
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{}
-\centering \Huge
-  \emph{Thanks!}
+\begin{frame}{本讲操作核对}
+  \small
+  \renewcommand{\arraystretch}{1.25}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}p{0.32\linewidth}p{0.59\linewidth}@{}}
+    \toprule
+    \thead{任务} & \thead{本讲使用的方法} \\
+    \midrule
+    生成随机数 & \code{runif()}、\code{rnorm()}、\code{rpois()} \\
+    估计期望与概率 & 数值平均、逻辑条件的平均 \\
+    近似计算积分 & 区间长度乘函数值的平均 \\
+    计算正态概率 & \code{pnorm()} 与标准化 \\
+    观察正态近似 & 标准化均值的经验分布与 $\Phi$ 比较 \\
+    \bottomrule
+  \end{tabular*}
+  \par\medskip
+  模拟结果应结合概率对象与条件解释。
+  \note{教材第84--93页。第二节讲评5分钟中的2分钟。第二节累计45分钟。本讲不增加误差阶、GC定理、其他积分或多维模拟，不布置提交作业。}
 \end{frame}
 
 \end{document}

@@ -1,614 +1,673 @@
-\documentclass[9pt,compress,t,noamsthm,notheorem,table,handout]{ctexbeamer}
-\usetheme{Boadilla}
-\useinnertheme{circles}
-\useoutertheme{shadow}
-\usecolortheme{seahorse}
+\documentclass[14pt,compress,t,noamsthm,notheorem,table,handout,fontset=none]{ctexbeamer}
+
+\setCJKmainfont[
+  Path=/usr/local/texlive/2024/texmf-dist/fonts/opentype/public/fandol/,
+  BoldFont=FandolSong-Bold.otf
+]{FandolSong-Regular.otf}
+\setCJKsansfont[
+  Path=/usr/local/texlive/2024/texmf-dist/fonts/opentype/public/fandol/,
+  BoldFont=FandolHei-Bold.otf
+]{FandolHei-Regular.otf}
+\setCJKmonofont[
+  Path=/usr/local/texlive/2024/texmf-dist/fonts/opentype/public/fandol/
+]{FandolFang-Regular.otf}
+\setsansfont[
+  Path=/usr/local/texlive/2024/texmf-dist/fonts/opentype/public/tex-gyre/,
+  BoldFont=texgyreheros-bold.otf,
+  ItalicFont=texgyreheros-italic.otf,
+  BoldItalicFont=texgyreheros-bolditalic.otf
+]{texgyreheros-regular.otf}
+\setmonofont[
+  Path=/usr/local/texlive/2024/texmf-dist/fonts/opentype/public/inconsolata/,
+  BoldFont=Inconsolatazi4-Bold.otf,
+  StylisticSet=3
+]{Inconsolatazi4-Regular.otf}
+\usetheme{default}
 \usefonttheme[onlymath]{serif}
 \setbeamertemplate{navigation symbols}{}
-% \setbeamercovered{transparent}
-\usepackage{natbib}
-\usepackage{amsthm}
-\usepackage{makecell}
-\usepackage{multirow}
-\renewcommand{\qedsymbol}{$\blacksquare$}
-\bibliographystyle{unsrtnat}
-\usepackage{color}
-\setbeamercolor{myfootline}{bg=white,fg=blue}
-\definecolor{myfoot}{rgb}{0.5,0.2,0.5}
-\definecolor{darkblue}{rgb}{0.1,0,0.85}
-\setbeamertemplate{headline}
-  { \leavevmode\begin{beamercolorbox}[wd=\paperwidth,ht=1.25ex,dp=1ex,left]{}
-    \end{beamercolorbox}}
-\setbeamertemplate{footline}% 自定义页脚
-  { \leavevmode\mbox{%
-    \begin{beamercolorbox}[wd=.75\paperwidth,ht=2.25ex,dp=1ex,left]{myfootline}%
-        \rule{2em}{0pt}\color{myfoot}\ttfamily\scriptsize%
-        %\insertshortauthor~(\insertshortinstitute)
-    \end{beamercolorbox}%
-    \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,right]{myfootline}%
-       {\color{myfoot}\ttfamily\scriptsize\insertframenumber{}/%
-        \inserttotalframenumber\hspace*{3ex}}
-    \end{beamercolorbox}}
-    \vskip0pt }
-
-\setbeamercolor{frametitle}{fg=blue,bg=white}
-\setbeamertemplate{frametitle}{%
-  \leavevmode\linespread{1}\large\textbf{\insertframetitle}\par
-  \color{structure.fg!30!bg}\rule[6pt]{\linewidth}{2pt}\par\vspace{-1.0em}}
-
-% \setbeamertemplate{blocks}[default] % beamer块（含定理类环境）不要阴影
-\setbeamertemplate{bibliography entry title}{}{}
-\setbeamertemplate{bibliography entry location}{}{}
-\setbeamertemplate*{bibliography entry note}{}{}
-\setbeamersize{text margin left=0.75cm, text margin right=0.75cm}
-
-\setbeamercolor{bluebox}{fg=black,bg=blue!10}
-\setbeamercolor{redbox}{fg=black,bg=red!10}
-\newenvironment{Boxblue}[1][\textwidth]
-  {\begin{beamercolorbox}[sep=0.1em,shadow=true,wd=#1,rounded=true,center]{bluebox}}
-  {\end{beamercolorbox}}
-\newenvironment{Boxred}[1][\textwidth]
-  {\begin{beamercolorbox}[sep=0.1em,shadow=true,wd=#1,rounded=true,center]{redbox}}
-  {\end{beamercolorbox}}
-\usepackage{stmaryrd}
-\usepackage{amsmath,amssymb,amsfonts,bm}
-\usepackage{graphicx,xcolor}
-\graphicspath{{figures/}}
-\usepackage{hyperref}
-\hypersetup{pdfborder=001,colorlinks=true,linkcolor=darkblue,urlcolor=blue}
-\usepackage{bbding}
-\newcommand{\Bullet}{{\fontsize{6pt}{6pt}\selectfont\CircleSolid}}
-\newcommand{\Hand}{{\fontsize{8pt}{6pt}\selectfont\HandRight}}
-\newcommand{\zhu}{{\color{blue!40}\Bullet}}
-\newcommand{\zhuu}{{\color{red!80}\Hand}}
-\newcommand{\labeli}{\zhu}
-\newenvironment{blist}%
-    {\begin{list}{{\hfill\raisebox{1.12pt}{\color{blue!60}\zhu}}}{%
-     \leftmargin2em\labelwidth1.5em\labelsep0.5em
-     \itemsep1ex\itemindent0pt\parsep0pt\topsep0pt}}
-    {\end{list}}
-\newenvironment{myitem}
-  {\begin{list}{{\hfill\raisebox{0pt}{\labeli}}}{%
-    \setlength{\leftmargin}{1.2em}\labelwidth0.8em\labelsep.4em%
-    \itemsep1ex\parsep2pt\itemindent0pt\topsep0pt}}{\end{list}}
-\newenvironment{subitem}
-  {\begin{list}{{\hfill\raisebox{0pt}{-}}}{%
-    \setlength{\leftmargin}{1.2em}\labelwidth0.8em\labelsep.4em%
-    \itemsep0ex\parsep2pt\itemindent0pt\topsep0pt}}{\end{list}}
-\usepackage{colortbl}
-\usepackage{tikz}
-\usetikzlibrary{arrows}
-\usepackage{stmaryrd}
-\usepackage{amsfonts}
-\usepackage[ruled,linesnumbered]{algorithm2e}
-\usepackage{float} 
+\usepackage{amsmath,amssymb}
 \usepackage{booktabs}
-\usepackage[framemethod=tikz]{mdframed}
-\newmdenv[linecolor=green,middlelinewidth=1pt,%
-          roundcorner=3pt,backgroundcolor=white,%
-          innertopmargin=0.8em,innerbottommargin=0.5em,%
-          innerleftmargin=3pt,innerrightmargin=3pt,%
-          skipbelow=0.5em,skipabove=1em,%
-          splittopskip=\topskip]{Block}
-\newmdenv[linecolor=green,middlelinewidth=1pt,%
-          roundcorner=3pt,backgroundcolor=red!5!white,%
-          innertopmargin=0.5em,innerbottommargin=0.5em,%
-          innerleftmargin=3pt,innerrightmargin=3pt,%
-          skipbelow=0.5em,skipabove=1em,%
-          splittopskip=\topskip]{redbox}
-\newmdenv[linecolor=green,middlelinewidth=0.5pt,%
-          %outerlinewidth=0.5pt,skipabove=0pt,
-          roundcorner=3pt,backgroundcolor=white,%
-          innerbottommargin=3pt,innerrightmargin=5pt,%
-          innerleftmargin=5pt,leftmargin=0ex]{mathbox}
-\newmdenv[linecolor=blue!5!green,middlelinewidth=0.5pt,%
-          roundcorner=3pt,backgroundcolor=yellow!5,%
-          % frametitle={Hello},frametitlebackgroundcolor=green!50,%
-          % skipabove=2pt,skipbelow=2pt,%
-          innerleftmargin=3pt,leftmargin=0ex]{notebox}
-\newmdenv[linecolor=white,font={\scriptsize},%
-          fontcolor=blue!85,backgroundcolor=yellow!5,%
-          skipabove=1ex,skipbelow=0pt,innerbottommargin=0.5ex,%
-          innerleftmargin=3pt,leftmargin=1em]{myref}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\renewcommand{\thefootnote}{}% 不要编号
-\setbeamertemplate{footnote}{% 首行不缩进
-  \noindent\insertfootnotemark%
-  \scriptsize\color{blue!85!green!85}\insertfootnotetext\par\kern1ex}
-\renewcommand\footnoterule%    更改横线属性：长度，粗细，颜色
-  {\color{red}\kern-3pt\rule{0.4\linewidth}{0.5pt}\par\kern2.6pt}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\usepackage[many]{tcolorbox}
-\tcbset{highlight math %
-  style={enhanced, colframe=blue!40,colback=yellow!20,arc=4pt,boxrule=1pt}}
-\newtcbox{\subsubtit}[1][]{%
-  after skip=1em,boxrule=0.5pt,
-  fontupper=\color{blue}\bfseries,top=0.5ex,bottom=0.5ex,
-  left=1ex,right=1ex,
-  colframe=green,colback=red!5!white,#1}
-
-%\renewcommand{\baselinestretch}{1.1}
-\linespread{1.1}
-\setlength{\parskip}{1ex}
-
-\usepackage{listings} %插入代码
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
 \usepackage{xcolor}
-\lstset{numbers=left, %设置行号位置
-        numberstyle=\tiny, %设置行号大小
-        keywordstyle=\color{blue}, %设置关键字颜色
-        commentstyle=\color[cmyk]{1,0,1,0}, %设置注释颜色
-        frame=single, %设置边框格式
-        escapeinside=``, %逃逸字符(1左面的键)，用于显示中文
-        %breaklines, %自动折行
-        extendedchars=false, %解决代码跨页时，章节标题，页眉等汉字不显示的问题
-        xleftmargin=2em,xrightmargin=2em, aboveskip=1em, %设置边距
-        tabsize=4, %设置tab空格数
-        showspaces=false, %不显示空格
-        basicstyle=\ttfamily,
-       }
+\usepackage{etoolbox}
+\graphicspath{{figs/}}
+\definecolor{navy}{HTML}{193B5B}
+\definecolor{bodytext}{HTML}{24313D}
+\definecolor{muted}{HTML}{617080}
+\definecolor{rulegray}{HTML}{CBD4DD}
+\definecolor{codebg}{HTML}{F4F6F8}
+\definecolor{codeframe}{HTML}{D5DDE5}
+\definecolor{codecomment}{HTML}{4B705C}
+\definecolor{codestring}{HTML}{92533C}
+\definecolor{tablehead}{HTML}{EEF2F6}
+\hypersetup{pdfborder=0 0 0,colorlinks=true,linkcolor=navy,urlcolor=navy}
+\setbeamercolor{normal text}{fg=bodytext,bg=white}
+\setbeamercolor{structure}{fg=navy}
+\setbeamercolor{frametitle}{fg=navy,bg=white}
+\setbeamercolor{myfootline}{bg=white,fg=muted}
+\setbeamercolor{block title}{fg=navy,bg=white}
+\setbeamercolor{block body}{fg=bodytext,bg=white}
+\setbeamercolor{alerted text}{fg=codestring}
+\setbeamerfont{frametitle}{size=\fontsize{18}{21},series=\bfseries}
+\setbeamerfont{block title}{size=\normalsize,series=\bfseries}
+\setbeamertemplate{blocks}[default]
+\setbeamertemplate{itemize item}{\raisebox{0.15ex}{\scriptsize\textbullet}}
+\setbeamertemplate{enumerate item}{\insertenumlabel.}
+\AtBeginEnvironment{itemize}{\setlength{\itemsep}{0.24em}}
+\AtBeginEnvironment{enumerate}{\setlength{\itemsep}{0.24em}}
+\arrayrulecolor{rulegray}
+\setlength{\heavyrulewidth}{0.6pt}
+\setlength{\lightrulewidth}{0.35pt}
+\setbeamertemplate{headline}{}
+\setbeamertemplate{footline}{%
+  \leavevmode\mbox{%
+    \begin{beamercolorbox}[wd=.75\paperwidth,ht=3mm,dp=2mm,left]{myfootline}%
+      \hspace*{0.8cm}{\fontsize{7.5}{9}\selectfont 统计学导论上机课}
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.25\paperwidth,ht=3mm,dp=2mm,right]{myfootline}%
+      {\fontsize{7.5}{9}\selectfont\insertframenumber\,/\,\inserttotalframenumber\hspace*{0.8cm}}
+    \end{beamercolorbox}}
+  \vskip0pt}
+\setbeamertemplate{frametitle}{%
+  \vspace{0.28cm}%
+  {\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle\par}%
+  \vspace{0.12cm}%
+  {\color{rulegray}\hrule height 0.45pt}%
+  \vspace{-0.2cm}}
+\setbeamersize{text margin left=0.8cm,text margin right=0.8cm}
+\setbeamertemplate{title page}{%
+  \vspace*{0.95cm}%
+  {\fontsize{25}{31}\selectfont\bfseries\color{navy}\inserttitle\par}%
+  \vspace{0.35cm}%
+  {\fontsize{14}{19}\selectfont\color{bodytext}\insertsubtitle\par}%
+  \vspace{0.65cm}%
+  {\color{rulegray}\hrule height 0.45pt}%
+  \vspace{0.6cm}%
+  {\fontsize{13}{18}\selectfont\insertauthor\par}%
+  \vspace{0.12cm}%
+  {\fontsize{10}{15}\selectfont\color{muted}\insertinstitute\par}%
+  \vfill
+  {\fontsize{10}{14}\selectfont\color{muted}\insertdate\par}%
+  \vspace*{0.6cm}}
+\lstset{
+  language=R,
+  basicstyle=\ttfamily\fontsize{12.5}{14.5}\selectfont\color{bodytext},
+  keywordstyle=\color{navy},
+  commentstyle=\color{codecomment},
+  stringstyle=\color{codestring},
+  backgroundcolor=\color{codebg},
+  frame=single,
+  rulecolor=\color{codeframe},
+  framerule=0.35pt,
+  framesep=5pt,
+  showstringspaces=false,
+  keepspaces=true,
+  breaklines=true,
+  columns=fullflexible,
+  xleftmargin=5pt,
+  xrightmargin=5pt,
+  aboveskip=0.35em,
+  belowskip=0.35em
+}
+\lstdefinestyle{output}{
+  language={},
+  keywordstyle=\color{bodytext},
+  commentstyle=\color{bodytext},
+  stringstyle=\color{bodytext},
+  backgroundcolor=\color{white},
+  frame=none,
+  aboveskip=0.12em,
+  belowskip=0.25em
+}
+\newcommand{\code}[1]{\textcolor{navy}{\texttt{#1}}}
+\newcommand{\inputlabel}{\par\smallskip{\fontsize{10.5}{13}\selectfont\bfseries\color{muted}输入代码\par}}
+\newcommand{\outputlabel}{\par\smallskip{\fontsize{10.5}{13}\selectfont\bfseries\color{muted}Console 输出\par}}
+\newcommand{\thead}[1]{\textcolor{navy}{\textbf{#1}}}
 
-\title{R语言-6}
-\author{郑泽靖 \and zzjstat2023@163.com}
+\title{R语言基础（六）}
+\subtitle{频数、频率与基本图形}
+\author{郑泽靖}
 \institute{北京师范大学统计学院}
-
+\date{2026年秋季学期}
 
 \begin{document}
-\begin{frame}
+
+\begin{frame}[plain]
   \titlepage
+  \note{教材第132--149页，范围为4.2节和4.3.1节。每节45分钟，保留课堂练习与讲评，不提交作业。Excel导入放在末尾参考页，不计入90分钟。}
 \end{frame}
-\section{数据读取与基础绘图}
 
-% --- Frame 1: 读取 Excel ---
-\begin{frame}[fragile]{从 Excel 文件中读取数据}
-    在 R 中，推荐使用 \texttt{readxl} 包来读取 Excel 文件。
-    
-    \textbf{1. 安装和加载 \texttt{readxl} 包}：
-\begin{lstlisting}[language=R]
-install.packages("readxl")  # 安装 readxl 包
-library(readxl)             # 加载 readxl 包
+\begin{frame}{课堂数据}
+  本讲使用教材中的数据。
+  \begin{itemize}
+    \item 56名学生的身高：频率直方图。
+    \item 两届学生的成绩：不等组距与分布比较。
+    \item 29名学生的性别：频数、频率与分类图形。
+    \item 55辆汽车的车速：第一节课堂练习。
+  \end{itemize}
+  \medskip
+  在 RStudio 中打开 \code{R6-data.R}，\par
+  选中相应数据段运行，后续直接使用数据名称。\par
+  本讲不要求逐项输入数据。
+  \note{教材第132、139、143、173页。第一节第0--3分钟，3分钟。教师示范运行数据段，复习向量赋值。完整数据保留在配套脚本，不要求手抄。}
+\end{frame}
+
+\begin{frame}{数据分组}
+  \begin{itemize}
+    \item 组边界：将数据范围分成若干区间的分割点。
+    \item 组距：相邻两个组边界的差。
+    \item 等距分组：各组组距相同。
+    \item 不等距分组：存在不同的组距。
+  \end{itemize}
+  \medskip
+  先确定覆盖全部数据的范围，再选择组边界，最后统计每组中的数据个数。
+  \note{教材第135页，4.2.2节。第一节第3--6分钟，讲解3分钟。组边界共有k+1个点时分为k组，不增加形式推导。}
+\end{frame}
+
+\begin{frame}{频率直方图的柱高与面积}
+  对某一组，设频数为 $n_i$，总样本量为 $n$。
+  \[
+    \text{频率}=\frac{n_i}{n},\qquad
+    \text{柱高}=\frac{\text{频率}}{\text{组距}}.
+  \]
+  \[
+    \text{矩形面积}=\text{柱高}\times\text{组距}=\text{频率}.
+  \]
+  各组矩形的总面积为1。用频率近似概率，\\
+  矩形顶边可以帮助观察总体密度的形状。
+  \note{教材第133--135页，概率矩形、频率矩形及频率直方图。第一节第6--10分钟，讲解4分钟。说明概率矩形面积为概率、频率矩形面积为频率，通过大数定律联系上讲，不讲证明。}
+\end{frame}
+
+\begin{frame}[fragile]{\texttt{hist()} 的基本用法}
+\begin{lstlisting}
+hist(height, breaks = "Sturges",
+     freq = FALSE)
 \end{lstlisting}
+  \small
+  \renewcommand{\arraystretch}{1.22}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}ll@{}}
+    \toprule
+    \thead{参数} & \thead{含义} \\
+    \midrule
+    \code{height} & 数值型数据向量 \\
+    \code{breaks} & 分组规则或组边界向量 \\
+    \code{freq = FALSE} & 频率直方图，纵轴为频率/组距 \\
+    \code{freq = TRUE} & 分组频数条形图，纵轴为频数 \\
+    \bottomrule
+  \end{tabular*}
+  \medskip
+  默认分组规则为 \code{"Sturges"}。\par
+  实际分组仍需结合图形检查。
+  \note{教材第136--138、140页。第一节第10--12分钟，教师演示2分钟。本讲明确写出freq，避免默认设置混淆。Sturges不表述为最适组距。}
+\end{frame}
 
-    \textbf{2. 读取 Excel 文件}：
-\begin{lstlisting}[language=R]
-# 设置文件路径 (注意使用正斜杠 / 或双反斜杠 \\)
-file_path <- "path/to/your/file.xlsx"
-
-# 读取 Excel 文件中的第一个工作表
-data <- read_excel(file_path)
-
-# 查看数据前几行
-head(data)
+\begin{frame}[fragile]{教材例4.2.1：身高直方图}
+  数据名称为 \code{height}，共56个身高值。
+  \inputlabel
+\begin{lstlisting}
+g <- seq(157.3, 181.8, 3.5)
+hist(height, breaks = g,
+     freq = FALSE, main = "",
+     xlab = "身高（cm）",
+     ylab = "频率/组距")
 \end{lstlisting}
+  \code{main} 设置标题，\code{xlab} 和 \code{ylab} 设置坐标轴名称。\code{main = ""} 表示不另加图标题。
+  \note{教材第132、136页，表4-2、例4.2.1。第一节第12--15分钟，演示3分钟。数据在脚本中完整提供，重点解释seq生成组边界及三个标签参数。}
 \end{frame}
 
-\section{连续变量的分布：直方图}
+\begin{frame}{56名学生的身高分布}
+  \centering
+  \includegraphics[width=.96\linewidth,height=.65\textheight,keepaspectratio]{height-density.pdf}
+  \par\raggedright
+  每个矩形面积表示相应身高区间内学生的频率。
+  \note{教材第136--137页，图4.4。第一节第15--18分钟，演示与读图3分钟。教师对照代码、组距和纵轴，学生观察图形。}
+\end{frame}
 
-% --- Frame 2: 直方图概念 ---
-\begin{frame}[fragile]{直方图 (Histogram)}
-    直方图用于展示\textbf{连续变量}的分布情况。使用 \texttt{hist()} 函数即可绘制。
-    
-    例如，模拟生成 30 个服从正态分布的数据并绘制直方图：
-\begin{lstlisting}[language=R]
-x <- rnorm(30, mean=100, sd=1)
-hist(x)
+\begin{frame}{直方图的读取}
+  本例在两个区间出现较高的矩形：
+  \[
+    (164.3,167.8],\qquad (174.8,178.3].
+  \]
+  图形呈现两个峰，整体不具有良好的对称性。
+  \par\medskip
+  读图时可关注数据范围、对称性、峰的个数、中心位置及分散程度。读图结论来自本组样本。
+  \note{教材第136页例4.2.1结论及第138--139页4.2.4节。第一节第18--20分钟，讲解2分钟。简要说明教材列举的单峰对称、U形、右偏、左偏、J形、反J形，不要求额外绘图。}
+\end{frame}
+
+\begin{frame}{分组数的选择}
+  \small
+  分组太少会掩盖细节，分组太多会使图形过于零碎。\\
+  教材给出的经验参考为 $k\approx 1+\log_2 n$。
+  \par\smallskip
+  \centering
+  \includegraphics[width=\linewidth,height=.5\textheight,keepaspectratio]{height-groups.pdf}
+  \par\raggedright
+  对56个观测，参考值约为6.8，本例取7组。仍需结合图形检查分组是否合适。
+  \note{教材第137--138页，4.2.3节。第一节第20--22分钟，演示2分钟。同一教材身高数据采用2、7、20组作课堂对照，属于已讲分组用法，不新增模拟数据或分组算法。}
+\end{frame}
+
+\begin{frame}[fragile]{分组频数条形图}
+  同样的身高数据与组边界，只修改 \code{freq}。
+\begin{lstlisting}
+hist(height, breaks = g,
+     freq = TRUE, main = "",
+     xlab = "身高（cm）",
+     ylab = "频数")
 \end{lstlisting}
-
-    \begin{figure}
-        \centering
-        % 建议使用 height 控制图片高度，避免溢出
-        \includegraphics[height=0.45\textheight]{1.png} 
-        \caption{模拟正态分布数据的直方图}
-    \end{figure}
+  此时每根柱的高度表示该组中的学生人数。
+  \note{教材第140--141页，分组频数条形图。第一节第22--23分钟，教师演示1分钟。沿用前页g，不重复输入长向量。}
 \end{frame}
 
-% --- Frame 3: hist 参数详解 ---
-\begin{frame}[fragile]{hist 函数详解}
-    常用命令格式：
-\begin{lstlisting}[language=R]
-hist(x, breaks="Sturges", freq=FALSE)
+\begin{frame}{等组距时的两种纵轴}
+  \centering
+  \includegraphics[width=\linewidth,height=.58\textheight,keepaspectratio]{height-density-count.pdf}
+  \par\raggedright
+  本例各组组距相同，两图形状一致。\par
+  左图看频率/组距，右图看每组人数。
+  \note{教材第140--141页，图4.8。第一节第23--24分钟，比较1分钟。提醒分类变量的条形图与这里的分组频数条形图含义不同。}
+\end{frame}
+
+\begin{frame}[fragile]{教材例4.2.2：不等组距}
+  使用教材两届成绩 \code{prob02}、\code{prob03}。
+\begin{lstlisting}
+hist(prob02, right = FALSE,
+     breaks = c(0, 60, 70, 80, 90, 100),
+     freq = FALSE, main = "2002级",
+     xlab = "成绩", ylab = "频率/组距")
+
+hist(prob03, right = FALSE,
+     breaks = c(0, 60, 70, 80, 90, 100),
+     freq = FALSE, main = "2003级",
+     xlab = "成绩", ylab = "频率/组距")
 \end{lstlisting}
-
-    \begin{table}
-    \centering
-    \begin{tabular}{|l|l|}
-    \hline 
-    \textbf{参数} & \textbf{含义} \\
-    \hline 
-    \texttt{x} & 数据向量（必须为数值型） \\
-    \hline 
-    \texttt{breaks} & 设置分组边界 \\
-    & (1) 默认为 "Sturges"（自动计算最适组距） \\
-    & (2) 指定向量：自定义组边界点 \\
-    \hline 
-    \texttt{freq} & 纵轴显示设置 \\
-    & \texttt{TRUE} (默认)：显示\textbf{频数} (Frequency) \\
-    & \texttt{FALSE}：显示\textbf{频率/密度} (Density) \\
-    \hline
-    \end{tabular}
-    \end{table}
+  \small
+  \code{right = FALSE} 表示左闭右开，如 $[60,70)$。
+  \note{教材第139--140页，例4.2.2。第一节第24--26分钟，教师演示2分钟。默认right=TRUE为左开右闭，端点归属由参数确定。数据均小于100，分组覆盖全部观测。}
 \end{frame}
 
-% --- Frame 4: 自定义直方图 ---
-\begin{frame}[fragile]{自定义直方图样式}
-    可以使用 \texttt{main}、\texttt{xlab}、\texttt{ylab} 设置标签，用 \texttt{col} 设置颜色。
-\begin{lstlisting}[language=R]
-hist(x, 
-     col = rainbow(15),     # 设置彩虹色
-     main = '正态随机数分布', # 主标题
-     xlab = '数值',           # x轴标签
-     ylab = '频数')           # y轴标签
+\begin{frame}{不等组距下的成绩比较}
+  \centering
+  \includegraphics[width=\linewidth,height=.52\textheight,keepaspectratio]{score-density.pdf}
+  \par\raggedright\small
+  首组组距为60，其余各组为10。比较分布形状时，柱高应\mbox{采用}频率/组距，不能直接用频数代替。
+  2002级较高的\mbox{密度}在90--100分组，2003级在70--80分组。
+  \note{教材第139--141页，图4.7及4.9。第一节第26--28分钟，讲解2分钟。教师可口头将freq改TRUE对照教材图4.9，R可能提示不等组距时面积不能解释为频率，正好强调本页区别。}
+\end{frame}
+
+\begin{frame}[fragile]{课堂练习一：汽车车速（12分钟）}
+  教材练习4.10：55辆汽车，数据为 \code{speed}。
+  \begin{enumerate}
+    \item 按下面的组边界绘制频率直方图。
+    \item 将组距由5改为10，比较图形。
+    \item 说明纵轴含义，并描述车速的主要集中范围。
+  \end{enumerate}
+\begin{lstlisting}
+g1 <- seq(5, 55, 5)
+hist(speed, breaks = g1, freq = FALSE,
+     main = "", xlab = "车速（km/h）",
+     ylab = "频率/组距")
+g2 <- seq(5, 55, 10)
 \end{lstlisting}
-
-    \begin{figure}
-        \centering
-        \includegraphics[height=0.45\textheight]{3.png}
-        \caption{自定义样式的直方图}
-    \end{figure}
+  \note{教材第173页练习4.10，表4-15。第一节第28--40分钟，独立练习12分钟。数据脚本含完整55项，不需要提交。教师巡视，提示两组边界都覆盖7--52的全部观测。}
 \end{frame}
 
-% --- Frame 5: 频率直方图示例 ---
-\begin{frame}[fragile]{直方图示例：频率直方图}
-    \textbf{例一：绘制频率直方图 (Density)}
-\begin{lstlisting}[language=R]
-set.seed(123)
-x <- rnorm(100, 80, 5)        # 生成100个均值为80的成绩数据
-x <- x[x > 50 & x <= 100]     # 截取50-100分之间的数据
-g <- seq(50, 100, 3)          # 定义组边界，组距为3
-
-hist(x, breaks = g,           # 设置自定义组距
-     freq = FALSE,            # FALSE 表示绘制频率(密度)直方图
-     main = "学生成绩分布",    
-     xlim = c(50, 100),       # 设置 x 轴范围
-     xlab = "成绩",
-     ylab = "频率/组距") 
+\begin{frame}[fragile]{练习一参考：改变组距}
+\begin{lstlisting}
+g2 <- seq(5, 55, 10)
+hist(speed, breaks = g2, freq = FALSE,
+     main = "", xlab = "车速（km/h）",
+     ylab = "频率/组距")
 \end{lstlisting}
+  两种分组都使用同一批数据。组距改变时，柱高也随之改变，但各组矩形的总面积仍为1。
+  \note{教材第135--138页分组原理及第173页练习4.10。第一节第40--42分钟，讲评2分钟。核对freq和组边界，不要求额外函数。}
 \end{frame}
 
-% --- Frame 6: 频率直方图图示 ---
-\begin{frame}[fragile]{直方图示例：频率直方图}
-    \begin{figure}
-        \centering
-        \includegraphics[height=0.7\textheight]{4.png}
-        \caption{学生成绩的频率直方图}
-    \end{figure}
+\begin{frame}{练习一参考：车速分布}
+  \centering
+  \includegraphics[width=.95\linewidth,height=.61\textheight,keepaspectratio]{speed-density.pdf}
+  \par\raggedright\small
+  本组车速主要集中在20--35 km/h附近。\par
+  总体变量为该路段在所考察条件下通过车辆的车速。
+  \note{教材第173页练习4.10。第一节第42--44分钟，读图讲评2分钟。强调55个车速值是样本数据，不把样本本身称为总体。}
 \end{frame}
 
-% --- Frame 7: 频数直方图示例 ---
-\begin{frame}[fragile]{直方图示例：频数直方图}
-    \textbf{例二：绘制频数直方图 (Frequency)}
-\begin{lstlisting}[language=R]
-set.seed(123)
-x <- rnorm(100, 80, 5) 
-x <- x[x > 50 & x <= 100]
-g <- seq(50, 100, 3)
+\begin{frame}{第一节操作核对}
+  \begin{itemize}
+    \item 能用 \code{breaks} 指定覆盖全部数据的组边界。
+    \item 能区分频率直方图与分组频数条形图。
+    \item 知道频率直方图的面积表示频率。
+    \item 读图时同时查看分组方式与纵轴名称。
+  \end{itemize}
+  \medskip
+  下一节：分类频数与频率、条形图与饼图。
+  \note{教材第135--142页。第一节第44--45分钟，讲评收束1分钟。第一节合计3+7+10+8+12+5=45分钟。}
+\end{frame}
 
-hist(x, breaks = g, 
-     freq = TRUE,             # TRUE 表示绘制频数直方图
-     main = "学生成绩分布", 
-     xlim = c(50, 100), 
-     xlab = "成绩",
-     ylab = "频数") 
+\begin{frame}[fragile]{分类数据的频数}
+  教材案例4.4调查29名学生的性别。先运行数据脚本中的 \code{gender} 段。
+\begin{lstlisting}
+a <- as.factor(gender)
+u <- table(a)
+u
 \end{lstlisting}
-\end{frame}
-
-% --- Frame 8: 频数直方图图示 ---
-\begin{frame}[fragile]{直方图示例：频数直方图}
-    \begin{figure}
-        \centering
-        \includegraphics[height=0.7\textheight]{2.png}
-        \caption{学生成绩的频数直方图}
-    \end{figure}
-\end{frame}
-
-\section{分类变量的分布：条形图与饼图}
-
-% --- Frame 9: 频数统计 ---
-\begin{frame}[fragile]{分类变量的频数统计}
-    对于分类变量（因子），可以使用 \texttt{table()} 函数统计各类别的频数。
-\begin{lstlisting}[language=R]
-# 创建示例数据
-x <- c("女", "男", "女", "女", "女", "男", "女", "男", 
-       "女", "女", "男", "男", "女", "男", "女", "女", 
-       "女", "女", "男", "男", "男", "男", "男")
-y <- as.factor(x) 
-
-u <- table(y)     # 计算频数
-print(u)
-# y
-# 男  女 
-# 12  17 
+  \outputlabel
+\begin{lstlisting}[style=output]
+a
+女 男
+17 12
 \end{lstlisting}
+  \code{as.factor()} 将数据转为因子，\code{table()} 统计频数。类别顺序可能因系统而异，应按标签核对。
+  \note{教材第142--143页案例4.4。第二节第0--3分钟，演示3分钟。完整29项数据与男女计数核对一致，不再使用旧稿23项向量。}
+\end{frame}
 
-    使用 \texttt{addmargins()} 添加合计行：
-\begin{lstlisting}[language=R]
+\begin{frame}[fragile]{频数合计}
+  \code{addmargins()} 在分类统计结果中添加合计。
+\begin{lstlisting}
 addmargins(u)
-# y   女  男  Sum
-#    17  12  29
 \end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+a
+ 女  男 Sum
+ 17  12  29
+\end{lstlisting}
+  \medskip
+  女生17人，男生12人，合计29人。
+  \note{教材第143页。第二节第3--5分钟，演示2分钟。说明Sum为合计而非第三个类别。}
 \end{frame}
 
-% --- Frame 10: 频率统计 ---
-\begin{frame}[fragile]{分类变量的频率统计}
-    使用 \texttt{prop.table()} 计算比例（频率）：
-\begin{lstlisting}[language=R]
-prop.table(u)
-# 男        女 
-# 0.4137931 0.5862069 
+\begin{frame}[fragile]{分类数据的频率}
+  \code{prop.table()} 将频数转为频率。
+\begin{lstlisting}
+v <- prop.table(u)
+addmargins(v)
 \end{lstlisting}
-
-    结合 \texttt{addmargins()} 显示合计频率：
-\begin{lstlisting}[language=R]
-v <- prop.table(u)         
-addmargins(v)              
-# 男        女        Sum 
-# 0.4137931 0.5862069 1.0000000
+  \outputlabel
+\begin{lstlisting}[style=output]
+a
+       女        男       Sum
+0.5862069 0.4137931 1.0000000
 \end{lstlisting}
+  \[
+    \text{女生频率}=17/29,\qquad \text{男生频率}=12/29.
+  \]
+  所有类别的频率合计为1。
+  \note{教材第143--144页。第二节第5--8分钟，演示3分钟。解释频数与频率，无须新增保留小数的函数。}
 \end{frame}
 
-% --- Frame 11: 条形图绘制 ---
-\begin{frame}[fragile]{分类数据的条形图 (Bar Plot)}
-    条形图和饼图常用于展示分类数据。在 R 中使用 \texttt{barplot()} 绘制条形图。
-
-\begin{lstlisting}[language=R]
-# 绘制频数条形图
-barplot(u, main = "性别频数分布", ylab = "人数")  
-\end{lstlisting}
-
-    \begin{figure}
-        \centering
-        \includegraphics[height=0.6\textheight]{8.png}
-        \caption{频数条形图}
-    \end{figure}
-\end{frame}
-
-% --- Frame 13: 条形图展示2 ---
 \begin{frame}[fragile]{分类数据的条形图}
-    \begin{lstlisting}[language=R]
-# 绘制频率条形图
-barplot(v, main = "性别频率分布", ylab = "占比")  
+\begin{lstlisting}
+barplot(u, main = "", ylab = "频数")
+barplot(v, main = "", ylab = "频率")
 \end{lstlisting}
-    \begin{figure}
-        \centering
-        \includegraphics[height=0.7\textheight]{10.png}
-        \caption{频率条形图}
-    \end{figure}
+  \begin{itemize}
+    \item 条形高度分别表示频数或频率。
+    \item 不同类别的条形相互分离。
+    \item 纵轴从0开始，避免夸大类别间的差别。
+  \end{itemize}
+  \note{教材第144--145页。第二节第8--10分钟，演示2分钟。上节的连续数值用分组，本节按类别汇总。}
 \end{frame}
 
-% --- Frame 14: 饼图 ---
-\begin{frame}[fragile]{饼图 (Pie Chart)}
-    饼图通过扇形面积比例展示各分类变量的频率。使用 \texttt{pie()} 函数绘制。
-\begin{lstlisting}[language=R]
-print(u)
-# y
-# 男 女 
-# 12 17 
+\begin{frame}{频数条形图与频率条形图}
+  \centering
+  \includegraphics[width=\linewidth,height=.6\textheight,keepaspectratio]{gender-bars.pdf}
+  \par\raggedright
+  两图表达同一组分类统计结果，纵轴分别为人数与所占比例。
+  \note{教材第144页图4.10。第二节第10--11分钟，读图1分钟。图与table的标签顺序严格对应。}
+\end{frame}
 
-pie(u, main = "性别分布饼图")
+\begin{frame}[fragile]{饼图}
+\begin{lstlisting}
+pie(u)
 \end{lstlisting}
-    \begin{figure}
-        \centering
-        \includegraphics[height=0.5\textheight]{9.png}
-    \end{figure}
+  \centering
+  \includegraphics[width=.65\linewidth,height=.43\textheight,keepaspectratio]{gender-pie.pdf}
+  \par\raggedright
+  每个扇形的面积比例表示该类别的频率。女生所占比例较高，与频数表及条形图一致。
+  \note{教材第144--145页图4.11。第二节第11--14分钟，演示与比较3分钟。无须增加百分比标签或格式化函数。}
 \end{frame}
 
-\section{多维分类变量的可视化}
-
-% --- Frame 15: 案例引入 ---
-\begin{frame}[fragile]{案例 4.5: 学生性别与专业分类}
-    \textbf{背景}：某大学入学一年后分专业。调查了 69 名学生的志愿选择情况。
-    
-    \textbf{数据统计}：
-    \begin{itemize}
-        \item \textbf{文科}：29 人（男生 12，女生 17）
-        \item \textbf{理科}：40 人（男生 19，女生 21）
-    \end{itemize}
-    
-    此处涉及两个分类变量：
-    \begin{itemize}
-        \item 变量 $X$：专业（文科、理科）
-        \item 变量 $Y$：性别（男、女）
-    \end{itemize}
-\end{frame}
-
-% --- Frame 16: 条形图类型 ---
-\begin{frame}[fragile]{多变量条形图}
-    展示两个分类变量的关系时，常用的条形图类型：
-    \begin{enumerate}
-        \item \textbf{堆积条形图 (Stacked Bar Plot)}：分为等高（展示比例）和非等高（展示总量）。
-        \item \textbf{并列条形图 (Dodged Bar Plot)}：便于直接比较各组数值。
-    \end{enumerate}
-    
-    \begin{figure}
-        \centering
-        \includegraphics[width=0.8\textwidth]{denggao.png} 
-        \caption{等高堆积条形图示例}
-    \end{figure}
-\end{frame}
-
-% --- Frame 17: 数据准备 ---
-\begin{frame}[fragile]{数据准备：创建列联表}
-    首先将数据存储为矩阵或 table 对象：
-\begin{lstlisting}[language=R]
-# 创建矩阵数据
-x <- matrix(c(12, 19, 17, 21), nrow=2, ncol=2)
-colnames(x) <- c("男", "女")      # 列名：性别
-rownames(x) <- c("文科", "理科")  # 行名：专业
-
-y <- as.table(x)  # 转换为 table 对象
-print(y)
+\begin{frame}[fragile]{教材案例4.5：性别与专业}
+  69名学生中，文科29人，理科40人。
+\begin{lstlisting}
+x <- matrix(c(12, 19, 17, 21), nrow = 2)
+colnames(x) <- c("男", "女")
+rownames(x) <- c("文科", "理科")
+y <- as.table(x)
+y
 \end{lstlisting}
-
-    \begin{table}[h]
-    \centering
-    \begin{tabular}{lcc} 
-    \hline
-    & \textbf{男} & \textbf{女} \\
-    \hline
-    \textbf{文科} & 12 & 17 \\
-    \textbf{理科} & 19 & 21 \\
-    \hline
-    \end{tabular}
-    \caption{变量 y 的内容}
-    \end{table}
-\end{frame}
-
-% --- Frame 18: 等高堆积条形图代码 ---
-\begin{frame}[fragile]{绘制等高堆积条形图}
-    等高堆积条形图主要用于比较\textbf{结构比例}（即条件概率）。
-    
-    \textbf{图 A：给定学科时的性别比例}
-\begin{lstlisting}[language=R]
-# prop.table(..., margin=2) 表示按列计算比例(列和为1)
-barplot(prop.table(t(y), margin=2), 
-        xlim = c(0, 3.5), 
-        legend.text = colnames(y),     # 图例
-        args.legend = list(x="topright"))
+  \outputlabel
+\begin{lstlisting}[style=output]
+     男 女
+文科 12 17
+理科 19 21
 \end{lstlisting}
+  \note{教材第145--147页案例4.5、表4-7。第二节第14--16分钟，演示2分钟。两个分类变量形成列联表，matrix按列填入的次序与前讲一致。}
+\end{frame}
 
-    \textbf{图 B：给定性别时的学科比例}
-\begin{lstlisting}[language=R]
-barplot(prop.table(y, margin=2), 
-        xlim = c(0, 3.5), 
-        legend.text = rownames(y), 
-        args.legend = list(x="topright")) 
+\begin{frame}{列联表的行与列}
+  \centering
+  \renewcommand{\arraystretch}{1.35}
+  \begin{tabular}{lrrr}
+    \toprule
+    & \thead{男} & \thead{女} & \thead{合计} \\
+    \midrule
+    文科 & 12 & 17 & 29 \\
+    理科 & 19 & 21 & 40 \\
+    合计 & 31 & 38 & 69 \\
+    \bottomrule
+  \end{tabular}
+  \par\medskip\raggedright
+  \code{y} 的行是专业，列是性别。\code{t(y)} 交换行与列，便于改为按专业画图。
+  \note{教材第146--147页。第二节第16--17分钟，讲解1分钟。列联表教学块合计3分钟。只解释表方向，不重复讲矩阵转置算法。}
+\end{frame}
+
+\begin{frame}[fragile]{普通堆积条形图：代码}
+  先按专业比较人数构成。
+\begin{lstlisting}
+barplot(t(y),
+        xlim = c(0, 3.5),
+        legend.text = colnames(y),
+        args.legend = list(x = "topright"),
+        ylab = "频数")
 \end{lstlisting}
+  \small
+  \code{legend.text} 设置图例名称，\code{args.legend} 设置图例位置。\code{xlim} 为图例保留横向空间。
+  \note{教材第147--148页图4.14。第二节第17--19分钟，教师演示2分钟。图例参数照模板使用，不展开list构造的新知识。}
 \end{frame}
 
-% --- Frame 19: 条件概率解释 ---
-\begin{frame}[fragile]{条件概率计算详解}
-    函数 \texttt{prop.table(data, margin)} 用于计算比例：
-    \begin{itemize}
-        \item \texttt{margin=1}：按行计算（行和为1）。
-        \item \texttt{margin=2}：按列计算（列和为1）。
-    \end{itemize}
-
-    \textbf{示例结果}：
-    \begin{columns}
-        \begin{column}{0.48\textwidth}
-        \small
-        \texttt{prop.table(t(y), margin=2)}
-        \begin{tabular}{rrr} 
-        \hline
-        & 文科 & 理科 \\
-        \hline
-        男 & 0.41 & 0.48 \\
-        女 & 0.59 & 0.52 \\
-        \hline
-        \end{tabular}
-        \end{column}
-        
-        \begin{column}{0.48\textwidth}
-        \small
-        \texttt{prop.table(y, margin=2)}
-        \begin{tabular}{rrr} 
-        \hline
-        & 男 & 女 \\
-        \hline
-        文科 & 0.39 & 0.45 \\
-        理科 & 0.61 & 0.55 \\
-        \hline
-        \end{tabular}
-        \end{column}
-    \end{columns}
-    
-    \vspace{0.5cm}
-    注：通过 \texttt{help(prop.table)} 可查看更多用法。
+\begin{frame}{普通堆积条形图：人数}
+  \centering
+  \includegraphics[width=.95\linewidth,height=.61\textheight,keepaspectratio]{major-stacked.pdf}
+  \par\raggedright\small
+  柱的总高度是该专业总人数，各段高度是男、女生人数。\par
+  理科总人数40，文科总人数29。
+  \note{教材第148页图4.14(a)。第二节第19--21分钟，读图2分钟。核对图例、段高与总高度，不将段高直接解释为组内比例。}
 \end{frame}
 
-% --- Frame 20: 堆积条形图 ---
-\begin{frame}[fragile]{普通堆积条形图 (Stacked)}
-    普通堆积条形图既能展示各组内部的比例结构，也能展示样本总量的差异。
-    
-    \begin{figure}
-        \centering
-        % 修正了文件名拼写 (假设原图名有误)
-        \includegraphics[width=0.8\textwidth]{feidenggap.png} 
-        \caption{非等高堆积条形图}
-    \end{figure}
-\end{frame}
-
-% --- Frame 21: 堆积条形图代码 ---
-\begin{frame}[fragile]{绘制堆积条形图}
-    直接使用原始频数数据 \texttt{y} 进行绘制，无需计算比例。
-
-    \textbf{绘制图 (a)：按专业堆积}
-\begin{lstlisting}[language=R]
-barplot(t(y), 
-        xlim = c(0, 3.5), 
-        legend.text = colnames(y), 
-        args.legend = list(x="topright"))
+\begin{frame}[fragile]{按专业计算性别比例}
+\begin{lstlisting}
+prop.table(t(y), margin = 2)
 \end{lstlisting}
-
-    \textbf{绘制图 (b)：按性别堆积}
-\begin{lstlisting}[language=R]
-barplot(y, 
-        xlim = c(0, 3.5), 
-        legend.text = rownames(y), 
-        args.legend = list(x="topright"))
+  \outputlabel
+\begin{lstlisting}[style=output]
+        文科      理科
+男 0.4137931 0.4750000
+女 0.5862069 0.5250000
 \end{lstlisting}
+  \code{margin = 2} 表示每一列分别计算比例，各列合计为1。这里的分母分别为文科29人和理科40人。
+  \note{教材第147页。第二节第21--23分钟，演示2分钟。强调先看t(y)列的含义，再解释分母。不引入其他margin用法。}
 \end{frame}
 
-% --- Frame 22: 并列条形图 ---
-\begin{frame}[fragile]{并列条形图 (Dodged)}
-    并列条形图将各类别的柱子并排显示，便于直接比较数值大小。
-    \begin{figure}
-        \centering
-        \includegraphics[width=0.8\textwidth]{binglie.png}
-        \caption{并列条形图示例}
-    \end{figure}
-\end{frame}
-
-% --- Frame 23: 并列条形图代码 ---
-\begin{frame}[fragile]{绘制并列条形图}
-    关键参数：\texttt{beside = TRUE}。
-
-    \textbf{代码示例}：
-\begin{lstlisting}[language=R]
-# 图 (a)
-barplot(t(y), 
-        beside = TRUE,   # 关键参数：并列显示
-        legend.text = colnames(y), 
-        args.legend = list(x="topleft"))
-
-# 图 (b)
-barplot(y, 
-        beside = TRUE, 
-        legend.text = rownames(y), 
-        args.legend = list(x="topleft"))
+\begin{frame}[fragile]{等高堆积条形图：代码}
+\begin{lstlisting}
+barplot(prop.table(t(y), margin = 2),
+        xlim = c(0, 3.5),
+        legend.text = colnames(y),
+        args.legend = list(x = "topright"),
+        ylab = "频率")
 \end{lstlisting}
+  把每个专业的人数换为该专业内部的性别比例，\par
+  两根柱的总高度均为1。
+  \note{教材第146--147页图4.13(a)。第二节第23--24分钟，演示1分钟。只替换barplot第一个参数，其余沿用。}
 \end{frame}
 
-% --- Frame 24: 练习题 ---
-\begin{frame}{课堂练习}
-    \textbf{练习题：}
-    某统计学院对学生性别与专业进行调查，数据如下：
-    
-    \begin{table}[h]
-    \centering
-    \begin{tabular}{lccc}
-    \hline
-    \textbf{专业} & \textbf{男生 (人)} & \textbf{女生 (人)} & \textbf{合计} \\
-    \hline
+\begin{frame}{等高堆积条形图：比例}
+  \centering
+  \includegraphics[width=.95\linewidth,height=.61\textheight,keepaspectratio]{major-proportions.pdf}
+  \par\raggedright\small
+  文科女生比例约为0.59，理科女生比例为0.525。此图便于比较比例，但不能由柱高比较专业总人数。
+  \note{教材第146--147页图4.13(a)。第二节第24--25分钟，读图1分钟。普通堆积与等高堆积的重点不同。}
+\end{frame}
+
+\begin{frame}[fragile]{并列条形图：代码}
+  令 \code{beside = TRUE}，同一专业的男、女生分别画成相邻的条形。
+\begin{lstlisting}
+barplot(t(y), beside = TRUE,
+        legend.text = colnames(y),
+        args.legend = list(x = "topleft"),
+        ylab = "频数")
+\end{lstlisting}
+  与堆积方式相比，并列条形便于直接比较各专业男、女生的人数。
+  \note{教材第148--149页图4.15(a)。第二节第25--27分钟，演示2分钟。仅新增beside参数，不新增图形系统。}
+\end{frame}
+
+\begin{frame}{并列条形图：人数比较}
+  \centering
+  \includegraphics[width=.95\linewidth,height=.61\textheight,keepaspectratio]{major-beside.pdf}
+  \par\raggedright\small
+  同一专业内可比较男、女生人数，也可比较同一性别在两个专业中的人数。
+  \note{教材第149页图4.15(a)。第二节第27--28分钟，读图1分钟。通过图例与各柱位置核对原表。}
+\end{frame}
+
+\begin{frame}[fragile]{交换分类方向的代码对照}
+  \small
+  按性别查看专业构成时，使用 \code{y}，图例改为行名。
+\begin{lstlisting}
+barplot(y, xlim = c(0, 3.5),
+        legend.text = rownames(y),
+        args.legend = list(x = "topright"))
+barplot(prop.table(y, margin = 2),
+        xlim = c(0, 3.5),
+        legend.text = rownames(y),
+        args.legend = list(x = "topright"))
+barplot(y, beside = TRUE,
+        legend.text = rownames(y),
+        args.legend = list(x = "topleft"))
+\end{lstlisting}
+  \note{教材第147--149页，图4.13--4.15的(b)方向。第二节第28--29分钟，教师代码对照1分钟，不要求学生重复输入三段。多变量图教学块合计12分钟。}
+\end{frame}
+
+\begin{frame}[fragile]{课堂练习二：三个专业（12分钟）}
+  \small
+  \renewcommand{\arraystretch}{1.1}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrr@{}}
+    \toprule
+    \thead{专业} & \thead{男} & \thead{女} & \thead{合计} \\
+    \midrule
     文科 & 15 & 25 & 40 \\
     理科 & 20 & 30 & 50 \\
     工科 & 25 & 15 & 40 \\
-    \hline
-    \end{tabular}
-    \end{table}
-
-    \textbf{任务：} 请使用 R 语言完成以下图形绘制：
-    \begin{enumerate}
-        \item \textbf{堆积条形图}：展示每个专业中男、女生的\textbf{数量}构成。
-        \item \textbf{等高堆积条形图}：展示每个专业中男、女生的\textbf{比例}情况。
-        \item \textbf{并列条形图}：分组对比不同专业男、女生的数量。
-    \end{enumerate}
+    \bottomrule
+  \end{tabular*}
+\begin{lstlisting}
+z <- matrix(c(15, 20, 25, 25, 30, 15),
+            nrow = 3)
+rownames(z) <- c("文科", "理科", "工科")
+colnames(z) <- c("男", "女")
+\end{lstlisting}
+  以专业为横轴，参照前面的代码分别画普通堆积、等高堆积和并列条形图。比较总人数与性别比例。
+  \note{教材第146--149页案例4.5的简单数据变式，保留旧稿课堂练习。第二节第29--41分钟，独立练习12分钟，无须提交。提供数据建表及前页绘图框架，不从零写图例参数。}
 \end{frame}
 
-\begin{frame}{}
-\centering \Huge
-  \emph{Thanks!}
+\begin{frame}[fragile]{练习二参考：三种绘图方式}
+  \small
+  三段代码的图例设置相同，重点核对第一个参数。
+\begin{lstlisting}
+barplot(t(z), xlim = c(0, 5),
+        legend.text = colnames(z),
+        args.legend = list(x = "topright"))
+
+barplot(prop.table(t(z), margin = 2),
+        xlim = c(0, 5),
+        legend.text = colnames(z),
+        args.legend = list(x = "topright"))
+
+barplot(t(z), beside = TRUE, xlim = c(0, 12),
+        legend.text = colnames(z),
+        args.legend = list(x = "topright"))
+\end{lstlisting}
+  \note{教材第146--149页方法应用于练习数据。第二节第41--43分钟，讲评2分钟。沿用前例xlim为图例保留空间，不引入新参数。下一页三图由这些代码实际生成，采用同样数据与图例位置。}
+\end{frame}
+
+\begin{frame}{练习二参考：数量与比例}
+  \centering
+  \includegraphics[width=\linewidth,height=.56\textheight,keepaspectratio]{exercise-bars.pdf}
+  \par\raggedright\small
+  理科总人数最多。\par
+  文科女生比例为 $25/40$，理科为 $30/50$，工科为 $15/40$。\par
+  比较比例应看各专业内部的分母，而非只看女生人数。
+  \note{教材第146--149页图形方法的练习讲评。第二节第43--44分钟，讲评1分钟。图形按男、女顺序着色，与z列名一致。}
+\end{frame}
+
+\begin{frame}{本讲操作核对}
+  \small
+  \renewcommand{\arraystretch}{1.28}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}ll@{}}
+    \toprule
+    \thead{任务} & \thead{使用的方法} \\
+    \midrule
+    连续数值的分布 & \code{hist()}，明确组边界及纵轴 \\
+    分类统计 & \code{table()}、\code{prop.table()} \\
+    添加合计 & \code{addmargins()} \\
+    分类图形 & \code{barplot()}、\code{pie()} \\
+    组内比例 & \code{prop.table(..., margin = 2)} \\
+    并列显示 & \code{beside = TRUE} \\
+    \bottomrule
+  \end{tabular*}
+  \par\medskip
+  选择图形时，先确定要比较的是数量、比例，还是连续数值的分布形状。
+  \note{教材第135--149页。第二节第44--45分钟，讲评收束1分钟。第二节合计8+6+3+12+12+4=45分钟。本讲课堂练习完成即可，不设置提交作业。}
+\end{frame}
+
+\begin{frame}{参考：交换分类方向后的图形}
+  \centering
+  \includegraphics[width=\linewidth,height=.56\textheight,keepaspectratio]{reversed-bars.pdf}
+  \par\raggedright
+  横轴改为男、女，柱内区分文科、理科。\par
+  等高堆积图的分母相应改为\\
+  男生31人、女生38人。
+  \note{教材第147--149页图4.13--4.15的(b)方向。课后参考，不计90分钟。正文已保留对应代码，课堂仅对照行列方向，不另加讲授时间。}
+\end{frame}
+
+\begin{frame}{参考：Excel数据导入}
+  教材附录介绍了用 \code{xlsx} 读取 Excel 数据的方法。
+  \begin{enumerate}
+    \item 配置与系统相适应的64位 Java 环境。
+    \item 安装 \code{rJava}、\code{xlsxjars}、\code{xlsx}。
+    \item 加载程序包，再用 \code{read.xlsx()} 读取数据。
+  \end{enumerate}
+  \medskip
+  本次课堂直接使用已提供的数据脚本，不要求现场安装上述依赖。
+  \note{教材第172--173页附录。参考流程，不计90分钟，也不布置为作业。保留教材方法，不把旧稿readxl流程当作教材内容。不照抄旧版Java网址或占位安装路径。}
+\end{frame}
+
+\begin{frame}[fragile]{参考：程序包加载与读取函数}
+  完成环境配置和安装后，教材给出的加载命令为：
+  % QA-TEMPLATE：需额外Java及程序包环境，本次不执行安装。
+\begin{lstlisting}
+library("rJava")
+library("xlsxjars")
+library("xlsx")
+\end{lstlisting}
+  \medskip
+  加载后使用 \code{read.xlsx()}。实际读入前需要确定 Excel 文件和工作表。
+  \par\medskip
+  本讲不展开安装细节及读取参数，\\
+  也不要求独立完成导入。
+  \note{教材第172--173页附录。参考页，不计90分钟。上述包加载依赖未在本次环境安装验证，不能作为核心可运行示例或上机检查项目。教材仅给出read.xlsx名称，故不添加其未给出的参数格式。}
 \end{frame}
 
 \end{document}

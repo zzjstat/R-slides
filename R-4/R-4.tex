@@ -1,459 +1,920 @@
-\documentclass[10pt,compress,t,noamsthm,notheorem,table,handout]{ctexbeamer}
-\usetheme{Boadilla}
-\useinnertheme{circles}
-\useoutertheme{shadow}
-\usecolortheme{seahorse}
+\documentclass[14pt,compress,t,noamsthm,notheorem,table,handout,fontset=none]{ctexbeamer}
+
+\setCJKmainfont[
+  Path=/usr/local/texlive/2024/texmf-dist/fonts/opentype/public/fandol/,
+  BoldFont=FandolSong-Bold.otf
+]{FandolSong-Regular.otf}
+\setCJKsansfont[
+  Path=/usr/local/texlive/2024/texmf-dist/fonts/opentype/public/fandol/,
+  BoldFont=FandolHei-Bold.otf
+]{FandolHei-Regular.otf}
+\setCJKmonofont[
+  Path=/usr/local/texlive/2024/texmf-dist/fonts/opentype/public/fandol/
+]{FandolFang-Regular.otf}
+
+\setsansfont[
+  Path=/usr/local/texlive/2024/texmf-dist/fonts/opentype/public/tex-gyre/,
+  BoldFont=texgyreheros-bold.otf,
+  ItalicFont=texgyreheros-italic.otf,
+  BoldItalicFont=texgyreheros-bolditalic.otf
+]{texgyreheros-regular.otf}
+\setmonofont[
+  Path=/usr/local/texlive/2024/texmf-dist/fonts/opentype/public/inconsolata/,
+  BoldFont=Inconsolatazi4-Bold.otf,
+  StylisticSet=3
+]{Inconsolatazi4-Regular.otf}
+
+\usetheme{default}
 \usefonttheme[onlymath]{serif}
 \setbeamertemplate{navigation symbols}{}
-% \setbeamercovered{transparent}
-\usepackage{natbib}
-\usepackage{amsthm}
-\usepackage{makecell}
-\usepackage{multirow}
-\renewcommand{\qedsymbol}{$\blacksquare$}
-\bibliographystyle{unsrtnat}
-\usepackage{color}
-\setbeamercolor{myfootline}{bg=white,fg=blue}
-\definecolor{myfoot}{rgb}{0.5,0.2,0.5}
-\definecolor{darkblue}{rgb}{0.1,0,0.85}
-\setbeamertemplate{headline}
-  { \leavevmode\begin{beamercolorbox}[wd=\paperwidth,ht=1.25ex,dp=1ex,left]{}
-    \end{beamercolorbox}}
-\setbeamertemplate{footline}% 自定义页脚
-  { \leavevmode\mbox{%
-    \begin{beamercolorbox}[wd=.75\paperwidth,ht=2.25ex,dp=1ex,left]{myfootline}%
-        \rule{2em}{0pt}\color{myfoot}\ttfamily\scriptsize%
-        %\insertshortauthor~(\insertshortinstitute)
-    \end{beamercolorbox}%
-    \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,right]{myfootline}%
-       {\color{myfoot}\ttfamily\scriptsize\insertframenumber{}/%
-        \inserttotalframenumber\hspace*{3ex}}
-    \end{beamercolorbox}}
-    \vskip0pt }
 
-\setbeamercolor{frametitle}{fg=blue,bg=white}
-\setbeamertemplate{frametitle}{%
-  \leavevmode\linespread{1}\large\textbf{\insertframetitle}\par
-  \color{structure.fg!30!bg}\rule[6pt]{\linewidth}{2pt}\par\vspace{-1.0em}}
-
-% \setbeamertemplate{blocks}[default] % beamer块（含定理类环境）不要阴影
-\setbeamertemplate{bibliography entry title}{}{}
-\setbeamertemplate{bibliography entry location}{}{}
-\setbeamertemplate*{bibliography entry note}{}{}
-\setbeamersize{text margin left=0.75cm, text margin right=0.75cm}
-
-\setbeamercolor{bluebox}{fg=black,bg=blue!10}
-\setbeamercolor{redbox}{fg=black,bg=red!10}
-\newenvironment{Boxblue}[1][\textwidth]
-  {\begin{beamercolorbox}[sep=0.1em,shadow=true,wd=#1,rounded=true,center]{bluebox}}
-  {\end{beamercolorbox}}
-\newenvironment{Boxred}[1][\textwidth]
-  {\begin{beamercolorbox}[sep=0.1em,shadow=true,wd=#1,rounded=true,center]{redbox}}
-  {\end{beamercolorbox}}
-\usepackage{stmaryrd}
-\usepackage{amsmath,amssymb,amsfonts,bm}
-\usepackage{graphicx,xcolor}
-\graphicspath{{figures/}}
-\usepackage{hyperref}
-\hypersetup{pdfborder=001,colorlinks=true,linkcolor=darkblue,urlcolor=blue}
-\usepackage{bbding}
-\newcommand{\Bullet}{{\fontsize{6pt}{6pt}\selectfont\CircleSolid}}
-\newcommand{\Hand}{{\fontsize{8pt}{6pt}\selectfont\HandRight}}
-\newcommand{\zhu}{{\color{blue!40}\Bullet}}
-\newcommand{\zhuu}{{\color{red!80}\Hand}}
-\newcommand{\labeli}{\zhu}
-\newenvironment{blist}%
-    {\begin{list}{{\hfill\raisebox{1.12pt}{\color{blue!60}\zhu}}}{%
-     \leftmargin2em\labelwidth1.5em\labelsep0.5em
-     \itemsep1ex\itemindent0pt\parsep0pt\topsep0pt}}
-    {\end{list}}
-\newenvironment{myitem}
-  {\begin{list}{{\hfill\raisebox{0pt}{\labeli}}}{%
-    \setlength{\leftmargin}{1.2em}\labelwidth0.8em\labelsep.4em%
-    \itemsep1ex\parsep2pt\itemindent0pt\topsep0pt}}{\end{list}}
-\newenvironment{subitem}
-  {\begin{list}{{\hfill\raisebox{0pt}{-}}}{%
-    \setlength{\leftmargin}{1.2em}\labelwidth0.8em\labelsep.4em%
-    \itemsep0ex\parsep2pt\itemindent0pt\topsep0pt}}{\end{list}}
-\usepackage{colortbl}
-\usepackage{tikz}
-\usetikzlibrary{arrows}
-\usepackage{stmaryrd}
-\usepackage{amsfonts}
-\usepackage[ruled,linesnumbered]{algorithm2e}
-\usepackage{float} 
+\usepackage{amsmath,amssymb}
 \usepackage{booktabs}
-\usepackage[framemethod=tikz]{mdframed}
-\newmdenv[linecolor=green,middlelinewidth=1pt,%
-          roundcorner=3pt,backgroundcolor=white,%
-          innertopmargin=0.8em,innerbottommargin=0.5em,%
-          innerleftmargin=3pt,innerrightmargin=3pt,%
-          skipbelow=0.5em,skipabove=1em,%
-          splittopskip=\topskip]{Block}
-\newmdenv[linecolor=green,middlelinewidth=1pt,%
-          roundcorner=3pt,backgroundcolor=red!5!white,%
-          innertopmargin=0.5em,innerbottommargin=0.5em,%
-          innerleftmargin=3pt,innerrightmargin=3pt,%
-          skipbelow=0.5em,skipabove=1em,%
-          splittopskip=\topskip]{redbox}
-\newmdenv[linecolor=green,middlelinewidth=0.5pt,%
-          %outerlinewidth=0.5pt,skipabove=0pt,
-          roundcorner=3pt,backgroundcolor=white,%
-          innerbottommargin=3pt,innerrightmargin=5pt,%
-          innerleftmargin=5pt,leftmargin=0ex]{mathbox}
-\newmdenv[linecolor=blue!5!green,middlelinewidth=0.5pt,%
-          roundcorner=3pt,backgroundcolor=yellow!5,%
-          % frametitle={Hello},frametitlebackgroundcolor=green!50,%
-          % skipabove=2pt,skipbelow=2pt,%
-          innerleftmargin=3pt,leftmargin=0ex]{notebox}
-\newmdenv[linecolor=white,font={\scriptsize},%
-          fontcolor=blue!85,backgroundcolor=yellow!5,%
-          skipabove=1ex,skipbelow=0pt,innerbottommargin=0.5ex,%
-          innerleftmargin=3pt,leftmargin=1em]{myref}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\renewcommand{\thefootnote}{}% 不要编号
-\setbeamertemplate{footnote}{% 首行不缩进
-  \noindent\insertfootnotemark%
-  \scriptsize\color{blue!85!green!85}\insertfootnotetext\par\kern1ex}
-\renewcommand\footnoterule%    更改横线属性：长度，粗细，颜色
-  {\color{red}\kern-3pt\rule{0.4\linewidth}{0.5pt}\par\kern2.6pt}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\usepackage[many]{tcolorbox}
-\tcbset{highlight math %
-  style={enhanced, colframe=blue!40,colback=yellow!20,arc=4pt,boxrule=1pt}}
-\newtcbox{\subsubtit}[1][]{%
-  after skip=1em,boxrule=0.5pt,
-  fontupper=\color{blue}\bfseries,top=0.5ex,bottom=0.5ex,
-  left=1ex,right=1ex,
-  colframe=green,colback=red!5!white,#1}
-
-%\renewcommand{\baselinestretch}{1.1}
-\linespread{1.1}
-\setlength{\parskip}{1ex}
-
-\usepackage{listings} %插入代码
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
 \usepackage{xcolor}
-\lstset{numbers=left, %设置行号位置
-        numberstyle=\tiny, %设置行号大小
-        keywordstyle=\color{blue}, %设置关键字颜色
-        commentstyle=\color[cmyk]{1,0,1,0}, %设置注释颜色
-        frame=single, %设置边框格式
-        escapeinside=``, %逃逸字符(1左面的键)，用于显示中文
-        %breaklines, %自动折行
-        extendedchars=false, %解决代码跨页时，章节标题，页眉等汉字不显示的问题
-        xleftmargin=2em,xrightmargin=2em, aboveskip=1em, %设置边距
-        tabsize=4, %设置tab空格数
-        showspaces=false, %不显示空格
-        basicstyle=\ttfamily,
-       }
+\usepackage{etoolbox}
+
+\graphicspath{{figs/}}
+\definecolor{navy}{HTML}{193B5B}
+\definecolor{bodytext}{HTML}{24313D}
+\definecolor{muted}{HTML}{617080}
+\definecolor{rulegray}{HTML}{CBD4DD}
+\definecolor{codebg}{HTML}{F4F6F8}
+\definecolor{codeframe}{HTML}{D5DDE5}
+\definecolor{codecomment}{HTML}{4B705C}
+\definecolor{codestring}{HTML}{92533C}
+\definecolor{tablehead}{HTML}{EEF2F6}
+\hypersetup{pdfborder=0 0 0,colorlinks=true,linkcolor=navy,urlcolor=navy}
+
+\setbeamercolor{normal text}{fg=bodytext,bg=white}
+\setbeamercolor{structure}{fg=navy}
+\setbeamercolor{frametitle}{fg=navy,bg=white}
+\setbeamercolor{myfootline}{bg=white,fg=muted}
+\setbeamercolor{block title}{fg=navy,bg=white}
+\setbeamercolor{block body}{fg=bodytext,bg=white}
+\setbeamercolor{alerted text}{fg=codestring}
+\setbeamerfont{frametitle}{size=\fontsize{18}{21},series=\bfseries}
+\setbeamerfont{block title}{size=\normalsize,series=\bfseries}
+\setbeamertemplate{blocks}[default]
+\setbeamertemplate{itemize item}{\raisebox{0.15ex}{\scriptsize\textbullet}}
+\setbeamertemplate{enumerate item}{\insertenumlabel.}
+\AtBeginEnvironment{itemize}{\setlength{\itemsep}{0.24em}}
+\AtBeginEnvironment{enumerate}{\setlength{\itemsep}{0.24em}}
+\arrayrulecolor{rulegray}
+\setlength{\heavyrulewidth}{0.6pt}
+\setlength{\lightrulewidth}{0.35pt}
+
+\setbeamertemplate{headline}{}
+\setbeamertemplate{footline}{%
+  \leavevmode\mbox{%
+    \begin{beamercolorbox}[wd=.75\paperwidth,ht=3mm,dp=2mm,left]{myfootline}%
+      \hspace*{0.8cm}{\fontsize{7.5}{9}\selectfont 统计学导论上机课}
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.25\paperwidth,ht=3mm,dp=2mm,right]{myfootline}%
+      {\fontsize{7.5}{9}\selectfont\insertframenumber\,/\,\inserttotalframenumber\hspace*{0.8cm}}
+    \end{beamercolorbox}}
+  \vskip0pt}
+\setbeamertemplate{frametitle}{%
+  \vspace{0.28cm}%
+  {\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle\par}%
+  \vspace{0.12cm}%
+  {\color{rulegray}\hrule height 0.45pt}%
+  \vspace{-0.2cm}}
+\setbeamersize{text margin left=0.8cm,text margin right=0.8cm}
+
+\setbeamertemplate{title page}{%
+  \vspace*{0.95cm}%
+  {\fontsize{25}{31}\selectfont\bfseries\color{navy}\inserttitle\par}%
+  \vspace{0.35cm}%
+  {\fontsize{14}{19}\selectfont\color{bodytext}\insertsubtitle\par}%
+  \vspace{0.65cm}%
+  {\color{rulegray}\hrule height 0.45pt}%
+  \vspace{0.6cm}%
+  {\fontsize{13}{18}\selectfont\insertauthor\par}%
+  \vspace{0.12cm}%
+  {\fontsize{10}{15}\selectfont\color{muted}\insertinstitute\par}%
+  \vfill
+  {\fontsize{10}{14}\selectfont\color{muted}\insertdate\par}%
+  \vspace*{0.6cm}}
+
+\lstset{
+  language=R,
+  basicstyle=\ttfamily\fontsize{12.5}{14.5}\selectfont\color{bodytext},
+  keywordstyle=\color{navy},
+  commentstyle=\color{codecomment},
+  stringstyle=\color{codestring},
+  backgroundcolor=\color{codebg},
+  frame=single,
+  rulecolor=\color{codeframe},
+  framerule=0.35pt,
+  framesep=5pt,
+  showstringspaces=false,
+  keepspaces=true,
+  breaklines=true,
+  columns=fullflexible,
+  xleftmargin=5pt,
+  xrightmargin=5pt,
+  aboveskip=0.35em,
+  belowskip=0.35em
+}
+
+\lstdefinestyle{output}{
+  language={},
+  keywordstyle=\color{bodytext},
+  commentstyle=\color{bodytext},
+  stringstyle=\color{bodytext},
+  backgroundcolor=\color{white},
+  frame=none,
+  aboveskip=0.12em,
+  belowskip=0.25em
+}
+
+\newcommand{\code}[1]{\textcolor{navy}{\texttt{#1}}}
+\newcommand{\inputlabel}{\par\smallskip{\fontsize{10.5}{13}\selectfont\bfseries\color{muted}输入代码\par}}
+\newcommand{\outputlabel}{\par\smallskip{\fontsize{10.5}{13}\selectfont\bfseries\color{muted}Console 输出\par}}
+\newcommand{\thead}[1]{\textcolor{navy}{\textbf{#1}}}
+
+\title{R语言基础（四）}
+\subtitle{条件语句、循环与自定义函数}
+\author{郑泽靖}
+\institute{北京师范大学统计学院}
+\date{2026年秋季学期}
+
 \begin{document}
 
-%%%%% =======================================================================
-\title{R语言-4}
-\author{郑泽靖 \and zzjstat2023@163.com }
-\institute{\normalsize 北京师范大学统计学院}
-\date{\today}
-
-% ===== title page =====
 \begin{frame}[plain]
   \titlepage
+  \note{教材第99--104页。本讲主讲条件语句、for、while与自定义函数，共两节45分钟。末尾概率计算参考留待后续概率课使用。}
 \end{frame}
 
-% ===== contents =====
-% \begin{frame}
-%  \frametitle{Outline}
-%  \tableofcontents[hideallsubsections] %[pausesections]
-% \end{frame}
-\begin{frame}[fragile]{R语言中的条件语句}
-    在 R 语言中，常用的条件控制语句是 \texttt{if} 语句，它有三种主要形式。
-    
-    \begin{itemize}
-        \item \textbf{(1) 单条件 (if)}：基础判断。
-        \item \textbf{(2) 复合条件 (if/else)}：二选一判断。
-        \item \textbf{(3) 多条件 (if/else if/else)}：多重分支判断。
-    \end{itemize}
+\begin{frame}[fragile]{上讲回顾：判断与随机抽样}
+  \small
+  比较运算得到逻辑值；\code{sample()} 可以模拟随机抽样。
+  \inputlabel
+\begin{lstlisting}
+x <- 1
+x < 2
+sample(1:6, 1)
+\end{lstlisting}
+  \begin{itemize}
+    \item \code{x < 2} 的结果是 \code{TRUE}。
+    \item 抽样结果是 1 到 6 中的一个整数，每次可能不同。
+    \item 本讲用条件控制执行，用循环完成重复计算。
+  \end{itemize}
+  \note{教材第94--99页；衔接上讲关系运算和sample。第一节第0--3分钟，共3分钟，演示一次抽样即可。}
 \end{frame}
 
-\begin{frame}[fragile]{单条件语句 (if)}
-    \textbf{调用格式：}
-    \begin{lstlisting}[language=R]
-if (条件表达式) {
-    # 仅当条件表达式为 TRUE 时执行
-    程序代码
+\begin{frame}{条件语句的三种形式}
+  条件语句根据判断结果决定执行哪段代码。
+  \par\vspace{0.4em}
+  \renewcommand{\arraystretch}{1.45}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}ll@{}}
+    \toprule
+    \thead{形式} & \thead{执行规则} \\
+    \midrule
+    \code{if} & 条件成立时执行 \\
+    \code{if / else} & 两种情形中执行一种 \\
+    \code{if / else if / else} & 依次判断，执行相应分支 \\
+    \bottomrule
+  \end{tabular*}
+  \par\vspace{0.5em}
+  \code{if} 的条件应得到一个 \code{TRUE} 或 \code{FALSE}。
+  \note{教材第99--101页。条件语句部分合计15分钟（第一节第3--18分钟）。本页1分钟，三种形式均用单一数值作判断。}
+\end{frame}
+
+\begin{frame}[fragile]{单条件语句：\texttt{if}}
+  \small
+  条件不成立时跳过花括号中的代码；成立时执行。
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.65\textwidth}
+      \inputlabel
+\begin{lstlisting}
+x <- 1
+if (x < 1) {
+  x <- x + 1
 }
-    \end{lstlisting}
-    
-    \textbf{执行过程}：
-    若“条件表达式”成立（结果为 \texttt{TRUE}），则执行“程序代码”；否则，跳过执行。
+x
+if (x < 2) {
+  x <- x + 1
+}
+x
+\end{lstlisting}
+    \end{column}
+    \begin{column}{0.30\textwidth}
+      \outputlabel
+\begin{lstlisting}[style=output]
+[1] 1
+[1] 2
+\end{lstlisting}
+      \small 第一处不执行。\par 第二处执行。
+    \end{column}
+  \end{columns}
+  \note{教材第99页原例。2分钟，跟踪同一变量x从1到2的变化。两次输出分别对应两处单独的x。}
 \end{frame}
 
-\begin{frame}[fragile]{单条件语句示例}
-    \begin{lstlisting}[language=R]
-x <- 1  # 初始值
-
-if (x < 1) {  # 1 < 1 为 FALSE
-    x <- x + 1  
-}
-print(x)  # x 仍为 1
-
-if (x < 2) {  # 1 < 2 为 TRUE
-    x <- x + 1  
-}
-print(x)  # x 变为 2
-    \end{lstlisting}
-    
-    \textbf{要点提示}：条件表达式必须返回一个**长度为 1 的逻辑值**（\texttt{TRUE} 或 \texttt{FALSE}）。若输入长度大于 1 的向量，将仅检查第一个元素，并给出警告。
-\end{frame}
-
-\begin{frame}[fragile]{复合条件语句 (if/else)}
-    \textbf{调用格式：}
-    \begin{lstlisting}[language=R]
-if (条件表达式) {
-    程序代码1  # 条件成立时执行
+\begin{frame}[fragile]{两种情形：\texttt{if / else}}
+  \small
+  条件成立时执行前一分支，否则执行后一分支。
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.65\textwidth}
+      \inputlabel
+\begin{lstlisting}
+x <- 1
+if (x < 1) {
+  x <- x - 1
 } else {
-    程序代码2  # 条件不成立时执行
+  x <- x + 1
 }
-    \end{lstlisting}
-    
-    \textbf{注意事项}：
-    \begin{itemize}
-        \item \texttt{else} 必须紧跟在 \texttt{if} 代码块的右花括号 \texttt{\}} 之后，并在同一行。
-    \end{itemize}
+x
+\end{lstlisting}
+    \end{column}
+    \begin{column}{0.30\textwidth}
+      \outputlabel
+\begin{lstlisting}[style=output]
+[1] 2
+\end{lstlisting}
+    \end{column}
+  \end{columns}
+  \par\smallskip
+  \code{else} 与前一分支的右花括号写在同一行。
+  \note{教材第99--100页。2分钟，沿用x初值为1的二选一结构；强调本例只会执行一个分支。}
 \end{frame}
 
-\begin{frame}[fragile]{多条件语句 (if/else if/else)}
-    \textbf{调用格式：}
-    \begin{lstlisting}[language=R]
-if (条件表达式1) {
-    程序代码1
-} else if (条件表达式2) {
-    程序代码2
+\begin{frame}[fragile]{多种情形：依次判断}
+  \small
+  遇到第一个成立的条件后，执行相应分支并结束本结构。
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.65\textwidth}
+      \inputlabel
+\begin{lstlisting}
+x <- 1
+if (x <= 0) {
+  y <- 0
+} else if (x <= 1) {
+  y <- x
 } else {
-    程序代码3  # 以上条件都不满足时执行
+  y <- 2
 }
-    \end{lstlisting}
-    
-    \textbf{执行过程}：
-    程序依次检查条件表达式，一旦发现某个条件成立，则执行相应的程序代码，**然后跳出整个结构**。
+y
+\end{lstlisting}
+    \end{column}
+    \begin{column}{0.30\textwidth}
+      \outputlabel
+\begin{lstlisting}[style=output]
+[1] 1
+\end{lstlisting}
+      \small 执行第二分支。
+    \end{column}
+  \end{columns}
+  \note{教材第100--101页多条件原例。2分钟；此页第三分支y=2，下一页分布函数例的第三分支为1，须明确是两个任务。}
 \end{frame}
 
-\begin{frame}[fragile]{多条件语句示例：判断数字符号}
-    编写代码判断一个数字是正数、负数还是零。
-    \begin{lstlisting}[language=R]
-x <- -5
-sign_status <- ""
+\begin{frame}{教材例 2.A.3：计算分布函数}
+  对给定的一个数值 $x$，计算
+  \[
+    F(x)=\begin{cases}
+      0, & x\leq 0,\\[0.3em]
+      x, & 0<x\leq 1,\\[0.3em]
+      1, & x>1.
+    \end{cases}
+  \]
+  \begin{itemize}
+    \item 先判断 \code{x <= 0}。
+    \item 该条件不成立后，再判断 \code{x <= 1}。
+    \item 前两个条件都不成立时，取值为 1。
+  \end{itemize}
+  \note{教材第101页例2.A.3。2分钟，联系数学分段和代码分支；说明第二次判断前已知x>0，无需再写重复条件。}
+\end{frame}
 
-if (x > 0) {
-    sign_status <- "正数"
-} else if (x < 0) { # 检查是否为负数
-    sign_status <- "负数" 
-} else {            # 既不大于 0 也不小于 0，则为 0
-    sign_status <- "零"
+\begin{frame}[fragile]{分布函数：输入与结果}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.65\textwidth}
+      \inputlabel
+\begin{lstlisting}
+x <- 0.5
+if (x <= 0) {
+  Fx <- 0
+} else if (x <= 1) {
+  Fx <- x
+} else {
+  Fx <- 1
 }
-print(sign_status) # 输出 "负数"
-    \end{lstlisting}
+Fx
+\end{lstlisting}
+    \end{column}
+    \begin{column}{0.30\textwidth}
+      \outputlabel
+\begin{lstlisting}[style=output]
+[1] 0.5
+\end{lstlisting}
+      \small \code{Fx} 保存\par 本次计算结果。
+    \end{column}
+  \end{columns}
+  \note{教材第101页。2分钟；教师运行完整代码，随后只改x的赋值并重新运行整个判断结构。}
 \end{frame}
 
-
-\begin{frame}{循环语句概述}
-    循环语句用于重复执行一段程序代码，是实现迭代和批量操作的重要手段。R 语言主要提供两种循环语句：
-    \begin{itemize}
-        \item \textbf{for 循环}：适用于已知重复次数或需要遍历向量元素的场景。
-        \item \textbf{while 循环}：适用于重复次数不确定，依赖条件表达式来控制终止的场景。
-    \end{itemize}
+\begin{frame}{分布函数：检查区间边界}
+  修改 $x$，重新运行上一页的完整判断代码。
+  \par\vspace{0.4em}
+  \renewcommand{\arraystretch}{1.3}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lll@{}}
+    \toprule
+    \thead{输入 $x$} & \thead{进入的分支} & \thead{结果 $F(x)$} \\
+    \midrule
+    $-0.5$ & 第一分支 & $0$ \\
+    $0$ & 第一分支 & $0$ \\
+    $0.5$ & 第二分支 & $0.5$ \\
+    $1$ & 第二分支 & $1$ \\
+    $2$ & 第三分支 & $1$ \\
+    \bottomrule
+  \end{tabular*}
+  \note{教材第101页例2.A.3的直接核对。4分钟，含换值试运行与核对；重点检查x=0和x=1。条件语句合计15分钟，到第一节第18分钟结束。}
 \end{frame}
 
-\begin{frame}[fragile]{for 循环语句}
-    \textbf{调用格式：}
-    \begin{lstlisting}[language=R]
-for(i in 向量v) {
-    # 循环体 expr
+\begin{frame}{\texttt{for} 循环：依次取值}
+  \code{for} 循环让循环变量依次取向量中的值，\par
+  每取一个值就执行一次循环体。
+  \par\vspace{0.5em}
+  \begin{enumerate}
+    \item 取向量中的第一个值。
+    \item 执行花括号中的程序代码。
+    \item 取下一个值，继续执行，直到向量中的值取完。
+  \end{enumerate}
+  \note{教材第101--102页。for部分合计12分钟（第一节第18--30分钟）。本页1分钟，先讲执行过程，后讲可手算代码。}
+\end{frame}
+
+\begin{frame}[fragile]{\texttt{for} 循环：输出 1、2、3}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.65\textwidth}
+      \inputlabel
+\begin{lstlisting}
+for (i in 1:3) {
+  print(i)
 }
-    \end{lstlisting}
-    
-    \textbf{执行过程}：
-    \begin{enumerate}
-        \item 循环变量 $i$ 依次取向量 $v$ 中的每一个元素值。
-        \item 每取一个值，就执行一次循环体内的程序代码。
-    \end{enumerate}
+\end{lstlisting}
+    \end{column}
+    \begin{column}{0.30\textwidth}
+      \outputlabel
+\begin{lstlisting}[style=output]
+[1] 1
+[1] 2
+[1] 3
+\end{lstlisting}
+    \end{column}
+  \end{columns}
+  \begin{itemize}
+    \item \code{i} 是循环变量，依次取 1、2、3。
+    \item \code{print(i)} 每次显示 \code{i} 的当前值。
+  \end{itemize}
+  \note{教材第101--102页for调用规则的简单变式。2分钟。print是显式显示结果，循环体内用它观察每次执行。}
 \end{frame}
 
-\begin{frame}[fragile]{while 循环语句}
-    \textbf{调用格式：}
-    \begin{lstlisting}[language=R]
-while(条件表达式) {
-    循环体 
-    # 确保循环体内有能改变条件表达式的代码，防止死循环
+\begin{frame}[fragile]{\texttt{for} 循环：计算 1 到 5 的和}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.65\textwidth}
+      \inputlabel
+\begin{lstlisting}
+s <- 0
+for (i in 1:5) {
+  s <- s + i
 }
-    \end{lstlisting}
-    
-    \textbf{执行过程}：
-    \begin{enumerate}
-        \item 计算条件表达式。
-        \item 若为 \texttt{TRUE}，则运行循环体，然后返回第 1 步。
-        \item 若为 \texttt{FALSE}，则结束循环。
-    \end{enumerate}
+s
+\end{lstlisting}
+    \end{column}
+    \begin{column}{0.30\textwidth}
+      \outputlabel
+\begin{lstlisting}[style=output]
+[1] 15
+\end{lstlisting}
+    \end{column}
+  \end{columns}
+  \begin{itemize}
+    \item 循环开始前，令 \code{s <- 0}。
+    \item 每次将当前的 \code{i} 加入已有结果。
+  \end{itemize}
+  \note{教材第101--102页for规则的简单应用，和第104页自然数求和例呼应。2分钟；明确s <- s + i先算右边再保存。}
 \end{frame}
 
-\begin{frame}[fragile]{示例：模拟随机变量 $X$ (掷骰子直到 6 点)}
-    模拟 $X$: 掷骰子，直到掷出 6 点为止，记录掷骰子的次数 $X$。
-    
-    \textbf{使用 \texttt{while} 循环和 \texttt{break} 语句：}
-    \begin{lstlisting}[language=R]
-X_observations <- numeric(10) # 存储 10 次观测值
-for(i in 1:10) { 
-    n <- 0  # 实验次数
-    while(TRUE) { # 设置无限循环
-        n <- n + 1 
-        y <- sample(1:6, 1)  # 模拟掷骰子
-        if (y == 6) {        # 满足终止条件
-            X_observations[i] <- n
-            break            # 终止 while 循环
-        }
-    }
+\begin{frame}{求和过程：每次更新结果}
+  \code{s} 的初值为 0。
+  \par\vspace{0.4em}
+  \renewcommand{\arraystretch}{1.3}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lll@{}}
+    \toprule
+    \thead{本次 $i$} & \thead{本次计算} & \thead{更新后的 $s$} \\
+    \midrule
+    $1$ & $0+1$ & $1$ \\
+    $2$ & $1+2$ & $3$ \\
+    $3$ & $3+3$ & $6$ \\
+    $4$ & $6+4$ & $10$ \\
+    $5$ & $10+5$ & $15$ \\
+    \bottomrule
+  \end{tabular*}
+  \note{教材第101--102页循环执行过程的逐步解释。1分钟，学生先说出第三次更新的结果，教师再核对。}
+\end{frame}
+
+\begin{frame}[fragile]{教材例 2.A.5：重复计算骰子频率}
+  \small
+  先模拟 1000 次掷骰，再分别取前 $n$ 次计算六种点数的频率。
+  \inputlabel
+\begin{lstlisting}
+x <- sample(1:6, 1000, TRUE)
+f <- c()
+\end{lstlisting}
+  \renewcommand{\arraystretch}{1.25}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}ll@{}}
+    \toprule
+    \thead{循环编号 $i$} & \thead{使用的次数 $n$} \\
+    \midrule
+    $1,2,\ldots,10$ & $10,20,\ldots,100$ \\
+    $11$ & $500$ \\
+    $12$ & $1000$ \\
+    \bottomrule
+  \end{tabular*}
+  \note{教材第103页例2.A.5。2分钟，教师演示；这是上讲sum(y==点数)/n的重复计算，f初始不存放数值，之后用c追加。}
+\end{frame}
+
+\begin{frame}[fragile]{骰子频率：循环完成重复步骤}
+  \inputlabel
+\begin{lstlisting}
+for (i in 1:12) {
+  if (i < 11) { n <- i * 10
+  } else if (i == 11) { n <- 500
+  } else { n <- 1000 }
+  y <- x[1:n]
+  f <- c(f, c(sum(y == 1), sum(y == 2),
+              sum(y == 3), sum(y == 4),
+              sum(y == 5), sum(y == 6)) / n)
 }
-print(X_observations) # 显示 10 次模拟结果
-    \end{lstlisting}
+\end{lstlisting}
+  \small 每轮确定 \code{n}，提取前 \code{n} 次，再保存六种频率。
+  \note{教材第103页原程序整理，接上一页x和f运行。3分钟教师演示，不要求学生从零重写；只逐步指出定n、取前n次、算六种频率三步。}
 \end{frame}
 
-\begin{frame}[fragile]{函数 (Function) 定义}
-    函数是封装代码逻辑，实现代码重用和模块化的重要工具。
-    \begin{lstlisting}[language=R]
-name <- function(arg1, arg2, ...) {
-    # 函数体：程序代码
-    return(result) # 可选，但推荐使用
+\begin{frame}[fragile]{骰子频率：整理为矩阵}
+  \inputlabel
+\begin{lstlisting}
+f <- matrix(f, nrow = 12, ncol = 6,
+            byrow = TRUE)
+f[1:3, ]
+\end{lstlisting}
+  \begin{itemize}
+    \item 每行对应一个 \code{n}，每列对应一种点数。
+    \item \code{byrow = TRUE} 按行放入每轮的六个频率。
+    \item 最后一行代码显示前三行，\par
+      数值每次可能不同。
+  \end{itemize}
+  \note{教材第103页，复用第二讲matrix与行提取。1分钟；for部分共12分钟，到第一节第30分钟。不给出伪固定随机输出，不再讲矩阵新操作。}
+\end{frame}
+
+\begin{frame}{课堂练习一：条件与循环}
+  \small
+  练习时间：11 分钟。新建脚本 \code{R4-practice.R}。
+  \begin{enumerate}
+    \item 令 \code{a <- 2}。若 \code{a > 0}，将 \code{a} 加 1；显示结果。
+    \item 令 \code{x <- -2}。用 \code{if / else}：\par
+      正数时令 \code{y <- 1}，否则令 \code{y <- 0}。
+    \item 用教材例 2.A.3 的三分支代码，计算 $x=0.75$ 时的 $F(x)$。
+    \item 用 \code{for} 循环计算 $1+2+\cdots+10$。
+  \end{enumerate}
+  保存脚本，核对计算结果。
+  \note{教材第99--104页已有规则的直接练习。第一节第30--41分钟，共11分钟；前3题约6分钟、求和约5分钟。学生只写简单练习，不独立重写综合模拟例，不提交作业。}
+\end{frame}
+
+\begin{frame}[fragile]{练习一参考：三种条件语句}
+  \inputlabel
+\begin{lstlisting}
+a <- 2
+if (a > 0) { a <- a + 1 }
+x <- -2
+if (x > 0) { y <- 1 } else { y <- 0 }
+x <- 0.75
+if (x <= 0) { Fx <- 0
+} else if (x <= 1) { Fx <- x
+} else { Fx <- 1 }
+c(a, y, Fx)
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] 3.00 0.00 0.75
+\end{lstlisting}
+  \note{教材第99--101页条件语句。第一节第41--43分钟，2分钟，核对三题结果；参考代码紧凑排版，说明换行不改变分支含义。}
+\end{frame}
+
+\begin{frame}[fragile]{练习一参考：循环求和}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.65\textwidth}
+      \inputlabel
+\begin{lstlisting}
+s <- 0
+for (i in 1:10) {
+  s <- s + i
 }
-    \end{lstlisting}
-    
-    \begin{itemize}
-        \item \textbf{name}：自定义函数名。
-        \item \textbf{arg1, ...}：函数的输入参数。
-        \item \textbf{return(result)}：显式指定函数返回值。若省略 \texttt{return}，默认返回函数体中最后一行代码的计算结果。
-    \end{itemize}
+s
+\end{lstlisting}
+    \end{column}
+    \begin{column}{0.30\textwidth}
+      \outputlabel
+\begin{lstlisting}[style=output]
+[1] 55
+\end{lstlisting}
+    \end{column}
+  \end{columns}
+  \begin{itemize}
+    \item 重新运行前，将 \code{s} 的初值重设为 0。
+    \item 检查循环范围，并保存脚本。
+  \end{itemize}
+  \note{教材第101--104页求和应用。第一节第43--45分钟，2分钟；合计讲评4分钟。第一节45分钟结束。}
 \end{frame}
 
-\begin{frame}[fragile]{函数示例：计算前 $n$ 个自然数之和}
-    使用公式法定义函数 \texttt{mysum}：
-    \begin{lstlisting}[language=R]
-mysum <- function(n) {  
-    # 检查输入是否为正整数
-    if (n < 1 | n != round(n)) {
-        stop("参数n必须是正整数。")
-    }
-    s <- n * (n + 1) / 2  
-    return(s)  
+\begin{frame}{第二节：按条件重复计算}
+  打开上一节保存的 \code{R4-practice.R}，\par
+  在后面继续编写代码。
+  \par\vspace{0.5em}
+  \renewcommand{\arraystretch}{1.45}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lp{0.69\linewidth}@{}}
+    \toprule
+    \thead{结构} & \thead{控制重复的方式} \\
+    \midrule
+    \code{for} & 循环变量依次取向量中的值 \\
+    \code{while} & 每轮先判断条件，成立时继续执行 \\
+    \bottomrule
+  \end{tabular*}
+  \note{教材第101--102页。第二节第0--2分钟，共2分钟；衔接上一节，进入while与自定义函数。}
+\end{frame}
+
+\begin{frame}[fragile]{\texttt{while} 循环：先判断，再执行}
+  \small
+  条件成立时执行循环体，然后重新判断；不成立时结束。
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.65\textwidth}
+      \inputlabel
+\begin{lstlisting}
+k <- 1
+s <- 0
+while (k <= 3) {
+  s <- s + k
+  k <- k + 1
 }
-
-# 调用示例
-print(mysum(50))  
-# 输出 [1] 1275
-    \end{lstlisting}
+s
+\end{lstlisting}
+    \end{column}
+    \begin{column}{0.30\textwidth}
+      \outputlabel
+\begin{lstlisting}[style=output]
+[1] 6
+\end{lstlisting}
+    \end{column}
+  \end{columns}
+  \note{教材第102页while规则的可手算变式。第二节第2--7分钟，共5分钟；讲初值、条件、累加和更新四部分。初始条件若为FALSE则一次也不执行。}
 \end{frame}
 
+\begin{frame}{\texttt{while} 循环：条件如何变化}
+  \small
+  上一页开始时，\code{k = 1}，\code{s = 0}。
+  \par\vspace{0.4em}
+  \renewcommand{\arraystretch}{1.35}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}llll@{}}
+    \toprule
+    \thead{判断时 $k$} & \thead{$k\leq 3$} & \thead{新 $s$} & \thead{新 $k$} \\
+    \midrule
+    $1$ & \code{TRUE} & $1$ & $2$ \\
+    $2$ & \code{TRUE} & $3$ & $3$ \\
+    $3$ & \code{TRUE} & $6$ & $4$ \\
+    $4$ & \code{FALSE} & \multicolumn{2}{l}{结束循环} \\
+    \bottomrule
+  \end{tabular*}
+  \par\vspace{0.5em}
+  \code{k <- k + 1} 使条件发生变化，最终结束循环。
+  \par\smallskip
+  初次判断不成立时，循环体一次也不执行。
+  \note{教材第102页执行过程。第二节第7--12分钟，共5分钟；与上一页合计10分钟。让学生跟踪最后一次判断，不运行删除更新语句的代码。}
+\end{frame}
 
-\begin{frame}[fragile]{定积分计算：\texttt{integrate} 函数}
-    R 语言通过内置的 \texttt{integrate} 函数进行一元函数的数值积分。
-    
-    计算定积分 $\int_0^1 x^2 \mathrm{~d} x$：
-    \begin{lstlisting}[language=R]
-# integrate 的第一个参数是一个函数对象
-result <- integrate(function(x) x^2, 
-                     lower = 0, upper = 1)
+\begin{frame}[fragile]{教材例 2.A.4：掷骰直到出现 6}
+  \small
+  记录出现第一个 6 时，已经掷了多少次。
+  \inputlabel
+\begin{lstlisting}
+n <- 0
+y <- 0
+while (y != 6) {
+  y <- sample(1:6, 1)
+  n <- n + 1
+}
+n
+\end{lstlisting}
+  \small \code{y} 保存本次点数，\code{n} 累计次数；结果每次可能不同。
+  \note{教材第102--103页例2.A.4的等价写法，用y!=6直接控制结束，不引入break。第二节第12--16分钟，4分钟教师演示。初值y=0仅用来进入循环，实际点数由sample产生。随机终止不是确定次数。}
+\end{frame}
+
+\begin{frame}[fragile]{掷骰实验：取得 10 次观测值}
+  \inputlabel
+\begin{lstlisting}
+Xn <- 1:10
+for (i in 1:10) {
+  n <- 0
+  y <- 0
+  while (y != 6) {
+    y <- sample(1:6, 1)
+    n <- n + 1
+  }
+  Xn[i] <- n
+}
+Xn
+\end{lstlisting}
+  \note{教材第102--103页例2.A.4，保留10次模拟任务。第二节第16--20分钟，4分钟教师演示；外层每次重新设n与y，内层完成一次实验，结束后保存n。完整代码不要求学生从零重写。随机结果不印成固定输出。}
+\end{frame}
+
+\begin{frame}{掷骰实验：区分两层重复}
+  \begin{itemize}
+    \item 内层 \code{while}：完成一次“掷到 6 为止”的实验。
+    \item 外层 \code{for}：把整个实验重复 10 次。
+    \item \code{Xn[i]}：保存第 \code{i} 次实验的次数。
+  \end{itemize}
+  \par\vspace{0.4em}
+  \code{Xn} 中共有 10 个观测值，每个值都是一个正整数。
+  \note{教材第102--103页例2.A.4。第二节第20--22分钟，2分钟；综合骰子例合计10分钟。区分实验次数和实验中的掷骰次数，不扩展概率分布。}
+\end{frame}
+
+\begin{frame}[fragile]{自定义函数：保存一段计算}
+  \small
+  把经常使用的代码写成函数，之后通过函数名调用。
+  \inputlabel
+\begin{lstlisting}
+mysum <- function(n) {
+  s <- n * (n + 1) / 2
+  return(s)
+}
+\end{lstlisting}
+  \begin{itemize}
+    \item \code{mysum}：自定义的函数名。
+    \item \code{n}：输入参数，本例取正整数。
+    \item \code{return(s)}：返回计算结果。
+  \end{itemize}
+  \note{教材第103--104页原例。第二节第22--26分钟，4分钟；函数部分共10分钟。只讲一个参数、函数体与return，不增加输入检查函数。}
+\end{frame}
+
+\begin{frame}[fragile]{调用函数：计算前 50 个自然数之和}
+  \small
+  先运行上一页的函数定义，再调用 \code{mysum()}。
+  \inputlabel
+\begin{lstlisting}
+mysum(50)
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] 1275
+\end{lstlisting}
+  \[
+    1+2+\cdots+50=\frac{50\times 51}{2}=1275.
+  \]
+  \note{教材第104页原例。第二节第26--29分钟，3分钟。强调先定义后调用，50传给n；mysum(n)计算前n个自然数之和。}
+\end{frame}
+
+\begin{frame}[fragile]{更换参数，复用同一函数}
+  \inputlabel
+\begin{lstlisting}
+mysum(5)
+mysum(10)
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] 15
+[1] 55
+\end{lstlisting}
+  函数定义保持不变，更换括号中的输入值即可。
+  \note{教材第104页函数调用规则的直接变式。第二节第29--32分钟，3分钟；函数共10分钟。与第一节for求和的15和55核对。}
+\end{frame}
+
+\begin{frame}{课堂练习二：\texttt{while} 与函数}
+  练习时间：9 分钟。在 \code{R4-practice.R} 中继续完成。
+  \par\vspace{0.5em}
+  \begin{enumerate}
+    \item 用 \code{while} 循环计算 $1+2+3+4$。设置初值，并在每轮更新循环变量。
+    \item 定义教材中的 \code{mysum(n)}，分别计算前 10 个、前 100 个自然数之和。
+    \item 核对结果，保存脚本。
+  \end{enumerate}
+  \note{教材第102--104页已有内容。第二节第32--41分钟，共9分钟；while约5分钟、函数约4分钟，不要求学生独立编写两层随机循环，不提交作业。}
+\end{frame}
+
+\begin{frame}[fragile]{练习二参考：\texttt{while} 求和}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.65\textwidth}
+      \inputlabel
+\begin{lstlisting}
+k <- 1
+s <- 0
+while (k <= 4) {
+  s <- s + k
+  k <- k + 1
+}
+s
+\end{lstlisting}
+    \end{column}
+    \begin{column}{0.30\textwidth}
+      \outputlabel
+\begin{lstlisting}[style=output]
+[1] 10
+\end{lstlisting}
+    \end{column}
+  \end{columns}
+  \note{教材第102页while规则。第二节第41--43分钟，2分钟，重点核对循环起点、终点和更新语句。}
+\end{frame}
+
+\begin{frame}[fragile]{练习二参考：定义并调用函数}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.65\textwidth}
+      \inputlabel
+\begin{lstlisting}
+mysum <- function(n) {
+  s <- n * (n + 1) / 2
+  return(s)
+}
+mysum(10)
+mysum(100)
+\end{lstlisting}
+    \end{column}
+    \begin{column}{0.30\textwidth}
+      \outputlabel
+\begin{lstlisting}[style=output]
+[1] 55
+[1] 5050
+\end{lstlisting}
+    \end{column}
+  \end{columns}
+  \note{教材第103--104页。第二节第43--44分钟，1分钟；本页代码在新环境也可独立运行。}
+\end{frame}
+
+\begin{frame}{本讲内容核对}
+  \renewcommand{\arraystretch}{1.45}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lp{0.70\linewidth}@{}}
+    \toprule
+    \thead{结构} & \thead{本讲用途} \\
+    \midrule
+    \code{if} & 根据条件执行相应分支 \\
+    \code{for} & 循环变量依次取向量中的值 \\
+    \code{while} & 条件成立时重复执行 \\
+    \code{function} & 定义函数，传入参数并返回结果 \\
+    \bottomrule
+  \end{tabular*}
+  \par\vspace{0.5em}
+  保存 \code{R4-practice.R}，保留本次练习代码。
+  \note{教材第99--104页。第二节第44--45分钟，1分钟，含在讲评4分钟内。至此本讲90分钟结束；后续参考页本次不讲、不布置新任务。}
+\end{frame}
+
+\begin{frame}{概率计算参考}
+  \vspace{0.6cm}
+  \begin{itemize}
+    \item 数值积分与均匀分布的期望。
+    \item 二项分布、正态分布的相关函数。
+    \item 概率、分位数与随机数的计算。
+  \end{itemize}
+  \par\vspace{0.8em}
+  {\small\color{muted}供后续概率课使用，不计入本讲两节 45 分钟。}
+  \note{教材第56、59、65、74页。以下为旧课件概率计算材料的整理与纠错，留待相应概率章节使用，不计入本讲90分钟。}
+\end{frame}
+
+\begin{frame}[fragile]{数值积分：\texttt{integrate()}}
+  \small
+  计算 $\displaystyle\int_0^1 x^2\,\mathrm{d}x$。
+  \inputlabel
+\begin{lstlisting}
+result <- integrate(function(x) x^2,
+                    lower = 0, upper = 1)
 print(result)
-    \end{lstlisting}
-    运行结果：
-    \[
-    \text{\$value} = 0.3333333 \text{ with absolute error < } 3.7 \times 10^{-15}
-    \]
-    \small{注意：积分的返回值是一个包含结果和误差信息的列表。}
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+0.3333333 with absolute error < 3.7e-15
+\end{lstlisting}
+  \small 前面的数值是积分的近似值，后面给出数值误差信息。
+  \note{教材第56页。后续概率课参考；保留书上积分例，输出按实际R运行结果显示，不把print(result)误写成\$value=。}
 \end{frame}
 
-\begin{frame}[fragile]{均匀分布 $U(a, b)$ 的期望值}
-    设随机变量 $\xi \sim U(0, 60)$，理论期望值 $\mathrm{E}(\xi) = \frac{0+60}{2} = 30$。
-    
-    使用积分计算 $\mathrm{E}(\xi) = \int_{-\infty}^{\infty} x \cdot f(x) \mathrm{d}x$：
-    \begin{lstlisting}[language=R]
-# f(x) 为均匀分布的密度函数 dunif(x, min, max)
-result <- integrate(function(x) 
-              x * dunif(x, min = 0, max = 60), 
-              lower = -Inf, upper = Inf)
-print(result$value)
-    \end{lstlisting}
-    
-    \textbf{计算结果：} 
-    \[
-    \mathrm{E}(\xi) \approx 30.00000 \quad \text{(高精度逼近)}
-    \]
+\begin{frame}[fragile]{提取积分的计算值}
+  \small
+  \code{integrate()} 的结果含多个分量，可以用 \code{\$value} 提取积分值。
+  \inputlabel
+\begin{lstlisting}
+result <- integrate(function(x) x^2,
+                    lower = 0, upper = 1)
+result$value
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] 0.3333333
+\end{lstlisting}
+  \note{教材第56页积分例，复用第26--27页已学列表的\$提取规则，保留旧课件result\$value用法。后续概率课参考，不引入新的数据结构。}
 \end{frame}
 
-\begin{frame}{概率分布函数概述 (d/p/q/r)}
-    在 R 中，大多数概率分布函数都遵循 **d/p/q/r** 的命名规则：
-    \begin{itemize}
-        \item \texttt{d\textbf{xxx}(x)}: \textbf{D}ensity / \textbf{D}istribution function (概率密度或概率质量函数)。
-        \item \texttt{p\textbf{xxx}(q)}: \textbf{P}robability function (累积分布函数 CDF)，表示 $ P(X \leq q) $。
-        \item \texttt{q\textbf{xxx}(p)}: \textbf{Q}uantile function (分位数函数)，求解 $ F(x) = p $ 的 $ x $ 值。
-        \item \texttt{r\textbf{xxx}(n)}: \textbf{R}andom number generation (随机数生成函数)。
-    \end{itemize}
-    \small{（xxx 为分布的缩写，如 `norm`, `binom`, `unif` 等）}
+\begin{frame}[fragile]{均匀分布的期望：教材例 2.3.9}
+  \small
+  若 $\xi\sim U(0,60)$，理论期望为 $\mathrm{E}(\xi)=30$。
+  \inputlabel
+\begin{lstlisting}
+result <- integrate(function(x)
+  x * dunif(x, min = 0, max = 60),
+  lower = -Inf, upper = Inf)
+result$value
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] 29.99986
+\end{lstlisting}
+  \small \code{dunif()} 给出密度值；数值积分得到近似结果。
+  \note{教材第59页例2.3.9原积分区间。后续概率课参考；如书所示实际数值29.99986，与理论30区分，不写成30.00000。}
 \end{frame}
 
-\begin{frame}[fragile]{二项分布（Binomial）示例}
-    \begin{itemize}
-        \item \texttt{dbinom(x, size, prob)}
-        \item \texttt{pbinom(q, size, prob)}
-        \item \texttt{rbinom(n, size, prob)}
-    \end{itemize}
-    \begin{lstlisting}[language=R]
-> dbinom(5, size = 10, prob = 0.5)  
-# P(X=5) = 0.246
-> pbinom(5, size = 10, prob = 0.5)  
-# P(X<=5) = 0.623
-> rbinom(2, size = 10, prob = 0.5)  
-# [1] 7 8 (示例值)
-    \end{lstlisting}
+\begin{frame}{概率分布函数的名称}
+  \small
+  常用分布的相关函数通常以 \code{d}、\code{p}、\code{q}、\code{r} 开头。
+  \par\vspace{0.4em}
+  \renewcommand{\arraystretch}{1.45}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lp{0.73\linewidth}@{}}
+    \toprule
+    \thead{前缀} & \thead{用途} \\
+    \midrule
+    \code{d} & 离散分布的概率值，或连续分布的密度值 \\
+    \code{p} & 分布函数值，即 $P(X\leq x)$ \\
+    \code{q} & 给定累计概率，计算相应分位数 \\
+    \code{r} & 生成服从该分布的随机数 \\
+    \bottomrule
+  \end{tabular*}
+  \par\vspace{0.4em}
+  例如：\code{binom} 表示二项分布，\code{norm} 表示正态分布。
+  \note{教材第65页d/p/r命名说明、第74页正态d/p/r/q函数。后续概率课参考；不把所有分位数说成严格解F(x)=p，避免离散情形错误。}
 \end{frame}
 
-\begin{frame}[fragile]{正态分布（Normal）示例}
-    \begin{itemize}
-        \item \texttt{dnorm(x, mean, sd)}
-        \item \texttt{pnorm(q, mean, sd)}
-        \item \texttt{rnorm(n, mean, sd)}
-    \end{itemize}
-    \begin{lstlisting}[language=R]
-> dnorm(0.5, mean = 0, sd = 1)   
-# 0.3520...
-> pnorm(1.96, mean = 0, sd = 1)  
-# P(Z<=1.96) = 0.975
-> rnorm(3, mean = 0, sd = 1)     
-# [1] -0.62... 1.03... 0.70...
-    \end{lstlisting}
+\begin{frame}[fragile]{二项分布：概率与累计概率}
+  \small
+  设 $X\sim B(10,0.25)$，\par
+  计算恰好答对两题、至多答对两题的概率。
+  \inputlabel
+\begin{lstlisting}
+dbinom(2, size = 10, prob = 0.25)
+pbinom(2, size = 10, prob = 0.25)
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] 0.2815676
+[1] 0.5255928
+\end{lstlisting}
+  \small 两个结果分别为 $P(X=2)$ 与 $P(X\leq 2)$。
+  \note{教材第65页二项分布函数与例2.4.1。pbinom是教材已列函数的直接应用；后续概率课参考。}
 \end{frame}
 
-\begin{frame}[fragile]{练习题：斐波那契数列函数}
-    编写一个名为 \texttt{fibonacci} 的 R 函数，该函数接受一个正整数 $n$ 作为输入参数，并返回一个长度为 $n$ 的斐波契数列。
-    
-    \textbf{斐波那契数列定义：}
-    \[ F_0=0, F_1=1, F_n = F_{n-1} + F_{n-2} \quad (n \ge 2) \]
-    
-    \textbf{示例：}
-    如果输入 \texttt{n = 5}，则输出应为：
-    \begin{verbatim}
-[1] 0 1 1 2 3
-    \end{verbatim}
-    
-    \textbf{提示：}
-    \begin{itemize}
-        \item 使用 \texttt{numeric()} 函数初始化结果向量。
-        \item 使用 \texttt{if} 语句处理 $n=1$ 和 $n=2$ 的边界情况。
-        \item 使用 \texttt{for} 循环来计算 $n \ge 3$ 的值。
-    \end{itemize}
+\begin{frame}[fragile]{二项分布：生成随机数}
+  \small
+  用 \code{rbinom()} 生成服从二项分布的随机数。
+  \inputlabel
+\begin{lstlisting}
+rbinom(2, size = 10, prob = 0.25)
+\end{lstlisting}
+  \begin{itemize}
+    \item 第一个参数 2 表示生成两个随机数。
+    \item 每个随机数表示 10 次试验中的成功次数。
+    \item 成功概率为 0.25，结果每次可能不同。
+  \end{itemize}
+  \note{教材第65页rbinom调用规则。旧课件保留两个随机数的演示，参数换为教材例2.4.1的10和0.25。后续概率课参考，不硬编码随机输出。}
 \end{frame}
 
-\begin{frame}{}
-\centering \Huge
-  \emph{Thanks!}
+\begin{frame}[fragile]{标准正态分布：密度与概率}
+  \small
+  设 $Z\sim N(0,1)$，\code{sd = 1} 表示标准差为 1。
+  \inputlabel
+\begin{lstlisting}
+dnorm(0.5, mean = 0, sd = 1)
+pnorm(1.96, mean = 0, sd = 1)
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] 0.3520653
+[1] 0.9750021
+\end{lstlisting}
+  \small 第一项是 0.5 处的密度值；第二项是 $P(Z\leq1.96)$。
+  \note{教材第74页正态分布函数调用规则。保留旧课件0.5和1.96作为简单参数演示，数值按实际运行核对；后续概率课参考。}
+\end{frame}
+
+\begin{frame}[fragile]{标准正态分布：分位数与随机数}
+  \small
+  给定累计概率 0.975，计算相应分位数。
+  \inputlabel
+\begin{lstlisting}
+qnorm(0.975, mean = 0, sd = 1)
+\end{lstlisting}
+  \outputlabel
+\begin{lstlisting}[style=output]
+[1] 1.959964
+\end{lstlisting}
+  \small 生成三个标准正态随机数，结果每次可能不同。
+  \inputlabel
+\begin{lstlisting}
+rnorm(3, mean = 0, sd = 1)
+\end{lstlisting}
+  \note{教材第74页qnorm与rnorm调用规则。保留旧课件随机数部分，并补齐概述中q对应的教材已有函数例；后续概率课参考，不计入本讲90分钟。}
 \end{frame}
 
 \end{document}
