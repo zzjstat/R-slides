@@ -449,14 +449,17 @@ mean(x > 0.1 & x < 2)
 \end{frame}
 
 \begin{frame}{教材例2.6.6：平均体重的概率}
-  已知某大学女学生体重的均值为51.96 kg，\\
-  标准差为6.31 kg。\par\medskip
+  已知某大学女学生体重的均值为51.96 kg ($\mu$)，\\
+  标准差为6.31 kg ($\sigma$)。\par\medskip
   随机选择36名女大学生，\\
   求平均体重超过57 kg的概率。\par\medskip
-  记36人的平均体重为 $\overline X$，用中心极限定理近似：
+  记36人的平均体重为 $\overline X_{36}$，用中心极限定理近似：
   \[
-    \mathrm{P}(\overline X>57)
-    \approx 1-\Phi\left(\frac{\sqrt{36}(57-51.96)}{6.31}\right).
+  \begin{aligned}
+        \mathrm{P}(\overline X_{36}>57) &= 1-\mathrm{P}(\overline X_{36}\leq 57) \\
+        &=1-P\left(\frac{\sqrt{36}(\overline X_{36}-51.96)}{6.31}\leq\frac{\sqrt{36}(57-51.96)}{6.31}\right)\\
+    &\approx 1-\Phi\left(\frac{\sqrt{36}(57-51.96)}{6.31}\right).
+  \end{aligned}
   \]
   \note{教材第92页例2.6.6。第二节体重例8分钟中的3分钟。教师确认单位、样本量和“平均超过57”的事件，不改教材数值。}
 \end{frame}
